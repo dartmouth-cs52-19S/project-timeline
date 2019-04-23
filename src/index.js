@@ -1,11 +1,52 @@
+/* eslint-disable react/jsx-filename-extension */
+
 
 // change require to es6 import style
-import $ from 'jquery';
+// import $ from 'jquery';
 import './style.scss';
+// import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-let num = 0;
-function numfunc() {
-  num += 1;
-  $('#main').html(`You've been on this page for ${num} seconds.`);
-}
-setInterval(numfunc, 1000);
+// let num = 0;
+// function numfunc() {
+//   num += 1;
+//   $('#main').html(`You've been on this page for ${num} seconds.`);
+// }
+// setInterval(numfunc, 1000);
+const App = () => <div className="test">All the REACT are belong to us!</div>;
+
+ReactDOM.render(<App />, document.getElementById('main'));
+
+
+// const About = (props) => {
+//   return <div> All there is to know about me </div>;
+// };
+// const Welcome = (props) => {
+//   return <div>Welcome</div>;
+// };
+
+
+// const Nav = (props) => {
+//   return (
+//     <nav>
+//       <ul>
+//         <li><NavLink to="/">Home</NavLink></li>
+//         <li><NavLink to="/about">About</NavLink></li>
+//       </ul>
+//     </nav>
+//   );
+// };
+
+
+// const App = (props) => {
+//   return (
+//     <Router>
+//       <div>
+//         <Nav />
+//         <Route exact path="/" component={Welcome} />
+//         <Route path="/about" component={About} />
+//       </div>
+//     </Router>
+//   );
+// };
