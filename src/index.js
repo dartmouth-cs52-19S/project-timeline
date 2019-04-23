@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 /* eslint-disable react/jsx-filename-extension */
 
 
 // change require to es6 import style
 // import $ from 'jquery';
+=======
+import React from 'react';
+import ReactDOM from 'react-dom';
+>>>>>>> 4dd1a2daf1225afbae31c05427e7d0f4a859892f
 import './style.scss';
 // import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 import React from 'react';
@@ -39,6 +44,7 @@ ReactDOM.render(<App />, document.getElementById('main'));
 // };
 
 
+<<<<<<< HEAD
 // const App = (props) => {
 //   return (
 //     <Router>
@@ -50,3 +56,8 @@ ReactDOM.render(<App />, document.getElementById('main'));
 //     </Router>
 //   );
 // };
+=======
+const App = () => <div className="test">All the REACT are belong to us!</div>;
+
+ReactDOM.render(<App />, document.getElementById('main'));
+>>>>>>> 4dd1a2daf1225afbae31c05427e7d0f4a859892f

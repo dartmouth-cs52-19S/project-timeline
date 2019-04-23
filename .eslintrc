@@ -43,6 +43,18 @@
         "jsx-a11y/click-events-have-key-events": 0,
         "jsx-a11y/no-noninteractive-element-interactions": 0,
         "react/jsx-one-expression-per-line":0
+<<<<<<< HEAD
+=======
+    },
+    "plugins": [
+        "react"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true,
+            "sourceType": "module"
+        }
+>>>>>>> 4dd1a2daf1225afbae31c05427e7d0f4a859892f
     }
     
     

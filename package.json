@@ -46,7 +46,11 @@
     "lodash.debounce": "^4.0.8",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+<<<<<<< HEAD
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0"
+=======
+    "react-router": "^5.0.0"
+>>>>>>> 4dd1a2daf1225afbae31c05427e7d0f4a859892f
   }
 }
