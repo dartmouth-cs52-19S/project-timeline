@@ -38,10 +38,10 @@ const App = (props) => {
       <div>
         <Nav />
         <Switch>
-          <Route component={FallBack} />
           <Route exact path="/" component={Welcome} />
           <Route path="/about" component={About} />
           <Route exact path="/test/:id" component={Test} />
+          <Route component={FallBack} />
         </Switch>
       </div>
     </Router>
