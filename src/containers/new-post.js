@@ -57,8 +57,8 @@ class NewPost extends Component {
 
   onCoverURLChange(event) {
     if (this.validURL(event.target.value) === false) {
-      console.log('it is flse');
-      this.setState({ errorCover: 'errorCover' });
+      console.log('it is false');
+      this.setState({ errorCover: 'error_box' });
     }
     if (this.validURL(event.target.value) === true) {
       console.log('it is true');
@@ -127,13 +127,13 @@ class NewPost extends Component {
     if (this.state.errorCover === 'error_box') {
       return (
         <div className="postContent">
-          <input className="error_box" placeholder="Image Link" onChange={this.onCoverURLChange} onBlur={this.handleCoverBlur} value={this.state.cover_url} /> <em>Not a valid URL</em>
+          <input className="error_box" placeholder="Image URL Link" onChange={this.onCoverURLChange} onBlur={this.handleCoverBlur} value={this.state.cover_url} /> <em>Not a valid URL</em>
         </div>
       );
     } else {
       return (
         <div className="postContent">
-          <input className="postCover" placeholder="Image Link" onChange={this.onCoverURLChange} onBlur={this.handleCoverBlur} value={this.state.cover_url} />  <em>Optional, but must be a valid URL if entered</em>
+          <input className="postCover" placeholder="Image URL Link" onChange={this.onCoverURLChange} onBlur={this.handleCoverBlur} value={this.state.cover_url} />
         </div>
       );
     }
@@ -144,13 +144,13 @@ class NewPost extends Component {
       return (
         <div>
           <div>
-            <input className={this.state.errorTitle} placeholder="Title of Event" onChange={this.onTitleChange} onBlur={this.handleTitleBlur} value={this.state.title} />
+            <input className={this.state.errorTitle} placeholder="Title of Event" onChange={this.onTitleChange} onBlur={this.handleTitleBlur} value={this.state.title} /> <em>* Required</em>
           </div>
           <div>
-            <input className={this.state.errorTags} placeholder="Location and Time" onChange={this.onTagsChange} onBlur={this.handleTagBlur} value={this.state.tags} />
+            <input className={this.state.errorTags} placeholder="Location and Time" onChange={this.onTagsChange} onBlur={this.handleTagBlur} value={this.state.tags} /> <em>* Required</em>
           </div>
           <div className="postContent">
-            <textarea placeholder="Event Description" onChange={this.onContentChange} onBlur={this.handleContentBlur} value={this.state.content} /> <em>Optional</em>
+            <textarea placeholder="Event Description" onChange={this.onContentChange} onBlur={this.handleContentBlur} value={this.state.content} />
           </div>
           <div>
             {this.renderCover()}
@@ -165,13 +165,13 @@ class NewPost extends Component {
       return (
         <div>
           <div>
-            <input className={this.state.errorTitle} placeholder="Title of Event" onChange={this.onTitleChange} onBlur={this.handleTitleBlur} value={this.state.title} />
+            <input className={this.state.errorTitle} placeholder="Title of Event" onChange={this.onTitleChange} onBlur={this.handleTitleBlur} value={this.state.title} /> <em>* Required</em>
           </div>
           <div>
-            <input className={this.state.errorTags} placeholder="Location and Time" onChange={this.onTagsChange} onBlur={this.handleTagBlur} value={this.state.tags} />
+            <input className={this.state.errorTags} placeholder="Location and Time" onChange={this.onTagsChange} onBlur={this.handleTagBlur} value={this.state.tags} /> <em>* Required</em>
           </div>
           <div className="postContent">
-            <textarea placeholder="Event Description" onChange={this.onContentChange} onBlur={this.handleContentBlur} value={this.state.content} /> <em>Optional</em>
+            <textarea placeholder="Event Description" onChange={this.onContentChange} onBlur={this.handleContentBlur} value={this.state.content} />
           </div>
           <div>
             {this.renderCover()}
