@@ -19,13 +19,6 @@ class NewPost extends Component {
       hasEdited: 0,
       hasMoved: 0,
       hasMovedTag: 0,
-      // touched_title: false,
-      // touched: {
-      //   title: false,
-      //   tags: false,
-      //   content: false,
-      //   cover_url: false,
-      // },
     };
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onTagsChange = this.onTagsChange.bind(this);

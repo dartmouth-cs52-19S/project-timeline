@@ -47,7 +47,8 @@ class Posts extends Component {
           return (
             <Link to={`/posts/${post.id}`} key={post.id} className="previewTitle">
               <div className="preview">
-                <div>{post.title}</div>
+                <div className="previewTitleText">{post.title}</div>
+                <div className="previewTagsText">{post.tags}</div>
               </div>
             </Link>
           );
