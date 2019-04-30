@@ -24,7 +24,7 @@ It took me awhile to really figure out how the containers connected to each othe
 # Extra Credit
 For extra credit, I turned the blog into a free food site. I also added form validation. For example, the title and tags (location/time) are required, so if the user doesn't fill them out (I used onBlur for this), then the box will turn red after they click away from that field. 
 
-<img width="500" alt="Screen Shot 2019-04-30 at 1 48 19 AM" src="https://user-images.githubusercontent.com/38498065/56968269-dd7bef80-6b30-11e9-8b0a-03a05c69fee5.png">
+<img width="500" alt="Screen Shot 2019-04-30 at 1 48 00 AM" src="https://user-images.githubusercontent.com/38498065/56969043-592a6c00-6b32-11e9-8dea-052089a0bef0.png">
 
 I also used a function to check to make sure the image URL is actually a valid URL. While that field is not required, if one does decide to fill it out, it needs to be an actual site or else we won't have a cover image!
 
