@@ -56,14 +56,17 @@ class NewPost extends Component {
   }
 
   onCoverURLChange(event) {
-    this.setState({ hasEdited: 1 });
-    this.setState({ cover_url: event.target.value });
-    if (this.validURL(this.state.cover_url) === false) {
+    if (this.validURL(event.target.value) === false) {
+      console.log('it is flse');
       this.setState({ errorCover: 'errorCover' });
     }
-    if (this.validURL(this.state.cover_url) === true) {
+    if (this.validURL(event.target.value) === true) {
+      console.log('it is true');
       this.setState({ errorCover: 'postCover' });
     }
+    this.setState({ cover_url: event.target.value });
+    console.log(this.state.cover_url);
+    this.setState({ hasEdited: 1 });
   }
 
   handleTitleBlur() {
@@ -100,6 +103,8 @@ class NewPost extends Component {
       if (this.validURL(this.state.cover_url) === false) {
         this.setState({ errorCover: 'error_box' });
         console.log('not a real URL');
+      } else {
+        this.setState({ errorCover: 'postCover' });
       }
     }
   }
