@@ -22,7 +22,7 @@ It took me awhile to really figure out how the containers connected to each othe
 <img width="500" alt="Screen Shot 2019-04-30 at 1 48 10 AM" src="https://user-images.githubusercontent.com/38498065/56968270-dd7bef80-6b30-11e9-955b-db5d1d13533d.png">
 
 # Extra Credit
-For extra credit, I turned the blog into a free food site. I also added form validation. For example, the title and tags (location/time) are required, so if the user doesn't fill them out (I used onBlur for this), then the box will turn red after they click away from that field. 
+For extra credit, I turned the blog into a free food site. I also added form validation. For example, the title and tags (location/time) are required, so if the user doesn't fill them out (I used onBlur for this), then the box will turn red after they click away from that field. The submit button will not show up unless all the required fields are filled.
 
 <img width="500" alt="Screen Shot 2019-04-30 at 1 48 00 AM" src="https://user-images.githubusercontent.com/38498065/56969043-592a6c00-6b32-11e9-8dea-052089a0bef0.png">
 
