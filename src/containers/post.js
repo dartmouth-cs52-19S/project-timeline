@@ -65,7 +65,7 @@ class Post extends Component {
     this.setState({ isEditing: 0 });
   }
 
-
+  // Adapted rom https://stackoverflow.com/questions/13373504/what-is-a-valid-url-query-string
   validURL(str) {
     const pattern = new RegExp('^(https?:\\/\\/)?' // protocol
       + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' // domain name
