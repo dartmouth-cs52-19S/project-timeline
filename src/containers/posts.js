@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable react/no-danger */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -10,39 +11,63 @@ class Posts extends Component {
     super(props);
 
     this.state = {
-
     };
   }
+
 
   componentDidMount() {
     this.props.fetchPosts();
     console.log(this.props.fetchPosts);
   }
 
+  validURL(str) {
+    const pattern = new RegExp('^(https?:\\/\\/)?' // protocol
+      + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' // domain name
+      + '((\\d{1,3}\\.){3}\\d{1,3}))' // OR ip (v4) address
+      + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' // port and path
+      + '(\\?[;&a-z\\d%_.~+=-]*)?' // query string
+      + '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+    return !!pattern.test(str);
+  }
+
   renderPosts() {
     if (this.props.posts) {
       return this.props.posts.map((post) => {
-        return (
-          <Link to={`/posts/${post.id}`} key={post.id}>
-            <div>
-              <div>{post.title}</div>
-              {/* <div>{post.tags}</div> */}
-            </div>
-          </Link>
-        );
+        // this.setState(this.numPosts += 1);
+        if (this.validURL(post.cover_url) === true) {
+          return (
+            <Link to={`/posts/${post.id}`} key={post.id} className="previewTitle">
+              <div className="preview">
+                <div className="previewTitleText">{post.title}</div>
+                <img src={post.cover_url} alt="post" className="previewImage" />
+              </div>
+            </Link>
+          );
+        } else {
+          return (
+            <Link to={`/posts/${post.id}`} key={post.id} className="previewTitle">
+              <div className="preview">
+                <div>{post.title}</div>
+              </div>
+            </Link>
+          );
+        }
       });
     } else {
-      return (<h1>where are my posts?!?!</h1>);
+      return (<h1>No DDS Hacks!</h1>);
     }
   }
 
   render() {
     return (
       <div>
-        <div>
-          These are all the posts
+        <div className="foodHeader">
+          <span><em>{this.props.posts.length}</em>   Free Food Events at <b>Dartmouth</b> </span>
         </div>
-        <div>
+        <div className="foodHeaderSecondary">
+          <h4>Low on DBA or Meal Swipes? Find tasty, free food near you!</h4>
+        </div>
+        <div className="allposts">
           {this.renderPosts()}
         </div>
       </div>

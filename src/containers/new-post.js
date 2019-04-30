@@ -12,6 +12,12 @@ class NewPost extends Component {
       tags: '',
       content: '',
       cover_url: '',
+      errorTitle: 'postTitle',
+      errorTags: 'postTags',
+      errorCover: 'postCover',
+      hasEdited: 0,
+      hasMoved: 0,
+      hasMovedTag: 0,
       // touched_title: false,
       // touched: {
       //   title: false,
@@ -30,39 +36,58 @@ class NewPost extends Component {
     this.handleContentBlur = this.handleContentBlur.bind(this);
     this.handleCoverBlur = this.handleCoverBlur.bind(this);
     this.validURL = this.validURL.bind(this);
+    this.renderCover = this.renderCover.bind(this);
   }
 
 
   onTitleChange(event) {
+    this.setState({ hasEdited: 1 });
     this.setState({ title: event.target.value });
-    console.log(this.state.title);
-    console.log(this.props.state);
+    if (!this.state.title) {
+      this.setState({ errorTitle: 'postTitle' });
+    }
   }
 
   onTagsChange(event) {
+    this.setState({ hasEdited: 1 });
     this.setState({ tags: event.target.value });
+    if (!this.state.tags) {
+      this.setState({ errorTags: 'postTags' });
+    }
   }
 
   onContentChange(event) {
+    this.setState({ hasEdited: 1 });
     this.setState({ content: event.target.value });
   }
 
   onCoverURLChange(event) {
+    this.setState({ hasEdited: 1 });
     this.setState({ cover_url: event.target.value });
     if (this.validURL(this.state.cover_url) === false) {
-      console.log('not a real URL');
+      this.setState({ errorCover: 'errorCover' });
+    }
+    if (this.validURL(this.state.cover_url) === true) {
+      this.setState({ errorCover: 'postCover' });
     }
   }
 
   handleTitleBlur() {
+    this.setState({ hasMoved: 1 });
     if (!this.state.title) {
-      console.log('no title');
+      this.setState({ errorTitle: 'errorTitle' });
+    } else {
+      this.setState({ errorTitle: 'postTitle' });
     }
   }
 
   handleTagBlur() {
+    this.setState({ hasMovedTag: 1 });
     if (!this.state.tags) {
       console.log('no tags');
+      this.setState({ errorTags: 'errorTags' });
+    } else {
+      this.setState({ errorTags: 'postTags' });
     }
   }
 
@@ -78,13 +103,17 @@ class NewPost extends Component {
 
   handleCoverBlur() {
     if (!this.state.cover_url) {
-      console.log('no cover');
+      if (this.validURL(this.state.cover_url) === false) {
+        this.setState({ errorCover: 'error_box' });
+        console.log('not a real URL');
+      }
     }
   }
 
+
   handleContentBlur() {
     if (!this.state.content) {
-      console.log('no content');
+      console.log('no content but that is OK');
     }
   }
 
@@ -96,27 +125,78 @@ class NewPost extends Component {
     }, this.props.history);
   }
 
+  renderCover() {
+    if (this.state.errorCover === 'error_box') {
+      return (
+        <div className="postContent">
+          <input className="error_box" placeholder="Image Link" onChange={this.onCoverURLChange} onBlur={this.handleCoverBlur} value={this.state.cover_url} /> <em>Not a valid URL</em>
+        </div>
+      );
+    } else {
+      return (
+        <div className="postContent">
+          <input className="postCover" placeholder="Image Link" onChange={this.onCoverURLChange} onBlur={this.handleCoverBlur} value={this.state.cover_url} />  <em>Optional, but must be a valid URL if entered</em>
+        </div>
+      );
+    }
+  }
+
   renderNewPost() {
-    return (
-      <div>
-        <h1>Create a New Post</h1>
-        <input placeholder="title" onChange={this.onTitleChange} onBlur={this.handleTitleBlur} value={this.state.title} />
-        <input placeholder="tags" onChange={this.onTagsChange} onBlur={this.handleTagBlur} value={this.state.tags} />
-        <input placeholder="content" onChange={this.onContentChange} onBlur={this.handleContentBlur} value={this.state.content} />
-        <input placeholder="cover_url" onChange={this.onCoverURLChange} onBlur={this.handleCoverBlur} value={this.state.cover_url} />
-        <button type="button" onClick={this.handleSubmit}>Submit</button>
-        <Link className="link" to="/">
+    if (this.state.hasEdited === 1 && this.state.hasMoved === 1 && this.state.hasMovedTag === 1 && this.state.errorTitle === 'postTitle' && this.state.errorTags === 'postTags' && this.state.errorCover === 'postCover') {
+      return (
+        <div>
           <div>
-            <button type="button">Cancel</button>
+            <input className={this.state.errorTitle} placeholder="Title of Event" onChange={this.onTitleChange} onBlur={this.handleTitleBlur} value={this.state.title} />
           </div>
-        </Link>
-      </div>
-    );
+          <div>
+            <input className={this.state.errorTags} placeholder="Location and Time" onChange={this.onTagsChange} onBlur={this.handleTagBlur} value={this.state.tags} />
+          </div>
+          <div className="postContent">
+            <textarea placeholder="Event Description" onChange={this.onContentChange} onBlur={this.handleContentBlur} value={this.state.content} /> <em>Optional</em>
+          </div>
+          <div>
+            {this.renderCover()}
+          </div>
+          {/* <div>
+            <input className="postCover" placeholder="Image Link" onChange={this.onCoverURLChange} onBlur={this.handleCoverBlur} value={this.state.cover_url} />
+          </div> */}
+          <Link className="link" to="/">
+            <button type="button">Cancel</button>
+          </Link>
+          <button type="button" onClick={this.handleSubmit}>Submit</button>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <div>
+            <input className={this.state.errorTitle} placeholder="Title of Event" onChange={this.onTitleChange} onBlur={this.handleTitleBlur} value={this.state.title} />
+          </div>
+          <div>
+            <input className={this.state.errorTags} placeholder="Location and Time" onChange={this.onTagsChange} onBlur={this.handleTagBlur} value={this.state.tags} />
+          </div>
+          <div className="postContent">
+            <textarea placeholder="Event Description" onChange={this.onContentChange} onBlur={this.handleContentBlur} value={this.state.content} /> <em>Optional</em>
+          </div>
+          <div>
+            {this.renderCover()}
+          </div>
+          <Link className="link" to="/">
+            <button type="button">Cancel</button>
+          </Link>
+        </div>
+      );
+    }
   }
 
   render() {
     return (
-      <div>{this.renderNewPost()}</div>
+      <div className="post">
+        <div className="newPostHeader">
+        Create a New Free Food Event!
+        </div>
+        <div>{this.renderNewPost()}</div>
+      </div>
     );
   }
 }

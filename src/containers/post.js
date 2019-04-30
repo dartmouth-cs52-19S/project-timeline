@@ -80,57 +80,65 @@ class Post extends Component {
   render() {
     if (this.state.isEditing === 1) {
       return (
-        <div>
-          <span>{this.props.post.title}</span>
+        <div className="post">
           <div>
-            <input placeholder={this.props.post.title} onChange={this.onTitleChange} value={this.value} />
-            <input placeholder={this.props.post.tags} onChange={this.onTagChange} value={this.value} />
-            <textarea placeholder={this.props.post.content} onChange={this.onContentChange} value={this.value} />
-            {/* <div> Post ID: {this.props.post._id} </div> */}
-            {/* <div> Tags: {this.props.post.tags} </div> */}
-            {/* <div> Content: {this.props.post.content} </div> */}
-            <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.post.cover_url || '') }} />
-            <button type="button" onClick={this.toggleDelete}>Delete</button>
-            <button type="button" onClick={this.toggleEdit}>Edit</button>
-            <button type="button" onClick={this.toggleSubmit}>Submit</button>
+            <div>
+              <input className="postTitle" placeholder={this.props.post.title} onChange={this.onTitleChange} value={this.value} /> <em>Title</em>
+            </div>
+            <div>
+              <input className="postTags" placeholder={this.props.post.tags} onChange={this.onTagChange} value={this.value} /> <em>Location and Time</em>
+            </div>
+            <div className="postContent">
+              <textarea placeholder={this.props.post.content} onChange={this.onContentChange} value={this.value} /> <em>Description</em>
+            </div>
+            <div>
+              <input className="postCover" placeholder={this.props.post.cover_url} onChange={this.onCoverChange} value={this.value} /> <em>Image URL</em>
+            </div>
+            <button type="button" onClick={this.toggleDelete}>Delete Event</button>
+            {/* <button type="button" onClick={this.toggleEdit}>Edit</button> */}
+            <button type="button" onClick={this.toggleSubmit}>Save Changes</button>
           </div>
         </div>
 
       );
     } else if (this.validURL(this.props.post.cover_url) === true) {
       return (
-        <div>
-          <div>
-            <img src={this.props.post.cover_url} alt="image" />
+        <div className="post">
+          <div className="postTitle">
+            {this.props.post.title}
           </div>
-          <span>{this.props.post.title}</span>
           <div>
             {/* <div> Post ID: {this.props.post._id} </div> */}
-            <div> Tags: {this.props.post.tags} </div>
+            <div className="postTags"> Location and Time: {this.props.post.tags} </div>
+            <div className="postImage">
+              <img src={this.props.post.cover_url} alt="image" />
+            </div>
             {/* <div> Content: {this.props.post.content} </div> */}
             <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.post.content || '') }} />
-            <button type="button" onClick={this.toggleDelete}>Delete</button>
-            <button type="button" onClick={this.toggleEdit}>Edit</button>
-            <button type="button" onClick={this.toggleSubmit}>Submit</button>
+            <button type="button" onClick={this.toggleDelete}>Delete Event</button>
+            <button type="button" onClick={this.toggleEdit}>Edit Event</button>
+            {/* <button type="button" onClick={this.toggleSubmit}>Submit</button> */}
           </div>
         </div>
 
       );
     } else {
       return (
-        <div>
+        <div className="post">
           {/* <div>
             <img src={this.props.post.cover_url} alt="image" />
           </div> */}
-          <span>{this.props.post.title}</span>
+          <div className="postTitle">
+            {this.props.post.title}
+          </div>
           <div>
             {/* <div> Post ID: {this.props.post._id} </div> */}
-            <div> Tags: {this.props.post.tags} </div>
+            <div className="postTags"> Location and Time: {this.props.post.tags} </div>
             {/* <div> Content: {this.props.post.content} </div> */}
             <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.post.content || '') }} />
-            <button type="button" onClick={this.toggleDelete}>Delete</button>
-            <button type="button" onClick={this.toggleEdit}>Edit</button>
-            <button type="button" onClick={this.toggleSubmit}>Submit</button>
+            <button type="button" onClick={this.toggleDelete}>Delete Event</button>
+            <button type="button" onClick={this.toggleEdit}>Edit Event</button>
+            {/* <button type="button" onClick={this.toggleSubmit}>Submit</button> */}
           </div>
         </div>
 
