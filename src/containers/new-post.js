@@ -123,7 +123,6 @@ class NewPost extends Component {
       title: this.state.title, content: this.state.content, tags: this.state.tags, cover_url: this.state.cover_url,
     }, this.props.history);
     this.props.history.push(`/post/${this.props.match.params.postID}`);
-    // this.props.history.push('/');
   }
 
   renderCover() {
