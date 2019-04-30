@@ -56,6 +56,10 @@ class Post extends Component {
 
   toggleEdit() {
     this.setState({ isEditing: 1 });
+    this.setState({ title: this.props.post.title });
+    this.setState({ tags: this.props.post.tags });
+    this.setState({ cover_url: this.props.post.cover_url });
+    this.setState({ content: this.props.post.content });
   }
 
   toggleSubmit() {
@@ -83,16 +87,16 @@ class Post extends Component {
         <div className="post">
           <div>
             <div>
-              <input className="postTitle" placeholder={this.props.post.title} onChange={this.onTitleChange} value={this.value} /> <em>Title</em>
+              <input className="postTitle" placeholder={this.props.post.title} onChange={this.onTitleChange} value={this.state.title} /> <em>Title</em>
             </div>
             <div>
-              <input className="postTags" placeholder={this.props.post.tags} onChange={this.onTagChange} value={this.value} /> <em>Location and Time</em>
+              <input className="postTags" placeholder={this.props.post.tags} onChange={this.onTagChange} value={this.state.tags} /> <em>Location and Time</em>
             </div>
             <div className="postContent">
-              <textarea placeholder={this.props.post.content} onChange={this.onContentChange} value={this.value} /> <em>Description</em>
+              <textarea placeholder={this.props.post.content} onChange={this.onContentChange} value={this.state.content} /> <em>Description</em>
             </div>
             <div>
-              <input className="postCover" placeholder={this.props.post.cover_url} onChange={this.onCoverChange} value={this.value} /> <em>Image URL</em>
+              <input className="postCover" placeholder={this.props.post.cover_url} onChange={this.onCoverChange} value={this.state.cover_url} /> <em>Image URL</em>
             </div>
             <button type="button" onClick={this.toggleDelete}>Delete Event</button>
             {/* <button type="button" onClick={this.toggleEdit}>Edit</button> */}
