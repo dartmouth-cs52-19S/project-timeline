@@ -1,8 +1,8 @@
 {
-  "name": "starterpack-regina-yan",
+  "name": "lab4-regina-yan",
   "version": "1.0.0",
   "main": "src/index.js",
-  "repository": "git@github.com:dartmouth-cs52-19S/starterpack-regina-yan.git",
+  "repository": "git@github.com:dartmouth-cs52-19S/lab4-regina-yan.git",
   "author": "Regina Yan <regina.l.yan.19@dartmouth.edu>",
   "license": "MIT",
   "scripts": {
@@ -10,7 +10,7 @@
     "test": "eslint src/**.js",
     "build": "yarn clean; NODE_ENV=production webpack --colors",
     "clean": "rimraf dist",
-    "deploy": "yarn build; surge -p dist -d regina-yan-cs52-starter.surge.sh; yarn clean"
+    "deploy": "yarn build; surge -p dist -d freefoodatnow.surge.sh; yarn clean"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",

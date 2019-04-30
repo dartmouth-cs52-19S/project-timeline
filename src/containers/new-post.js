@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -118,11 +119,11 @@ class NewPost extends Component {
   }
 
   handleSubmit() {
-    this.props.history.push('/');
-    console.log('trying to submit');
     this.props.createPost({
       title: this.state.title, content: this.state.content, tags: this.state.tags, cover_url: this.state.cover_url,
     }, this.props.history);
+    this.props.history.push(`/post/${this.props.match.params.postID}`);
+    // this.props.history.push('/');
   }
 
   renderCover() {
@@ -157,9 +158,6 @@ class NewPost extends Component {
           <div>
             {this.renderCover()}
           </div>
-          {/* <div>
-            <input className="postCover" placeholder="Image Link" onChange={this.onCoverURLChange} onBlur={this.handleCoverBlur} value={this.state.cover_url} />
-          </div> */}
           <Link className="link" to="/">
             <button type="button">Cancel</button>
           </Link>

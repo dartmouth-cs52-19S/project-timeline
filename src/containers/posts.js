@@ -33,12 +33,12 @@ class Posts extends Component {
   renderPosts() {
     if (this.props.posts) {
       return this.props.posts.map((post) => {
-        // this.setState(this.numPosts += 1);
         if (this.validURL(post.cover_url) === true) {
           return (
             <Link to={`/posts/${post.id}`} key={post.id} className="previewTitle">
               <div className="preview">
                 <div className="previewTitleText">{post.title}</div>
+                <div className="previewTagsText">{post.tags}</div>
                 <img src={post.cover_url} alt="post" className="previewImage" />
               </div>
             </Link>
@@ -54,7 +54,7 @@ class Posts extends Component {
         }
       });
     } else {
-      return (<h1>No DDS Hacks!</h1>);
+      return (<h1>No Free Food Events!</h1>);
     }
   }
 
@@ -67,6 +67,7 @@ class Posts extends Component {
         <div className="foodHeaderSecondary">
           <h4>Low on DBA or Meal Swipes? Find tasty, free food near you!</h4>
         </div>
+        {/* <div className="divider" /> */}
         <div className="allposts">
           {this.renderPosts()}
         </div>

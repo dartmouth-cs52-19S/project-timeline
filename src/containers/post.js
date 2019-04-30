@@ -109,7 +109,7 @@ class Post extends Component {
           </div>
           <div>
             {/* <div> Post ID: {this.props.post._id} </div> */}
-            <div className="postTags"> Location and Time: {this.props.post.tags} </div>
+            <div className="postTags">{this.props.post.tags} </div>
             <div className="postImage">
               <img src={this.props.post.cover_url} alt="image" />
             </div>
