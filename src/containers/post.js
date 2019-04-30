@@ -111,7 +111,7 @@ class Post extends Component {
             {/* <div> Post ID: {this.props.post._id} </div> */}
             <div className="postTags">{this.props.post.tags} </div>
             <div className="postImage">
-              <img src={this.props.post.cover_url} alt="image" />
+              <img className="postImagedisp" src={this.props.post.cover_url} alt="image" />
             </div>
             {/* <div> Content: {this.props.post.content} </div> */}
             <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.post.content || '') }} />
