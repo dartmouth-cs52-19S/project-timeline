@@ -33,6 +33,7 @@ class Posts extends Component {
 
   renderPosts() {
     if (this.props.posts) {
+      // console.log(this.props.posts);
       return this.props.posts.map((post) => {
         if (this.validURL(post.cover_url) === true) {
           return (
