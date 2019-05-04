@@ -31,6 +31,9 @@ I also used a function to check to make sure the image URL is actually a valid U
 <img width="500" alt="Screen Shot 2019-04-30 at 1 48 36 AM" src="https://user-images.githubusercontent.com/38498065/56968268-dd7bef80-6b30-11e9-8027-906c239270a9.png">
 
 
+### Acknowledgements
+Special thanks to Sheppard Somers '19 for helping debug and providing emotional support when the bugs were too scary
+
 
 
 
