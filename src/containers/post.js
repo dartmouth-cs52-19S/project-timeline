@@ -86,6 +86,7 @@ class Post extends Component {
       return (
         <div className="post">
           <div>
+            <p>Posted by: {this.props.post.username}</p>
             <div>
               <input className="postTitle" placeholder={this.props.post.title} onChange={this.onTitleChange} value={this.state.title} /> <em>Title</em>
             </div>
@@ -108,6 +109,7 @@ class Post extends Component {
     } else if (this.validURL(this.props.post.cover_url) === true) {
       return (
         <div className="post">
+          <p>Posted by: {this.props.post.username}</p>
           <div className="postTitle">
             {this.props.post.title}
           </div>
@@ -129,6 +131,7 @@ class Post extends Component {
     } else {
       return (
         <div className="post">
+          <p>Posted by: {this.props.post.username}</p>
           {/* <div>
             <img src={this.props.post.cover_url} alt="image" />
           </div> */}
