@@ -11,8 +11,8 @@ export const ActionTypes = {
   // CREATE_POST: 'CREATE_POST',
   // DELETE_POST: 'DELETE_POST',
 };
-// const ROOT_URL = 'https://lab5-regina-yan-1.herokuapp.com/api';
-const ROOT_URL = 'http://localhost:9090/api';
+const ROOT_URL = 'https://lab5-regina-yan-1.herokuapp.com/api';
+// const ROOT_URL = 'http://localhost:9090/api';
 // const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
 const API_KEY = '?key=r_yan';
 
