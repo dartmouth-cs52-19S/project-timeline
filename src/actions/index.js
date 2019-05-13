@@ -55,16 +55,29 @@ export function fetchPost(id) {
   };
 }
 
+// export function createPost(post, history) {
+//   return (dispatch) => {
+//     console.log('starting to post');
+//     console.log(`the post has title  ${post.title} and content ${post.content} `);
+//     axios.post(`${ROOT_URL}/posts${API_KEY}`, post, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
+//       console.log('got token');
+//       history.push('/');
+//       // dispatch({ type: ActionTypes.FETCH_POST, payload: response.data });
+//     }).catch((error) => {
+//       console.log(`error creating post  ${error}`);
+//     });
+//   };
+// }
+
 export function createPost(post, history) {
   return (dispatch) => {
-    console.log('starting to post');
-    console.log(`the post has title  ${post.title} and content ${post.content} `);
-    axios.post(`${ROOT_URL}/posts${API_KEY}`, post, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
-      console.log('got token');
+    const fields = {
+      title: post.title, content: post.content, tags: post.tags, cover_url: post.cover_url,
+    };
+    axios.post(`${ROOT_URL}/posts`, fields, { headers: { authorization: localStorage.getItem('token') } }).then(() => {
       history.push('/');
-      dispatch({ type: ActionTypes.FETCH_POST, payload: response.data });
     }).catch((error) => {
-      console.log(`error creating post  ${error}`);
+      console.log(error);
     });
   };
 }
