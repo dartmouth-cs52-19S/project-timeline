@@ -37,7 +37,7 @@ const App = (props) => {
           <Route exact path="/" component={Posts} />
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
-          <Route path="posts/new" component={RequireAuth(NewPost)} />
+          <Route path="/posts/new" component={RequireAuth(NewPost)} />
           {/* <Route path="/about" component={About} /> */}
           <Route exact path="/posts/:postID" component={Post} />
           <Route render={() => (<div>Food Hack not found </div>)} />

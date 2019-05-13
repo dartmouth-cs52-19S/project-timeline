@@ -36,7 +36,7 @@ class SignUp extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(`sign up info:  ${this.state.username}`);
+    console.log(`sign up info:  ${this.state.username} ${this.state.email} ${this.state.password}`);
     this.props.signupUser(this.state, this.props.history);
   }
 
