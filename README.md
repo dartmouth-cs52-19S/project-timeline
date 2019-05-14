@@ -2,23 +2,39 @@
 
 ![Team Photo](src/img/teamTimeline.jpeg)
 
-TODO: short project description, some sample screenshots or mockups
+Timeline helps you know what you don't know... way before 
+
+Sign up now (warning, Timeline may manifest itself as Free Food @Now but we promise it's not hehehe).
+
+[Team Figma -- Mockups](https://www.figma.com/files/project/2496184/Timeline---Journey---Design-Your-Life)
 
 ## Architecture
 
-Code is organized
-Library is
+Code is organized based on lab 4 frontend (some lab 5 stuff) right now.
+
+Code library is based on Lab 4/5.
 
 ## Setup
 
-TODO: how to get the project dev environment up and running, npm install etc
+Just `yarn` as of now! :) Yarn life.
 
 ## Deployment
 
-TODO: how to deploy the project
+To deploy the project, git clone both repos onto your local dev environment. Change the deploy URL in package.json to another surge URL and hit that `yarn deploy`.
 
 ## Authors
 
-TODO: list of authors
+Abhimanyu Kapur '21
+
+Katie Goldstein '20
+
+Regina Yan '19
+
+Sheppard Somers '19
+
+Zoe Yu '19
 
 ## Acknowledgments
+
+Our lovely TA's
+Timmy Tim Tim (Tim)
