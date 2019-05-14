@@ -1,0 +1,223 @@
+$main-color: #25e098;
+$text-color: #141414;
+$error-color: #ff6450;
+
+body, html {
+    font-family: "Roboto", sans-serif;    height: 100%;
+  }
+
+  .logo {
+    background-image: url('img/rocket.png');
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  // .active {
+  //   color: pink;
+  // }
+  .header{
+    background: $main-color;
+    height: 60px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  }
+  ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  li{
+    padding-right: 1em;
+    color: white;
+    text-decoration: none;
+  }
+  .link {
+    color: white;
+    text-decoration: none;
+    transition: all .1s ease-in-out;
+  }
+  .link:hover{
+    color: #f1eaea;
+  }
+  .preview{
+    height: 35vh;
+    width: 25vw;
+    border: 2px solid $text-color;
+    padding: 1em;
+    overflow: hidden;
+    transition: all .1s ease-in-out;
+  }
+  .preview:hover{
+    color: $main-color;
+    transform: scale(1.02);
+    border: 2px solid $main-color;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+    }
+  .allposts{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 4em;
+  }
+  .previewTitle{
+    color: $text-color;
+    text-decoration: none;
+    padding-bottom: 1em;
+
+  }
+  .previewTagsText{
+    font-weight: 100;
+    font-size: 10pt;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+
+  }
+  .previewImage{
+    height: 20vh;
+    // max-width: 90%;
+  }
+  @media screen and (max-width : 800px){
+    .previewImage{
+      max-width: 90%;
+      height: initial;
+    }
+  }
+  .previewTitleText{
+    font-size: 15pt;
+    margin-bottom: 0.5em;
+  }
+  .previewTagsText{
+    font-weight: 100;
+    font-size: 10pt;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+
+  }
+  .foodHeader{
+    margin-top: 70px;
+    padding: 1em 1em 0 1em;
+    font-size: 25pt;
+    font-weight: 100;
+    display: flex;
+    justify-content: center;
+  }
+  .foodHeader em{
+    font-weight: 400;
+    color: $main-color;
+    font-style: normal;
+  }
+  h4{
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #8d8d8d;
+  }
+  .foodHeaderSecondary{
+    display: flex;
+    justify-content: center;
+  }
+  .post{
+    margin-top: 90px;
+    padding: 2em;
+  }
+  .postTitle{
+    font-weight: 400;
+    font-size: 25pt;
+  }
+  .errorTitle{
+    font-weight: 400;
+    font-size: 25pt;
+    border: 1px solid $error-color;
+  }
+  .postTags{
+    font-weight: 100;
+    text-transform: uppercase;
+    font-size: 1em;
+  }
+  .errorTags{
+    font-weight: 100;
+    text-transform: uppercase;
+    font-size: 1em;
+    border: 1px solid $error-color;
+  }
+
+  button{
+    margin: 1em;
+    padding: 0.5em 1em;
+    border: 2px solid $main-color;
+    color: $main-color;
+    transition: all .2s ease-in-out;
+  }
+
+  button:focus{
+    outline: none;
+  }
+  button:hover{
+    background: $main-color;
+    color: white;
+  }
+  .postImage{
+    margin-top: 1em;
+  }
+  .postImagedisp{
+    max-height: 50vh;
+  }
+  input{
+    font-family: Roboto;
+    border: none;
+    font-weight: 100;
+    width: 40vw;
+    margin-bottom: 1em;
+    background: #f5f5f5;
+  }
+  input:focus{
+    background: #f5f5f5;
+    outline: none;
+    // border-bottom: 1px solid $text-color;
+  }
+  .error_box{
+    border: 1px solid $error-color;
+  }
+  textarea{
+    height: 100px;
+    width: 40vw;
+    border: none;
+    font-size: 11pt;
+    font-weight: 200;
+    font-family: Roboto;
+    background: #f5f5f5;
+    margin-bottom: 1em;
+  }
+  textarea:focus{
+    outline: none;
+    // border-bottom: 1px solid $text-color;
+  }
+  em{
+    font-style: italic;
+    font-weight: 100;
+  }
+  .postContent{
+    display: flex;
+    align-items: flex-start;
+  }
+  b{
+    font-weight: 400;
+  }
+  .newPostHeader{
+    font-size: 20pt;
+    margin-bottom: 1em;
+  }
+  .divider{
+    border-bottom: 1px solid $text-color;
+  }
+  .signin{
+    margin-top: 90px;
+    padding: 2em;
+  }
