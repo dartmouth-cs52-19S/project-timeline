@@ -1,13 +1,13 @@
-# Project Name
+# Timeline
 
-![Team Photo](Insert a Team Photo URL here)
-[*how?*](https://help.github.com/articles/about-readmes/#relative-links-and-image-paths-in-readme-files)
+![Team Photo](src/img/teamTimeline.jpeg)
 
 TODO: short project description, some sample screenshots or mockups
 
 ## Architecture
 
-TODO:  descriptions of code organization and tools and libraries used
+Code is organized
+Library is
 
 ## Setup
 
