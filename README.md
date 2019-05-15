@@ -34,6 +34,10 @@ Sheppard Somers '19
 
 Zoe Yu '19
 
+## Sources
+
+We started this project with Regina's Lab 4 (front end) and Abhimanyu's Lab 5 (server).
+
 ## Acknowledgments
 
 Our lovely TA's
