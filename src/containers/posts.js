@@ -7,14 +7,6 @@ import { fetchPosts, fetchPost } from '../actions';
 
 
 class Posts extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-    };
-  }
-
-
   componentDidMount() {
     this.props.fetchPosts();
     console.log(this.props.fetchPosts);
@@ -32,33 +24,29 @@ class Posts extends Component {
   }
 
   renderPosts() {
-    if (this.props.posts) {
-      // console.log(this.props.posts);
-      return this.props.posts.map((post) => {
-        if (this.validURL(post.cover_url) === true) {
-          return (
-            <Link to={`/posts/${post.id}`} key={post.id} className="previewTitle">
-              <div className="preview">
-                <div className="previewTitleText">{post.title}</div>
-                <div className="previewTagsText">{post.tags}</div>
-                <img src={post.cover_url} alt="post" className="previewImage" />
-              </div>
-            </Link>
-          );
-        } else {
-          return (
-            <Link to={`/posts/${post.id}`} key={post.id} className="previewTitle">
-              <div className="preview">
-                <div className="previewTitleText">{post.title}</div>
-                <div className="previewTagsText">{post.tags}</div>
-              </div>
-            </Link>
-          );
-        }
-      });
-    } else {
+    // if no posts return message
+    if (!this.props.posts) {
       return (<h1>No Free Food Events!</h1>);
     }
+    // otherwise return post previews
+    return (
+      this.props.posts.map((post) => {
+        // if img url define img tag to include
+        const imgTag = this.validURL(post.cover_url)
+          ? (<img src={post.cover_url} alt="post" className="previewImage" />) : '';
+
+        // return post preview
+        return (
+          <Link to={`/posts/${post.id}`} key={post.id} className="previewTitle">
+            <div className="preview">
+              <div className="previewTitleText">{post.title}</div>
+              <div className="previewTagsText">{post.tags}</div>
+              {imgTag}
+            </div>
+          </Link>
+        );
+      })
+    );
   }
 
   render() {

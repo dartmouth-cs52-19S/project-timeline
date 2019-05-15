@@ -39,7 +39,7 @@ export function fetchPosts() {
         // console.log(response.data);
       })
       .catch((error) => {
-// TODO: dispatch an error, make reducer, show error component
+        // TODO: dispatch an error, make reducer, show error component
         console.log('did not fetch');
         console.log(error);
       });
@@ -65,40 +65,40 @@ export function createPost(post, history) {
     const fields = {
       title: post.title, content: post.content, tags: post.tags, cover_url: post.cover_url,
     };
-    axios.post(`${ROOT_URL}/posts`, fields, 
+    axios.post(`${ROOT_URL}/posts`, fields,
       { headers: { authorization: localStorage.getItem('token') } })
-    .then(() => {
-      history.push('/');
-    }).catch((error) => {
-      console.log(error);
-    });
+      .then(() => {
+        history.push('/');
+      }).catch((error) => {
+        console.log(error);
+      });
   };
 }
 
 // send updated post info to replace old
 export function updatePost(id, fields, history) {
   return (dispatch) => {
-    axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, fields, 
+    axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, fields,
       { headers: { authorization: localStorage.getItem('token') } })
-    .then((response) => {
-      history.push('/');
-      dispatch({ type: ActionTypes.FETCH_POST, payload: response });
-    }).catch((error) => {
-      console.log(error);
-    });
+      .then((response) => {
+        history.push('/');
+        dispatch({ type: ActionTypes.FETCH_POST, payload: response });
+      }).catch((error) => {
+        console.log(error);
+      });
   };
 }
 
 // Delete post + push to home
 export function deletePost(id, history) {
   return (dispatch) => {
-    axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`, 
+    axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`,
       { headers: { authorization: localStorage.getItem('token') } })
-    .then((response) => {
-      history.push('/');
-    }).catch((error) => {
-      console.log(error);
-    });
+      .then((response) => {
+        history.push('/');
+      }).catch((error) => {
+        console.log(error);
+      });
   };
 }
 
@@ -119,7 +119,7 @@ export function signinUser({ email, password }, history) {
       localStorage.setItem('token', response.data.token);
       history.push('/');
     }).catch((error) => {
-      console.log("Sign in failed.");
+      console.log('Sign in failed.');
       console.log(error);
       dispatch(authError(`Sign In Failed: ${error.response.data}`));
     });

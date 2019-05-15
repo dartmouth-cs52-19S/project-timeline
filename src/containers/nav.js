@@ -6,6 +6,7 @@ import { signoutUser } from '../actions';
 class Nav extends Component {
   constructor(props) {
     super(props);
+
     this.onSignOut = this.onSignOut.bind(this);
   }
 
@@ -14,25 +15,25 @@ class Nav extends Component {
   }
 
   render() {
+    // set the links based on authentication
+    const account = this.props.authenticated
+      ? (
+        <li onClick={this.onSignOut}>Sign Out</li>
+      )
+      : (
+        <span>
+          <li><NavLink to="/signup" className="link">Sign Up</NavLink></li>
+          <li><NavLink to="/signin" className="link">Sign In</NavLink></li>
+        </span>
+      );
+
     return (
       <nav className="header">
-        {this.props.authenticated
-          ? (
-            <ul>
-              <li><NavLink exact to="/" className="link">Home</NavLink></li>
-              <li><NavLink to="/posts/new" className="link">New Free Food Event</NavLink></li>
-              <li onClick={this.onSignOut}>Sign Out</li>
-            </ul>
-          )
-          : (
-            <ul>
-              <li><NavLink exact to="/" className="link">Home</NavLink></li>
-              <li><NavLink to="/posts/new" className="link">New Free Food Event</NavLink></li>
-              <li><NavLink to="/signup" className="link">Sign Up</NavLink></li>
-              <li><NavLink to="/signin" className="link">Sign In</NavLink></li>
-            </ul>
-          )
-        }
+        <ul>
+          <li><NavLink exact to="/" className="link">Home</NavLink></li>
+          <li><NavLink to="/posts/new" className="link">New Free Food Event</NavLink></li>
+          {account}
+        </ul>
       </nav>
     );
   }
@@ -45,15 +46,3 @@ const mapStateToProps = state => (
 );
 
 export default withRouter(connect(mapStateToProps, { signoutUser })(Nav));
-
-// const Nav = (props) => {
-//   return (
-//       <nav className="header">
-//         <ul>
-//           <li><NavLink exact to="/" className="link">Home</NavLink></li>
-//           <li><NavLink to="/posts/new" className="link">New Free Food Event</NavLink></li>
-//           {/* <li><NavLink to="/about">About</NavLink></li> */}
-//         </ul>
-//       </nav>
-//   );
-// };

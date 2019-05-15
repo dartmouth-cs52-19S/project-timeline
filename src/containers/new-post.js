@@ -8,6 +8,7 @@ import { createPost } from '../actions';
 class NewPost extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       title: '',
       tags: '',
@@ -20,6 +21,7 @@ class NewPost extends Component {
       hasMoved: 0,
       hasMovedTag: 0,
     };
+
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onTagsChange = this.onTagsChange.bind(this);
     this.onContentChange = this.onContentChange.bind(this);
