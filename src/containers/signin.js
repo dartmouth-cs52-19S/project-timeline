@@ -13,19 +13,9 @@ class SignIn extends Component {
     };
 
     this.edit = this.edit.bind(this);
-    // this.onEmailChange = this.onEmailChange.bind(this);
-    // this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onCancel = this.onCancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  // onEmailChange(event) {
-  //   this.setState({ email: event.target.value });
-  // }
-
-  // onPasswordChange(event) {
-  //   this.setState({ password: event.target.value });
-  // }
 
   onCancel(event) {
     this.props.history.push('/');
