@@ -19,13 +19,11 @@ class Post extends Component {
       cover_url: props.post.cover_url,
       isEditing: 0,
     };
-    this.toggleDelete = this.toggleDelete.bind(this);
-    this.onTitleChange = this.onTitleChange.bind(this);
-    this.onContentChange = this.onContentChange.bind(this);
-    this.onTagChange = this.onTagChange.bind(this);
-    this.onCoverChange = this.onCoverChange.bind(this);
-    this.toggleSubmit = this.toggleSubmit.bind(this);
-    this.toggleEdit = this.toggleEdit.bind(this);
+
+    this.edit = this.edit.bind(this);
+    this.delete = this.delete.bind(this);
+    this.submit = this.submit.bind(this);
+    this.startEdit = this.startEdit.bind(this);
     this.validURL = this.validURL.bind(this);
   }
 
@@ -34,38 +32,32 @@ class Post extends Component {
     this.setState({ title: this.props.post.title });
   }
 
-  onTitleChange(event) {
-    this.setState({ title: event.target.value });
+  edit(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
-  onContentChange(event) {
-    this.setState({ content: event.target.value });
-  }
-
-  onTagChange(event) {
-    this.setState({ tags: event.target.value });
-  }
-
-  onCoverChange(event) {
-    this.setState({ cover_url: event.target.value });
-  }
-
-  toggleDelete() {
+  delete() {
     this.props.deletePost(this.props.post._id, this.props.history);
   }
 
-  toggleEdit() {
-    this.setState({ isEditing: 1 });
-    this.setState({ title: this.props.post.title });
-    this.setState({ tags: this.props.post.tags });
-    this.setState({ cover_url: this.props.post.cover_url });
-    this.setState({ content: this.props.post.content });
+  startEdit() {
+    this.setState({
+      isEditing: 1,
+      title: this.props.post.title,
+      tags: this.props.post.tags,
+      cover_url: this.props.post.cover_url,
+      content: this.props.post.content,
+    });
   }
 
-  toggleSubmit() {
+  submit() {
     this.props.updatePost(this.props.post._id, {
-      title: this.state.title, content: this.state.content, tags: this.state.tags, cover_url: this.state.cover_url,
+      title: this.state.title,
+      content: this.state.content,
+      tags: this.state.tags,
+      cover_url: this.state.cover_url,
     }, this.props.history);
+
     this.setState({ isEditing: 0 });
   }
 
@@ -82,31 +74,58 @@ class Post extends Component {
 
 
   render() {
+    // editing view
     if (this.state.isEditing === 1) {
       return (
         <div className="post">
           <div>
             <p>Posted by: {this.props.post.username}</p>
             <div>
-              <input className="postTitle" placeholder={this.props.post.title} onChange={this.onTitleChange} value={this.state.title} /> <em>Title</em>
+              <input
+                className="postTitle"
+                name="title"
+                placeholder={this.props.post.title}
+                onChange={this.edit}
+                value={this.state.title}
+              />
+              <em>Title</em>
             </div>
             <div>
-              <input className="postTags" placeholder={this.props.post.tags} onChange={this.onTagChange} value={this.state.tags} /> <em>Location and Time</em>
+              <input className="postTags"
+                name="tags"
+                placeholder={this.props.post.tags}
+                onChange={this.edit}
+                value={this.state.tags}
+              />
+              <em>Location and Time</em>
             </div>
             <div className="postContent">
-              <textarea placeholder={this.props.post.content} onChange={this.onContentChange} value={this.state.content} /> <em>Description</em>
+              <textarea
+                name="content"
+                placeholder={this.props.post.content}
+                onChange={this.edit}
+                value={this.state.content}
+              />
+              <em>Description</em>
             </div>
             <div>
-              <input className="postCover" placeholder={this.props.post.cover_url} onChange={this.onCoverChange} value={this.state.cover_url} /> <em>Image URL</em>
+              <input
+                name="cover_url"
+                className="postCover"
+                placeholder={this.props.post.cover_url}
+                onChange={this.edit}
+                value={this.state.cover_url}
+              />
+              <em>Image URL</em>
             </div>
-            <button type="button" onClick={this.toggleDelete}>Delete Event</button>
+            <button type="button" onClick={this.delete}>Delete Event</button>
             {/* <button type="button" onClick={this.toggleEdit}>Edit</button> */}
-            <button type="button" onClick={this.toggleSubmit}>Save Changes</button>
+            <button type="button" onClick={this.submit}>Save Changes</button>
           </div>
         </div>
 
       );
-    } else if (this.validURL(this.props.post.cover_url) === true) {
+    } else if (this.validURL(this.props.post.cover_url) === true) { // check url
       return (
         <div className="post">
           <p>Posted by: {this.props.post.username}</p>
@@ -120,21 +139,21 @@ class Post extends Component {
               <img className="postImagedisp" src={this.props.post.cover_url} alt="image" />
             </div>
             {/* <div> Content: {this.props.post.content} </div> */}
-            <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.post.content || '') }} />
-            <button type="button" onClick={this.toggleDelete}>Delete Event</button>
+            <div
+              className="noteBody"
+              dangerouslySetInnerHTML={{ __html: marked(this.props.post.content || '') }}
+            />
+            <button type="button" onClick={this.delete}>Delete Event</button>
             <button type="button" onClick={this.toggleEdit}>Edit Event</button>
-            {/* <button type="button" onClick={this.toggleSubmit}>Submit</button> */}
+            {/* <button type="button" onClick={this.submit}>Submit</button> */}
           </div>
         </div>
 
       );
-    } else {
+    } else { // normal presentation
       return (
         <div className="post">
           <p>Posted by: {this.props.post.username}</p>
-          {/* <div>
-            <img src={this.props.post.cover_url} alt="image" />
-          </div> */}
           <div className="postTitle">
             {this.props.post.title}
           </div>
@@ -142,10 +161,13 @@ class Post extends Component {
             {/* <div> Post ID: {this.props.post._id} </div> */}
             <div className="postTags"> Location and Time: {this.props.post.tags} </div>
             {/* <div> Content: {this.props.post.content} </div> */}
-            <div className="noteBody" dangerouslySetInnerHTML={{ __html: marked(this.props.post.content || '') }} />
-            <button type="button" onClick={this.toggleDelete}>Delete Event</button>
+            <div
+              className="noteBody"
+              dangerouslySetInnerHTML={{ __html: marked(this.props.post.content || '') }}
+            />
+            <button type="button" onClick={this.delete}>Delete Event</button>
             <button type="button" onClick={this.toggleEdit}>Edit Event</button>
-            {/* <button type="button" onClick={this.toggleSubmit}>Submit</button> */}
+            {/* <button type="button" onClick={this.submit}>Submit</button> */}
           </div>
         </div>
 

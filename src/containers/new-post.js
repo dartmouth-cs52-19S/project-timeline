@@ -8,6 +8,7 @@ import { createPost } from '../actions';
 class NewPost extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       title: '',
       tags: '',
@@ -20,53 +21,32 @@ class NewPost extends Component {
       hasMoved: 0,
       hasMovedTag: 0,
     };
-    this.onTitleChange = this.onTitleChange.bind(this);
-    this.onTagsChange = this.onTagsChange.bind(this);
-    this.onContentChange = this.onContentChange.bind(this);
-    this.onCoverURLChange = this.onCoverURLChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.edit = this.edit.bind(this);
     this.handleTitleBlur = this.handleTitleBlur.bind(this);
     this.handleTagBlur = this.handleTagBlur.bind(this);
     this.handleContentBlur = this.handleContentBlur.bind(this);
-    this.handleCoverBlur = this.handleCoverBlur.bind(this);
+    this.handleCoverURLBlur = this.handleCoverURLBlur.bind(this);
     this.validURL = this.validURL.bind(this);
-    this.renderCover = this.renderCover.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
-  onTitleChange(event) {
-    this.setState({ hasEdited: 1 });
-    this.setState({ title: event.target.value });
-    if (!this.state.title) {
-      this.setState({ errorTitle: 'postTitle' });
-    }
-  }
-
-  onTagsChange(event) {
-    this.setState({ hasEdited: 1 });
-    this.setState({ tags: event.target.value });
-    if (!this.state.tags) {
-      this.setState({ errorTags: 'postTags' });
-    }
-  }
-
-  onContentChange(event) {
-    this.setState({ hasEdited: 1 });
-    this.setState({ content: event.target.value });
-  }
-
-  onCoverURLChange(event) {
-    if (this.validURL(event.target.value) === false) {
-      console.log('it is false');
+  // TODO Add onblur for coverURL
+  // then can remove the setstate above
+  handleCoverURLBlur() {
+    if (!this.validURL(this.state.cover_url)) {
+      console.log('URL is bad');
       this.setState({ errorCover: 'error_box' });
-    }
-    if (this.validURL(event.target.value) === true) {
-      console.log('it is true');
+    } else {
+      console.log('URL is good');
       this.setState({ errorCover: 'postCover' });
     }
-    this.setState({ cover_url: event.target.value });
-    console.log(this.state.cover_url);
-    this.setState({ hasEdited: 1 });
+  }
+
+  handleContentBlur() {
+    if (!this.state.content) {
+      console.log('no content but that is OK');
+    }
   }
 
   handleTitleBlur() {
@@ -88,6 +68,10 @@ class NewPost extends Component {
     }
   }
 
+  edit(e) {
+    this.setState({ hasEdited: 1, [e.target.name]: e.target.value });
+  }
+
   // Adapted from https://stackoverflow.com/questions/13373504/what-is-a-valid-url-query-string
   validURL(str) {
     const pattern = new RegExp('^(https?:\\/\\/)?' // protocol
@@ -99,24 +83,6 @@ class NewPost extends Component {
     return !!pattern.test(str);
   }
 
-  handleCoverBlur() {
-    if (!this.state.cover_url) {
-      if (this.validURL(this.state.cover_url) === false) {
-        this.setState({ errorCover: 'error_box' });
-        console.log('not a real URL');
-      } else {
-        this.setState({ errorCover: 'postCover' });
-      }
-    }
-  }
-
-
-  handleContentBlur() {
-    if (!this.state.content) {
-      console.log('no content but that is OK');
-    }
-  }
-
   handleSubmit() {
     this.props.createPost({
       title: this.state.title, content: this.state.content, tags: this.state.tags, cover_url: this.state.cover_url,
@@ -124,65 +90,65 @@ class NewPost extends Component {
     this.props.history.push(`/post/${this.props.match.params.postID}`);
   }
 
-  renderCover() {
-    if (this.state.errorCover === 'error_box') {
-      return (
-        <div className="postContent">
-          <input className="error_box" placeholder="Image URL Link" onChange={this.onCoverURLChange} onBlur={this.handleCoverBlur} value={this.state.cover_url} /> <em>Not a valid URL</em>
-        </div>
-      );
-    } else {
-      return (
-        <div className="postContent">
-          <input className="postCover" placeholder="Image URL Link" onChange={this.onCoverURLChange} onBlur={this.handleCoverBlur} value={this.state.cover_url} />
-        </div>
-      );
-    }
-  }
-
   renderNewPost() {
+    // show submit button based on whether all fields are correctly filled
+    let submit;
     if (this.state.hasEdited === 1 && this.state.hasMoved === 1 && this.state.hasMovedTag === 1 && this.state.errorTitle === 'postTitle' && this.state.errorTags === 'postTags' && this.state.errorCover === 'postCover') {
-      return (
-        <div>
-          <div>
-            <input className={this.state.errorTitle} placeholder="Title of Event" onChange={this.onTitleChange} onBlur={this.handleTitleBlur} value={this.state.title} /> <em>* Required</em>
-          </div>
-          <div>
-            <input className={this.state.errorTags} placeholder="Location and Time" onChange={this.onTagsChange} onBlur={this.handleTagBlur} value={this.state.tags} /> <em>* Required</em>
-          </div>
-          <div className="postContent">
-            <textarea placeholder="Event Description" onChange={this.onContentChange} onBlur={this.handleContentBlur} value={this.state.content} />
-          </div>
-          <div>
-            {this.renderCover()}
-          </div>
-          <Link className="link" to="/">
-            <button type="button">Cancel</button>
-          </Link>
-          <button type="button" onClick={this.handleSubmit}>Submit</button>
-        </div>
-      );
+      submit = <button type="button" onClick={this.handleSubmit}>Submit</button>;
     } else {
-      return (
-        <div>
-          <div>
-            <input className={this.state.errorTitle} placeholder="Title of Event" onChange={this.onTitleChange} onBlur={this.handleTitleBlur} value={this.state.title} /> <em>* Required</em>
-          </div>
-          <div>
-            <input className={this.state.errorTags} placeholder="Location and Time" onChange={this.onTagsChange} onBlur={this.handleTagBlur} value={this.state.tags} /> <em>* Required</em>
-          </div>
-          <div className="postContent">
-            <textarea placeholder="Event Description" onChange={this.onContentChange} onBlur={this.handleContentBlur} value={this.state.content} />
-          </div>
-          <div>
-            {this.renderCover()}
-          </div>
-          <Link className="link" to="/">
-            <button type="button">Cancel</button>
-          </Link>
-        </div>
-      );
+      submit = '';
     }
+
+    return (
+      <div>
+        <div>
+          <input
+            name="title"
+            className={this.state.errorTitle}
+            placeholder="Title of Event"
+            onChange={this.edit}
+            onBlur={this.handleTitleBlur}
+            value={this.state.title}
+          />
+          <em>* Required</em>
+        </div>
+        <div>
+          <input
+            name="tags"
+            className={this.state.errorTags}
+            placeholder="Location and Time"
+            onChange={this.edit}
+            onBlur={this.handleTagBlur}
+            value={this.state.tags}
+          />
+          <em>* Required</em>
+        </div>
+        <div className="postContent">
+          <textarea
+            name="content"
+            placeholder="Event Description"
+            onChange={this.edit}
+            onBlur={this.handleContentBlur}
+            value={this.state.content}
+          />
+        </div>
+        <div className="postContent">
+          <input
+            name="cover_url"
+            className={this.state.errorCover}
+            placeholder="Image URL Link"
+            onChange={this.edit}
+            onBlur={this.handleCoverURLBlur}
+            value={this.state.cover_url}
+          />
+          {this.state.errorCover === 'error_box' ? <em>Not a valid URL</em> : ''}
+        </div>
+        <Link className="link" to="/">
+          <button type="button">Cancel</button>
+        </Link>
+        {submit}
+      </div>
+    );
   }
 
   render() {

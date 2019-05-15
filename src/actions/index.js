@@ -7,12 +7,14 @@ export const ActionTypes = {
   AUTH_USER: 'AUTH_USER',
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
-  // UPDATE_POST: 'UPDATE_POST',
-  // CREATE_POST: 'CREATE_POST',
-  // DELETE_POST: 'DELETE_POST',
 };
+
+// SERVER URLS
+// Regina's API url
 const ROOT_URL = 'https://lab5-regina-yan-1.herokuapp.com/api';
+// local testing api url
 // const ROOT_URL = 'http://localhost:9090/api';
+// Tim's blog API
 // const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
 const API_KEY = '?key=r_yan';
 
@@ -21,91 +23,86 @@ if (token) {
   console.log(`token  ${token}`);
 }
 
+
+// Get all of the post previews
 export function fetchPosts() {
   // ActionCreator returns a function
   // that gets called with dispatch
   // remember (arg) => { } is a function
   return (dispatch) => {
+    // server call
     axios.get(`${ROOT_URL}/posts${API_KEY}`)
       .then((response) => {
-        // once we are done fetching we can dispatch a redux action with the response data
+        // dispatch action w/ payload
         dispatch({ type: ActionTypes.FETCH_POSTS, payload: response.data });
-        console.log('done fetching');
-        console.log(response.data);
+        // console.log('done fetching');
+        // console.log(response.data);
       })
       .catch((error) => {
-        // whaaat?
-        // dispatch an error, use it in a separate error reducer. this is the beauty of redux.
-        // have an error component somewhere show it
+        // TODO: dispatch an error, make reducer, show error component
         console.log('did not fetch');
         console.log(error);
-        // might you also want an ERROR_CLEAR action?
       });
   };
 }
 
+// Get single, full post
 export function fetchPost(id) {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`).then((response) => {
       dispatch({ type: ActionTypes.FETCH_POST, payload: response.data });
-      console.log('this is post', response.data);
+      // console.log('this is post', response.data);
     }).catch((error) => {
       console.log(error);
     });
   };
 }
 
-// export function createPost(post, history) {
-//   return (dispatch) => {
-//     console.log('starting to post');
-//     console.log(`the post has title  ${post.title} and content ${post.content} `);
-//     axios.post(`${ROOT_URL}/posts${API_KEY}`, post, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
-//       console.log('got token');
-//       history.push('/');
-//       // dispatch({ type: ActionTypes.FETCH_POST, payload: response.data });
-//     }).catch((error) => {
-//       console.log(`error creating post  ${error}`);
-//     });
-//   };
-// }
-
+// add a post
+// TODO: Check against server for sending post v. destructured
 export function createPost(post, history) {
   return (dispatch) => {
     const fields = {
       title: post.title, content: post.content, tags: post.tags, cover_url: post.cover_url,
     };
-    axios.post(`${ROOT_URL}/posts`, fields, { headers: { authorization: localStorage.getItem('token') } }).then(() => {
-      history.push('/');
-    }).catch((error) => {
-      console.log(error);
-    });
+    axios.post(`${ROOT_URL}/posts`, fields,
+      { headers: { authorization: localStorage.getItem('token') } })
+      .then(() => {
+        history.push('/');
+      }).catch((error) => {
+        console.log(error);
+      });
   };
 }
 
+// send updated post info to replace old
 export function updatePost(id, fields, history) {
   return (dispatch) => {
-    axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, fields, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
-      history.push('/');
-      dispatch({ type: ActionTypes.FETCH_POST, payload: response });
-    }).catch((error) => {
-      console.log(error);
-    });
+    axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, fields,
+      { headers: { authorization: localStorage.getItem('token') } })
+      .then((response) => {
+        history.push('/');
+        dispatch({ type: ActionTypes.FETCH_POST, payload: response });
+      }).catch((error) => {
+        console.log(error);
+      });
   };
 }
 
-
+// Delete post + push to home
 export function deletePost(id, history) {
   return (dispatch) => {
-    axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`, { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
-      history.push('/');
-    }).catch((error) => {
-      console.log(error);
-    });
+    axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`,
+      { headers: { authorization: localStorage.getItem('token') } })
+      .then((response) => {
+        history.push('/');
+      }).catch((error) => {
+        console.log(error);
+      });
   };
 }
 
 // trigger to deauth if there is error
-// can also use in your error reducer if you have one to display an error message
 export function authError(error) {
   return {
     type: ActionTypes.AUTH_ERROR,
@@ -113,7 +110,7 @@ export function authError(error) {
   };
 }
 
-
+// sign in -> set authorization state
 export function signinUser({ email, password }, history) {
   const user = { email, password };
   return (dispatch) => {
@@ -122,32 +119,33 @@ export function signinUser({ email, password }, history) {
       localStorage.setItem('token', response.data.token);
       history.push('/');
     }).catch((error) => {
+      console.log('Sign in failed.');
+      console.log(error);
       dispatch(authError(`Sign In Failed: ${error.response.data}`));
     });
   };
 }
 
-
+// sign up -> set auth state again
 export function signupUser({ username, email, password }, history) {
   return (dispatch) => {
     const user = { username, email, password };
-    console.log('in signup user');
+    // console.log('in signup user');
     axios.post(`${ROOT_URL}/signup`, user).then((response) => {
-      console.log('lab4 axios post');
+      // console.log('lab4 axios post');
       dispatch({ type: ActionTypes.AUTH_USER });
       localStorage.setItem('token', response.data.token);
       history.push('/');
     }).catch((error) => {
-      console.log('lab4 error in actions');
-      console.log(error.response.data);
+      console.log('Sign up failed.');
+      console.log('error data', error.response.data);
+      console.log('full error: ', error);
       dispatch(authError(`Sign Up Failed: ${error.response.data}`));
     });
   };
 }
 
-
-// deletes token from localstorage
-// and deauths
+// Sign out -> deletes token from localstorage and deauths
 export function signoutUser(history) {
   return (dispatch) => {
     localStorage.removeItem('token');
