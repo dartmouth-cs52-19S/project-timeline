@@ -11,9 +11,9 @@ export const ActionTypes = {
 
 // SERVER URLS
 // Regina's API url
-const ROOT_URL = 'https://lab5-regina-yan-1.herokuapp.com/api';
+// const ROOT_URL = 'https://lab5-regina-yan-1.herokuapp.com/api';
 // local testing api url
-// const ROOT_URL = 'http://localhost:9090/api';
+const ROOT_URL = 'http://localhost:9090/api';
 // Tim's blog API
 // const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
 const API_KEY = '?key=r_yan';
