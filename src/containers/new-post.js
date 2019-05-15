@@ -47,6 +47,10 @@ class NewPost extends Component {
     this.setState({ hasEdited: 1 });
   }
 
+  // TODO Add onblur for coverURL
+  // then can remove the setstate above
+  // onCoverURLBlue(e) {}
+
   handleTitleBlur() {
     this.setState({ hasMoved: 1 });
     if (!this.state.title) {
