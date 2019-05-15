@@ -22,39 +22,15 @@ class NewPost extends Component {
       hasMovedTag: 0,
     };
 
-    this.onTitleChange = this.onTitleChange.bind(this);
-    this.onTagsChange = this.onTagsChange.bind(this);
-    this.onContentChange = this.onContentChange.bind(this);
+    this.edit = this.edit.bind(this);
     this.onCoverURLChange = this.onCoverURLChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTitleBlur = this.handleTitleBlur.bind(this);
     this.handleTagBlur = this.handleTagBlur.bind(this);
     this.handleContentBlur = this.handleContentBlur.bind(this);
     this.handleCoverBlur = this.handleCoverBlur.bind(this);
     this.validURL = this.validURL.bind(this);
     this.renderCover = this.renderCover.bind(this);
-  }
-
-
-  onTitleChange(event) {
-    this.setState({ hasEdited: 1 });
-    this.setState({ title: event.target.value });
-    if (!this.state.title) {
-      this.setState({ errorTitle: 'postTitle' });
-    }
-  }
-
-  onTagsChange(event) {
-    this.setState({ hasEdited: 1 });
-    this.setState({ tags: event.target.value });
-    if (!this.state.tags) {
-      this.setState({ errorTags: 'postTags' });
-    }
-  }
-
-  onContentChange(event) {
-    this.setState({ hasEdited: 1 });
-    this.setState({ content: event.target.value });
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   onCoverURLChange(event) {
@@ -88,6 +64,14 @@ class NewPost extends Component {
     } else {
       this.setState({ errorTags: 'postTags' });
     }
+  }
+
+  edit(e) {
+    // this.setState({ [e.target.name]: e.target.value });
+    this.setState({ hasEdited: 1, [e.target.name]: e.target.value });
+    // if (!(this.state).e.target.name) {
+    //   this.setState({ ('error' + [e.target.name): 'error' });
+    // }
   }
 
   // Adapted from https://stackoverflow.com/questions/13373504/what-is-a-valid-url-query-string
@@ -143,48 +127,56 @@ class NewPost extends Component {
   }
 
   renderNewPost() {
+    // show submit button based on whether all fields are correctly filled
+    let submit;
     if (this.state.hasEdited === 1 && this.state.hasMoved === 1 && this.state.hasMovedTag === 1 && this.state.errorTitle === 'postTitle' && this.state.errorTags === 'postTags' && this.state.errorCover === 'postCover') {
-      return (
-        <div>
-          <div>
-            <input className={this.state.errorTitle} placeholder="Title of Event" onChange={this.onTitleChange} onBlur={this.handleTitleBlur} value={this.state.title} /> <em>* Required</em>
-          </div>
-          <div>
-            <input className={this.state.errorTags} placeholder="Location and Time" onChange={this.onTagsChange} onBlur={this.handleTagBlur} value={this.state.tags} /> <em>* Required</em>
-          </div>
-          <div className="postContent">
-            <textarea placeholder="Event Description" onChange={this.onContentChange} onBlur={this.handleContentBlur} value={this.state.content} />
-          </div>
-          <div>
-            {this.renderCover()}
-          </div>
-          <Link className="link" to="/">
-            <button type="button">Cancel</button>
-          </Link>
-          <button type="button" onClick={this.handleSubmit}>Submit</button>
-        </div>
-      );
+      submit = <button type="button" onClick={this.handleSubmit}>Submit</button>;
     } else {
-      return (
-        <div>
-          <div>
-            <input className={this.state.errorTitle} placeholder="Title of Event" onChange={this.onTitleChange} onBlur={this.handleTitleBlur} value={this.state.title} /> <em>* Required</em>
-          </div>
-          <div>
-            <input className={this.state.errorTags} placeholder="Location and Time" onChange={this.onTagsChange} onBlur={this.handleTagBlur} value={this.state.tags} /> <em>* Required</em>
-          </div>
-          <div className="postContent">
-            <textarea placeholder="Event Description" onChange={this.onContentChange} onBlur={this.handleContentBlur} value={this.state.content} />
-          </div>
-          <div>
-            {this.renderCover()}
-          </div>
-          <Link className="link" to="/">
-            <button type="button">Cancel</button>
-          </Link>
-        </div>
-      );
+      submit = '';
     }
+
+    return (
+      <div>
+        <div>
+          <input
+            name="title"
+            className={this.state.errorTitle}
+            placeholder="Title of Event"
+            onChange={this.edit}
+            onBlur={this.handleTitleBlur}
+            value={this.state.title}
+          />
+          <em>* Required</em>
+        </div>
+        <div>
+          <input
+            name="tags"
+            className={this.state.errorTags}
+            placeholder="Location and Time"
+            onChange={this.edit}
+            onBlur={this.handleTagBlur}
+            value={this.state.tags}
+          />
+          <em>* Required</em>
+        </div>
+        <div className="postContent">
+          <textarea
+            name="content"
+            placeholder="Event Description"
+            onChange={this.edit}
+            onBlur={this.handleContentBlur}
+            value={this.state.content}
+          />
+        </div>
+        <div>
+          {this.renderCover()}
+        </div>
+        <Link className="link" to="/">
+          <button type="button">Cancel</button>
+        </Link>
+        {submit}
+      </div>
+    );
   }
 
   render() {
