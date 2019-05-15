@@ -144,7 +144,7 @@ class Post extends Component {
               dangerouslySetInnerHTML={{ __html: marked(this.props.post.content || '') }}
             />
             <button type="button" onClick={this.delete}>Delete Event</button>
-            <button type="button" onClick={this.toggleEdit}>Edit Event</button>
+            <button type="button" onClick={this.startEdit}>Edit Event</button>
             {/* <button type="button" onClick={this.submit}>Submit</button> */}
           </div>
         </div>
@@ -166,7 +166,7 @@ class Post extends Component {
               dangerouslySetInnerHTML={{ __html: marked(this.props.post.content || '') }}
             />
             <button type="button" onClick={this.delete}>Delete Event</button>
-            <button type="button" onClick={this.toggleEdit}>Edit Event</button>
+            <button type="button" onClick={this.startEdit}>Edit Event</button>
             {/* <button type="button" onClick={this.submit}>Submit</button> */}
           </div>
         </div>
