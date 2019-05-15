@@ -19,6 +19,8 @@ Code library is based on Lab 4/5.
 Just `yarn` as of now! :) Yarn life.
 
 ## Deployment
+heroku git: https://git.heroku.com/timimeline.git
+heroku domain: https://timimeline.herokuapp.com/
 
 To deploy the project, git clone both repos onto your local dev environment. Change the deploy URL in package.json to another surge URL and hit that `yarn deploy`.
 
