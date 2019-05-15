@@ -23,33 +23,31 @@ class NewPost extends Component {
     };
 
     this.edit = this.edit.bind(this);
-    this.onCoverURLChange = this.onCoverURLChange.bind(this);
     this.handleTitleBlur = this.handleTitleBlur.bind(this);
     this.handleTagBlur = this.handleTagBlur.bind(this);
     this.handleContentBlur = this.handleContentBlur.bind(this);
-    this.handleCoverBlur = this.handleCoverBlur.bind(this);
+    this.handleCoverURLBlur = this.handleCoverURLBlur.bind(this);
     this.validURL = this.validURL.bind(this);
-    this.renderCover = this.renderCover.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  onCoverURLChange(event) {
-    if (this.validURL(event.target.value) === false) {
-      console.log('it is false');
-      this.setState({ errorCover: 'error_box' });
-    }
-    if (this.validURL(event.target.value) === true) {
-      console.log('it is true');
-      this.setState({ errorCover: 'postCover' });
-    }
-    this.setState({ cover_url: event.target.value });
-    console.log(this.state.cover_url);
-    this.setState({ hasEdited: 1 });
   }
 
   // TODO Add onblur for coverURL
   // then can remove the setstate above
-  // onCoverURLBlue(e) {}
+  handleCoverURLBlur() {
+    if (!this.validURL(this.state.cover_url)) {
+      console.log('URL is bad');
+      this.setState({ errorCover: 'error_box' });
+    } else {
+      console.log('URL is good');
+      this.setState({ errorCover: 'postCover' });
+    }
+  }
+
+  handleContentBlur() {
+    if (!this.state.content) {
+      console.log('no content but that is OK');
+    }
+  }
 
   handleTitleBlur() {
     this.setState({ hasMoved: 1 });
@@ -71,11 +69,7 @@ class NewPost extends Component {
   }
 
   edit(e) {
-    // this.setState({ [e.target.name]: e.target.value });
     this.setState({ hasEdited: 1, [e.target.name]: e.target.value });
-    // if (!(this.state).e.target.name) {
-    //   this.setState({ ('error' + [e.target.name): 'error' });
-    // }
   }
 
   // Adapted from https://stackoverflow.com/questions/13373504/what-is-a-valid-url-query-string
@@ -89,45 +83,11 @@ class NewPost extends Component {
     return !!pattern.test(str);
   }
 
-  handleCoverBlur() {
-    if (!this.state.cover_url) {
-      if (this.validURL(this.state.cover_url) === false) {
-        this.setState({ errorCover: 'error_box' });
-        console.log('not a real URL');
-      } else {
-        this.setState({ errorCover: 'postCover' });
-      }
-    }
-  }
-
-
-  handleContentBlur() {
-    if (!this.state.content) {
-      console.log('no content but that is OK');
-    }
-  }
-
   handleSubmit() {
     this.props.createPost({
       title: this.state.title, content: this.state.content, tags: this.state.tags, cover_url: this.state.cover_url,
     }, this.props.history);
     this.props.history.push(`/post/${this.props.match.params.postID}`);
-  }
-
-  renderCover() {
-    if (this.state.errorCover === 'error_box') {
-      return (
-        <div className="postContent">
-          <input className="error_box" placeholder="Image URL Link" onChange={this.onCoverURLChange} onBlur={this.handleCoverBlur} value={this.state.cover_url} /> <em>Not a valid URL</em>
-        </div>
-      );
-    } else {
-      return (
-        <div className="postContent">
-          <input className="postCover" placeholder="Image URL Link" onChange={this.onCoverURLChange} onBlur={this.handleCoverBlur} value={this.state.cover_url} />
-        </div>
-      );
-    }
   }
 
   renderNewPost() {
@@ -172,8 +132,16 @@ class NewPost extends Component {
             value={this.state.content}
           />
         </div>
-        <div>
-          {this.renderCover()}
+        <div className="postContent">
+          <input
+            name="cover_url"
+            className={this.state.errorCover}
+            placeholder="Image URL Link"
+            onChange={this.edit}
+            onBlur={this.handleCoverURLBlur}
+            value={this.state.cover_url}
+          />
+          {this.state.errorCover === 'error_box' ? <em>Not a valid URL</em> : ''}
         </div>
         <Link className="link" to="/">
           <button type="button">Cancel</button>
