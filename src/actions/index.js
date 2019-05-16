@@ -14,7 +14,7 @@ export const ActionTypes = {
 // const ROOT_URL = 'https://lab5-regina-yan-1.herokuapp.com/api';
 // local testing api url
 const ROOT_URL = 'http://localhost:9090/api';
-// Abhi's Database 
+// Abhi's Database
 // const ROOT_URL = 'https://cs52-abhi-blog.herokuapp.com/';
 // Tim's blog API
 // const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';

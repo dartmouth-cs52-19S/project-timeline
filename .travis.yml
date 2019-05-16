@@ -2,4 +2,4 @@ language: node_js
 node_js: 
   - "11" 
 after_success: 
-  - surge --project ./src/ --domain timeline.surge.sh
+  - yarn deploy
