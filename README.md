@@ -2,9 +2,9 @@
 
 ![Team Photo](src/img/teamTimeline.jpeg)
 
-Timeline helps you know what you don't know... way before 
+Timeline helps you know what you don't.
 
-Sign up now (warning, Timeline may manifest itself as Free Food @Now but we promise it's not hehehe).
+Sign up now (warning, Timeline may manifest itself as Free Food @Now but we promise it's not hehehe) on http://lifetime.surge.sh/.
 
 [Team Figma -- Mockups](https://www.figma.com/files/project/2496184/Timeline---Journey---Design-Your-Life)
 
@@ -16,7 +16,8 @@ Code library is based on Lab 4/5.
 
 ## Setup
 
-Just `yarn` as of now! :) Yarn life.
+Just `yarn` as of now! Download all your dependencies :) Yarn life.
+Visit http://lifetime.surge.sh/ right now to see what we have.
 
 ## Deployment
 heroku git: https://git.heroku.com/timimeline.git
