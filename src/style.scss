@@ -4,6 +4,7 @@ $error-color: #ff6450;
 
 body, html {
     font-family: "Roboto", sans-serif;    height: 100%;
+    background-color: #f3f4f6;
   }
 
   .logo {
@@ -220,4 +221,11 @@ body, html {
   .signin{
     margin-top: 90px;
     padding: 2em;
+  }
+  .timelineDisp{
+    display: flex;
+    align-items:  flex-start;
+  }
+  .placeholderBox{
+    width: 40vw;
   }

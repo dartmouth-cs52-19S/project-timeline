@@ -1,12 +1,20 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable react/no-danger */
 import React, { Component } from 'react';
+// eslint-disable-next-line max-len
+import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { fetchPosts, fetchPost } from '../actions';
 
 
 class Posts extends Component {
+  constructor(props) {
+    super(props);
+    this.displayDetail = this.displayDetail.bind(this);
+  }
+
   componentDidMount() {
     this.props.fetchPosts();
     console.log(this.props.fetchPosts);
@@ -23,6 +31,10 @@ class Posts extends Component {
     return !!pattern.test(str);
   }
 
+  displayDetail() {
+    console.log('diplaying detail');
+  }
+
   renderPosts() {
     // if no posts return message
     if (!this.props.posts) {
@@ -37,13 +49,28 @@ class Posts extends Component {
 
         // return post preview
         return (
-          <Link to={`/posts/${post.id}`} key={post.id} className="previewTitle">
-            <div className="preview">
-              <div className="previewTitleText">{post.title}</div>
-              <div className="previewTagsText">{post.tags}</div>
-              {imgTag}
-            </div>
-          </Link>
+          <VerticalTimelineElement
+            className="vertical-timeline-element--work"
+            date="{post.tags}"
+            iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+            icon="clickable icon?"
+            iconOnClick={this.displayDetail}
+          >
+            <h3 className="vertical-timeline-element-title">{post.title}</h3>
+            <h4 className="vertical-timeline-element-subtitle">{post.tags}</h4>
+            {imgTag}
+          </VerticalTimelineElement>
+          // <Link to={`/posts/${post.id}`} key={post.id} className="previewTitle">
+          //   <div className="preview">
+          //     <div className="previewTitleText">{post.title}</div>
+          //     <div className="previewTagsText">{post.tags}</div>
+          //     {imgTag}
+          //   </div>
+          // </Link>
+          // <VerticalTimelineElement>
+          //   className="vertical-timeline-element--work"
+          //   date="2011 - present"
+          // </VerticalTimelineElement>
         );
       })
     );
@@ -59,9 +86,31 @@ class Posts extends Component {
           <h4>Low on DBA or Meal Swipes? Find tasty, free food near you!</h4>
         </div>
         {/* <div className="divider" /> */}
-        <div className="allposts">
+        {/* <div className="allposts">
           {this.renderPosts()}
+        </div> */}
+        <div className="timelineDisp">
+          <div className="placeholderBox">
+          Hello
+          </div>
+          <VerticalTimeline>
+            {this.renderPosts()}
+          </VerticalTimeline>
         </div>
+        {/* <VerticalTimeline>
+          <VerticalTimelineElement
+            className="vertical-timeline-element--work"
+            date="2011 - present"
+            iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+            // icon={}
+          >
+            <h3 className="vertical-timeline-element-title">Creative Director</h3>
+            <h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
+            <p>
+      Creative Direction, User Experience, Visual Design, Project Management, Team Leading
+            </p>
+          </VerticalTimelineElement>
+        </VerticalTimeline> */}
       </div>
 
     );
