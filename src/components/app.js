@@ -4,7 +4,9 @@ import '../style.scss';
 import {
   BrowserRouter as Router, Route, Switch,
 } from 'react-router-dom';
-import Posts from '../containers/posts';
+// import TimeMain from '../containers/time-main';
+import Timeline from '../containers/timeline';
+// import Posts from '../containers/posts';
 import Post from '../containers/post';
 import NewPost from '../containers/new-post';
 import Nav from '../containers/nav';
@@ -18,7 +20,8 @@ const App = (props) => {
       <div>
         <Nav />
         <Switch>
-          <Route exact path="/" component={Posts} />
+          <Route exact path="/" component={Timeline} />
+          {/* <Route exact path="/" component={Posts} /> */}
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
           <Route path="/posts/new" component={RequireAuth(NewPost)} />

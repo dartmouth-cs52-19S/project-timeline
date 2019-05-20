@@ -7,6 +7,8 @@ export const ActionTypes = {
   AUTH_USER: 'AUTH_USER',
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
+  FETCH_EXPLORE: 'FETCH_EXPLORE',
+  TIMELINE_SELECTED: 'TIMELINE_SELECTED',
 };
 
 // SERVER URLS
@@ -25,6 +27,28 @@ if (token) {
   console.log(`token  ${token}`);
 }
 
+export function fetchTimeline() {
+  return (dispatch) => {
+    // server call
+    console.log('making server call');
+    axios.get('https://timimeline.herokuapp.com/api/explore')
+      .then((response) => {
+        // dispatch action w/ payload
+        dispatch({ type: ActionTypes.FETCH_EXPLORE, payload: response.data });
+        console.log('done fetching');
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // TODO: dispatch an error, make reducer, show error component
+        console.log('did not fetch');
+        console.log(error);
+      });
+  };
+}
+
+export function onSelect() {
+
+}
 
 // Get all of the post previews
 export function fetchPosts() {

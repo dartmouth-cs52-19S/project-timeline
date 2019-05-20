@@ -229,3 +229,31 @@ body, html {
   .placeholderBox{
     width: 40vw;
   }
+  .time{
+    border-left: 2px solid rgb(37, 37, 37);
+    position: relative;
+  }
+  .dot {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    position: absolute;
+    // top: 0;
+    // display: inline-block;
+  }
+  .timeInfo{
+    margin-left: 30px;
+  }
+  .flex{
+    display: flex;
+    padding-top: 50px;
+  }
+  .flex-detail, .flex-main{
+    width: 40%
+  }
+
+  .flex-main{
+    border-left: 2px solid rgb(37, 37, 37);
+    position: relative;
+  }
