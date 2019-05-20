@@ -8,33 +8,31 @@ import { fetchTimeline } from '../actions';
 class TimeDetail extends Component {
   componentWillMount() {
     this.props.fetchTimeline();
-    console.log('componentWillMount success');
+    console.log('componentWillMount Detail success');
+    console.log(`detail ID${this.props.selected}`);
   }
 
   render() {
     console.log(`fetched timeline:  ${this.props.timeline.events}`);
-    if (this.props.timeline.events === undefined) {
+    if (this.props.selected === undefined) {
       return (<div>Loading...</div>);
     }
-    console.log('time-main render');
-    return (this.props.timeline.events.map((events) => {
-      return (
-        <div className="padding">
-          <Detail
-            key={events.id}
-            title={events.title}
-          />
-        </div>
-      );
-    })
+    console.log('time-detail render');
+    return (
+      <div>
+        <Detail
+          key={this.props.selected.id}
+          title={this.props.selected.title}
+        />
+      </div>
     );
-    // return (<div>{timeline}</div>);
   }
 }
 
 const mapStateToProps = state => (
   {
     timeline: state.timeline,
+    selected: state.selected,
   }
 );
 

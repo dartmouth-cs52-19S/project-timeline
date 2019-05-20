@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Main from '../components/main';
-import { fetchTimeline } from '../actions';
+import { fetchTimeline, selectTimeline } from '../actions';
 
 
 class TimeMain extends Component {
@@ -24,7 +24,7 @@ class TimeMain extends Component {
             key={events.id}
             id={events.id}
             title={events.title}
-            onSelect={this.props.onSelect}
+            selectTimeline={this.props.selectTimeline}
           />
         </div>
       );
@@ -41,4 +41,4 @@ const mapStateToProps = state => (
 );
 
 
-export default withRouter(connect(mapStateToProps, { fetchTimeline })(TimeMain));
+export default withRouter(connect(mapStateToProps, { fetchTimeline, selectTimeline })(TimeMain));

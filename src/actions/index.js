@@ -8,7 +8,8 @@ export const ActionTypes = {
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
   FETCH_EXPLORE: 'FETCH_EXPLORE',
-  TIMELINE_SELECTED: 'TIMELINE_SELECTED',
+  SELECT_TIMELINE: 'SELECT_TIMELINE',
+  SELECT_TIMELINE_DETAIL: 'SELECT_TIMELINE_DETAIL',
 };
 
 // SERVER URLS
@@ -46,8 +47,22 @@ export function fetchTimeline() {
   };
 }
 
-export function onSelect() {
+export const selectTimeline = timeline => ({
+  type: ActionTypes.SELECT_TIMELINE,
+  selected: timeline,
+});
 
+export function fetchTimelineDetail(id) {
+  return (dispatch) => {
+    axios.get('https://timimeline.herokuapp.com/api/explore')
+      .then((response) => {
+        // console.log('from action, post: ', response.data);
+        dispatch({ type: ActionTypes.SELECT_TIMELINE_DETAIL, payload: response.data });
+      })
+      .catch((error) => {
+        dispatch({ type: ActionTypes.ERROR_SET, error });
+      });
+  };
 }
 
 // Get all of the post previews
