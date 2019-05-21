@@ -1,6 +1,7 @@
 $main-color: #31CBC1;
 $text-color: #141414;
 $shadow-color: #7A7A7A;
+$vibrant-shadow-color: #C0C7D7;
 $error-color: #ff6450;
 $white: #ffffff;
 
@@ -126,7 +127,7 @@ body, html {
     padding: 1em 1em 1em 1em;
     font-size: 25pt;
     font-weight: 500;
-    color: $main-color;
+    color: $text-color;
     display: flex;
     justify-content: flex-start;
     border-bottom: 2px dotted $shadow-color;
@@ -146,8 +147,31 @@ body, html {
     justify-content: center;
   }
   .post{
-    margin-top: 90px;
+    margin: 2em 0 0 2em;
     padding: 2em;
+  }
+  .callOut{
+    background: $white;
+    padding: 0.5em;
+    margin: 0 0 2em 0;
+    display: inline-block;
+    font-weight: 100;
+    font-size: 10pt;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  }
+  .callOut em{
+    font-style: normal;
+    font-weight: 600;
+    color: $main-color;
+  }
+  .addContainer{
+    margin: 3em 0 0 0;
+    width: 30vw;
+    height: 60vh;
+    padding: 2em;
+    overflow: hidden;
+    background: $vibrant-shadow-color;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
   }
   .postTitle{
     font-weight: 400;
@@ -193,7 +217,7 @@ body, html {
   }
   input{
     font-family: Roboto;
-    border: none;
+    border: 1pt solid $shadow-color;
     font-weight: 100;
     width: 40vw;
     margin-bottom: 1em;
