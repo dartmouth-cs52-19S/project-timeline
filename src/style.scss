@@ -123,11 +123,13 @@ body, html {
   }
   .foodHeader{
     margin-top: 70px;
-    padding: 1em 1em 0 1em;
+    padding: 1em 1em 1em 1em;
     font-size: 25pt;
-    font-weight: 100;
+    font-weight: 500;
+    color: $main-color;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    border-bottom: 2px dotted $shadow-color;
   }
   .foodHeader em{
     font-weight: 400;
