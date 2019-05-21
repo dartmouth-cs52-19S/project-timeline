@@ -29,13 +29,42 @@ class Nav extends Component {
 
     return (
       <nav className="header">
-        <ul>
-          <li><NavLink exact to="/" className="link">Explore</NavLink></li>
-          <li><NavLink to="/personal" className="link">Personal</NavLink></li>
-          <li><NavLink to="/settings" className="link">Settings</NavLink></li>
-          <li><NavLink to="/newTime" className="link">Add</NavLink></li>
-          {account}
-        </ul>
+        <div>
+          <ul>
+            <li>
+              <i className="fas fa-star-of-life" /> Logo
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li>
+              {/* Explore */}
+              <NavLink exact to="/" className="link" activeClassName="selectedLink">
+                <i className="fas fa-stream grow" />
+              </NavLink>
+            </li>
+            <li>
+              {/* Personal */}
+              <NavLink to="/personal" className="link" activeClassName="selectedLink">
+                <i className="far fa-user grow" />
+              </NavLink>
+            </li>
+            <li>
+              {/* Settings */}
+              <NavLink to="/settings" className="link" activeClassName="selectedLink">
+                <i className="fas fa-cog fa-spin-hover" />
+              </NavLink>
+            </li>
+            <li>
+              {/* Add */}
+              <NavLink to="/newTime" className="link" activeClassName="selectedLink">
+                <i className="fas fa-plus grow" />
+              </NavLink>
+            </li>
+            {account}
+          </ul>
+        </div>
       </nav>
     );
   }

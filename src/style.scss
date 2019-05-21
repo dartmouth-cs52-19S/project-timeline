@@ -1,6 +1,8 @@
-$main-color: #25e098;
+$main-color: #31CBC1;
 $text-color: #141414;
+$shadow-color: #7A7A7A;
 $error-color: #ff6450;
+$white: #ffffff;
 
 body, html {
     font-family: "Roboto", sans-serif;    height: 100%;
@@ -18,7 +20,7 @@ body, html {
   //   color: pink;
   // }
   .header{
-    background: $main-color;
+    background: $white;
     height: 60px;
     margin: 0 auto;
     overflow: hidden;
@@ -27,6 +29,8 @@ body, html {
     top: 0;
     width: 100%;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: space-between;
   }
   ul{
     list-style-type: none;
@@ -36,16 +40,31 @@ body, html {
   }
   li{
     padding-right: 1em;
-    color: white;
+    color: $shadow-color;
     text-decoration: none;
   }
   .link {
-    color: white;
+    color: $shadow-color;
     text-decoration: none;
     transition: all .1s ease-in-out;
   }
   .link:hover{
-    color: #f1eaea;
+    color: $main-color;
+  }
+  .selectedLink{
+    color: $main-color;
+  }
+  .fa-spin-hover:hover{
+    -webkit-animation: fa-spin 2s infinite linear;
+    -moz-animation: fa-spin 2s infinite linear;
+    -o-animation: fa-spin 2s infinite linear;
+    animation: fa-spin 2s infinite linear;
+  }
+  .grow{
+    transition: all .1s ease-in-out;
+  }
+  .grow:hover{
+    transform: scale(1.1);
   }
   .preview{
     height: 35vh;
