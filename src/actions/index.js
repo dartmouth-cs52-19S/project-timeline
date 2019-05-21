@@ -84,7 +84,7 @@ export function createTimeline(fields, addNextUnder) {
         if (addNextUnder) {
           dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
         } else {
-          dispatch({ type: ActionTypes.DO_NOTHING });
+          dispatch(selectTimeline(response.data.parent));
         }
         // history.push('/');
       })
