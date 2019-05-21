@@ -3,10 +3,14 @@
 import { combineReducers } from 'redux';
 import PostsReducer from './posts-reducer';
 import AuthReducer from './auth-reducer';
+import TimelineReducer from './timeline-reducer';
+import SelectReducer from './select-reducer';
 
 const rootReducer = combineReducers({
   posts: PostsReducer,
   auth: AuthReducer,
+  timeline: TimelineReducer,
+  selected: SelectReducer,
 });
 
 export default rootReducer;
