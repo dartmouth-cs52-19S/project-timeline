@@ -85,9 +85,26 @@ export function createTimeline(fields, addNextUnder) {
         if (addNextUnder) {
           dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
         } else {
-          dispatch({ type: ActionTypes.DO_NOTHING });
+          dispatch(selectTimeline(response.data.parent));
         }
         // history.push('/');
+      })
+      .catch((error) => {
+        dispatch({ type: ActionTypes.ERROR_SET, error });
+      });
+  };
+}
+
+export function updateTimeline(fields, addNextUnder, history) {
+  return (dispatch) => {
+    console.log('Fields in action creator: ', fields);
+    console.log('field.id: ', fields.id);
+    axios.post(`${ROOT_URL}/timeline/${fields.id.toString()}`, fields)
+      .then((response) => {
+        console.log('from action, update timeline response: ', response.data);
+        console.log('ADDNEXTUNDER: ', addNextUnder);
+        dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
+        history.push('/');
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.ERROR_SET, error });

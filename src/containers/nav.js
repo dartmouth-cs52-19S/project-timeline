@@ -32,7 +32,10 @@ class Nav extends Component {
         <div>
           <ul>
             <li>
-              <i className="fas fa-star-of-life" /> Logo
+              {/* Home */}
+              <NavLink exact to="/" className="link">
+                <i className="fas fa-star-of-life fa-spin-hover" /> Logo
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -60,6 +63,12 @@ class Nav extends Component {
               {/* Add */}
               <NavLink to="/newTime" className="link" activeClassName="selectedLink">
                 <i className="fas fa-plus grow" />
+              </NavLink>
+            </li>
+            <li>
+              {/* Update */}
+              <NavLink to="/updateTime" className="link" activeClassName="selectedLink">
+                <i className="fas fa-pen grow" />
               </NavLink>
             </li>
             {account}
