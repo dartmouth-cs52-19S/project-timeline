@@ -8,7 +8,11 @@ import Timeline from '../containers/timeline';
 import Nav from '../containers/nav';
 import SignIn from '../containers/signin';
 import SignUp from '../containers/signup';
+<<<<<<< HEAD
 import CreateTimeline from '../containers/create-timeline';
+=======
+import Settings from '../containers/settings';
+>>>>>>> 3ed7f2837fb24f3844accb30f3a08fb0b5672a3c
 // import RequireAuth from '../containers/requireAuth';
 
 const App = (props) => {
@@ -18,10 +22,13 @@ const App = (props) => {
         <Nav />
         <Switch>
           <Route exact path="/" component={Timeline} />
-          {/* <Route exact path="/" component={Posts} /> */}
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
           <Route path="/newTime" component={CreateTimeline} />
+          <Route path="/settings" component={Settings} />
+
+          {/* UNCOMMENT WHEN WE HAVE USER SAVING FUNCTIONALITY */}
+          {/* <Route path="/personal" component={Timeline} /> */}
           <Route render={() => (<div>Food Hack not found </div>)} />
         </Switch>
       </div>

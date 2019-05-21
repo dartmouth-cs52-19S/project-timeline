@@ -30,11 +30,9 @@ class Nav extends Component {
     return (
       <nav className="header">
         <ul>
-          {/* Changed from home: / */}
-          <li><NavLink exact to="/explore" className="link">Explore</NavLink></li>
-          {/* Chagned from new event: /posts/new */}
-          <li><NavLink to="/posts/new" className="link">Personal</NavLink></li>
-          {/* <li><NavLink to="/settings" className="link">Settings</NavLink></li> */}
+          <li><NavLink exact to="/" className="link">Explore</NavLink></li>
+          <li><NavLink to="/personal" className="link">Personal</NavLink></li>
+          <li><NavLink to="/settings" className="link">Settings</NavLink></li>
           {account}
         </ul>
       </nav>
