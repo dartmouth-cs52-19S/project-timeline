@@ -9,19 +9,19 @@ class CreateTimeline extends Component {
     super(props);
 
     this.state = {
-    title: '',
-    events: [], // Array of reference IDs to other timelines for individual events 
-    filter: '',
-    content: '',
-    time: '', // Associated relative prep time
-    cover_url: '', // Image URL 
-        
-    errorTitle: 'postTitle',
-    errorTags: 'postTags',
-    errorCover: 'postCover',
-    hasEdited: 0,
-    hasMoved: 0,
-    hasMovedTag: 0,
+      title: '',
+      events: [], // Array of reference IDs to other timelines for individual events
+      filter: '',
+      content: '',
+      time: '', // Associated relative prep time
+      cover_url: '', // Image URL
+
+      errorTitle: 'postTitle',
+      errorTags: 'postTags',
+      errorCover: 'postCover',
+      hasEdited: 0,
+      // hasMoved: 0,
+      // hasMovedTag: 0,
     };
 
     this.edit = this.edit.bind(this);
@@ -52,7 +52,7 @@ class CreateTimeline extends Component {
   }
 
   handleTitleBlur() {
-    this.setState({ hasMoved: 1 });
+    // this.setState({ hasMoved: 1 });
     if (!this.state.title) {
       this.setState({ errorTitle: 'errorTitle' });
     } else {
@@ -61,7 +61,7 @@ class CreateTimeline extends Component {
   }
 
   handleTagBlur() {
-    this.setState({ hasMovedTag: 1 });
+    // this.setState({ hasMovedTag: 1 });
     if (!this.state.tags) {
       console.log('no tags');
       this.setState({ errorTags: 'errorTags' });
@@ -87,25 +87,28 @@ class CreateTimeline extends Component {
 
   handleSubmit() {
     // this.props.createPost({
-    //   title: this.state.title, content: this.state.content, tags: this.state.tags, cover_url: this.state.cover_url,
+    //   title: this.state.title, content: this.state.content,
+    //   tags: this.state.tags, cover_url: this.state.cover_url,
     // }, this.props.history);
     // this.props.history.push(`/post/${this.props.match.params.postID}`);
-    const time = new Date(parseInt(this.state.time) * 2.628e+9);
-    createTimeline({
-        title: this.state.title,
-        content: this.state.content,
-        filter: this.state.filter,
-        cover_url: this.state.cover_url,
-        parent: this.props.timeline.id,
-        events: this.state.events, 
-        time,
-    })
+    const time = new Date(parseInt(this.state.time, 10) * 2629746000);
+    const fields = {
+      title: this.state.title,
+      content: this.state.content,
+      filter: this.state.filter,
+      cover_url: this.state.cover_url,
+      parent: this.props.timeline.id,
+      events: this.state.events,
+      time,
+    };
+    createTimeline(fields);
+    console.log(fields);
   }
 
   renderNewPost() {
     // show submit button based on whether all fields are correctly filled
     let submit;
-    if (this.state.hasEdited === 1 && this.state.hasMoved === 1 && this.state.hasMovedTag === 1 && this.state.errorTitle === 'postTitle' && this.state.errorTags === 'postTags' && this.state.errorCover === 'postCover') {
+    if (this.state.hasEdited === 1) {
       submit = <button type="button" onClick={this.handleSubmit}>Submit</button>;
     } else {
       submit = '';
@@ -126,14 +129,14 @@ class CreateTimeline extends Component {
         </div>
         <div>
           <input
-            name="tags"
+            name="filter"
             className={this.state.errorTags}
-            placeholder="Location and Time"
+            placeholder="Filter Term"
             onChange={this.edit}
             onBlur={this.handleTagBlur}
             value={this.state.filter}
           />
-          <em>* Required</em>
+          {/* <em>* Required</em> */}
         </div>
         <div>
           <input
@@ -144,7 +147,7 @@ class CreateTimeline extends Component {
             onBlur={this.handleTagBlur}
             value={this.state.time}
           />
-          <em>* Required</em>
+          {/* <em>* Required</em> */}
         </div>
         <div className="postContent">
           <textarea
@@ -164,7 +167,7 @@ class CreateTimeline extends Component {
             onBlur={this.handleCoverURLBlur}
             value={this.state.cover_url}
           />
-          {this.state.errorCover === 'error_box' ? <em>Not a valid URL</em> : ''}
+          {/* {this.state.errorCover === 'error_box' ? <em>Not a valid URL</em> : ''} */}
         </div>
         <Link className="link" to="/">
           <button type="button">Cancel</button>
@@ -187,10 +190,10 @@ class CreateTimeline extends Component {
 }
 
 const mapStateToProps = state => (
-    {
-      timeline: state.timeline
-    }
-  )
-  
+  {
+    timeline: state.timeline,
+  }
+);
 
-export default withRouter(connect(mapStateToProps, { CreateTimeline })(CreateTimeline));
+
+export default withRouter(connect(mapStateToProps, { createTimeline })(CreateTimeline));

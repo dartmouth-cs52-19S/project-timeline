@@ -8,6 +8,7 @@ import Timeline from '../containers/timeline';
 import Nav from '../containers/nav';
 import SignIn from '../containers/signin';
 import SignUp from '../containers/signup';
+import CreateTimeline from '../containers/create-timeline';
 // import RequireAuth from '../containers/requireAuth';
 
 const App = (props) => {
@@ -20,6 +21,7 @@ const App = (props) => {
           {/* <Route exact path="/" component={Posts} /> */}
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
+          <Route path="/newTime" component={CreateTimeline} />
           <Route render={() => (<div>Food Hack not found </div>)} />
         </Switch>
       </div>
