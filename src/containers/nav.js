@@ -32,7 +32,10 @@ class Nav extends Component {
         <div>
           <ul>
             <li>
-              <i className="fas fa-star-of-life" /> Logo
+              {/* Home */}
+              <NavLink exact to="/" className="link">
+                <i className="fas fa-star-of-life fa-spin-hover" /> Logo
+              </NavLink>
             </li>
           </ul>
         </div>
