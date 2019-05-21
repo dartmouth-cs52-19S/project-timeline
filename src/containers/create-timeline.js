@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { createPost } from '../actions';
+import { createTimeline } from '../actions';
 
 class CreateTimeline extends Component {
   constructor(props) {
@@ -13,15 +13,15 @@ class CreateTimeline extends Component {
     events: [], // Array of reference IDs to other timelines for individual events 
     filter: '',
     content: '',
-    time: new Date(), // Associated relative prep time
+    time: '', // Associated relative prep time
     cover_url: '', // Image URL 
         
-      errorTitle: 'postTitle',
-      errorTags: 'postTags',
-      errorCover: 'postCover',
-      hasEdited: 0,
-      hasMoved: 0,
-      hasMovedTag: 0,
+    errorTitle: 'postTitle',
+    errorTags: 'postTags',
+    errorCover: 'postCover',
+    hasEdited: 0,
+    hasMoved: 0,
+    hasMovedTag: 0,
     };
 
     this.edit = this.edit.bind(this);
@@ -86,10 +86,20 @@ class CreateTimeline extends Component {
   }
 
   handleSubmit() {
-    this.props.createPost({
-      title: this.state.title, content: this.state.content, tags: this.state.tags, cover_url: this.state.cover_url,
-    }, this.props.history);
-    this.props.history.push(`/post/${this.props.match.params.postID}`);
+    // this.props.createPost({
+    //   title: this.state.title, content: this.state.content, tags: this.state.tags, cover_url: this.state.cover_url,
+    // }, this.props.history);
+    // this.props.history.push(`/post/${this.props.match.params.postID}`);
+    const time = new Date(parseInt(this.state.time) * 2.628e+9);
+    createTimeline({
+        title: this.state.title,
+        content: this.state.content,
+        filter: this.state.filter,
+        cover_url: this.state.cover_url,
+        parent: this.props.timeline.id,
+        events: this.state.events, 
+        time,
+    })
   }
 
   renderNewPost() {
@@ -121,7 +131,18 @@ class CreateTimeline extends Component {
             placeholder="Location and Time"
             onChange={this.edit}
             onBlur={this.handleTagBlur}
-            value={this.state.tags}
+            value={this.state.filter}
+          />
+          <em>* Required</em>
+        </div>
+        <div>
+          <input
+            name="time"
+            className={this.state.errorTags}
+            placeholder="Time IN MONTHS SINCE HIGH SCHOOL"
+            onChange={this.edit}
+            onBlur={this.handleTagBlur}
+            value={this.state.time}
           />
           <em>* Required</em>
         </div>
