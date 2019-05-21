@@ -20,7 +20,7 @@ class TimeElement extends Component {
       console.log('time-main render');
       return (this.props.timeline.events.map((events) => {
         return (
-          <div className="padding">
+          <div key={events.id} className="padding">
             <Element
               key={events.id}
               id={events.id}
@@ -35,7 +35,7 @@ class TimeElement extends Component {
     } else {
       return (this.props.selected.events.map((events) => {
         return (
-          <div className="padding">
+          <div key={events.id} className="padding">
             <Element
               key={events.id}
               id={events.id}
