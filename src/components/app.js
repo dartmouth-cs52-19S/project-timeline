@@ -8,11 +8,8 @@ import Timeline from '../containers/timeline';
 import Nav from '../containers/nav';
 import SignIn from '../containers/signin';
 import SignUp from '../containers/signup';
-<<<<<<< HEAD
 import CreateTimeline from '../containers/create-timeline';
-=======
 import Settings from '../containers/settings';
->>>>>>> 3ed7f2837fb24f3844accb30f3a08fb0b5672a3c
 // import RequireAuth from '../containers/requireAuth';
 
 const App = (props) => {
