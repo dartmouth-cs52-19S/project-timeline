@@ -31,6 +31,7 @@ class CreateTimeline extends Component {
     this.handleCoverURLBlur = this.handleCoverURLBlur.bind(this);
     this.validURL = this.validURL.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.renderNewPost = this.renderNewPost.bind(this);
   }
 
   // TODO Add onblur for coverURL
@@ -85,7 +86,7 @@ class CreateTimeline extends Component {
     return !!pattern.test(str);
   }
 
-  handleSubmit() {
+  handleSubmit(addNextUnder) {
     // this.props.createPost({
     //   title: this.state.title, content: this.state.content,
     //   tags: this.state.tags, cover_url: this.state.cover_url,
@@ -97,25 +98,50 @@ class CreateTimeline extends Component {
       content: this.state.content,
       filter: this.state.filter,
       cover_url: this.state.cover_url,
-      parent: this.props.timeline.id,
+      parent: this.props.timeline._id,
       events: this.state.events,
       time,
     };
-    createTimeline(fields);
+    this.props.createTimeline(fields, addNextUnder);
+
+    // reset the state
+    this.setState({
+      title: '',
+      events: [],
+      filter: '',
+      content: '',
+      time: '',
+      cover_url: '',
+    });
     console.log(fields);
   }
 
   renderNewPost() {
     // show submit button based on whether all fields are correctly filled
-    let submit;
+    let submit; // par;
     if (this.state.hasEdited === 1) {
-      submit = <button type="button" onClick={this.handleSubmit}>Submit</button>;
+      submit = (
+        <div>
+          <button type="button" onClick={() => this.handleSubmit(true)}>
+            Submit (next: under)
+          </button>
+          <button type="button" onClick={() => this.handleSubmit(false)}>
+            Submit (next: adjacent)
+          </button>
+        </div>
+      );
     } else {
       submit = '';
     }
 
+    // if (this.props.timeline) {
+    //   par = this.props.timeline.title;
+    // }
+
+    console.log(this.props.timeline);
     return (
       <div>
+        You are about to add a new step under: {this.props.timeline.title}.
         <div>
           <input
             name="title"
@@ -191,7 +217,7 @@ class CreateTimeline extends Component {
 
 const mapStateToProps = state => (
   {
-    timeline: state.timeline,
+    timeline: state.selected,
   }
 );
 
