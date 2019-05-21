@@ -1,24 +1,31 @@
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-// import Profile from '../components/profile';
+import { fetchUserInfo } from '../actions';
+import Profile from '../components/profile';
 
 class UserProfile extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-
-    };
-  }
-
   render() {
-    return (
-      <div className="signin">
-        {this.state.heyyyyKatie}
-      </div>
-    );
+    if (this.props.user !== null) {
+      return (
+        <div>
+            Loading
+        </div>
+      );
+    } else {
+      return (
+        <Profile user={this.props.user} />
+      );
+    }
   }
 }
 
-export default withRouter(connect(null, null)(UserProfile));
+const mapStateToProps = reduxState => (
+  {
+    user: reduxState.user,
+  }
+);
+
+
+export default withRouter(connect(mapStateToProps, { fetchUserInfo })(UserProfile));
