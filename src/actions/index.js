@@ -11,6 +11,8 @@ export const ActionTypes = {
   SELECT_TIMELINE: 'SELECT_TIMELINE',
   CREATE_TIMELINE: 'CREATE_TIMELINE',
   SELECT_TIMELINE_DETAIL: 'SELECT_TIMELINE_DETAIL',
+  DO_NOTHING: 'DO_NOTHING',
+  ERROR_SET: 'ERROR_SET',
 };
 
 // SERVER URLS
@@ -38,7 +40,7 @@ export function fetchTimeline() {
   return (dispatch) => {
     // server call
     console.log('making server call');
-    axios.get('https://timimeline.herokuapp.com/api/explore')
+    axios.get(`${ROOT_URL}/explore`)
       .then((response) => {
         // dispatch action w/ payload
         dispatch({ type: ActionTypes.FETCH_EXPLORE, payload: response.data });
@@ -60,7 +62,7 @@ export function fetchTimeline() {
 
 export function selectTimeline(id) {
   return (dispatch) => {
-    axios.get(`https://timimeline.herokuapp.com/api/timeline/${id}`)
+    axios.get(`${ROOT_URL}/timeline/${id}`)
       .then((response) => {
         // console.log('from action, post: ', response.data);
         dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
@@ -72,13 +74,19 @@ export function selectTimeline(id) {
 }
 
 
-export function createTimeline(fields, history) {
+export function createTimeline(fields, addNextUnder) {
   return (dispatch) => {
-    axios.post('https://timimeline.herokuapp.com/api/timeline', fields)
+    console.log('Fields in action creator: ', fields);
+    axios.post(`${ROOT_URL}/timeline`, fields)
       .then((response) => {
-        // console.log('from action, post: ', response.data);
-        dispatch({ type: ActionTypes.CREATE_TIMELINE, timeline: response.data });
-        history.push('/');
+        console.log('from action, create timeline response: ', response.data);
+        console.log('ADDNEXTUNDER: ', addNextUnder);
+        if (addNextUnder) {
+          dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
+        } else {
+          dispatch({ type: ActionTypes.DO_NOTHING });
+        }
+        // history.push('/');
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.ERROR_SET, error });
@@ -88,7 +96,7 @@ export function createTimeline(fields, history) {
 
 export function fetchTimelineDetail(id) {
   return (dispatch) => {
-    axios.get(`https://timimeline.herokuapp.com/api/timeline/${id}`)
+    axios.get(`${ROOT_URL}/timeline/${id}`)
       .then((response) => {
         // console.log('from action, post: ', response.data);
         dispatch({ type: ActionTypes.SELECT_TIMELINE_DETAIL, payload: response.data });

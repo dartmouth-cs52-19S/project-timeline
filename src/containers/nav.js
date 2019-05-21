@@ -33,6 +33,7 @@ class Nav extends Component {
           <li><NavLink exact to="/" className="link">Explore</NavLink></li>
           <li><NavLink to="/personal" className="link">Personal</NavLink></li>
           <li><NavLink to="/settings" className="link">Settings</NavLink></li>
+          <li><NavLink to="/newTime" className="link">Add</NavLink></li>
           {account}
         </ul>
       </nav>
