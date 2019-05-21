@@ -18,10 +18,10 @@ export const ActionTypes = {
 // const ROOT_URL = 'https://lab5-regina-yan-1.herokuapp.com/api';
 
 // local testing api url
-// const ROOT_URL = 'http://localhost:9090/api';
+const ROOT_URL = 'http://localhost:9090/api';
 
 // timeline api url
-const ROOT_URL = 'https://timimeline.herokuapp.com/api';
+// const ROOT_URL = 'https://timimeline.herokuapp.com/api';
 
 // Abhi's Database
 // const ROOT_URL = 'https://cs52-abhi-blog.herokuapp.com/';
@@ -74,11 +74,11 @@ export function selectTimeline(id) {
 
 export function createTimeline(fields, history) {
   return (dispatch) => {
-    axios.post(`https://timimeline.herokuapp.com/api/timeline`. fields)
+    axios.post('https://timimeline.herokuapp.com/api/timeline', fields)
       .then((response) => {
         // console.log('from action, post: ', response.data);
         dispatch({ type: ActionTypes.CREATE_TIMELINE, timeline: response.data });
-        history.push('/')
+        history.push('/');
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.ERROR_SET, error });

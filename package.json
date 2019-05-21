@@ -6,9 +6,9 @@
   "author": "Regina Yan <regina.l.yan.19@dartmouth.edu>",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server",
+    "start": "SET NODE_ENV=development& webpack-dev-server",
     "test": "eslint src/**.js",
-    "build": "yarn clean; NODE_ENV=production webpack --colors",
+    "build": "yarn clean & SET WEBPACK_ENV=production& webpack --colors",
     "clean": "rimraf dist",
     "deploy": "yarn build; surge -p dist -d lifetime.surge.sh; yarn clean"
   },

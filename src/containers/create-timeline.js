@@ -189,8 +189,8 @@ class CreateTimeline extends Component {
 const mapStateToProps = state => (
     {
       timeline: state.timeline
-    },
-  );
+    }
+  )
   
 
 export default withRouter(connect(mapStateToProps, { CreateTimeline })(CreateTimeline));
