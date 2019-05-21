@@ -65,6 +65,12 @@ class Nav extends Component {
                 <i className="fas fa-plus grow" />
               </NavLink>
             </li>
+            <li>
+              {/* Update */}
+              <NavLink to="/updateTime" className="link" activeClassName="selectedLink">
+                <i className="fas fa-pen grow" />
+              </NavLink>
+            </li>
             {account}
           </ul>
         </div>
