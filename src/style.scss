@@ -263,3 +263,28 @@ body, html {
     border-radius: 50%;
     color: white;
   }
+
+  .detailContainer{
+    width: 60%;
+    margin-top: 4em;
+    padding: 1em;
+    border-left: 10px solid $main-color;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .detailTitle{
+    text-transform: uppercase;
+    font-size: 1.5em;
+  }
+
+.detailImg{
+  margin-top: 2em;
+}
+.Img{
+  width: 50%;
+}
+.detailContent{
+  margin-top: 1em;
+  font-size: 0.75em;
+  font-weight: 200; 
+}

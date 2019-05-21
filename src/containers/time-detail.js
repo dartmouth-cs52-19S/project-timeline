@@ -29,6 +29,8 @@ class TimeDetail extends Component {
           key={this.props.selected.id}
           title={this.props.selected.title}
           content={this.props.selected.content}
+          cover_url={this.props.selected.cover_url}
+          events={this.props.selected.events}
         />
       </div>
     );
