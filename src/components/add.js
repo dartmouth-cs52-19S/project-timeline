@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 // import { createTimeline } from '../actions';
+import TimeElement from '../containers/time-element';
 
 class AddForm extends Component {
   constructor(props) {
@@ -169,7 +170,9 @@ class AddForm extends Component {
     console.log(this.props.timeline);
     return (
       <div>
-        You are about to add a new step under: {this.props.timeline.title}.
+        <div className="callOut">
+          You are about to add a new step under: <em>{this.props.timeline.title}</em>.
+        </div>
         <div>
           <input
             name="title"
@@ -233,12 +236,21 @@ class AddForm extends Component {
 
   render() {
     return (
-      <div className="post">
-        <div className="newPostHeader">
+      <div className="flex">
+        <div className="post">
+          <div className="newPostHeader">
         Create a New Timeline!
+          </div>
+          <div>{this.renderNewPost()}</div>
         </div>
-        <div>{this.renderNewPost()}</div>
+        <div className="addContainer">
+          <div className="flex-main">
+            <TimeElement />
+          </div>
+        </div>
+
       </div>
+
     );
   }
 }

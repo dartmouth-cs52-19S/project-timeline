@@ -10,6 +10,22 @@ import { fetchTimeline } from '../actions';
 
 class Timeline extends Component {
   render() {
+    console.log(`state of selected is${this.props.selected}`);
+    if (this.props.selected === 0) {
+      return (
+        <div>
+          <div className="foodHeader">
+        Discover the Possibilities
+          </div>
+          <div className="flex">
+            <div className="flex-detail" />
+            <div className="flex-main">
+              <TimeElement />
+            </div>
+          </div>
+        </div>
+      );
+    }
     return (
       <div>
         <div className="foodHeader">
@@ -33,6 +49,7 @@ class Timeline extends Component {
 const mapStateToProps = state => (
   {
     timeline: state.timeline,
+    selected: state.selected,
   }
 );
 
