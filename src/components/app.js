@@ -4,7 +4,7 @@ import {
   BrowserRouter as Router, Route, Switch,
 } from 'react-router-dom';
 // import TimeMain from '../containers/time-main';
-import Timeline from '../containers/timeline';
+import TimelineExplore from '../containers/explore-view';
 import Nav from '../containers/nav';
 import SignIn from '../containers/signin';
 import SignUp from '../containers/signup';
@@ -18,7 +18,7 @@ const App = (props) => {
       <div>
         <Nav />
         <Switch>
-          <Route exact path="/" component={Timeline} />
+          <Route exact path="/" component={TimelineExplore} />
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
           <Route path="/newTime" component={CreateTimeline} />

@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 // import Main from '../components/main';
-import TimeElement from './time-element';
+// import TimeElement from './time-element';
+import Timeline from '../components/timeline';
 import TimeDetail from './time-detail';
-import { fetchTimeline } from '../actions';
+import { fetchTimeline, selectTimeline } from '../actions';
 
 
-class Timeline extends Component {
+class TimelineExplore extends Component {
   render() {
     return (
       <div>
@@ -20,7 +21,7 @@ class Timeline extends Component {
             <TimeDetail />
           </div>
           <div className="flex-main">
-            <TimeElement />
+            <Timeline />
           </div>
         </div>
       </div>
@@ -33,8 +34,11 @@ class Timeline extends Component {
 const mapStateToProps = state => (
   {
     timeline: state.timeline,
+    selected: state.selected,
   }
 );
 
 
-export default withRouter(connect(mapStateToProps, { fetchTimeline })(Timeline));
+export default withRouter(
+  connect(mapStateToProps, { fetchTimeline, selectTimeline })(TimelineExplore),
+);
