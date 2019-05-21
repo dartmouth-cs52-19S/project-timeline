@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Main extends React.Component {
+class Element extends React.Component {
   constructor(props) {
     super(props);
 
@@ -10,15 +10,15 @@ class Main extends React.Component {
   handleClicked() {
     console.log(`clicked this ID: ${this.props.id}`);
     console.log(`the object selected is: ${this.props}`);
-    this.props.selectTimeline(this.props);
+    this.props.selectTimeline(this.props.id);
   }
 
   render() {
     console.log('in main component render');
     return (
-      <div>
-        <button type="button" onClick={this.handleClicked}>
-            Button
+      <div className="element">
+        <button type="button" className="elementButton" onClick={this.handleClicked}>
+         .
         </button>
         {this.props.title}
       </div>
@@ -26,4 +26,4 @@ class Main extends React.Component {
   }
 }
 
-export default Main;
+export default Element;

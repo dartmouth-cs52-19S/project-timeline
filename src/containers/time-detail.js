@@ -12,6 +12,11 @@ class TimeDetail extends Component {
     console.log(`detail ID${this.props.selected}`);
   }
 
+  //   componentWillUpdate() {
+  //     this.props.fetchTimelineDetail(this.props.selected.id);
+  //     console.log('updated Detail');
+  //   }
+
   render() {
     console.log(`fetched timeline:  ${this.props.timeline.events}`);
     if (this.props.selected === undefined) {
@@ -23,6 +28,7 @@ class TimeDetail extends Component {
         <Detail
           key={this.props.selected.id}
           title={this.props.selected.title}
+          content={this.props.selected.content}
         />
       </div>
     );

@@ -250,10 +250,16 @@ body, html {
     padding-top: 50px;
   }
   .flex-detail, .flex-main{
-    width: 40%
+    width: 40%;
+    height: 100vh;
   }
 
   .flex-main{
     border-left: 2px solid rgb(37, 37, 37);
     position: relative;
+  }
+
+  .elementButton{
+    border-radius: 50%;
+    color: white;
   }

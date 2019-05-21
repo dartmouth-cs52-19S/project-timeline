@@ -47,14 +47,28 @@ export function fetchTimeline() {
   };
 }
 
-export const selectTimeline = timeline => ({
-  type: ActionTypes.SELECT_TIMELINE,
-  selected: timeline,
-});
+// export const selectTimeline = timeline => ({
+//   type: ActionTypes.SELECT_TIMELINE,
+//   selected: timeline,
+// });
+
+export function selectTimeline(id) {
+  return (dispatch) => {
+    axios.get(`https://timimeline.herokuapp.com/api/timeline/${id}`)
+      .then((response) => {
+        // console.log('from action, post: ', response.data);
+        dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
+      })
+      .catch((error) => {
+        dispatch({ type: ActionTypes.ERROR_SET, error });
+      });
+  };
+}
+
 
 export function fetchTimelineDetail(id) {
   return (dispatch) => {
-    axios.get('https://timimeline.herokuapp.com/api/explore')
+    axios.get(`https://timimeline.herokuapp.com/api/timeline/${id}`)
       .then((response) => {
         // console.log('from action, post: ', response.data);
         dispatch({ type: ActionTypes.SELECT_TIMELINE_DETAIL, payload: response.data });

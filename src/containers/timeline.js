@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 // import Main from '../components/main';
-import TimeMain from './time-main';
+import TimeElement from './time-element';
 import TimeDetail from './time-detail';
 import { fetchTimeline } from '../actions';
 
@@ -16,7 +16,7 @@ class Timeline extends Component {
           <TimeDetail />
         </div>
         <div className="flex-main">
-          <TimeMain />
+          <TimeElement />
         </div>
       </div>
 
