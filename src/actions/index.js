@@ -7,6 +7,9 @@ export const ActionTypes = {
   AUTH_USER: 'AUTH_USER',
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
+  FETCH_EXPLORE: 'FETCH_EXPLORE',
+  SELECT_TIMELINE: 'SELECT_TIMELINE',
+  SELECT_TIMELINE_DETAIL: 'SELECT_TIMELINE_DETAIL',
 };
 
 // SERVER URLS
@@ -30,6 +33,56 @@ if (token) {
   console.log(`token  ${token}`);
 }
 
+export function fetchTimeline() {
+  return (dispatch) => {
+    // server call
+    console.log('making server call');
+    axios.get('https://timimeline.herokuapp.com/api/explore')
+      .then((response) => {
+        // dispatch action w/ payload
+        dispatch({ type: ActionTypes.FETCH_EXPLORE, payload: response.data });
+        console.log('done fetching');
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // TODO: dispatch an error, make reducer, show error component
+        console.log('did not fetch');
+        console.log(error);
+      });
+  };
+}
+
+// export const selectTimeline = timeline => ({
+//   type: ActionTypes.SELECT_TIMELINE,
+//   selected: timeline,
+// });
+
+export function selectTimeline(id) {
+  return (dispatch) => {
+    axios.get(`https://timimeline.herokuapp.com/api/timeline/${id}`)
+      .then((response) => {
+        // console.log('from action, post: ', response.data);
+        dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
+      })
+      .catch((error) => {
+        dispatch({ type: ActionTypes.ERROR_SET, error });
+      });
+  };
+}
+
+
+export function fetchTimelineDetail(id) {
+  return (dispatch) => {
+    axios.get(`https://timimeline.herokuapp.com/api/timeline/${id}`)
+      .then((response) => {
+        // console.log('from action, post: ', response.data);
+        dispatch({ type: ActionTypes.SELECT_TIMELINE_DETAIL, payload: response.data });
+      })
+      .catch((error) => {
+        dispatch({ type: ActionTypes.ERROR_SET, error });
+      });
+  };
+}
 
 // Get all of the post previews
 export function fetchPosts() {

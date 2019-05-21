@@ -1,12 +1,24 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable react/no-danger */
 import React, { Component } from 'react';
+// eslint-disable-next-line max-len
+// import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { fetchPosts, fetchPost } from '../actions';
+import Main from '../components/main';
+import Detail from '../components/detail';
+// import EventInfo from '../components/timeline';
 
 
 class Posts extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   // this.displayDetail = this.displayDetail.bind(this);
+  // }
+
   componentDidMount() {
     this.props.fetchPosts();
     console.log(this.props.fetchPosts);
@@ -23,7 +35,20 @@ class Posts extends Component {
     return !!pattern.test(str);
   }
 
-  renderPosts() {
+  displayDetail() {
+    console.log('diplaying detail');
+    console.log({});
+  }
+
+  renderDetail() {
+    // <Detail
+    //   key={post.id}
+    //   title={post.title}
+    // />;
+    console.log('rendering Detail');
+  }
+
+  renderMain() {
     // if no posts return message
     if (!this.props.posts) {
       return (<h1>No Free Food Events!</h1>);
@@ -37,13 +62,20 @@ class Posts extends Component {
 
         // return post preview
         return (
-          <Link to={`/posts/${post.id}`} key={post.id} className="previewTitle">
-            <div className="preview">
-              <div className="previewTitleText">{post.title}</div>
-              <div className="previewTagsText">{post.tags}</div>
-              {imgTag}
-            </div>
-          </Link>
+          <div onClick={this.renderDetail}>
+            {/* <Link to={`/posts/${post.id}`} key={post.id} className="previewTitle">
+              <div className="dot" onClick={this.displayDetail} />
+              <div className="timeInfo">
+                <h3>{post.title}</h3>
+                <h4>{post.tags}</h4>
+                {imgTag}
+              </div>
+            </Link> */}
+            <Main
+              key={post.id}
+              title={post.title}
+            />
+          </div>
         );
       })
     );
@@ -58,10 +90,34 @@ class Posts extends Component {
         <div className="foodHeaderSecondary">
           <h4>Low on DBA or Meal Swipes? Find tasty, free food near you!</h4>
         </div>
-        {/* <div className="divider" /> */}
-        <div className="allposts">
+        <div className="divider" />
+        {/* <div className="allposts">
           {this.renderPosts()}
+        </div> */}
+        <div className="timelineDisp">
+          <div className="placeholderBox">
+            {/* {this.renderInfo()} */}
+            {/* {this.renderDetail()} */}
+          </div>
+
+          <div className="time">
+            {this.renderMain()}
+          </div>
         </div>
+        {/* <VerticalTimeline>
+          <VerticalTimelineElement
+            className="vertical-timeline-element--work"
+            date="2011 - present"
+            iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+            // icon={}
+          >
+            <h3 className="vertical-timeline-element-title">Creative Director</h3>
+            <h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
+            <p>
+      Creative Direction, User Experience, Visual Design, Project Management, Team Leading
+            </p>
+          </VerticalTimelineElement>
+        </VerticalTimeline> */}
       </div>
 
     );
