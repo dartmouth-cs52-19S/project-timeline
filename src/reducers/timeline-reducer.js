@@ -6,6 +6,8 @@ const TimelineReducer = (state = 0, action) => {
       return action.payload;
     case ActionTypes.SELECT_TIMELINE_DETAIL:
       return action.payload;
+    case ActionTypes.CREATE_TIMELINE:
+      return action.payload;
     default:
       return state;
   }
