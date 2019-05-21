@@ -23,7 +23,7 @@ const ROOT_URL = 'https://timimeline.herokuapp.com/api';
 // const ROOT_URL = 'https://cs52-abhi-blog.herokuapp.com/';
 // Tim's blog API
 // const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
-const API_KEY = '?key=r_yan';
+const API_KEY = '';
 
 const token = localStorage.getItem('token');
 if (token) {
