@@ -28,12 +28,27 @@ class Nav extends Component {
     // set the links based on authentication
     const account = this.props.authenticated
       ? (
-        <li onClick={this.onSignOut}>Sign Out</li>
+        <li onClick={this.onSignOut}>
+          <button type="button" className="signButton">Sign Out</button>
+        </li>
       )
       : (
         <span>
-          <li><NavLink to="/signup" className="link">Sign Up</NavLink></li>
-          <li><NavLink to="/signin" className="link">Sign In</NavLink></li>
+          <div className="flex">
+            <li>
+              <NavLink to="/signin" className="link signinButton">
+                Sign In
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/signup" className="link">
+                <button type="button" className="signButton">
+                Sign Up
+                </button>
+              </NavLink>
+            </li>
+          </div>
+
         </span>
       );
 
