@@ -22,17 +22,19 @@ class Element extends React.Component {
   render() {
     console.log('in main component render');
     const date = new Date(this.props.time).getTime();
+    const months = date / 2.628e+6;
+    console.log(`content is${this.props.content}`);
     return (
       <div className="element">
         <button type="button" className="elementButton" onClick={this.handleClicked}>
          .
         </button>
         {this.props.title}
-        <p>
+        {/* <p>
           Date is {this.props.time}
-        </p>
+        </p> */}
         <p>
-          In some # format: {date}
+          In some # format: {months}
         </p>
       </div>
     );

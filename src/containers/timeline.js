@@ -54,7 +54,7 @@ const mapStateToProps = state => (
   {
     timeline: state.timeline,
     selected: state.selected,
-    addupdate: 0,
+    addupdate: state.addupdate,
   }
 );
 

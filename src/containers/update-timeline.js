@@ -15,9 +15,5 @@ const mapStateToProps = state => (
 
 
 export default withRouter(connect(mapStateToProps, {
-<<<<<<< HEAD
   createTimeline: updateTimeline, delete: deleteTimeline,
-=======
-  createTimeline: updateTimeline,
->>>>>>> 097234c7be8212327fede1b27de6dc0f05e4ecc7
 })(AddForm));
