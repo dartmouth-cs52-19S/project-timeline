@@ -27,6 +27,7 @@ const App = (props) => {
           <Route path="/updateTime" component={UpdateTimeline} />
           <Route path="/settings" component={Settings} />
           <Route path="/personal" component={UserProfile} />
+          <Route path="/:timelineID" component={Timeline} />
 
           {/* UNCOMMENT WHEN WE HAVE USER SAVING FUNCTIONALITY */}
           <Route render={() => (<div>Food Hack not found </div>)} />
