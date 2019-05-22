@@ -11,6 +11,7 @@ import SignUp from '../containers/signup';
 import CreateTimeline from '../containers/create-timeline';
 import UpdateTimeline from '../containers/update-timeline';
 import Settings from '../containers/settings';
+import UserProfile from '../containers/user';
 // import RequireAuth from '../containers/requireAuth';
 
 const App = (props) => {
@@ -25,9 +26,9 @@ const App = (props) => {
           <Route path="/newTime" component={CreateTimeline} />
           <Route patt="/updateTime" component={UpdateTimeline} />
           <Route path="/settings" component={Settings} />
+          <Route path="/personal" component={UserProfile} />
 
           {/* UNCOMMENT WHEN WE HAVE USER SAVING FUNCTIONALITY */}
-          {/* <Route path="/personal" component={Timeline} /> */}
           <Route render={() => (<div>Food Hack not found </div>)} />
         </Switch>
       </div>

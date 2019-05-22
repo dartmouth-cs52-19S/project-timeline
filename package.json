@@ -41,6 +41,7 @@
     "webpack-dev-server": "^3.3.1"
   },
   "dependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
     "axios": "^0.18.0",
     "jquery": "^3.4.0",
     "lodash.debounce": "^4.0.8",
