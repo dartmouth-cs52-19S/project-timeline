@@ -5,14 +5,18 @@ export const ActionTypes = {
   FETCH_POSTS: 'FETCH_POSTS',
   FETCH_POST: 'FETCH_POST',
   AUTH_USER: 'AUTH_USER',
+  GET_USER: 'GET_USER',
+  ERR_USER: 'ERR_USER',
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
   FETCH_EXPLORE: 'FETCH_EXPLORE',
   SELECT_TIMELINE: 'SELECT_TIMELINE',
   CREATE_TIMELINE: 'CREATE_TIMELINE',
   SELECT_TIMELINE_DETAIL: 'SELECT_TIMELINE_DETAIL',
+  ON_ADDUPDATE: 'ON_ADDUPDATE',
   DO_NOTHING: 'DO_NOTHING',
-  ERROR_SET: 'ERROR_SET',
+  BANNER_SET: 'BANNER_SET',
+  BANNER_CLEAR: 'BANNER_CLEAR',
 };
 
 // SERVER URLS
@@ -25,16 +29,22 @@ export const ActionTypes = {
 // timeline api url
 const ROOT_URL = 'https://timimeline.herokuapp.com/api';
 
-// Abhi's Database
-// const ROOT_URL = 'https://cs52-abhi-blog.herokuapp.com/';
-// Tim's blog API
-// const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
 const API_KEY = '';
 
 const token = localStorage.getItem('token');
 if (token) {
   console.log(`token  ${token}`);
 }
+
+// this one works though
+export function clearBanner() {
+  return ({ type: ActionTypes.BANNER_CLEAR });
+}
+// NOT sure this is working...
+export function createBanner(message) {
+  return ({ type: ActionTypes.BANNER_SET, payload: message });
+}
+
 
 export function fetchTimeline() {
   return (dispatch) => {
@@ -51,6 +61,7 @@ export function fetchTimeline() {
         // TODO: dispatch an error, make reducer, show error component
         console.log('did not fetch');
         console.log(error);
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };
 }
@@ -68,7 +79,7 @@ export function selectTimeline(id) {
         dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
       })
       .catch((error) => {
-        dispatch({ type: ActionTypes.ERROR_SET, error });
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };
 }
@@ -83,13 +94,50 @@ export function createTimeline(fields, addNextUnder) {
         console.log('ADDNEXTUNDER: ', addNextUnder);
         if (addNextUnder) {
           dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
+          console.log('Calling create banner');
+          dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
         } else {
           dispatch(selectTimeline(response.data.parent));
+          dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
         }
         // history.push('/');
       })
       .catch((error) => {
-        dispatch({ type: ActionTypes.ERROR_SET, error });
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+      });
+  };
+}
+
+export function updateTimeline(fields, addNextUnder, history) {
+  return (dispatch) => {
+    console.log('Fields in action creator: ', fields);
+    console.log('field.id: ', fields.id);
+    axios.post(`${ROOT_URL}/timeline/${fields.id.toString()}`, fields)
+      .then((response) => {
+        console.log('from action, update timeline response: ', response.data);
+        console.log('ADDNEXTUNDER: ', addNextUnder);
+        // can't use response to set because it is not populated with
+        // the titles and times of its events
+        dispatch(selectTimeline(response.data._id));
+        console.log('dispatching banner_set');
+        dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
+        if (history) {
+          history.push('/');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+      });
+  };
+}
+
+export function deleteTimeline(timeline, history) {
+  return (dispatch) => {
+    axios.delete(`${ROOT_URL}/timeline/${timeline._id}`)
+      .then((response) => {
+        dispatch({ type: ActionTypes.BANNER_SET, payload: response.data });
+        dispatch(selectTimeline(timeline.parent));
       });
   };
 }
@@ -102,8 +150,16 @@ export function fetchTimelineDetail(id) {
         dispatch({ type: ActionTypes.SELECT_TIMELINE_DETAIL, payload: response.data });
       })
       .catch((error) => {
-        dispatch({ type: ActionTypes.ERROR_SET, error });
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
+  };
+}
+
+export function onAddUpdate(i) {
+  console.log('in onAddUpdate action');
+  return {
+    type: ActionTypes.ON_ADDUPDATE,
+    addupdate: i,
   };
 }
 
@@ -138,6 +194,22 @@ export function fetchPost(id) {
     }).catch((error) => {
       console.log(error);
     });
+  };
+}
+
+// Get user info
+export function fetchUserInfo() {
+  return (dispatch) => {
+    console.log('IN FETCH');
+    axios.get(`${ROOT_URL}/personal${API_KEY}`,
+      { headers: { authorization: localStorage.getItem('token') } })
+      .then((response) => {
+        console.log('SUCCESS IN FETCH, bout to dispatch');
+        dispatch({ type: ActionTypes.GET_USER, payload: response.data });
+      }).catch((error) => {
+        console.log(error);
+        dispatch({ type: ActionTypes.ERR_USER, error });
+      });
   };
 }
 
@@ -205,6 +277,7 @@ export function signinUser({ email, password }, history) {
       console.log('Sign in failed.');
       console.log(error);
       dispatch(authError(`Sign In Failed: ${error.response.data}`));
+      dispatch({ type: ActionTypes.BANNER_SET, payload: 'Sign in failed.' });
     });
   };
 }
@@ -228,6 +301,7 @@ export function signupUser({
       console.log('error data', error.response.data);
       console.log('full error: ', error);
       dispatch(authError(`Sign Up Failed: ${error.response.data}`));
+      dispatch({ type: ActionTypes.BANNER_SET, payload: 'Sign up failed.' });
     });
   };
 }

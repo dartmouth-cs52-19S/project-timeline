@@ -1,29 +1,54 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import { signoutUser } from '../actions';
+import { signoutUser, onAddUpdate } from '../actions';
+import BackButton from '../components/backbutton';
 
 class Nav extends Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+    };
     this.onSignOut = this.onSignOut.bind(this);
   }
+
+  // componentWillMount() {
+  //   this.props.onAddUpdate(this.addup);
+  // }
 
   onSignOut() {
     this.props.signoutUser(this.props.history);
   }
 
+  // onAddUpdate(i) {
+  //   this.props.onAddUpdate(i);
+  // }
+
   render() {
     // set the links based on authentication
     const account = this.props.authenticated
       ? (
-        <li onClick={this.onSignOut}>Sign Out</li>
+        <li onClick={this.onSignOut}>
+          <button type="button" className="signButton">Sign Out</button>
+        </li>
       )
       : (
         <span>
-          <li><NavLink to="/signup" className="link">Sign Up</NavLink></li>
-          <li><NavLink to="/signin" className="link">Sign In</NavLink></li>
+          <div className="flex">
+            <li>
+              <NavLink to="/signin" className="link signinButton">
+                Sign In
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/signup" className="link">
+                <button type="button" className="signButton">
+                Sign Up
+                </button>
+              </NavLink>
+            </li>
+          </div>
+
         </span>
       );
 
@@ -37,13 +62,21 @@ class Nav extends Component {
                 <i className="fas fa-star-of-life fa-spin-hover" /> Logo
               </NavLink>
             </li>
+            <li>
+              <BackButton />
+            </li>
           </ul>
         </div>
         <div>
           <ul>
             <li>
               {/* Explore */}
-              <NavLink exact to="/" className="link" activeClassName="selectedLink">
+              <NavLink
+                exact
+                to="/"
+                className="link"
+                activeClassName="selectedLink"
+              >
                 <i className="fas fa-stream grow" />
               </NavLink>
             </li>
@@ -61,8 +94,24 @@ class Nav extends Component {
             </li>
             <li>
               {/* Add */}
-              <NavLink to="/newTime" className="link" activeClassName="selectedLink">
+              <NavLink
+                to="/newTime"
+                className="link"
+                activeClassName="selectedLink"
+                // onClick={this.onAddUpdate(1)}
+              >
                 <i className="fas fa-plus grow" />
+              </NavLink>
+            </li>
+            <li>
+              {/* Update */}
+              <NavLink
+                to="/updateTime"
+                className="link"
+                activeClassName="selectedLink"
+                // onClick={this.onAddUpdate(1)}
+              >
+                <i className="fas fa-pen grow" />
               </NavLink>
             </li>
             {account}
@@ -76,7 +125,8 @@ class Nav extends Component {
 const mapStateToProps = state => (
   {
     authenticated: state.auth.authenticated,
+    addupdate: state.addupdate,
   }
 );
 
-export default withRouter(connect(mapStateToProps, { signoutUser })(Nav));
+export default withRouter(connect(mapStateToProps, { signoutUser, onAddUpdate })(Nav));
