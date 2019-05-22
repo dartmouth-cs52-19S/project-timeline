@@ -24,10 +24,10 @@ export const ActionTypes = {
 // const ROOT_URL = 'https://lab5-regina-yan-1.herokuapp.com/api';
 
 // local testing api url
-// const ROOT_URL = 'http://localhost:9090/api';
+const ROOT_URL = 'http://localhost:9090/api';
 
 // timeline api url
-const ROOT_URL = 'https://timimeline.herokuapp.com/api';
+// const ROOT_URL = 'https://timimeline.herokuapp.com/api';
 
 const API_KEY = '';
 
@@ -126,6 +126,16 @@ export function updateTimeline(fields, addNextUnder, history) {
       .catch((error) => {
         console.log(error);
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+      });
+  };
+}
+
+export function deleteTimeline(timeline, history) {
+  return (dispatch) => {
+    axios.delete(`${ROOT_URL}/timeline/${timeline._id}`)
+      .then((response) => {
+        dispatch({ type: ActionTypes.BANNER_SET, payload: response.data });
+        dispatch(selectTimeline(timeline.parent));
       });
   };
 }
