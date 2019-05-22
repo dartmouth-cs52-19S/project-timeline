@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 // import { createTimeline } from '../actions';
+import TimeElement from '../containers/time-element';
 
 class AddForm extends Component {
   constructor(props) {
@@ -45,6 +46,16 @@ class AddForm extends Component {
         cover_url: this.props.timeline.cover_url,
       });
     }
+  }
+
+  displayTimelineName() {
+    if (this.props.timeline.title === undefined) {
+      return (
+        'Root'
+      );
+    } return (
+      this.props.timeline.title
+    );
   }
 
   // TODO Add onblur for coverURL
@@ -165,11 +176,13 @@ class AddForm extends Component {
     // if (this.props.timeline) {
     //   par = this.props.timeline.title;
     // }
-
+    const addEdit = this.props.update ? 'update' : 'add a new step under';
     console.log(this.props.timeline);
     return (
       <div>
-        You are about to add a new step under: {this.props.timeline.title}.
+        <div className="callOut">
+          You are about to {addEdit}: <em>{this.displayTimelineName()}</em>.
+        </div>
         <div>
           <input
             name="title"
@@ -232,13 +245,30 @@ class AddForm extends Component {
   }
 
   render() {
+    const addEditTitle = this.props.update ? 'Update Timeline Info!' : 'Create a New Timeline!';
     return (
-      <div className="post">
+      <div>
         <div className="newPostHeader">
-        Create a New Timeline!
+          {addEditTitle}
         </div>
-        <div>{this.renderNewPost()}</div>
+        <div className="addContainerFull">
+          <div className="post">
+            <div>{this.renderNewPost()}</div>
+          </div>
+          <div>
+            <div className="callOut">
+          Current Timeline Display.
+            </div>
+            <div className="addContainer">
+              <div className="addContainerTimeline">
+                <TimeElement />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
+
     );
   }
 }

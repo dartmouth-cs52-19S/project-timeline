@@ -1,6 +1,7 @@
 $main-color: #31CBC1;
 $text-color: #141414;
 $shadow-color: #7A7A7A;
+$vibrant-shadow-color: rgb(176, 188, 216);
 $error-color: #ff6450;
 $white: #ffffff;
 
@@ -126,7 +127,7 @@ body, html {
     padding: 1em 1em 1em 1em;
     font-size: 25pt;
     font-weight: 500;
-    color: $main-color;
+    color: $text-color;
     display: flex;
     justify-content: flex-start;
     border-bottom: 2px dotted $shadow-color;
@@ -146,8 +147,41 @@ body, html {
     justify-content: center;
   }
   .post{
-    margin-top: 90px;
+    margin: 0 1em 0 2em;
+    padding: 0 2em 2em 2em;
+    border-right: 2px dotted $shadow-color;
+  }
+  .callOut{
+    background: $white;
+    padding: 0.5em;
+    margin: 0 0 2em 0;
+    display: inline-block;
+    font-weight: 100;
+    font-size: 10pt;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  }
+  .callOut em{
+    font-style: normal;
+    font-weight: 600;
+    color: $main-color;
+  }
+  .addContainerFull{
+    display: flex;
+  }
+  .addContainer{
+    // margin: 3em 0 0 0;
+    width: 30vw;
+    height: 40vh;
     padding: 2em;
+    overflow: auto;
+    background: $vibrant-shadow-color;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  }
+  .addContainerTimeline{
+    border-left: 2px solid #7A7A7A;
+    position: relative;
+    width: 60%;
+    float: right;
   }
   .postTitle{
     font-weight: 400;
@@ -183,7 +217,14 @@ body, html {
   }
   button:hover{
     background: $main-color;
-    color: white;
+    color: $white;
+  }
+  .element{
+    margin-left: -1.7em;
+    margin-top: 1em;
+  }
+  .elementButton:hover{
+    color: $main-color;
   }
   .postImage{
     margin-top: 1em;
@@ -193,7 +234,7 @@ body, html {
   }
   input{
     font-family: Roboto;
-    border: none;
+    border: 1pt solid $shadow-color;
     font-weight: 100;
     width: 40vw;
     margin-bottom: 1em;
@@ -234,7 +275,8 @@ body, html {
   }
   .newPostHeader{
     font-size: 20pt;
-    margin-bottom: 1em;
+    margin-top: 2em;
+    padding: 2em;
   }
   .divider{
     border-bottom: 1px solid $text-color;
@@ -268,7 +310,7 @@ body, html {
   }
   .flex{
     display: flex;
-    padding-top: 50px;
+    // padding-top: 50px;
   }
   .flex-detail, .flex-main{
     width: 40%;
@@ -276,7 +318,7 @@ body, html {
   }
 
   .flex-main{
-    border-left: 2px solid rgb(37, 37, 37);
+    border-left: 2px solid $shadow-color;
     position: relative;
   }
 

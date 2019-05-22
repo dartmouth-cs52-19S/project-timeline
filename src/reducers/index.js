@@ -5,12 +5,14 @@ import AuthReducer from './auth-reducer';
 import TimelineReducer from './timeline-reducer';
 import SelectReducer from './select-reducer';
 import BannerReducer from './banner-reducer';
+import UserReducer from './user-reducer';
 
 const rootReducer = combineReducers({
   auth: AuthReducer,
   timeline: TimelineReducer,
   selected: SelectReducer,
   message: BannerReducer,
+  user: UserReducer,
 });
 
 export default rootReducer;

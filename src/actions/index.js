@@ -5,6 +5,7 @@ export const ActionTypes = {
   FETCH_POSTS: 'FETCH_POSTS',
   FETCH_POST: 'FETCH_POST',
   AUTH_USER: 'AUTH_USER',
+  GET_USER: 'GET_USER',
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
   FETCH_EXPLORE: 'FETCH_EXPLORE',
@@ -26,10 +27,6 @@ export const ActionTypes = {
 // timeline api url
 const ROOT_URL = 'https://timimeline.herokuapp.com/api';
 
-// Abhi's Database
-// const ROOT_URL = 'https://cs52-abhi-blog.herokuapp.com/';
-// Tim's blog API
-// const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
 const API_KEY = '';
 
 const token = localStorage.getItem('token');
@@ -176,6 +173,18 @@ export function fetchPost(id) {
     }).catch((error) => {
       console.log(error);
     });
+  };
+}
+
+// Get user info
+export function fetchUserInfo(id) {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/personal${API_KEY}`)
+      .then((response) => {
+        dispatch({ type: ActionTypes.GET_USER, payload: response.data });
+      }).catch((error) => {
+        console.log(error);
+      });
   };
 }
 

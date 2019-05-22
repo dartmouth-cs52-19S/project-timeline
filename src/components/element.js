@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 class Element extends React.Component {
   constructor(props) {
@@ -8,11 +9,11 @@ class Element extends React.Component {
 
   handleClicked() {
     console.log(`clicked this ID: ${this.props.id}`);
-    console.log(`the object selected is: ${this.props}`);
-    console.log(`the time of this is: ${this.props.time}`);
+    // Change the route
+    // NOTE: Child componenets need with router affect change upwards
+    this.props.history.push(`${this.props.id}`);
     this.props.selectTimeline(this.props.id);
-    const date = new Date(this.props.time).getTime();
-    console.log(`new date${date}`);
+    // const date = new Date(this.props.time).getTime();
   }
 
   render() {
@@ -35,4 +36,4 @@ class Element extends React.Component {
   }
 }
 
-export default Element;
+export default withRouter(Element);
