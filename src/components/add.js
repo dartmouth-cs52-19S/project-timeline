@@ -1,8 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-// import { createTimeline } from '../actions';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+import { onAddUpdate } from '../actions';
 import TimeElement from '../containers/time-element';
 
 class AddForm extends Component {
@@ -11,12 +11,10 @@ class AddForm extends Component {
 
     this.state = {
       title: '',
-      events: [], // Array of reference IDs to other timelines for individual events
       filter: '',
       content: '',
       time: '', // Associated relative prep time
       cover_url: '', // Image URL
-
       errorTitle: 'postTitle',
       errorTags: 'postTags',
       errorCover: 'postCover',
@@ -46,6 +44,8 @@ class AddForm extends Component {
         cover_url: this.props.timeline.cover_url,
       });
     }
+    console.log(`hopefully not undefined${this.props.addupdate}`);
+    this.props.onAddUpdate(1);
   }
 
   displayTimelineName() {
@@ -124,7 +124,6 @@ class AddForm extends Component {
         content: this.state.content,
         filter: this.state.filter,
         cover_url: this.state.cover_url,
-        events: this.state.events,
         time,
         id: this.props.timeline._id,
       };
@@ -135,14 +134,12 @@ class AddForm extends Component {
         filter: this.state.filter,
         cover_url: this.state.cover_url,
         parent: this.props.timeline._id,
-        events: this.state.events,
         time,
       };
 
       // reset the state
       this.setState({
         title: '',
-        events: [],
         filter: '',
         content: '',
         time: '',
@@ -181,7 +178,7 @@ class AddForm extends Component {
     return (
       <div>
         <div className="callOut">
-          You are about to {addEdit}: <em>{this.displayTimelineName()}</em>.
+          You are about to {addEdit} <em>{this.displayTimelineName()}</em>.
         </div>
         <div>
           <input
@@ -239,6 +236,19 @@ class AddForm extends Component {
         <Link className="link" to="/">
           <button type="button">Cancel</button>
         </Link>
+        {this.props.update
+          ? (
+            <button
+              type="button"
+              onClick={() => {
+                this.props.delete(this.props.timeline, this.props.history);
+              }}
+            >
+              Delete
+            </button>
+          )
+          : ''
+          }
         {submit}
       </div>
     );
@@ -257,7 +267,7 @@ class AddForm extends Component {
           </div>
           <div>
             <div className="callOut">
-          Current Timeline Display.
+          Current Timeline Display for {this.displayTimelineName()}
             </div>
             <div className="addContainer">
               <div className="addContainerTimeline">
@@ -273,4 +283,11 @@ class AddForm extends Component {
   }
 }
 
-export default AddForm;
+// export default AddForm;
+const mapStateToProps = state => (
+  {
+    addupdate: state.addupdate,
+  }
+);
+
+export default withRouter(connect(mapStateToProps, { onAddUpdate })(AddForm));

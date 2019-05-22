@@ -4,12 +4,13 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import TimeElement from './time-element';
 import TimeDetail from './time-detail';
-import { fetchTimeline, selectTimeline } from '../actions';
+import { fetchTimeline, selectTimeline, onAddUpdate } from '../actions';
 import BackButton from '../components/backbutton';
 
 class Timeline extends Component {
   componentWillMount() {
-    console.log('IN COMPONENT WILL MOUNT');
+    this.props.onAddUpdate(0);
+
     if (this.props.match.params.timelineID === undefined) {
       this.props.fetchTimeline();
     } else {
@@ -18,7 +19,6 @@ class Timeline extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('IN COMPONENT DID update');
     if (this.props.match.params.timelineID !== undefined) {
       if (prevProps.match.params.timelineID !== this.props.match.params.timelineID) {
         this.props.selectTimeline(this.props.match.params.timelineID);
@@ -77,8 +77,9 @@ const mapStateToProps = state => (
   {
     timeline: state.timeline,
     selected: state.selected,
+    addupdate: 0,
   }
 );
 
-
-export default withRouter(connect(mapStateToProps, { fetchTimeline, selectTimeline })(Timeline));
+export default withRouter(connect(mapStateToProps,
+  { fetchTimeline, selectTimeline, onAddUpdate })(Timeline));

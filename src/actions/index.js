@@ -13,6 +13,7 @@ export const ActionTypes = {
   SELECT_TIMELINE: 'SELECT_TIMELINE',
   CREATE_TIMELINE: 'CREATE_TIMELINE',
   SELECT_TIMELINE_DETAIL: 'SELECT_TIMELINE_DETAIL',
+  ON_ADDUPDATE: 'ON_ADDUPDATE',
   DO_NOTHING: 'DO_NOTHING',
   BANNER_SET: 'BANNER_SET',
   BANNER_CLEAR: 'BANNER_CLEAR',
@@ -115,7 +116,9 @@ export function updateTimeline(fields, addNextUnder, history) {
       .then((response) => {
         console.log('from action, update timeline response: ', response.data);
         console.log('ADDNEXTUNDER: ', addNextUnder);
-        dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
+        // can't use response to set because it is not populated with
+        // the titles and times of its events
+        dispatch(selectTimeline(response.data._id));
         console.log('dispatching banner_set');
         dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
         if (history) {
@@ -125,6 +128,16 @@ export function updateTimeline(fields, addNextUnder, history) {
       .catch((error) => {
         console.log(error);
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+      });
+  };
+}
+
+export function deleteTimeline(timeline, history) {
+  return (dispatch) => {
+    axios.delete(`${ROOT_URL}/timeline/${timeline._id}`)
+      .then((response) => {
+        dispatch({ type: ActionTypes.BANNER_SET, payload: response.data });
+        dispatch(selectTimeline(timeline.parent));
       });
   };
 }
@@ -139,6 +152,14 @@ export function fetchTimelineDetail(id) {
       .catch((error) => {
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
+  };
+}
+
+export function onAddUpdate(i) {
+  console.log('in onAddUpdate action');
+  return {
+    type: ActionTypes.ON_ADDUPDATE,
+    addupdate: i,
   };
 }
 

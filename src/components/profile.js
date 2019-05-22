@@ -21,9 +21,17 @@ class Profile extends Component {
     }
     return (
       <div>
-        <button type="submit">{user.username}</button>
-        <button type="submit">{startTime}</button>
-        <button type="submit">{timelines}</button>
+        <div className="mainHeader">
+          <div>
+            Welcome, {user.username}
+          </div>
+          <div>
+            <h4>
+          Your Current Stage in Life is {startTime}
+            </h4>
+          </div>
+        </div>
+        {/* {timelines} */}
       </div>
     );
   }
