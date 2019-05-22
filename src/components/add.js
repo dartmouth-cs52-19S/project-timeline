@@ -241,19 +241,6 @@ class AddForm extends Component {
         <Link className="link" to="/">
           <button type="button">Cancel</button>
         </Link>
-        {this.props.update
-          ? (
-            <button
-              type="button"
-              onClick={() => {
-                this.props.delete(this.props.timeline, this.props.history);
-              }}
-            >
-              Delete
-            </button>
-          )
-          : ''
-          }
         {submit}
       </div>
     );

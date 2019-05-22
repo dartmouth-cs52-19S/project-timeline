@@ -130,16 +130,6 @@ export function updateTimeline(fields, addNextUnder, history) {
   };
 }
 
-export function deleteTimeline(timeline, history) {
-  return (dispatch) => {
-    axios.delete(`${ROOT_URL}/timeline/${timeline._id}`)
-      .then((response) => {
-        dispatch({ type: ActionTypes.BANNER_SET, payload: response.data });
-        dispatch(selectTimeline(timeline.parent));
-      });
-  };
-}
-
 export function fetchTimelineDetail(id) {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/timeline/${id}`)
