@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Element from '../components/element';
+// import ElementStatic from '../components/element-static';
 import { fetchTimeline, selectTimeline } from '../actions';
 
 
@@ -12,6 +13,7 @@ class TimeElement extends Component {
   }
 
   render() {
+    // console.log(`addupdate${this.props.addupdate}`);
     if (this.props.selected === 0) {
       console.log(`fetched timeline:  ${this.props.timeline.events}`);
       if (this.props.timeline.events === undefined) {
@@ -59,4 +61,6 @@ const mapStateToProps = state => (
 );
 
 
-export default withRouter(connect(mapStateToProps, { fetchTimeline, selectTimeline })(TimeElement));
+export default withRouter(connect(mapStateToProps, {
+  fetchTimeline, selectTimeline,
+})(TimeElement));

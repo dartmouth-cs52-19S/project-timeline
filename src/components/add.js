@@ -46,6 +46,7 @@ class AddForm extends Component {
         cover_url: this.props.timeline.cover_url,
       });
     }
+    console.log(`hopefully not undefined${this.props.addupdate}`);
   }
 
   displayTimelineName() {
@@ -181,7 +182,7 @@ class AddForm extends Component {
     return (
       <div>
         <div className="callOut">
-          You are about to {addEdit}: <em>{this.displayTimelineName()}</em>.
+          You are about to {addEdit} <em>{this.displayTimelineName()}</em>.
         </div>
         <div>
           <input
@@ -257,7 +258,7 @@ class AddForm extends Component {
           </div>
           <div>
             <div className="callOut">
-          Current Timeline Display.
+          Current Timeline Display for {this.displayTimelineName()}
             </div>
             <div className="addContainer">
               <div className="addContainerTimeline">

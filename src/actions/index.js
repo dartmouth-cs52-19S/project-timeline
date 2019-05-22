@@ -12,6 +12,7 @@ export const ActionTypes = {
   SELECT_TIMELINE: 'SELECT_TIMELINE',
   CREATE_TIMELINE: 'CREATE_TIMELINE',
   SELECT_TIMELINE_DETAIL: 'SELECT_TIMELINE_DETAIL',
+  ON_ADDUPDATE: 'ON_ADDUPDATE',
   DO_NOTHING: 'DO_NOTHING',
   ERROR_SET: 'ERROR_SET',
 };
@@ -118,6 +119,14 @@ export function fetchTimelineDetail(id) {
       .catch((error) => {
         dispatch({ type: ActionTypes.ERROR_SET, error });
       });
+  };
+}
+
+export function onAddUpdate() {
+  console.log('in onAddUpdate action');
+  return {
+    type: ActionTypes.ON_ADDUPDATE,
+    addupdate: 1,
   };
 }
 

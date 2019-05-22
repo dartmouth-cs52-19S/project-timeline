@@ -5,10 +5,14 @@ import { connect } from 'react-redux';
 // import Main from '../components/main';
 import TimeElement from './time-element';
 import TimeDetail from './time-detail';
-import { fetchTimeline } from '../actions';
+import { fetchTimeline, onAddUpdate } from '../actions';
 
 
 class Timeline extends Component {
+  componentWillMount() {
+    this.props.onAddUpdate();
+  }
+
   render() {
     console.log(`state of selected is${this.props.selected}`);
     if (this.props.selected === 0) {
@@ -50,8 +54,9 @@ const mapStateToProps = state => (
   {
     timeline: state.timeline,
     selected: state.selected,
+    addupdate: state.addupdate,
   }
 );
 
 
-export default withRouter(connect(mapStateToProps, { fetchTimeline })(Timeline));
+export default withRouter(connect(mapStateToProps, { fetchTimeline, onAddUpdate })(Timeline));
