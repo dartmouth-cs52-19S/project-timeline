@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { updateTimeline } from '../actions';
 import AddForm from '../components/add';
 
+
 const mapStateToProps = state => (
   {
     timeline: state.selected,
@@ -13,4 +14,6 @@ const mapStateToProps = state => (
 );
 
 
-export default withRouter(connect(mapStateToProps, { createTimeline: updateTimeline })(AddForm));
+export default withRouter(connect(mapStateToProps, {
+  createTimeline: updateTimeline,
+})(AddForm));

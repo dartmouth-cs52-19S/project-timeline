@@ -13,6 +13,7 @@ export const ActionTypes = {
   SELECT_TIMELINE: 'SELECT_TIMELINE',
   CREATE_TIMELINE: 'CREATE_TIMELINE',
   SELECT_TIMELINE_DETAIL: 'SELECT_TIMELINE_DETAIL',
+  ON_ADDUPDATE: 'ON_ADDUPDATE',
   DO_NOTHING: 'DO_NOTHING',
   BANNER_SET: 'BANNER_SET',
   BANNER_CLEAR: 'BANNER_CLEAR',
@@ -139,6 +140,14 @@ export function fetchTimelineDetail(id) {
       .catch((error) => {
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
+  };
+}
+
+export function onAddUpdate(i) {
+  console.log('in onAddUpdate action');
+  return {
+    type: ActionTypes.ON_ADDUPDATE,
+    addupdate: i,
   };
 }
 

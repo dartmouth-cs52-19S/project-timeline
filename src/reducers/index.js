@@ -6,6 +6,7 @@ import TimelineReducer from './timeline-reducer';
 import SelectReducer from './select-reducer';
 import BannerReducer from './banner-reducer';
 import UserReducer from './user-reducer';
+import AddUpdateReducer from './addupdate-reducer';
 
 const rootReducer = combineReducers({
   auth: AuthReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   selected: SelectReducer,
   message: BannerReducer,
   user: UserReducer,
+  addupdate: AddUpdateReducer,
 });
 
 export default rootReducer;
