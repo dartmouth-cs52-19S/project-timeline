@@ -2,7 +2,7 @@
 // import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { updateTimeline } from '../actions';
+import { updateTimeline, deleteTimeline } from '../actions';
 import AddForm from '../components/add';
 
 const mapStateToProps = state => (
@@ -13,4 +13,6 @@ const mapStateToProps = state => (
 );
 
 
-export default withRouter(connect(mapStateToProps, { createTimeline: updateTimeline })(AddForm));
+export default withRouter(connect(mapStateToProps, {
+  createTimeline: updateTimeline, delete: deleteTimeline,
+})(AddForm));
