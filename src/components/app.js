@@ -24,7 +24,7 @@ const App = (props) => {
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
           <Route path="/newTime" component={CreateTimeline} />
-          <Route patt="/updateTime" component={UpdateTimeline} />
+          <Route path="/updateTime" component={UpdateTimeline} />
           <Route path="/settings" component={Settings} />
           <Route path="/personal" component={UserProfile} />
 
