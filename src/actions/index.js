@@ -34,15 +34,13 @@ if (token) {
   console.log(`token  ${token}`);
 }
 
+// this one works though
 export function clearBanner() {
-  return (dispatch) => {
-    dispatch({ type: ActionTypes.BANNER_CLEAR });
-  };
+  return ({ type: ActionTypes.BANNER_CLEAR });
 }
+// NOT sure this is working...
 export function createBanner(message) {
-  return (dispatch) => {
-    dispatch({ type: ActionTypes.BANNER_SET, payload: message });
-  };
+  return ({ type: ActionTypes.BANNER_SET, payload: message });
 }
 
 
@@ -61,6 +59,7 @@ export function fetchTimeline() {
         // TODO: dispatch an error, make reducer, show error component
         console.log('did not fetch');
         console.log(error);
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };
 }
@@ -78,7 +77,7 @@ export function selectTimeline(id) {
         dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
       })
       .catch((error) => {
-        dispatch({ type: ActionTypes.ERROR_SET, error });
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };
 }
@@ -94,10 +93,10 @@ export function createTimeline(fields, addNextUnder) {
         if (addNextUnder) {
           dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
           console.log('Calling create banner');
-          createBanner('You successfully added a post!');
+          dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
         } else {
           dispatch(selectTimeline(response.data.parent));
-          createBanner('You successfully added a post!');
+          dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
         }
         // history.push('/');
       })
@@ -116,8 +115,8 @@ export function updateTimeline(fields, addNextUnder, history) {
         console.log('from action, update timeline response: ', response.data);
         console.log('ADDNEXTUNDER: ', addNextUnder);
         dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
-        console.log('calling create Banner');
-        createBanner('You successfully updated a post!');
+        console.log('dispatching banner_set');
+        dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
         if (history) {
           history.push('/');
         }
@@ -137,7 +136,7 @@ export function fetchTimelineDetail(id) {
         dispatch({ type: ActionTypes.SELECT_TIMELINE_DETAIL, payload: response.data });
       })
       .catch((error) => {
-        dispatch({ type: ActionTypes.ERROR_SET, error });
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };
 }
@@ -252,6 +251,7 @@ export function signinUser({ email, password }, history) {
       console.log('Sign in failed.');
       console.log(error);
       dispatch(authError(`Sign In Failed: ${error.response.data}`));
+      dispatch({ type: ActionTypes.BANNER_SET, payload: 'Sign in failed.' });
     });
   };
 }
@@ -271,6 +271,7 @@ export function signupUser({ username, email, password }, history) {
       console.log('error data', error.response.data);
       console.log('full error: ', error);
       dispatch(authError(`Sign Up Failed: ${error.response.data}`));
+      dispatch({ type: ActionTypes.BANNER_SET, payload: 'Sign up failed.' });
     });
   };
 }
