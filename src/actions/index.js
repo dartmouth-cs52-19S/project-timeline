@@ -24,10 +24,10 @@ export const ActionTypes = {
 // const ROOT_URL = 'https://lab5-regina-yan-1.herokuapp.com/api';
 
 // local testing api url
-// const ROOT_URL = 'http://localhost:9090/api';
+const ROOT_URL = 'http://localhost:9090/api';
 
 // timeline api url
-const ROOT_URL = 'https://timimeline.herokuapp.com/api';
+// const ROOT_URL = 'https://timimeline.herokuapp.com/api';
 
 const API_KEY = '';
 
@@ -308,5 +308,24 @@ export function signoutUser(history) {
     localStorage.removeItem('token');
     dispatch({ type: ActionTypes.DEAUTH_USER });
     history.push('/');
+  };
+}
+
+// save a timeline to a user's profile timeline
+// get the user's user object from server
+// then POST to user/link with the two timeline id's
+export function saveTimeline(timelineID) {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/personal`).then((user) => {
+      axios.post(`${ROOT_URL}/user/link`, { parentID: user.timeline, childID: timelineID })
+        .then((resp) => {
+          dispatch(createBanner(resp));
+        })
+        .catch(err => dispatch(createBanner(err.message)));
+    })
+      .catch((error) => {
+        console.log(error);
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+      });
   };
 }
