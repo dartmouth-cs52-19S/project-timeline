@@ -1,8 +1,8 @@
 /* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-// import { createTimeline } from '../actions';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+import { onAddUpdate } from '../actions';
 import TimeElement from '../containers/time-element';
 
 class AddForm extends Component {
@@ -47,6 +47,7 @@ class AddForm extends Component {
       });
     }
     console.log(`hopefully not undefined${this.props.addupdate}`);
+    this.props.onAddUpdate(1);
   }
 
   displayTimelineName() {
@@ -274,4 +275,11 @@ class AddForm extends Component {
   }
 }
 
-export default AddForm;
+// export default AddForm;
+const mapStateToProps = state => (
+  {
+    addupdate: state.addupdate,
+  }
+);
+
+export default withRouter(connect(mapStateToProps, { onAddUpdate })(AddForm));

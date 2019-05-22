@@ -143,11 +143,11 @@ export function fetchTimelineDetail(id) {
   };
 }
 
-export function onAddUpdate() {
+export function onAddUpdate(i) {
   console.log('in onAddUpdate action');
   return {
     type: ActionTypes.ON_ADDUPDATE,
-    addupdate: 1,
+    addupdate: i,
   };
 }
 

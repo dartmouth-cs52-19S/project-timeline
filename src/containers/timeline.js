@@ -10,7 +10,7 @@ import { fetchTimeline, onAddUpdate } from '../actions';
 
 class Timeline extends Component {
   componentWillMount() {
-    this.props.onAddUpdate();
+    this.props.onAddUpdate(0);
   }
 
   render() {
@@ -54,7 +54,7 @@ const mapStateToProps = state => (
   {
     timeline: state.timeline,
     selected: state.selected,
-    addupdate: state.addupdate,
+    addupdate: 0,
   }
 );
 
