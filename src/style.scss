@@ -144,6 +144,16 @@ li {
   justify-content: flex-start;
   border-bottom: 2px dotted $shadow-color;
 }
+.mainHeader{
+  margin-top: 70px;
+  padding: 1em 1em 1em 1em;
+  font-size: 25pt;
+  font-weight: 500;
+  color: $text-color;
+  // display: flex;
+  // justify-content: flex-start;
+  border-bottom: 2px dotted $shadow-color;
+}
 .foodHeader em{
   font-weight: 400;
   color: $main-color;
@@ -151,8 +161,9 @@ li {
 }
 h4{
   font-weight: 100;
-  text-transform: uppercase;
-  color: #8d8d8d;
+  // text-transform: uppercase;
+  color: $shadow-color;
+  font-size: 0.5em;
 }
 .foodHeaderSecondary{
   display: flex;
@@ -362,4 +373,15 @@ b{
   margin-top: 1em;
   font-size: 0.75em;
   font-weight: 200; 
+}
+.signButton{
+  margin: 0;
+  border: none;
+  background: $vibrant-shadow-color;
+  color: $white;
+
+}
+.signinButton{
+  padding: none;
+  font-size: 11pt;
 }
