@@ -70,6 +70,12 @@ class Nav extends Component {
               </NavLink>
             </li>
             <li>
+              {/* Save User Timeline */}
+              <NavLink to="/save" className="link" activeClassName="selectedLink">
+                <i className="fas fa-plane grow" />
+              </NavLink>
+            </li>
+            <li>
               {/* Update */}
               <NavLink to="/updateTime" className="link" activeClassName="selectedLink">
                 <i className="fas fa-pen grow" />
