@@ -156,13 +156,15 @@ export function fetchPost(id) {
 }
 
 // Get user info
-export function fetchUserInfo(id) {
+export function fetchUserInfo() {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/personal${API_KEY}`)
+    axios.get(`${ROOT_URL}/personal${API_KEY}`,
+      { headers: { authorization: localStorage.getItem('token') } })
       .then((response) => {
         dispatch({ type: ActionTypes.GET_USER, payload: response.data });
       }).catch((error) => {
         console.log(error);
+        dispatch({ type: 'ERROR', error });
       });
   };
 }
