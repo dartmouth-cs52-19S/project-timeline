@@ -2,15 +2,28 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import Main from '../components/main';
 import TimeElement from './time-element';
 import TimeDetail from './time-detail';
-import { fetchTimeline, onAddUpdate } from '../actions';
-
+import { fetchTimeline, selectTimeline, onAddUpdate } from '../actions';
+import BackButton from '../components/backbutton';
 
 class Timeline extends Component {
   componentWillMount() {
     this.props.onAddUpdate(0);
+
+    if (this.props.match.params.timelineID === undefined) {
+      this.props.fetchTimeline();
+    } else {
+      this.props.selectTimeline(this.props.match.params.timelineID);
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.match.params.timelineID !== undefined) {
+      if (prevProps.match.params.timelineID !== this.props.match.params.timelineID) {
+        this.props.selectTimeline(this.props.match.params.timelineID);
+      }
+    }
   }
 
   render() {
@@ -19,7 +32,13 @@ class Timeline extends Component {
       return (
         <div>
           <div className="foodHeader">
-        Discover the Possibilities
+            Discover the Possibilities
+          </div>
+          <div>
+            <BackButton
+              className="disabled-backbutton"
+              enabled="false"
+            />
           </div>
           <div className="flex">
             <div className="flex-detail" />
@@ -33,7 +52,13 @@ class Timeline extends Component {
     return (
       <div>
         <div className="foodHeader">
-        Discover the Possibilities
+          Discover the Possibilities
+        </div>
+        <div>
+          <BackButton
+            curr_url={this.props.match.params.timelineID}
+            selectTimeline={this.props.selectTimeline}
+          />
         </div>
         <div className="flex">
           <div className="flex-detail">
@@ -44,8 +69,6 @@ class Timeline extends Component {
           </div>
         </div>
       </div>
-
-
     );
   }
 }
@@ -58,5 +81,5 @@ const mapStateToProps = state => (
   }
 );
 
-
-export default withRouter(connect(mapStateToProps, { fetchTimeline, onAddUpdate })(Timeline));
+export default withRouter(connect(mapStateToProps,
+  { fetchTimeline, selectTimeline, onAddUpdate })(Timeline));

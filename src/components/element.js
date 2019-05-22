@@ -9,15 +9,7 @@ class Element extends React.Component {
   }
 
   handleClicked() {
-    console.log(`clicked this ID: ${this.props.id}`);
-    // root url handled by undefined checker in setBackButton
-    // this.props.setBackButton(this.props.math.params.timelineID);
-
-    // Change the route
-    // NOTE: Child componenets need with router affect change upwards
     this.props.history.push(`${this.props.id}`);
-    this.props.selectTimeline(this.props.id);
-    // const date = new Date(this.props.time).getTime();
   }
 
   handleHover() {
