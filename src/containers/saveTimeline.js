@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -18,14 +19,25 @@ class SaveTimeline extends Component {
   }
 
   componentDidMount = () => {
+    console.log('MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
+
     if (this.props.selected !== 0 && this.state.currTimeline !== this.props.selected) {
+      console.log('MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
+
+      console.log('saving');
       this.props.saveToTimeline(this.props.selected.id);
       this.setState({ currTimeline: this.props.selected });
     }
   }
 
   componentDidUpdate = () => {
-    if (this.props.selected !== 0 && this.state.currTimeline !== this.props.selected) {
+    console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUDGHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
+    console.log(this.state.currTimeline);
+    console.log(this.props.selected);
+    if (this.state.currTimeline !== this.props.selected) {
+      console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUDGHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
+      console.log('saving');
+
       this.props.saveToTimeline(this.props.selected);
       this.setState({ currTimeline: this.props.selected });
     }
