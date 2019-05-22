@@ -116,7 +116,9 @@ export function updateTimeline(fields, addNextUnder, history) {
       .then((response) => {
         console.log('from action, update timeline response: ', response.data);
         console.log('ADDNEXTUNDER: ', addNextUnder);
-        dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
+        // can't use response to set because it is not populated with
+        // the titles and times of its events
+        dispatch(selectTimeline(response.data._id));
         console.log('dispatching banner_set');
         dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
         if (history) {
