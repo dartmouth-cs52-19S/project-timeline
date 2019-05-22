@@ -6,6 +6,7 @@ export const ActionTypes = {
   FETCH_POST: 'FETCH_POST',
   AUTH_USER: 'AUTH_USER',
   GET_USER: 'GET_USER',
+  ERR_USER: 'ERR_USER',
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
   FETCH_EXPLORE: 'FETCH_EXPLORE',
@@ -158,13 +159,15 @@ export function fetchPost(id) {
 // Get user info
 export function fetchUserInfo() {
   return (dispatch) => {
+    console.log('IN FETCH');
     axios.get(`${ROOT_URL}/personal${API_KEY}`,
       { headers: { authorization: localStorage.getItem('token') } })
       .then((response) => {
+        console.log('SUCCESS IN FETCH, bout to dispatch');
         dispatch({ type: ActionTypes.GET_USER, payload: response.data });
       }).catch((error) => {
         console.log(error);
-        dispatch({ type: 'ERROR', error });
+        dispatch({ type: ActionTypes.ERR_USER, error });
       });
   };
 }
