@@ -11,11 +11,18 @@ class Profile extends Component {
 
   render() {
     const { user } = this.state;
+    let { timelines, startTime } = user;
+    if (timelines === null) {
+      timelines = 'No TimeLines Currently Stores';
+    }
+    if (startTime === null) {
+      startTime = 'LET\'S GET IT STARTED AYAT';
+    }
     return (
       <div>
         <button type="submit">{user.username}</button>
-        <button type="submit">{user.startTime}</button>
-        <button type="submit">{user.timelines}</button>
+        <button type="submit">{startTime}</button>
+        <button type="submit">{timelines}</button>
       </div>
     );
   }
