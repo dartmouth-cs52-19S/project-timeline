@@ -11,12 +11,10 @@ class AddForm extends Component {
 
     this.state = {
       title: '',
-      events: [], // Array of reference IDs to other timelines for individual events
       filter: '',
       content: '',
       time: '', // Associated relative prep time
       cover_url: '', // Image URL
-
       errorTitle: 'postTitle',
       errorTags: 'postTags',
       errorCover: 'postCover',
@@ -126,7 +124,6 @@ class AddForm extends Component {
         content: this.state.content,
         filter: this.state.filter,
         cover_url: this.state.cover_url,
-        events: this.state.events,
         time,
         id: this.props.timeline._id,
       };
@@ -137,14 +134,12 @@ class AddForm extends Component {
         filter: this.state.filter,
         cover_url: this.state.cover_url,
         parent: this.props.timeline._id,
-        events: this.state.events,
         time,
       };
 
       // reset the state
       this.setState({
         title: '',
-        events: [],
         filter: '',
         content: '',
         time: '',
