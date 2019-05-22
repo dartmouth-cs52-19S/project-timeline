@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { signupUser } from '../actions';
+import { signupUser, createBanner } from '../actions';
+// import { Banner } from '../components/banner';
 
 class SignUp extends Component {
   constructor(props) {
@@ -31,11 +32,14 @@ class SignUp extends Component {
   handleSubmit(event) {
     event.preventDefault();
     // error checks
-    if (this.state.email === '') console.log('Please enter an email');
-    if (this.state.username === '') console.log('Please enter a username');
-    if (this.state.password === '') console.log('Please enter a password');
-    if (this.state.startTime === null || Number.isNaN(Date.parse(this.state.startTime))) {
-      console.log('Please enter a valid date');
+    if (this.state.email === '') {
+      this.props.createBanner('Please enter an email.');
+    } else if (this.state.username === '') {
+      this.props.createBanner('Please enter a username.');
+    } else if (this.state.password === '') {
+      this.props.createBanner('Please enter a password.');
+    } else if (this.state.startTime === null || Number.isNaN(Date.parse(this.state.startTime))) {
+      this.props.createBanner('Please enter a valid date.');
     } else {
     // console.log(`sign up info:
     // ${this.state.username} ${this.state.email} ${this.state.password}`);
@@ -86,4 +90,4 @@ class SignUp extends Component {
   }
 }
 
-export default withRouter(connect(null, { signupUser })(SignUp));
+export default withRouter(connect(null, { signupUser, createBanner })(SignUp));
