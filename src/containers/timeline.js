@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import Main from '../components/main';
 import TimeElement from './time-element';
 import TimeDetail from './time-detail';
 import { fetchTimeline, selectTimeline } from '../actions';
