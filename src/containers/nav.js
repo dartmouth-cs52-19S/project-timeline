@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { signoutUser, onAddUpdate } from '../actions';
-import BackButton from '../components/backbutton';
 
 class Nav extends Component {
   constructor(props) {
@@ -12,28 +11,35 @@ class Nav extends Component {
     this.onSignOut = this.onSignOut.bind(this);
   }
 
-  // componentWillMount() {
-  //   this.props.onAddUpdate(this.addup);
-  // }
-
   onSignOut() {
     this.props.signoutUser(this.props.history);
   }
-
-  // onAddUpdate(i) {
-  //   this.props.onAddUpdate(i);
-  // }
 
   render() {
     // set the links based on authentication
     const account = this.props.authenticated
       ? (
-        <li onClick={this.onSignOut}>Sign Out</li>
+        <li onClick={this.onSignOut}>
+          <button type="button" className="signButton">Sign Out</button>
+        </li>
       )
       : (
         <span>
-          <li><NavLink to="/signup" className="link">Sign Up</NavLink></li>
-          <li><NavLink to="/signin" className="link">Sign In</NavLink></li>
+          <div className="flex">
+            <li>
+              <NavLink to="/signin" className="link signinButton">
+                Sign In
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/signup" className="link">
+                <button type="button" className="signButton">
+                Sign Up
+                </button>
+              </NavLink>
+            </li>
+          </div>
+
         </span>
       );
 
@@ -46,9 +52,6 @@ class Nav extends Component {
               <NavLink exact to="/" className="link">
                 <i className="fas fa-star-of-life fa-spin-hover" /> Logo
               </NavLink>
-            </li>
-            <li>
-              <BackButton />
             </li>
           </ul>
         </div>

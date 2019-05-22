@@ -128,7 +128,9 @@ export function updateTimeline(fields, addNextUnder, history) {
       .then((response) => {
         console.log('from action, update timeline response: ', response.data);
         console.log('ADDNEXTUNDER: ', addNextUnder);
-        dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
+        // can't use response to set because it is not populated with
+        // the titles and times of its events
+        dispatch(selectTimeline(response.data._id));
         console.log('dispatching banner_set');
         dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
         if (history) {
@@ -138,6 +140,16 @@ export function updateTimeline(fields, addNextUnder, history) {
       .catch((error) => {
         console.log(error);
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+      });
+  };
+}
+
+export function deleteTimeline(timeline, history) {
+  return (dispatch) => {
+    axios.delete(`${ROOT_URL}/timeline/${timeline._id}`)
+      .then((response) => {
+        dispatch({ type: ActionTypes.BANNER_SET, payload: response.data });
+        dispatch(selectTimeline(timeline.parent));
       });
   };
 }
@@ -213,7 +225,7 @@ export function fetchUserInfo() {
   };
 }
 
-// add a post
+// USELESS DELETE LATER
 // TODO: Check against server for sending post v. destructured
 export function createPost(post, history) {
   return (dispatch) => {
@@ -230,6 +242,7 @@ export function createPost(post, history) {
   };
 }
 
+// USELESS DELETE LATER
 // send updated post info to replace old
 export function updatePost(id, fields, history) {
   return (dispatch) => {
@@ -244,6 +257,7 @@ export function updatePost(id, fields, history) {
   };
 }
 
+// USELESS DELETE LATER
 // Delete post + push to home
 export function deletePost(id, history) {
   return (dispatch) => {
