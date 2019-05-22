@@ -48,6 +48,16 @@ class AddForm extends Component {
     }
   }
 
+  displayTimelineName() {
+    if (this.props.timeline.title === undefined) {
+      return (
+        'Root'
+      );
+    } return (
+      this.props.timeline.title
+    );
+  }
+
   // TODO Add onblur for coverURL
   // then can remove the setstate above
   handleCoverURLBlur() {
@@ -166,12 +176,12 @@ class AddForm extends Component {
     // if (this.props.timeline) {
     //   par = this.props.timeline.title;
     // }
-
+    const addEdit = this.props.update ? 'update' : 'add a new step under';
     console.log(this.props.timeline);
     return (
       <div>
         <div className="callOut">
-          You are about to add a new step under: <em>{this.props.timeline.title}</em>.
+          You are about to {addEdit}: <em>{this.displayTimelineName()}</em>.
         </div>
         <div>
           <input
@@ -235,21 +245,29 @@ class AddForm extends Component {
   }
 
   render() {
+    const addEditTitle = this.props.update ? 'Update Timeline Info!' : 'Create a New Timeline!';
     return (
-      <div className="flex">
-        <div className="post">
-          <div className="newPostHeader">
-        Create a New Timeline!
-          </div>
-          <div>{this.renderNewPost()}</div>
+      <div>
+        <div className="newPostHeader">
+          {addEditTitle}
         </div>
-        <div className="addContainer">
-          <div className="flex-main">
-            <TimeElement />
+        <div className="addContainerFull">
+          <div className="post">
+            <div>{this.renderNewPost()}</div>
+          </div>
+          <div>
+            <div className="callOut">
+          Current Timeline Display.
+            </div>
+            <div className="addContainer">
+              <div className="addContainerTimeline">
+                <TimeElement />
+              </div>
+            </div>
           </div>
         </div>
-
       </div>
+
 
     );
   }
