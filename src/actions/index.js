@@ -192,7 +192,7 @@ export function fetchUserInfo() {
   };
 }
 
-// add a post
+// USELESS DELETE LATER
 // TODO: Check against server for sending post v. destructured
 export function createPost(post, history) {
   return (dispatch) => {
@@ -209,6 +209,7 @@ export function createPost(post, history) {
   };
 }
 
+// USELESS DELETE LATER
 // send updated post info to replace old
 export function updatePost(id, fields, history) {
   return (dispatch) => {
@@ -223,6 +224,7 @@ export function updatePost(id, fields, history) {
   };
 }
 
+// USELESS DELETE LATER
 // Delete post + push to home
 export function deletePost(id, history) {
   return (dispatch) => {
