@@ -12,17 +12,6 @@ class Element extends React.Component {
     this.props.history.push(`${this.props.id}`);
   }
 
-  handleHover() {
-    const date = new Date(this.props.time).getTime();
-    const months = Math.round(date / 2.628e+6);
-    const years = Math.round(months / 12);
-    // return (
-    //   <div id="div1" className="callOutTimeline show">
-    //       Start working on this {months} months from now <br /> ({years} years)
-    //   </div>
-    // );
-  }
-
   render() {
     console.log('in main component render');
     const date = new Date(this.props.time).getTime();
@@ -32,7 +21,7 @@ class Element extends React.Component {
     return (
       <div className="element flex">
         <div className="trigger">
-          <button type="button" className="elementButton" onClick={this.handleClicked} onHover={this.handleHover}>
+          <button type="button" className="elementButton" onClick={this.handleClicked}>
          .
           </button>
         </div>
