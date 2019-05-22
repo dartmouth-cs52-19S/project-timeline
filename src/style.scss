@@ -6,339 +6,351 @@ $error-color: #ff6450;
 $white: #ffffff;
 
 body, html {
-    font-family: "Roboto", sans-serif;    height: 100%;
+    font-family: "Roboto", sans-serif;    
+    height: 100%;
     background-color: #f3f4f6;
   }
 
-  .logo {
-    background-image: url('img/rocket.png');
-    width: 100px;
-    height: 100px;
-    background-repeat: no-repeat;
-    background-size: contain;
+.logo {
+  background-image: url('img/rocket.png');
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+// .active {
+//   color: pink;
+// }
+.header {
+  background: $white;
+  height: 60px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: space-between;
+}
+ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+li {
+  padding-right: 1em;
+  color: $shadow-color;
+  text-decoration: none;
+}
+// also has class .header above
+#banner {
+  top: 60px;
+  background: $main-color;
+  color: $white;
+  width: 94%;
+  padding: 0 2% 0 4%;
+}
+#banner li {
+  color: $white;
+}
+.link {
+  color: $shadow-color;
+  text-decoration: none;
+  transition: all .1s ease-in-out;
+}
+.link:hover{
+  color: $main-color;
+}
+.selectedLink{
+  color: $main-color;
+}
+.fa-spin-hover:hover{
+  -webkit-animation: fa-spin 2s infinite linear;
+  -moz-animation: fa-spin 2s infinite linear;
+  -o-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear;
+}
+.grow{
+  transition: all .1s ease-in-out;
+}
+.grow:hover{
+  transform: scale(1.1);
+}
+.preview{
+  height: 35vh;
+  width: 25vw;
+  border: 2px solid $text-color;
+  padding: 1em;
+  overflow: hidden;
+  transition: all .1s ease-in-out;
+}
+.preview:hover{
+  color: $main-color;
+  transform: scale(1.02);
+  border: 2px solid $main-color;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
   }
-  // .active {
-  //   color: pink;
-  // }
-  .header{
-    background: $white;
-    height: 60px;
-    margin: 0 auto;
-    overflow: hidden;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
-    display: flex;
-    justify-content: space-between;
-  }
-  ul{
-    list-style-type: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  li{
-    padding-right: 1em;
-    color: $shadow-color;
-    text-decoration: none;
-  }
-  .link {
-    color: $shadow-color;
-    text-decoration: none;
-    transition: all .1s ease-in-out;
-  }
-  .link:hover{
-    color: $main-color;
-  }
-  .selectedLink{
-    color: $main-color;
-  }
-  .fa-spin-hover:hover{
-    -webkit-animation: fa-spin 2s infinite linear;
-    -moz-animation: fa-spin 2s infinite linear;
-    -o-animation: fa-spin 2s infinite linear;
-    animation: fa-spin 2s infinite linear;
-  }
-  .grow{
-    transition: all .1s ease-in-out;
-  }
-  .grow:hover{
-    transform: scale(1.1);
-  }
-  .preview{
-    height: 35vh;
-    width: 25vw;
-    border: 2px solid $text-color;
-    padding: 1em;
-    overflow: hidden;
-    transition: all .1s ease-in-out;
-  }
-  .preview:hover{
-    color: $main-color;
-    transform: scale(1.02);
-    border: 2px solid $main-color;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
-    }
-  .allposts{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin-top: 4em;
-  }
-  .previewTitle{
-    color: $text-color;
-    text-decoration: none;
-    padding-bottom: 1em;
+.allposts{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 4em;
+}
+.previewTitle{
+  color: $text-color;
+  text-decoration: none;
+  padding-bottom: 1em;
 
-  }
-  .previewTagsText{
-    font-weight: 100;
-    font-size: 10pt;
-    text-transform: uppercase;
-    margin-bottom: 1em;
+}
+.previewTagsText{
+  font-weight: 100;
+  font-size: 10pt;
+  text-transform: uppercase;
+  margin-bottom: 1em;
 
-  }
+}
+.previewImage{
+  height: 20vh;
+  // max-width: 90%;
+}
+@media screen and (max-width : 800px){
   .previewImage{
-    height: 20vh;
-    // max-width: 90%;
+    max-width: 90%;
+    height: initial;
   }
-  @media screen and (max-width : 800px){
-    .previewImage{
-      max-width: 90%;
-      height: initial;
-    }
-  }
-  .previewTitleText{
-    font-size: 15pt;
-    margin-bottom: 0.5em;
-  }
-  .previewTagsText{
-    font-weight: 100;
-    font-size: 10pt;
-    text-transform: uppercase;
-    margin-bottom: 1em;
+}
+.previewTitleText{
+  font-size: 15pt;
+  margin-bottom: 0.5em;
+}
+.previewTagsText{
+  font-weight: 100;
+  font-size: 10pt;
+  text-transform: uppercase;
+  margin-bottom: 1em;
 
-  }
-  .foodHeader{
-    margin-top: 70px;
-    padding: 1em 1em 1em 1em;
-    font-size: 25pt;
-    font-weight: 500;
-    color: $text-color;
-    display: flex;
-    justify-content: flex-start;
-    border-bottom: 2px dotted $shadow-color;
-  }
-  .foodHeader em{
-    font-weight: 400;
-    color: $main-color;
-    font-style: normal;
-  }
-  h4{
-    font-weight: 100;
-    text-transform: uppercase;
-    color: #8d8d8d;
-  }
-  .foodHeaderSecondary{
-    display: flex;
-    justify-content: center;
-  }
-  .post{
-    margin: 0 1em 0 2em;
-    padding: 0 2em 2em 2em;
-    border-right: 2px dotted $shadow-color;
-  }
-  .callOut{
-    background: $white;
-    padding: 0.5em;
-    margin: 0 0 2em 0;
-    display: inline-block;
-    font-weight: 100;
-    font-size: 10pt;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
-  }
-  .callOut em{
-    font-style: normal;
-    font-weight: 600;
-    color: $main-color;
-  }
-  .addContainerFull{
-    display: flex;
-  }
-  .addContainer{
-    // margin: 3em 0 0 0;
-    width: 30vw;
-    height: 40vh;
-    padding: 2em;
-    overflow: auto;
-    background: $vibrant-shadow-color;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
-  }
-  .addContainerTimeline{
-    border-left: 2px solid #7A7A7A;
-    position: relative;
-    width: 60%;
-    float: right;
-  }
-  .postTitle{
-    font-weight: 400;
-    font-size: 25pt;
-  }
-  .errorTitle{
-    font-weight: 400;
-    font-size: 25pt;
-    border: 1px solid $error-color;
-  }
-  .postTags{
-    font-weight: 100;
-    text-transform: uppercase;
-    font-size: 1em;
-  }
-  .errorTags{
-    font-weight: 100;
-    text-transform: uppercase;
-    font-size: 1em;
-    border: 1px solid $error-color;
-  }
+}
+.foodHeader{
+  margin-top: 70px;
+  padding: 1em 1em 1em 1em;
+  font-size: 25pt;
+  font-weight: 500;
+  color: $text-color;
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 2px dotted $shadow-color;
+}
+.foodHeader em{
+  font-weight: 400;
+  color: $main-color;
+  font-style: normal;
+}
+h4{
+  font-weight: 100;
+  text-transform: uppercase;
+  color: #8d8d8d;
+}
+.foodHeaderSecondary{
+  display: flex;
+  justify-content: center;
+}
+.post{
+  margin: 0 1em 0 2em;
+  padding: 0 2em 2em 2em;
+  border-right: 2px dotted $shadow-color;
+}
+.callOut{
+  background: $white;
+  padding: 0.5em;
+  margin: 0 0 2em 0;
+  display: inline-block;
+  font-weight: 100;
+  font-size: 10pt;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+}
+.callOut em{
+  font-style: normal;
+  font-weight: 600;
+  color: $main-color;
+}
+.addContainerFull{
+  display: flex;
+}
+.addContainer{
+  // margin: 3em 0 0 0;
+  width: 30vw;
+  height: 40vh;
+  padding: 2em;
+  overflow: auto;
+  background: $vibrant-shadow-color;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+}
+.addContainerTimeline{
+  border-left: 2px solid #7A7A7A;
+  position: relative;
+  width: 60%;
+  float: right;
+}
+.postTitle{
+  font-weight: 400;
+  font-size: 25pt;
+}
+.errorTitle{
+  font-weight: 400;
+  font-size: 25pt;
+  border: 1px solid $error-color;
+}
+.postTags{
+  font-weight: 100;
+  text-transform: uppercase;
+  font-size: 1em;
+}
+.errorTags{
+  font-weight: 100;
+  text-transform: uppercase;
+  font-size: 1em;
+  border: 1px solid $error-color;
+}
 
-  button{
-    margin: 1em;
-    padding: 0.5em 1em;
-    border: 2px solid $main-color;
-    color: $main-color;
-    transition: all .2s ease-in-out;
-  }
+button{
+  margin: 1em;
+  padding: 0.5em 1em;
+  border: 2px solid $main-color;
+  color: $main-color;
+  transition: all .2s ease-in-out;
+}
 
-  button:focus{
-    outline: none;
-  }
-  button:hover{
-    background: $main-color;
-    color: $white;
-  }
-  .element{
-    margin-left: -1.7em;
-    margin-top: 1em;
-  }
-  .elementButton:hover{
-    color: $main-color;
-  }
-  .postImage{
-    margin-top: 1em;
-  }
-  .postImagedisp{
-    max-height: 50vh;
-  }
-  input{
-    font-family: Roboto;
-    border: 1pt solid $shadow-color;
-    font-weight: 100;
-    width: 40vw;
-    margin-bottom: 1em;
-    background: #f5f5f5;
-  }
-  input:focus{
-    background: #f5f5f5;
-    outline: none;
-    // border-bottom: 1px solid $text-color;
-  }
-  .error_box{
-    border: 1px solid $error-color;
-  }
-  textarea{
-    height: 100px;
-    width: 40vw;
-    border: none;
-    font-size: 11pt;
-    font-weight: 200;
-    font-family: Roboto;
-    background: #f5f5f5;
-    margin-bottom: 1em;
-  }
-  textarea:focus{
-    outline: none;
-    // border-bottom: 1px solid $text-color;
-  }
-  em{
-    font-style: italic;
-    font-weight: 100;
-  }
-  .postContent{
-    display: flex;
-    align-items: flex-start;
-  }
-  b{
-    font-weight: 400;
-  }
-  .newPostHeader{
-    font-size: 20pt;
-    margin-top: 2em;
-    padding: 2em;
-  }
-  .divider{
-    border-bottom: 1px solid $text-color;
-  }
-  .signin{
-    margin-top: 90px;
-    padding: 2em;
-  }
-  .timelineDisp{
-    display: flex;
-    align-items:  flex-start;
-  }
-  .placeholderBox{
-    width: 40vw;
-  }
-  .time{
-    border-left: 2px solid rgb(37, 37, 37);
-    position: relative;
-  }
-  .dot {
-    height: 25px;
-    width: 25px;
-    background-color: #bbb;
-    border-radius: 50%;
-    position: absolute;
-    // top: 0;
-    // display: inline-block;
-  }
-  .timeInfo{
-    margin-left: 30px;
-  }
-  .flex{
-    display: flex;
-    // padding-top: 50px;
-  }
-  .flex-detail, .flex-main{
-    width: 40%;
-    height: 100vh;
-  }
+button:focus{
+  outline: none;
+}
+button:hover{
+  background: $main-color;
+  color: $white;
+}
+.element{
+  margin-left: -1.7em;
+  margin-top: 1em;
+}
+.elementButton:hover{
+  color: $main-color;
+}
+.postImage{
+  margin-top: 1em;
+}
+.postImagedisp{
+  max-height: 50vh;
+}
+input{
+  font-family: Roboto;
+  border: 1pt solid $shadow-color;
+  font-weight: 100;
+  width: 40vw;
+  margin-bottom: 1em;
+  background: #f5f5f5;
+}
+input:focus{
+  background: #f5f5f5;
+  outline: none;
+  // border-bottom: 1px solid $text-color;
+}
+.error_box{
+  border: 1px solid $error-color;
+}
+textarea{
+  height: 100px;
+  width: 40vw;
+  border: none;
+  font-size: 11pt;
+  font-weight: 200;
+  font-family: Roboto;
+  background: #f5f5f5;
+  margin-bottom: 1em;
+}
+textarea:focus{
+  outline: none;
+  // border-bottom: 1px solid $text-color;
+}
+em{
+  font-style: italic;
+  font-weight: 100;
+}
+.postContent{
+  display: flex;
+  align-items: flex-start;
+}
+b{
+  font-weight: 400;
+}
+.newPostHeader{
+  font-size: 20pt;
+  margin-top: 2em;
+  padding: 2em;
+}
+.divider{
+  border-bottom: 1px solid $text-color;
+}
+.signin{
+  margin-top: 90px;
+  padding: 2em;
+}
+.timelineDisp{
+  display: flex;
+  align-items:  flex-start;
+}
+.placeholderBox{
+  width: 40vw;
+}
+.time{
+  border-left: 2px solid rgb(37, 37, 37);
+  position: relative;
+}
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  position: absolute;
+  // top: 0;
+  // display: inline-block;
+}
+.timeInfo{
+  margin-left: 30px;
+}
+.flex{
+  display: flex;
+  // padding-top: 50px;
+}
+.flex-detail, .flex-main{
+  width: 40%;
+  height: 100vh;
+}
 
-  .flex-main{
-    border-left: 2px solid $shadow-color;
-    position: relative;
-  }
+.flex-main{
+  border-left: 2px solid $shadow-color;
+  position: relative;
+}
 
-  .elementButton{
-    border-radius: 50%;
-    color: white;
-  }
+.elementButton{
+  border-radius: 50%;
+  color: white;
+}
 
-  .detailContainer{
-    width: 60%;
-    margin-top: 4em;
-    padding: 1em;
-    border-left: 10px solid $main-color;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
-  }
+.detailContainer{
+  width: 60%;
+  margin-top: 4em;
+  padding: 1em;
+  border-left: 10px solid $main-color;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+}
 
-  .detailTitle{
-    text-transform: uppercase;
-    font-size: 1.5em;
-  }
+.detailTitle{
+  text-transform: uppercase;
+  font-size: 1.5em;
+}
 
 .detailImg{
   margin-top: 2em;
