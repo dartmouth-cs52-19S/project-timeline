@@ -12,7 +12,8 @@ export const ActionTypes = {
   CREATE_TIMELINE: 'CREATE_TIMELINE',
   SELECT_TIMELINE_DETAIL: 'SELECT_TIMELINE_DETAIL',
   DO_NOTHING: 'DO_NOTHING',
-  ERROR_SET: 'ERROR_SET',
+  BANNER_SET: 'BANNER_SET',
+  BANNER_CLEAR: 'BANNER_CLEAR',
 };
 
 // SERVER URLS
@@ -35,6 +36,18 @@ const token = localStorage.getItem('token');
 if (token) {
   console.log(`token  ${token}`);
 }
+
+export function clearBanner() {
+  return (dispatch) => {
+    dispatch({ type: ActionTypes.BANNER_CLEAR });
+  };
+}
+export function createBanner(message) {
+  return (dispatch) => {
+    dispatch({ type: ActionTypes.BANNER_SET, payload: message });
+  };
+}
+
 
 export function fetchTimeline() {
   return (dispatch) => {
@@ -83,13 +96,16 @@ export function createTimeline(fields, addNextUnder) {
         console.log('ADDNEXTUNDER: ', addNextUnder);
         if (addNextUnder) {
           dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
+          console.log('Calling create banner');
+          createBanner('You successfully added a post!');
         } else {
           dispatch(selectTimeline(response.data.parent));
+          createBanner('You successfully added a post!');
         }
         // history.push('/');
       })
       .catch((error) => {
-        dispatch({ type: ActionTypes.ERROR_SET, error });
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };
 }
@@ -103,10 +119,15 @@ export function updateTimeline(fields, addNextUnder, history) {
         console.log('from action, update timeline response: ', response.data);
         console.log('ADDNEXTUNDER: ', addNextUnder);
         dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
-        history.push('/');
+        console.log('calling create Banner');
+        createBanner('You successfully updated a post!');
+        if (history) {
+          history.push('/');
+        }
       })
       .catch((error) => {
-        dispatch({ type: ActionTypes.ERROR_SET, error });
+        console.log(error);
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };
 }

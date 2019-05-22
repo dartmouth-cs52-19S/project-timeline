@@ -6,6 +6,7 @@ import {
 // import TimeMain from '../containers/time-main';
 import Timeline from '../containers/timeline';
 import Nav from '../containers/nav';
+import Banner from '../containers/banner';
 import SignIn from '../containers/signin';
 import SignUp from '../containers/signup';
 import CreateTimeline from '../containers/create-timeline';
@@ -18,6 +19,7 @@ const App = (props) => {
     <Router>
       <div>
         <Nav />
+        <Banner />
         <Switch>
           <Route exact path="/" component={Timeline} />
           <Route path="/signin" component={SignIn} />
