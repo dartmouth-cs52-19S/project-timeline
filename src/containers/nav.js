@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { signoutUser } from '../actions';
+import BackButton from '../components/backbutton';
 
 class Nav extends Component {
   constructor(props) {
@@ -36,6 +37,9 @@ class Nav extends Component {
               <NavLink exact to="/" className="link">
                 <i className="fas fa-star-of-life fa-spin-hover" /> Logo
               </NavLink>
+            </li>
+            <li>
+              <BackButton />
             </li>
           </ul>
         </div>
