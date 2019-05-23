@@ -53,6 +53,46 @@ class Landing extends Component {
     );
   }
 
+  renderCTAwhite() {
+    if (this.props.authenticated === false) {
+      return (
+        <NavLink to="/signup" className="link">
+          <button type="button" className="buttonCTAwhite">
+                Let’s Get Started
+          </button>
+        </NavLink>
+      );
+    } else {
+      return ('');
+    }
+  }
+
+  renderCTAwhitealt() {
+    if (this.props.authenticated === false) {
+      console.log('should show');
+      return (
+        <NavLink to="/signup" className="link">
+          <button type="button" className="buttonCTAwhite-alt">
+          Sign Up Now
+          </button>
+        </NavLink>
+      );
+    } else {
+      return ('');
+    }
+  }
+
+  renderAuthText() {
+    if (this.props.authenticated === false) {
+      console.log('should show');
+      return (
+        <h5>What are you waiting for?</h5>
+      );
+    } else {
+      return ('');
+    }
+  }
+
   render() {
     return (
       <div className="landing">
@@ -62,11 +102,7 @@ class Landing extends Component {
             <br />
             <h2>We help you know what you don’t</h2>
             <br />
-            <NavLink to="/signup" className="link">
-              <button type="button" className="buttonCTAwhite">
-                Let’s Get Started
-              </button>
-            </NavLink>
+            {this.renderCTAwhite()}
           </div>
           <Particles className="particles" params={particlesOptions} />
         </div>
@@ -77,13 +113,9 @@ class Landing extends Component {
         </div>
         <div className="landingFooter">
           <div className="footerText">
-            <h5>What are you waiting for?</h5>
+            {this.renderAuthText()}
             <br />
-            <NavLink to="/signup" className="link">
-              <button type="button" className="buttonCTAwhite-alt">
-                Sign Up Now
-              </button>
-            </NavLink>
+            {this.renderCTAwhitealt()}
           </div>
           <Particles className="particles" params={particlesOptions} />
         </div>
@@ -96,6 +128,7 @@ class Landing extends Component {
 const mapStateToProps = state => (
   {
     meta: state.meta,
+    authenticated: state.auth.authenticated,
   }
 );
 
