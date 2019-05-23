@@ -1,4 +1,5 @@
 $main-color: #31CBC1;
+$secondary-color: #50A0E9;
 $text-color: #141414;
 $shadow-color: #7A7A7A;
 $vibrant-shadow-color: rgb(176, 188, 216);
@@ -44,6 +45,11 @@ li {
   padding-right: 1em;
   color: $shadow-color;
   text-decoration: none;
+}
+h3{
+  font-size: 2em;
+  margin-block-start: 0.2em;
+  margin-block-end: 0.2em;
 }
 // also has class .header above
 #banner {
@@ -215,6 +221,7 @@ h4{
   position: relative;
   width: 60%;
   float: right;
+  height: 100%;
 }
 .postTitle{
   font-weight: 400;
@@ -281,7 +288,9 @@ input{
   font-family: Roboto;
   border: 1pt solid $shadow-color;
   font-weight: 100;
-  width: 40vw;
+  // width: 40vw;
+  width: 100%;
+  box-sizing: border-box;
   margin-bottom: 1em;
   background: #f5f5f5;
 }
@@ -289,6 +298,10 @@ input:focus{
   background: #f5f5f5;
   outline: none;
   // border-bottom: 1px solid $text-color;
+}
+.signinput{
+  height: 3em;
+  padding: 1em;
 }
 .error_box{
   border: 1px solid $error-color;
@@ -357,6 +370,10 @@ b{
   display: flex;
   // padding-top: 50px;
 }
+.flexWide{
+  display: flex;
+  justify-content: space-between;
+}
 .flex-detail, .flex-main{
   width: 40%;
   height: 100vh;
@@ -418,4 +435,61 @@ b{
   display: flex;
   justify-content: flex-start;
   border-bottom: 2px dotted $shadow-color;
+}
+.userGraphic{
+  width: 50%;
+  background: $secondary-color;
+  overflow: hidden;
+}
+.signContainer{
+  width: 50%;
+  height: 100vh;
+}
+.whiteBox{
+  background: $white;
+  margin: 4em;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+}
+.signText{
+  margin-bottom: 2em;
+}
+.signicon{
+  margin-right: 1em;
+  color: $shadow-color;
+}
+.signSubmitBox{
+  margin-top: 2em;
+}
+.buttonSecondary{
+  border: none;
+  color: $vibrant-shadow-color;
+  transition: all .2s ease-in-out;
+}
+.buttonSecondary:hover{
+  border-bottom: 2px solid $vibrant-shadow-color;
+  color: $vibrant-shadow-color;
+  background: $white;
+}
+.buttonCTA{
+  border: 2px solid $main-color;
+  color: $white;
+  background: $main-color;
+  transition: all .2s ease-in-out;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+}
+.buttonCTA:hover{
+  border: 2px solid $main-color;
+  color: $white;
+  transform: scale(1.05);
+}
+.particles {
+  // position: fixed;
+  // right: 0;
+  // right: 0;
+  // bottom: 0;
+  // left: 0;
+  width: 100%;
+  height: 100%;
+  // box-sizing: border-box;
+  // z-index: -1;
 }

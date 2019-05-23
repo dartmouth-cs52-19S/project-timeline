@@ -13,11 +13,9 @@ class Element extends React.Component {
   }
 
   render() {
-    console.log('in main component render');
     const date = new Date(this.props.time).getTime();
     const months = Math.round(date / 2.628e+6);
     const years = Math.round(months / 12);
-    console.log(`content is${this.props.content}`);
     return (
       <div className="element flex">
         <div className="trigger">

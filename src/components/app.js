@@ -13,6 +13,7 @@ import CreateTimeline from '../containers/create-timeline';
 import UpdateTimeline from '../containers/update-timeline';
 import Settings from '../containers/settings';
 import UserProfile from '../containers/user';
+
 // import RequireAuth from '../containers/requireAuth';
 
 const App = (props) => {

@@ -203,8 +203,13 @@ class SignUp extends Component {
               </div>
             </div>
           </div>
+<<<<<<< HEAD
         </div>
       </div>
+=======
+         </div>
+        </div>
+>>>>>>> 20119dc3002e743dc788b5608da27d7fe3c186a1
 
     );
   }
