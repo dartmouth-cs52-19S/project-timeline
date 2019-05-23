@@ -9,7 +9,6 @@ import { fetchTimeline, selectTimeline } from '../actions';
 class TimeElement extends Component {
   componentWillMount() {
     this.props.fetchTimeline(this.props.match.params.timelineID);
-    console.log('componentWillMount success');
   }
 
   render() {
