@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchUserInfo } from '../actions';
+import { fetchUserInfo, createBanner } from '../actions';
 
 class Settings extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class Settings extends Component {
   }
 
   onCancel(event) {
-    this.props.history.push('/');
+    this.props.history.push('/explore/start');
   }
 
   // update fxn for username, email
@@ -53,6 +53,8 @@ class Settings extends Component {
   // eslint-disable-next-line class-methods-use-this
   handleSubmit(event) {
     event.preventDefault();
+    // right now just throws a banner error bc I'm not done with it
+    this.props.createBanner('Sorry this is not working right now!');
     // console.log(`sign up info:
     // ${this.state.username} ${this.state.email} ${this.state.password}`);
     // this.props.SOME ACTION (this.state, this.props.history);
@@ -61,8 +63,6 @@ class Settings extends Component {
   }
 
   render() {
-    console.log(this.state);
-    console.log('^^ above state');
     if (this.props.user == null) {
       return (
         <div className="flex" style={{ alignItems: 'flex-end', justifyContent: 'space-around' }}>
@@ -137,4 +137,4 @@ const mapStateToProps = reduxState => (
 );
 
 // export default withRouter(connect(mapStateToProps, null)(Settings));
-export default withRouter(connect(mapStateToProps, { fetchUserInfo })(Settings));
+export default withRouter(connect(mapStateToProps, { fetchUserInfo, createBanner })(Settings));
