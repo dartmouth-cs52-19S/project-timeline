@@ -272,7 +272,7 @@ export function signinUser({ email, password }, history) {
   const user = { email, password };
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signin`, user).then((response) => {
-      dispatch({ type: ActionTypes.AUTH_USER });
+      dispatch({ type: ActionTypes.AUTH_USER, payload: user });
       localStorage.setItem('token', response.data.token);
       history.push('/');
     }).catch((error) => {
@@ -291,8 +291,10 @@ export function signupUser({ username, email, password }, history) {
     // console.log('in signup user');
     axios.post(`${ROOT_URL}/signup`, user).then((response) => {
       // console.log('lab4 axios post');
-      dispatch({ type: ActionTypes.AUTH_USER });
+      dispatch({ type: ActionTypes.AUTH_USER, payload: user });
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('username', response.data.username);
+      localStorage.setItem('email', response.data.email);
       history.push('/');
     }).catch((error) => {
       console.log('Sign up failed.');
@@ -308,7 +310,28 @@ export function signupUser({ username, email, password }, history) {
 export function signoutUser(history) {
   return (dispatch) => {
     localStorage.removeItem('token');
-    dispatch({ type: ActionTypes.DEAUTH_USER });
+    dispatch({ type: ActionTypes.DEAUTH_USER, payload: {} });
     history.push('/');
+  };
+}
+
+// this is crap DO NOT USE
+export function updateUser(username, fields, history) {
+  return (dispatch) => {
+    console.log('getting user', username);
+    // this is where we stopped
+    axios.post(`${ROOT_URL}/settings}`, fields)
+      .then((response) => {
+        dispatch(selectTimeline(response.data._id));
+        console.log('dispatching banner_set');
+        dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
+        if (history) {
+          history.push('/');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+      });
   };
 }
