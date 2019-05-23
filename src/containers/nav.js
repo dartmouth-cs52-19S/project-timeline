@@ -62,7 +62,7 @@ class Nav extends Component {
 
         </span>
       );
-
+    // Show add/update timeline info buttons only if admin auth
     const admin = (this.props.authenticated === true
       && this.props.user !== null && this.props.user.username === 'admin')
       ? (
