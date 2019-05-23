@@ -14,6 +14,7 @@ import SaveTimeline from '../containers/saveTimeline';
 import UpdateTimeline from '../containers/update-timeline';
 import Settings from '../containers/settings';
 import UserProfile from '../containers/user';
+import Landing from '../containers/landing';
 
 // import RequireAuth from '../containers/requireAuth';
 
@@ -24,7 +25,10 @@ const App = (props) => {
         <Nav />
         <Banner />
         <Switch>
-          <Route exact path="/" component={Timeline} />
+          <Route exact path="/" component={Landing} />
+
+          <Route path="/explore/start" component={Timeline} />
+          <Route path="/explore/:timelineID" component={Timeline} />
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
           <Route path="/newTime" component={CreateTimeline} />
@@ -32,8 +36,7 @@ const App = (props) => {
           <Route path="/settings" component={Settings} />
           <Route path="/personal" component={UserProfile} />
           <Route path="/save" component={SaveTimeline} />
-          <Route path="/:timelineID" component={Timeline} />
-          <Route render={() => (<div>Food Hack not found </div>)} />
+          <Route render={() => (<div> This life does not exist </div>)} />
         </Switch>
       </div>
     </Router>

@@ -109,7 +109,7 @@ class Nav extends Component {
               {/* Explore */}
               <NavLink
                 exact
-                to="/"
+                to="/explore/start"
                 className="link"
                 activeClassName="selectedLink"
               >

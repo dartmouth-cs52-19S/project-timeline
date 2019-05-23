@@ -8,7 +8,7 @@ import { fetchTimeline, selectTimeline, onAddUpdate } from '../actions';
 import BackButton from '../components/backbutton';
 
 class Timeline extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.onAddUpdate(0);
 
     if (this.props.match.params.timelineID === undefined) {
@@ -19,6 +19,8 @@ class Timeline extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('this props', this.props);
+    console.log('this prev props', this.prevprops);
     if (this.props.match.params.timelineID !== undefined) {
       if (prevProps.match.params.timelineID !== this.props.match.params.timelineID) {
         this.props.selectTimeline(this.props.match.params.timelineID);
@@ -56,7 +58,7 @@ class Timeline extends Component {
         </div>
         <div>
           <BackButton
-            curr_url={this.props.match.params.timelineID}
+            enabled="true"
             selectTimeline={this.props.selectTimeline}
           />
         </div>
@@ -77,7 +79,7 @@ const mapStateToProps = state => (
   {
     timeline: state.timeline,
     selected: state.selected,
-    addupdate: state.addupdate,
+    addupdate: 0,
   }
 );
 
