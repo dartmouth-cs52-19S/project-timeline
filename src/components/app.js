@@ -10,6 +10,7 @@ import Banner from '../containers/banner';
 import SignIn from '../containers/signin';
 import SignUp from '../containers/signup';
 import CreateTimeline from '../containers/create-timeline';
+import SaveTimeline from '../containers/saveTimeline';
 import UpdateTimeline from '../containers/update-timeline';
 import Settings from '../containers/settings';
 import UserProfile from '../containers/user';
@@ -30,9 +31,8 @@ const App = (props) => {
           <Route path="/updateTime" component={UpdateTimeline} />
           <Route path="/settings" component={Settings} />
           <Route path="/personal" component={UserProfile} />
+          <Route path="/save" component={SaveTimeline} />
           <Route path="/:timelineID" component={Timeline} />
-
-          {/* UNCOMMENT WHEN WE HAVE USER SAVING FUNCTIONALITY */}
           <Route render={() => (<div>Food Hack not found </div>)} />
         </Switch>
       </div>
