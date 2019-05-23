@@ -74,8 +74,8 @@ export function fetchMeta() {
     axios.get(`${ROOT_URL}/timeline/5ce5bf1be5057b0034c8a87c`)
       .then((response) => {
         // dispatch action w/ payload
-        dispatch({ type: ActionTypes.FETCH_META, payload: response.data });
-        console.log('done fetching');
+        dispatch({ type: ActionTypes.FETCH_META, meta: response.data });
+        console.log('done fetching meta');
         console.log(response.data);
       })
       .catch((error) => {
