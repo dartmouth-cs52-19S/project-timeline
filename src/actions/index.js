@@ -353,7 +353,6 @@ export function signoutUser(history) {
   };
 }
 
-<<<<<<< HEAD
 // save a timeline to a user's profile timeline
 // get the user's user object from server
 // then POST to user/link with the two timeline id's
@@ -370,7 +369,9 @@ export function saveTimeline(timelineID) {
         console.log(error);
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
-=======
+  };
+}
+
 // this is crap DO NOT USE
 export function updateUser(user, history) {
   return (dispatch) => {
@@ -385,6 +386,5 @@ export function updateUser(user, history) {
       dispatch(authError(`Update settings failed: ${error.response.data}`));
       dispatch({ type: ActionTypes.BANNER_SET, payload: 'Updating user settings failed.' });
     });
->>>>>>> 57cb7a4d97d3afff29aedb344e08faa8be64d255
   };
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import Particles from 'react-particles-js';
 import ElementStatic from '../components/element-static';
-import { fetchMeta, selectTimeline } from '../actions';
+import { fetchMeta, selectTimeline } from '../actions/index';
 
 const particlesOptions = {
   particles: {
@@ -60,17 +60,13 @@ class Landing extends Component {
           <div className="landingText">
             <h1>Timeline</h1>
             <br />
-<<<<<<< HEAD
-            <h2>We help you know what you don{'\''}t know</h2>
-=======
-            <h2>We help you know what you don’t</h2>
+            <h2>We help you know what you don{'\''} know</h2>
             <br />
             <NavLink to="/signup" className="link">
               <button type="button" className="buttonCTAwhite">
                 Let’s Get Started
               </button>
             </NavLink>
->>>>>>> 57cb7a4d97d3afff29aedb344e08faa8be64d255
           </div>
           <Particles className="particles" params={particlesOptions} />
         </div>
