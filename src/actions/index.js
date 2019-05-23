@@ -17,6 +17,7 @@ export const ActionTypes = {
   DO_NOTHING: 'DO_NOTHING',
   BANNER_SET: 'BANNER_SET',
   BANNER_CLEAR: 'BANNER_CLEAR',
+  UPDATE_USER: 'UPDATE_USER',
 };
 
 // SERVER URLS
@@ -332,22 +333,18 @@ export function signoutUser(history) {
 }
 
 // this is crap DO NOT USE
-export function updateUser(username, fields, history) {
+export function updateUser(user, history) {
   return (dispatch) => {
-    console.log('getting user', username);
-    // this is where we stopped
-    axios.post(`${ROOT_URL}/settings}`, fields)
-      .then((response) => {
-        dispatch(selectTimeline(response.data._id));
-        console.log('dispatching banner_set');
-        dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
-        if (history) {
-          history.push('/');
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
-      });
+    console.log('getting user', user);
+    // this is where I stopped
+    axios.post(`${ROOT_URL}/settings`, user).then((response) => {
+      dispatch({ type: ActionTypes.UPDATE_USER, payload: user });
+      localStorage.setItem('username', response.data.username);
+      localStorage.setItem('email', response.data.email);
+      history.push('/');
+    }).catch((error) => {
+      dispatch(authError(`Update settings failed: ${error.response.data}`));
+      dispatch({ type: ActionTypes.BANNER_SET, payload: 'Updating user settings failed.' });
+    });
   };
 }
