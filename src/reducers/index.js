@@ -7,6 +7,7 @@ import SelectReducer from './select-reducer';
 import BannerReducer from './banner-reducer';
 import UserReducer from './user-reducer';
 import AddUpdateReducer from './addupdate-reducer';
+import MetaReducer from './meta-reducer';
 
 const rootReducer = combineReducers({
   auth: AuthReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   message: BannerReducer,
   user: UserReducer,
   addupdate: AddUpdateReducer,
+  meta: MetaReducer,
 });
 
 export default rootReducer;

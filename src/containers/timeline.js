@@ -8,27 +8,52 @@ import { fetchTimeline, selectTimeline, onAddUpdate } from '../actions';
 import BackButton from '../components/backbutton';
 
 class Timeline extends Component {
-  componentWillMount() {
-    this.props.onAddUpdate(0);
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: 0,
+    };
 
-    if (this.props.match.params.timelineID === undefined) {
-      this.props.fetchTimeline();
-    } else {
-      this.props.selectTimeline(this.props.match.params.timelineID);
-    }
+    this.selectedZero = this.selectedZero.bind(this);
+    this.selectedNotZero = this.selectedNotZero.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.onAddUpdate(0);
+    this.props.fetchTimeline();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.match.params.timelineID !== undefined) {
       if (prevProps.match.params.timelineID !== this.props.match.params.timelineID) {
+        console.log('JUST SELECTED TIMELINE');
+        console.log('PREVPROP IS: ', prevProps.match.params.timelineID);
+        console.log('THIS PROPS IS: ', this.props.match.params.timelineID);
+        this.selectedNotZero();
         this.props.selectTimeline(this.props.match.params.timelineID);
       }
+    } else if (prevProps.match.params.timelineID !== undefined) {
+      this.selectedZero();
+      this.props.selectTimeline('5ce1b7c6c75aa400347686ee');
     }
   }
 
+  selectedNotZero() {
+    if (this.props.match.params.timelineID !== undefined) {
+      this.setState({ selected: this.props.match.params.timelineID });
+    } else {
+      this.setState({ selected: '5ce1b7c6c75aa400347686ee' });
+    }
+  }
+
+  selectedZero() {
+    this.setState({ selected: 0 });
+  }
+
   render() {
+    console.log('timeilneid: ', this.props.match.params.timelineID);
     console.log(`state of selected is${this.props.selected}`);
-    if (this.props.selected === 0) {
+    if (this.state.selected === 0) {
       return (
         <div>
           <div className="foodHeader">
@@ -56,8 +81,7 @@ class Timeline extends Component {
         </div>
         <div>
           <BackButton
-            curr_url={this.props.match.params.timelineID}
-            selectTimeline={this.props.selectTimeline}
+            enabled="true"
           />
         </div>
         <div className="flex">
@@ -77,7 +101,7 @@ const mapStateToProps = state => (
   {
     timeline: state.timeline,
     selected: state.selected,
-    addupdate: state.addupdate,
+    addupdate: 0,
   }
 );
 

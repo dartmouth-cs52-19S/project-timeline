@@ -9,7 +9,7 @@ class Element extends React.Component {
   }
 
   handleClicked() {
-    this.props.history.push(`${this.props.id}`);
+    this.props.history.push(`/explore/${this.props.id}`);
   }
 
   render() {

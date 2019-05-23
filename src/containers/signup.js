@@ -112,7 +112,7 @@ class SignUp extends Component {
                 />
               </div>
               <div className="flexWide">
-                <i className="fas fa-lock signicon" />
+                <i className="fas fa-graduation-cap signicon" />
                 <input
                   name="startTime"
                   className="signinput"
@@ -141,7 +141,6 @@ class SignUp extends Component {
           </div>
         </div>
       </div>
-
     );
   }
 }

@@ -10,6 +10,7 @@ export const ActionTypes = {
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
   FETCH_EXPLORE: 'FETCH_EXPLORE',
+  FETCH_META: 'FETCH_META',
   SELECT_TIMELINE: 'SELECT_TIMELINE',
   CREATE_TIMELINE: 'CREATE_TIMELINE',
   SELECT_TIMELINE_DETAIL: 'SELECT_TIMELINE_DETAIL',
@@ -56,6 +57,26 @@ export function fetchTimeline() {
         // dispatch action w/ payload
         dispatch({ type: ActionTypes.FETCH_EXPLORE, payload: response.data });
         console.log('done fetching');
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // TODO: dispatch an error, make reducer, show error component
+        console.log('did not fetch');
+        console.log(error);
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+      });
+  };
+}
+
+export function fetchMeta() {
+  return (dispatch) => {
+    // server call
+    console.log('making server call');
+    axios.get(`${ROOT_URL}/timeline/5ce5bf1be5057b0034c8a87c`)
+      .then((response) => {
+        // dispatch action w/ payload
+        dispatch({ type: ActionTypes.FETCH_META, meta: response.data });
+        console.log('done fetching meta');
         console.log(response.data);
       })
       .catch((error) => {
