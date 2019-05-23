@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import Particles from 'react-particles-js';
 import { signinUser } from '../actions';
+
+const particlesOptions = {
+  particles: {
+    number: {
+      value: 80,
+      density: {
+        enable: true,
+        value_area: 800,
+      },
+    },
+  },
+};
 
 class SignIn extends Component {
   constructor(props) {
@@ -33,7 +46,9 @@ class SignIn extends Component {
   render() {
     return (
       <div className="flexWide">
-        <div className="userGraphic" />
+        <div className="userGraphic">
+          <Particles className="particles" params={particlesOptions} />
+        </div>
         <div className="signContainer">
           <div className="whiteBox">
             <div className="signin">
