@@ -67,7 +67,7 @@ class Settings extends Component {
             placeholder="new email"
           />
         </div>
-        <div className="password">
+        {/* <div className="password">
           <input
             name="password"
             placeholder="new password"
@@ -78,7 +78,7 @@ class Settings extends Component {
             name="startTime"
             placeholder="new hs graduation date YYYY-MM-DD"
           />
-        </div>
+        </div> */}
         <button type="button" onClick={this.onCancel}>Cancel</button>
         <button type="button" onClick={this.handleSubmit}>Save Changes</button>
       </div>

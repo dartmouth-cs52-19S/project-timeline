@@ -13,7 +13,7 @@ const Banner = (props) => {
       <nav className="header" id="banner">
         <div>
           <p>
-            Oops! Looks like we have an error. {props.message}
+            Hold up! {props.message}
           </p>
         </div>
         <div>
