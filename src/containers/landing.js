@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import Particles from 'react-particles-js';
 import ElementStatic from '../components/element-static';
-import { fetchMeta, selectTimeline } from '../actions';
+import { fetchMeta } from '../actions';
 
 const particlesOptions = {
   particles: {
@@ -134,5 +134,5 @@ const mapStateToProps = state => (
 
 
 export default withRouter(connect(mapStateToProps, {
-  fetchMeta, selectTimeline,
+  fetchMeta,
 })(Landing));
