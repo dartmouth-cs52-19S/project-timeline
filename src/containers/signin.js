@@ -83,25 +83,6 @@ class SignIn extends Component {
 
         </div>
       </div>
-      // <div className="signin">
-      //   <input
-      //     name="email"
-      //     placeholder="email"
-      //     onChange={this.edit}
-      //     value={this.state.email}
-      //   />
-      //   <input
-      //     name="password"
-      //     type="password"
-      //     placeholder="password"
-      //     onChange={this.edit}
-      //     value={this.state.password}
-      //   />
-      //   <div className="signSubmitBox">
-      //     <button type="button" onClick={this.onCancel} className="buttonSecondary">Cancel</button>
-      //     <button type="button" onClick={this.handleSubmit} className="buttonCTA">Sign In</button>
-      //   </div>
-      // </div>
     );
   }
 }
