@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import Particles from 'react-particles-js';
 import { signupUser, createBanner } from '../actions';
-// import { Banner } from '../components/banner';
+
+const particlesOptions = {
+  particles: {
+    number: {
+      value: 80,
+      density: {
+        enable: true,
+        value_area: 800,
+      },
+    },
+  },
+};
 
 class SignUp extends Component {
   constructor(props) {
@@ -57,35 +69,78 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div className="signin">
-        <input
-          name="username"
-          placeholder="username"
-          onChange={this.edit}
-          value={this.state.username}
-        />
-        <input
-          name="email"
-          placeholder="email"
-          onChange={this.edit}
-          value={this.state.email}
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="password"
-          onChange={this.edit}
-          value={this.state.password}
-        />
-        <input
-          name="startTime"
-          placeholder="expected high school graduation YYYY-MM-DD"
-          onChange={this.edit}
-          value={this.state.startTime}
-        />
-        <button type="button" onClick={this.onCancel}>Cancel</button>
-        <button type="button" onClick={this.handleSubmit}>Join</button>
-      </div>
+      <div className="flexWide">
+        <div className="userGraphic">
+          <Particles className="particles" params={particlesOptions} />
+        </div>
+        <div className="signContainer">
+          <div className="whiteBox">
+            <div className="signin">
+              <div className="signText">
+                <h3>Sign Up</h3>
+                <h4>Sign up and discover all the possibilities in life!</h4>
+              </div>
+              <div className="flexWide">
+                <i className="far fa-user signicon" />
+                <input
+                  name="username"
+                  className="signinput"
+                  placeholder="username"
+                  onChange={this.edit}
+                  value={this.state.username}
+                />
+              </div>
+              <div className="flexWide">
+                <i className="far fa-paper-plane signicon" />
+                <input
+                  name="email"
+                  className="signinput"
+                  placeholder="email"
+                  onChange={this.edit}
+                  value={this.state.email}
+                />
+              </div>
+              <div className="flexWide">
+                <i className="fas fa-lock signicon" />
+                <input
+                  name="password"
+                  className="signinput"
+                  placeholder="password"
+                  onChange={this.edit}
+                  value={this.state.password}
+                />
+              </div>
+              <div className="flexWide">
+                <i className="fas fa-lock signicon" />
+                <input
+                  name="startTime"
+                  className="signinput"
+                  placeholder="expected high school graduation YYYY-MM-DD"
+                  onChange={this.edit}
+                  value={this.state.startTime}
+                />
+              </div>
+              <div className="signSubmitBox">
+                <button
+                  type="button"
+                  className="buttonSecondary"
+                  onClick={this.onCancel}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className="buttonCTA"
+                  onClick={this.handleSubmit}
+                >
+                  Get Started
+                </button>
+              </div>
+            </div>
+          </div>
+         </div>
+        </div>
+
     );
   }
 }

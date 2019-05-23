@@ -8,19 +8,17 @@ import { fetchTimeline, selectTimeline } from '../actions';
 
 class TimeElement extends Component {
   componentWillMount() {
-    this.props.fetchTimeline();
+    this.props.fetchTimeline(this.props.match.params.timelineID);
     console.log('componentWillMount success');
   }
 
   render() {
+    // Timeline that Redirects Page
     if (this.props.addupdate === 0) {
-      // console.log(`addupdate${this.props.addupdate}`);
       if (this.props.selected === 0) {
-        console.log(`fetched timeline:  ${this.props.timeline.events}`);
         if (this.props.timeline.events === undefined) {
           return (<div>Loading...</div>);
         }
-        console.log('time-main render');
         return (this.props.timeline.events.map((events) => {
           return (
             <div key={events.id} className="padding">
@@ -30,6 +28,7 @@ class TimeElement extends Component {
                 title={events.title}
                 selectTimeline={this.props.selectTimeline}
                 time={events.time}
+                content={this.props.timeline.content}
               />
             </div>
           );
@@ -45,6 +44,7 @@ class TimeElement extends Component {
                 title={events.title}
                 selectTimeline={this.props.selectTimeline}
                 time={events.time}
+                content={events.content}
               />
             </div>
           );
@@ -52,11 +52,10 @@ class TimeElement extends Component {
         );
       }
     } else if (this.props.selected === 0) {
-      console.log(`fetched timeline:  ${this.props.timeline.events}`);
       if (this.props.timeline.events === undefined) {
         return (<div>Loading...</div>);
       }
-      console.log('time-main render');
+      // Timeline that Does Not Redirect Page
       return (this.props.timeline.events.map((events) => {
         return (
           <div key={events.id} className="padding">
@@ -66,6 +65,7 @@ class TimeElement extends Component {
               title={events.title}
               selectTimeline={this.props.selectTimeline}
               time={events.time}
+              content={events.content}
             />
           </div>
         );
@@ -81,6 +81,7 @@ class TimeElement extends Component {
               title={events.title}
               selectTimeline={this.props.selectTimeline}
               time={events.time}
+              content={events.content}
             />
           </div>
         );
