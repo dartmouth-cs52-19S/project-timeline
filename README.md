@@ -4,7 +4,10 @@
 
 Timeline helps you know what you don't.
 
-Sign up now (warning, Timeline may manifest itself as Free Food @Now but we promise it's not hehehe) on http://lifetime.surge.sh/.
+Sign up now on http://lifetime.surge.sh/.
+If you want to update a node or create a new one, please sign in as admin (username: admin, password: admin). Secure, we know. Then refresh the page. 
+If you sign out after, refresh as well to see the non-admin nav bar.
+PLEASE DO NOT USE DELETE. RIGHT NOW IT DELETES EVERYTHING. WE BEG YOU. NO.
 
 [Team Figma -- Mockups](https://www.figma.com/files/project/2496184/Timeline---Journey---Design-Your-Life)
 
@@ -12,7 +15,7 @@ Sign up now (warning, Timeline may manifest itself as Free Food @Now but we prom
 
 Code is organized based on lab 4 frontend (some lab 5 stuff) right now.
 
-Code library is based on Lab 4/5.
+Code library is based on Lab 4/5. Additionally, we have used react-particles-js
 
 ## Setup
 

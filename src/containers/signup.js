@@ -106,6 +106,7 @@ class SignUp extends Component {
                   name="password"
                   className="signinput"
                   placeholder="password"
+                  type="password"
                   onChange={this.edit}
                   value={this.state.password}
                 />

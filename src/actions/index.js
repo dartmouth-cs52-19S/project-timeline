@@ -18,6 +18,7 @@ export const ActionTypes = {
   DO_NOTHING: 'DO_NOTHING',
   BANNER_SET: 'BANNER_SET',
   BANNER_CLEAR: 'BANNER_CLEAR',
+  UPDATE_USER: 'UPDATE_USER',
 };
 
 // SERVER URLS
@@ -305,7 +306,7 @@ export function signinUser({ email, password }, history) {
   const user = { email, password };
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signin`, user).then((response) => {
-      dispatch({ type: ActionTypes.AUTH_USER });
+      dispatch({ type: ActionTypes.AUTH_USER, payload: user });
       localStorage.setItem('token', response.data.token);
       history.push('/explore/start');
     }).catch((error) => {
@@ -328,8 +329,10 @@ export function signupUser({
     // console.log('in signup user');
     axios.post(`${ROOT_URL}/signup`, user).then((response) => {
       // console.log('lab4 axios post');
-      dispatch({ type: ActionTypes.AUTH_USER });
+      dispatch({ type: ActionTypes.AUTH_USER, payload: user });
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('username', response.data.username);
+      localStorage.setItem('email', response.data.email);
       history.push('/explore/start');
     }).catch((error) => {
       console.log('Sign up failed.');
@@ -345,7 +348,24 @@ export function signupUser({
 export function signoutUser(history) {
   return (dispatch) => {
     localStorage.removeItem('token');
-    dispatch({ type: ActionTypes.DEAUTH_USER });
+    dispatch({ type: ActionTypes.DEAUTH_USER, payload: {} });
     history.push('/');
+  };
+}
+
+// this is crap DO NOT USE
+export function updateUser(user, history) {
+  return (dispatch) => {
+    console.log('getting user', user);
+    // this is where I stopped
+    axios.post(`${ROOT_URL}/settings`, user).then((response) => {
+      dispatch({ type: ActionTypes.UPDATE_USER, payload: user });
+      localStorage.setItem('username', response.data.username);
+      localStorage.setItem('email', response.data.email);
+      history.push('/');
+    }).catch((error) => {
+      dispatch(authError(`Update settings failed: ${error.response.data}`));
+      dispatch({ type: ActionTypes.BANNER_SET, payload: 'Updating user settings failed.' });
+    });
   };
 }
