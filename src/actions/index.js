@@ -307,7 +307,7 @@ export function signinUser({ email, password }, history) {
     axios.post(`${ROOT_URL}/signin`, user).then((response) => {
       dispatch({ type: ActionTypes.AUTH_USER });
       localStorage.setItem('token', response.data.token);
-      history.push('/');
+      history.push('/explore/start');
     }).catch((error) => {
       console.log('Sign in failed.');
       console.log(error);
@@ -330,7 +330,7 @@ export function signupUser({
       // console.log('lab4 axios post');
       dispatch({ type: ActionTypes.AUTH_USER });
       localStorage.setItem('token', response.data.token);
-      history.push('/');
+      history.push('/explore/start');
     }).catch((error) => {
       console.log('Sign up failed.');
       console.log('error data', error.response.data);
