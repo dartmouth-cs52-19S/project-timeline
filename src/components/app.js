@@ -14,6 +14,7 @@ import SaveTimeline from '../containers/saveTimeline';
 import UpdateTimeline from '../containers/update-timeline';
 import Settings from '../containers/settings';
 import UserProfile from '../containers/user';
+
 // import RequireAuth from '../containers/requireAuth';
 
 const App = (props) => {
