@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Particles from 'react-particles-js';
-import { signupUser } from '../actions';
+import { signupUser, createBanner } from '../actions';
 
 const particlesOptions = {
   particles: {
@@ -24,11 +24,13 @@ class SignUp extends Component {
       username: '',
       email: '',
       password: '',
+      startTime: '',
     };
 
     this.edit = this.edit.bind(this);
     this.onCancel = this.onCancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.createStartTime = this.createStartTime.bind(this);
   }
 
   onCancel(event) {
@@ -41,7 +43,28 @@ class SignUp extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.signupUser(this.state, this.props.history);
+    // error checks
+    if (this.state.email === '') {
+      this.props.createBanner('Please enter an email.');
+    } else if (this.state.username === '') {
+      this.props.createBanner('Please enter a username.');
+    } else if (this.state.password === '') {
+      this.props.createBanner('Please enter a password.');
+    } else if (this.state.startTime === null || Number.isNaN(Date.parse(this.state.startTime))) {
+      this.props.createBanner('Please enter a valid date.');
+    } else {
+    // console.log(`sign up info:
+    // ${this.state.username} ${this.state.email} ${this.state.password}`);
+      this.createStartTime();
+      this.props.signupUser(this.state, this.props.history);
+    }
+  }
+
+  createStartTime() { // changes the expected HS grad date to a unix string
+    this.setState((prevState) => {
+      const newStateStart = (new Date((prevState.startTime))).getTime();
+      this.startTime = newStateStart;
+    });
   }
 
   render() {
@@ -87,6 +110,16 @@ class SignUp extends Component {
                   value={this.state.password}
                 />
               </div>
+              <div className="flexWide">
+                <i className="fas fa-lock signicon" />
+                <input
+                  name="startTime"
+                  className="signinput"
+                  placeholder="expected high school graduation YYYY-MM-DD"
+                  onChange={this.edit}
+                  value={this.state.startTime}
+                />
+              </div>
               <div className="signSubmitBox">
                 <button
                   type="button"
@@ -105,13 +138,11 @@ class SignUp extends Component {
               </div>
             </div>
           </div>
-
+         </div>
         </div>
-      </div>
-
 
     );
   }
 }
 
-export default withRouter(connect(null, { signupUser })(SignUp));
+export default withRouter(connect(null, { signupUser, createBanner })(SignUp));

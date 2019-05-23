@@ -285,9 +285,13 @@ export function signinUser({ email, password }, history) {
 }
 
 // sign up -> set auth state again
-export function signupUser({ username, email, password }, history) {
+export function signupUser({
+  username, email, password, startTime,
+}, history) {
   return (dispatch) => {
-    const user = { username, email, password };
+    const user = {
+      username, email, password, startTime,
+    };
     // console.log('in signup user');
     axios.post(`${ROOT_URL}/signup`, user).then((response) => {
       // console.log('lab4 axios post');
