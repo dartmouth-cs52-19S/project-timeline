@@ -10,6 +10,7 @@ import Banner from '../containers/banner';
 import SignIn from '../containers/signin';
 import SignUp from '../containers/signup';
 import CreateTimeline from '../containers/create-timeline';
+import SaveTimeline from '../containers/saveTimeline';
 import UpdateTimeline from '../containers/update-timeline';
 import Settings from '../containers/settings';
 import UserProfile from '../containers/user';
@@ -34,7 +35,7 @@ const App = (props) => {
           <Route path="/updateTime" component={UpdateTimeline} />
           <Route path="/settings" component={Settings} />
           <Route path="/personal" component={UserProfile} />
-
+          <Route path="/save" component={SaveTimeline} />
           <Route render={() => (<div> This life does not exist </div>)} />
         </Switch>
       </div>
