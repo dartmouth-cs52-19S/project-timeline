@@ -16,20 +16,16 @@ class ElementStatic extends React.Component {
   }
 
   render() {
-    console.log('in main component render');
-    const date = new Date(this.props.time).getTime();
     return (
-      <div className="element">
-        <button type="button" className="elementButton" onClick={this.handleClicked}>
+      <div className="element flex">
+        <div>
+          <button type="button" className="elementButton" onClick={this.handleClicked}>
          .
-        </button>
-        {this.props.title}
-        <p>
-          Date is {this.props.time}
-        </p>
-        <p>
-          In some # format: {date}
-        </p>
+          </button>
+        </div>
+        <div className="displayElement">
+          {this.props.title}
+        </div>
       </div>
     );
   }

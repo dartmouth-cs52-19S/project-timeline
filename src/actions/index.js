@@ -10,6 +10,7 @@ export const ActionTypes = {
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
   FETCH_EXPLORE: 'FETCH_EXPLORE',
+  FETCH_META: 'FETCH_META',
   SELECT_TIMELINE: 'SELECT_TIMELINE',
   CREATE_TIMELINE: 'CREATE_TIMELINE',
   SELECT_TIMELINE_DETAIL: 'SELECT_TIMELINE_DETAIL',
@@ -66,6 +67,26 @@ export function fetchTimeline() {
   };
 }
 
+export function fetchMeta() {
+  return (dispatch) => {
+    // server call
+    console.log('making server call');
+    axios.get(`${ROOT_URL}/timeline/5ce5bf1be5057b0034c8a87c`)
+      .then((response) => {
+        // dispatch action w/ payload
+        dispatch({ type: ActionTypes.FETCH_META, meta: response.data });
+        console.log('done fetching meta');
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // TODO: dispatch an error, make reducer, show error component
+        console.log('did not fetch');
+        console.log(error);
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+      });
+  };
+}
+
 // export const selectTimeline = timeline => ({
 //   type: ActionTypes.SELECT_TIMELINE,
 //   selected: timeline,
@@ -84,6 +105,18 @@ export function selectTimeline(id) {
   };
 }
 
+export function saveToTimeline(timelineID) {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/personal`, timelineID)
+      .then((response) => {
+        console.log('from action, create timeline response: ', response.data);
+        dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
+      })
+      .catch((error) => {
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+      });
+  };
+}
 
 export function createTimeline(fields, addNextUnder) {
   return (dispatch) => {
@@ -213,7 +246,7 @@ export function fetchUserInfo() {
   };
 }
 
-// add a post
+// USELESS DELETE LATER
 // TODO: Check against server for sending post v. destructured
 export function createPost(post, history) {
   return (dispatch) => {
@@ -230,6 +263,7 @@ export function createPost(post, history) {
   };
 }
 
+// USELESS DELETE LATER
 // send updated post info to replace old
 export function updatePost(id, fields, history) {
   return (dispatch) => {
@@ -244,6 +278,7 @@ export function updatePost(id, fields, history) {
   };
 }
 
+// USELESS DELETE LATER
 // Delete post + push to home
 export function deletePost(id, history) {
   return (dispatch) => {
@@ -283,9 +318,13 @@ export function signinUser({ email, password }, history) {
 }
 
 // sign up -> set auth state again
-export function signupUser({ username, email, password }, history) {
+export function signupUser({
+  username, email, password, startTime,
+}, history) {
   return (dispatch) => {
-    const user = { username, email, password };
+    const user = {
+      username, email, password, startTime,
+    };
     // console.log('in signup user');
     axios.post(`${ROOT_URL}/signup`, user).then((response) => {
       // console.log('lab4 axios post');
