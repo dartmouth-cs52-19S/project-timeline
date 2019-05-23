@@ -9,7 +9,9 @@ class BackButton extends Component {
   }
 
   handleClicked() {
-    this.props.history.goBack();
+    if (this.props.enabled === 'true') {
+      this.props.history.goBack();
+    }
   }
 
   render() {

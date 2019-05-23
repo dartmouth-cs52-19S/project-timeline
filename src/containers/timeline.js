@@ -11,7 +11,8 @@ class Timeline extends Component {
   componentWillMount() {
     this.props.onAddUpdate(0);
 
-    if (this.props.match.params.timelineID === undefined) {
+    if (this.props.match.params.timelineID === undefined
+      || this.props.match.params.timelineID === '') {
       this.props.fetchTimeline();
     } else {
       this.props.selectTimeline(this.props.match.params.timelineID);
@@ -23,6 +24,8 @@ class Timeline extends Component {
       if (prevProps.match.params.timelineID !== this.props.match.params.timelineID) {
         this.props.selectTimeline(this.props.match.params.timelineID);
       }
+    } else {
+      this.props.fetchTimeline();
     }
   }
 
@@ -56,6 +59,7 @@ class Timeline extends Component {
         </div>
         <div>
           <BackButton
+            enabled="true"
             curr_url={this.props.match.params.timelineID}
             selectTimeline={this.props.selectTimeline}
           />
