@@ -60,7 +60,7 @@ class Landing extends Component {
           <div className="landingText">
             <h1>Timeline</h1>
             <br />
-            <h2>We help you know what you don't</h2>
+            <h2>We help you know what you don{'\''}t know</h2>
           </div>
           <Particles className="particles" params={particlesOptions} />
         </div>
