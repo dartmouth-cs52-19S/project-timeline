@@ -27,7 +27,7 @@ class TimeElement extends Component {
                 title={events.title}
                 selectTimeline={this.props.selectTimeline}
                 time={events.time}
-                content={this.props.timeline.content}
+                content={events.content}
               />
             </div>
           );
@@ -64,7 +64,6 @@ class TimeElement extends Component {
               title={events.title}
               selectTimeline={this.props.selectTimeline}
               time={events.time}
-              content={events.content}
             />
           </div>
         );
@@ -80,7 +79,6 @@ class TimeElement extends Component {
               title={events.title}
               selectTimeline={this.props.selectTimeline}
               time={events.time}
-              content={events.content}
             />
           </div>
         );

@@ -28,7 +28,12 @@ class Element extends React.Component {
         </div>
         <div className="show">
           <div className="callOutTimeline">
-      Start planning for this {months} months from now <br /> ({years} years)
+            <div className="callOutTimelineText">
+              {this.props.content}
+            </div>
+            <div className="callOutTimelineEm">
+                Start planning for this {months} months from now <br /> ({years} years)
+            </div>
           </div>
         </div>
 
