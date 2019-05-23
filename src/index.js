@@ -17,9 +17,14 @@ const store = createStore(reducers, {}, compose(
 ));
 
 const token = localStorage.getItem('token');
-if (token) {
-  store.dispatch({ type: ActionTypes.AUTH_USER });
+const username = localStorage.getItem('username');
+const email = localStorage.getItem('email');
+const user = { username, email };
+
+if (token && username && email) {
+  store.dispatch({ type: ActionTypes.AUTH_USER, payload: user });
 }
+
 
 // we now wrap App in a Provider
 ReactDOM.render(

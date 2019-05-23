@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { NavLink, withRouter } from 'react-router-dom';
 import Particles from 'react-particles-js';
 import ElementStatic from '../components/element-static';
 import { fetchMeta, selectTimeline } from '../actions';
@@ -60,16 +60,34 @@ class Landing extends Component {
           <div className="landingText">
             <h1>Timeline</h1>
             <br />
+<<<<<<< HEAD
             <h2>We help you know what you don{'\''}t know</h2>
+=======
+            <h2>We help you know what you don’t</h2>
+            <br />
+            <NavLink to="/signup" className="link">
+              <button type="button" className="buttonCTAwhite">
+                Let’s Get Started
+              </button>
+            </NavLink>
+>>>>>>> 57cb7a4d97d3afff29aedb344e08faa8be64d255
           </div>
           <Particles className="particles" params={particlesOptions} />
         </div>
-        <div className="landingContainerTimeline">
-          {this.renderTime()}
+        <div className="backgroundImg">
+          <div className="landingContainerTimeline">
+            {this.renderTime()}
+          </div>
         </div>
         <div className="landingFooter">
           <div className="footerText">
-            <h5>What are you waiting for? Sign Up Now</h5>
+            <h5>What are you waiting for?</h5>
+            <br />
+            <NavLink to="/signup" className="link">
+              <button type="button" className="buttonCTAwhite-alt">
+                Sign Up Now
+              </button>
+            </NavLink>
           </div>
           <Particles className="particles" params={particlesOptions} />
         </div>
@@ -89,71 +107,3 @@ const mapStateToProps = state => (
 export default withRouter(connect(mapStateToProps, {
   fetchMeta, selectTimeline,
 })(Landing));
-
-
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import { withRouter } from 'react-router-dom';
-// import TimeElement from './time-element';
-// import TimeDetail from './time-detail';
-// import { fetchMeta } from '../actions';
-
-// // class Landing extends Component {
-// //   constructor(props) {
-// //     super(props);
-
-// //     this.state = {
-// //       regina: 'heyyyy regina',
-// //     };
-// //   }
-
-// //   render() {
-// //     console.log('in landing page');
-// //     return (
-// //       <div className="landing">
-// //         {this.state.regina}
-// //       </div>
-// //     );
-// //   }
-// // }
-
-// // export default withRouter(connect(null, null)(Landing));
-
-// class Landing extends Component {
-//   componentDidMount() {
-//     this.props.fetchMeta();
-//   }
-
-//   render() {
-//     console.log(`state of selected is${this.props.selected}`);
-//     return (
-//       <div>
-//         <div className="foodHeader">
-//           Discover the Possibilities
-//         </div>
-//         <div>
-//           <BackButton
-//             className="disabled-backbutton"
-//             enabled="false"
-//           />
-//         </div>
-//         <div className="flex">
-//           <div className="flex-detail" />
-//           <div className="flex-main">
-//             <TimeElement />
-//           </div>
-//         </div>
-//       </div>
-//     );
-// }
-
-// const mapStateToProps = state => (
-//   {
-//     timeline: state.meta,
-//     selected: state.selected,
-//     addupdate: 0,
-//   }
-// );
-
-// export default withRouter(connect(mapStateToProps,
-//   { fetchTimeline, selectTimeline, onAddUpdate })(Landing));
