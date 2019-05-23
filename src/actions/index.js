@@ -105,6 +105,18 @@ export function selectTimeline(id) {
   };
 }
 
+export function saveToTimeline(timelineID) {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/personal`, timelineID)
+      .then((response) => {
+        console.log('from action, create timeline response: ', response.data);
+        dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
+      })
+      .catch((error) => {
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+      });
+  };
+}
 
 export function createTimeline(fields, addNextUnder) {
   return (dispatch) => {
@@ -306,9 +318,13 @@ export function signinUser({ email, password }, history) {
 }
 
 // sign up -> set auth state again
-export function signupUser({ username, email, password }, history) {
+export function signupUser({
+  username, email, password, startTime,
+}, history) {
   return (dispatch) => {
-    const user = { username, email, password };
+    const user = {
+      username, email, password, startTime,
+    };
     // console.log('in signup user');
     axios.post(`${ROOT_URL}/signup`, user).then((response) => {
       // console.log('lab4 axios post');
