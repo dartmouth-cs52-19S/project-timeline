@@ -21,6 +21,7 @@ class Timeline extends Component {
   componentDidMount() {
     this.props.onAddUpdate(0);
     this.props.fetchTimeline();
+    console.log(this.props);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -39,6 +40,8 @@ class Timeline extends Component {
   }
 
   selectedNotZero() {
+    console.log('somehting selected this is props');
+    console.log(this.props);
     if (this.props.match.params.timelineID !== undefined) {
       this.setState({ selected: this.props.match.params.timelineID });
     } else {
@@ -63,6 +66,8 @@ class Timeline extends Component {
             <BackButton
               className="disabled-backbutton"
               enabled="false"
+              timeline={this.state.timeline}
+              selected={this.state.selected}
             />
           </div>
           <div className="flex">
@@ -82,6 +87,9 @@ class Timeline extends Component {
         <div>
           <BackButton
             enabled="true"
+            timeline={this.state.timeline}
+            selected={this.state.selected}
+            parent={this.props.selected.parent}
           />
         </div>
         <div className="flex">
