@@ -10,13 +10,13 @@ import { fetchTimeline, saveToTimeline } from '../actions';
 
 
 class SaveTimeline extends Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      currTimeline: this.props.selected,
-    };
-  }
+  //   this.state = {
+  //     currTimeline: this.props.selected,
+  //   };
+  // }
 
   componentDidMount = () => {
     console.log('MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
@@ -31,16 +31,15 @@ class SaveTimeline extends Component {
   }
 
   componentDidUpdate = () => {
-    console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUDGHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
+    // console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUDGHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
     console.log(this.state.currTimeline);
     console.log(this.props.selected);
-    if (this.state.currTimeline !== this.props.selected) {
-      console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUDGHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
-      console.log('saving');
+    // if (this.state.currTimeline !== this.props.selected) {
+    console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUDGHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
+    console.log('saving');
 
-      this.props.saveToTimeline(this.props.selected);
-      this.setState({ currTimeline: this.props.selected });
-    }
+    this.props.saveToTimeline(this.props.selected.id);
+    // }
   }
 
   render() {

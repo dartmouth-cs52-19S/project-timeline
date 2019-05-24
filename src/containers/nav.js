@@ -26,6 +26,17 @@ class Nav extends Component {
         <span>
           <div className="flex">
             <li>
+              {/* Save */}
+              <NavLink
+                to="/save"
+                className="link"
+                activeClassName="selectedLink"
+              >
+                <i className="fas fa-plane grow" />
+              </NavLink>
+            </li>
+
+            <li>
               {/* Personal */}
               <NavLink to="/personal" className="link" activeClassName="selectedLink">
                 <i className="far fa-user grow" />

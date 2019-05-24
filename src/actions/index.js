@@ -108,13 +108,13 @@ export function selectTimeline(id) {
 
 export function saveToTimeline(timelineID) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/personal`, timelineID)
+    axios.post(`${ROOT_URL}/personal`, { childID: timelineID })
       .then((response) => {
         console.log('from action, create timeline response: ', response.data);
-        dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
+        dispatch(createBanner('You successfully added a post!'));
       })
       .catch((error) => {
-        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+        dispatch(createBanner(error.message));
       });
   };
 }
