@@ -54,7 +54,7 @@ class SignIn extends Component {
             <div className="signin">
               <div className="signText">
                 <h3>Sign In</h3>
-                <h4>Sign Back in to Access Your Profile and Account</h4>
+                <h6>Sign Back in to Access Your Profile and Account</h6>
               </div>
               <div className="flexWide">
                 <i className="far fa-paper-plane signicon" />

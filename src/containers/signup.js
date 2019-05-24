@@ -37,6 +37,25 @@ class SignUp extends Component {
     this.props.history.push('/');
   }
 
+  // eslint-disable-next-line consistent-return
+  checkStartTime = () => {
+    const startSlash = this.state.startTime.split('/');
+    const startDash = this.state.startTime.split('-');
+    if (startSlash.length === 1 && startDash.length === 1) {
+      return false;
+    }
+    const startTimeFinal = startSlash.length > 1 ? startSlash : startDash;
+    const date = startTimeFinal[2];
+    const month = startTimeFinal[1];
+    const year = startTimeFinal[0];
+
+    if (year.length !== 4) return false;
+    if (month.length !== 2) return false;
+    if (date.length !== 2) return false;
+
+    return true;
+  }
+
   edit(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -44,13 +63,18 @@ class SignUp extends Component {
   handleSubmit(event) {
     event.preventDefault();
     // error checks
+    console.log(this.checkStartTime());
     if (this.state.email === '') {
       this.props.createBanner('Please enter an email.');
     } else if (this.state.username === '') {
       this.props.createBanner('Please enter a username.');
     } else if (this.state.password === '') {
       this.props.createBanner('Please enter a password.');
-    } else if (this.state.startTime === null || Number.isNaN(Date.parse(this.state.startTime))) {
+    } else if (
+      (this.state.startTime === null
+      || Number.isNaN(Date.parse(this.state.startTime)))
+      || !this.checkStartTime()
+    ) {
       this.props.createBanner('Please enter a valid date.');
     } else {
     // console.log(`sign up info:
@@ -67,6 +91,8 @@ class SignUp extends Component {
     });
   }
 
+  // want to call fxn if user exists (which returns a t/f) onChange for username so realtime
+
   render() {
     return (
       <div className="flexWide">
@@ -78,7 +104,7 @@ class SignUp extends Component {
             <div className="signin">
               <div className="signText">
                 <h3>Sign Up</h3>
-                <h4>Sign up and discover all the possibilities in life!</h4>
+                <h6>Sign up and discover all the possibilities in life!</h6>
               </div>
               <div className="flexWide">
                 <i className="far fa-user signicon" />
@@ -134,7 +160,7 @@ class SignUp extends Component {
                   className="buttonCTA"
                   onClick={this.handleSubmit}
                 >
-                  Get Started
+                  Sign Up
                 </button>
               </div>
             </div>
