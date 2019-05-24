@@ -13,6 +13,8 @@ const AuthReducer = (state = initialState, action) => {
       return Object.assign({}, state, { authenticated: false, user: {} });
     case ActionTypes.AUTH_ERROR:
       return Object.assign({}, state, { authenticated: false, user: {} });
+    case ActionTypes.UPDATE_USER:
+      return Object.assign({}, state, { user: action.payload });
     default:
       return state;
   }
