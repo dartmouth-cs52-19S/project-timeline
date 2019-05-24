@@ -18,6 +18,7 @@ export const ActionTypes = {
   DO_NOTHING: 'DO_NOTHING',
   BANNER_SET: 'BANNER_SET',
   BANNER_CLEAR: 'BANNER_CLEAR',
+  UPDATE_USER: 'UPDATE_USER',
 };
 
 // SERVER URLS
@@ -305,9 +306,9 @@ export function signinUser({ email, password }, history) {
   const user = { email, password };
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signin`, user).then((response) => {
-      dispatch({ type: ActionTypes.AUTH_USER });
+      dispatch({ type: ActionTypes.AUTH_USER, payload: user });
       localStorage.setItem('token', response.data.token);
-      history.push('/');
+      history.push('/explore/start');
     }).catch((error) => {
       console.log('Sign in failed.');
       console.log(error);
@@ -328,9 +329,11 @@ export function signupUser({
     // console.log('in signup user');
     axios.post(`${ROOT_URL}/signup`, user).then((response) => {
       // console.log('lab4 axios post');
-      dispatch({ type: ActionTypes.AUTH_USER });
+      dispatch({ type: ActionTypes.AUTH_USER, payload: user });
       localStorage.setItem('token', response.data.token);
-      history.push('/');
+      localStorage.setItem('username', response.data.username);
+      localStorage.setItem('email', response.data.email);
+      history.push('/explore/start');
     }).catch((error) => {
       console.log('Sign up failed.');
       console.log('error data', error.response.data);
@@ -345,7 +348,7 @@ export function signupUser({
 export function signoutUser(history) {
   return (dispatch) => {
     localStorage.removeItem('token');
-    dispatch({ type: ActionTypes.DEAUTH_USER });
+    dispatch({ type: ActionTypes.DEAUTH_USER, payload: {} });
     history.push('/');
   };
 }
@@ -366,5 +369,22 @@ export function saveTimeline(timelineID) {
         console.log(error);
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
+  };
+}
+
+// ask backend to send me user
+// and do a check to see if username taken (for sign up too)
+export function updateUser(fields, history) {
+  return (dispatch) => {
+    console.log('getting user fields', fields);
+    axios.post(`${ROOT_URL}/personal`, fields).then((response) => {
+      dispatch({ type: ActionTypes.UPDATE_USER, payload: response });
+      localStorage.setItem('username', response.data.username);
+      localStorage.setItem('email', response.data.email);
+      history.push('/explore/start');
+    }).catch((error) => {
+      dispatch(authError(`Update settings failed: ${error.response.data}`));
+      dispatch({ type: ActionTypes.BANNER_SET, payload: 'Updating user settings failed.' });
+    });
   };
 }

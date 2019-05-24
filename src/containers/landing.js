@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { NavLink, withRouter } from 'react-router-dom';
 import Particles from 'react-particles-js';
 import ElementStatic from '../components/element-static';
-import { fetchMeta, selectTimeline } from '../actions';
+import Detail from '../components/detail';
+import { fetchMeta } from '../actions';
 
 const particlesOptions = {
   particles: {
@@ -23,10 +24,11 @@ class Landing extends Component {
   }
 
   renderTime() {
-    console.log(`this.props.meta${this.props.meta}`);
     if (this.props.meta !== 0) {
       return (this.props.meta.events.map((events) => {
-        console.log(`events${events}`);
+        console.log(`this.props.meta.title${this.props.meta.title}`);
+        console.log(`events.title${events.title}`);
+        console.log(`this.props.meta.title${this.props.meta.content}`);
         return (
           <div>
             <div key={events.id} className="padding">
@@ -34,12 +36,21 @@ class Landing extends Component {
                 key={events.id}
                 id={events.id}
                 title={events.title}
-                selectTimeline={this.props.selectTimeline}
+                fetchMeta={this.props.fetchMeta}
                 time={events.time}
                 content={events.content}
               />
             </div>
-            <div className="spacing" />
+            <div className="flex-detail-landing hide">
+              <Detail
+                key={events.id}
+                title={events.title}
+                content={events.content}
+                cover_url={events.cover_url}
+                events={events}
+              />
+            </div>
+            {/* <div className="spacing" /> */}
           </div>
         );
       })
@@ -53,6 +64,76 @@ class Landing extends Component {
     );
   }
 
+  renderDetail() {
+    if (this.props.meta !== 0) {
+      return (this.props.meta.events.map((events) => {
+        console.log(`this.props.meta.title${this.props.meta.title}`);
+        console.log(`events.title${events.title}`);
+        console.log(`this.props.meta.title${this.props.meta.content}`);
+        return (
+          <div>
+            <div className="flex-detail-landing padding">
+              <Detail
+                key={events.id}
+                title={events.title}
+                content={events.content}
+                cover_url={events.cover_url}
+                events={events}
+              />
+            </div>
+          </div>
+        );
+      })
+      );
+    }
+    return (
+      <div className="justShow">
+        <div>Pretend this is a Landing Page</div>
+      </div>
+
+    );
+  }
+
+  renderCTAwhite() {
+    if (this.props.authenticated === false) {
+      return (
+        <NavLink to="/signup" className="link">
+          <button type="button" className="buttonCTAwhite">
+                Let’s Get Started
+          </button>
+        </NavLink>
+      );
+    } else {
+      return ('');
+    }
+  }
+
+  renderCTAwhitealt() {
+    if (this.props.authenticated === false) {
+      console.log('should show');
+      return (
+        <NavLink to="/signup" className="link">
+          <button type="button" className="buttonCTAwhite-alt">
+          Sign Up Now
+          </button>
+        </NavLink>
+      );
+    } else {
+      return ('');
+    }
+  }
+
+  renderAuthText() {
+    if (this.props.authenticated === false) {
+      console.log('should show');
+      return (
+        <h5>What are you waiting for?</h5>
+      );
+    } else {
+      return ('');
+    }
+  }
+
   render() {
     return (
       <div className="landing">
@@ -60,16 +141,25 @@ class Landing extends Component {
           <div className="landingText">
             <h1>Timeline</h1>
             <br />
-            <h2>We help you know what you don't</h2>
+            <h2>We help you know what you don’t</h2>
+            <br />
+            {this.renderCTAwhite()}
           </div>
           <Particles className="particles" params={particlesOptions} />
         </div>
-        <div className="landingContainerTimeline">
-          {this.renderTime()}
+        <div className="landingTimeline">
+          <div className="flex-detail-landing">
+            {this.renderDetail()}
+          </div>
+          <div className="flex-main-landing">
+            {this.renderTime()}
+          </div>
         </div>
         <div className="landingFooter">
           <div className="footerText">
-            <h5>What are you waiting for? Sign Up Now</h5>
+            {this.renderAuthText()}
+            <br />
+            {this.renderCTAwhitealt()}
           </div>
           <Particles className="particles" params={particlesOptions} />
         </div>
@@ -82,78 +172,11 @@ class Landing extends Component {
 const mapStateToProps = state => (
   {
     meta: state.meta,
+    authenticated: state.auth.authenticated,
   }
 );
 
 
 export default withRouter(connect(mapStateToProps, {
-  fetchMeta, selectTimeline,
+  fetchMeta,
 })(Landing));
-
-
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import { withRouter } from 'react-router-dom';
-// import TimeElement from './time-element';
-// import TimeDetail from './time-detail';
-// import { fetchMeta } from '../actions';
-
-// // class Landing extends Component {
-// //   constructor(props) {
-// //     super(props);
-
-// //     this.state = {
-// //       regina: 'heyyyy regina',
-// //     };
-// //   }
-
-// //   render() {
-// //     console.log('in landing page');
-// //     return (
-// //       <div className="landing">
-// //         {this.state.regina}
-// //       </div>
-// //     );
-// //   }
-// // }
-
-// // export default withRouter(connect(null, null)(Landing));
-
-// class Landing extends Component {
-//   componentDidMount() {
-//     this.props.fetchMeta();
-//   }
-
-//   render() {
-//     console.log(`state of selected is${this.props.selected}`);
-//     return (
-//       <div>
-//         <div className="foodHeader">
-//           Discover the Possibilities
-//         </div>
-//         <div>
-//           <BackButton
-//             className="disabled-backbutton"
-//             enabled="false"
-//           />
-//         </div>
-//         <div className="flex">
-//           <div className="flex-detail" />
-//           <div className="flex-main">
-//             <TimeElement />
-//           </div>
-//         </div>
-//       </div>
-//     );
-// }
-
-// const mapStateToProps = state => (
-//   {
-//     timeline: state.meta,
-//     selected: state.selected,
-//     addupdate: 0,
-//   }
-// );
-
-// export default withRouter(connect(mapStateToProps,
-//   { fetchTimeline, selectTimeline, onAddUpdate })(Landing));
