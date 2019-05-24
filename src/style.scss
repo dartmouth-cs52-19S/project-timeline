@@ -230,6 +230,15 @@ h4{
   font-weight: 600;
   color: $main-color;
 }
+.callOutTimelineText{
+  font-weight: 300;
+  margin-bottom: 1em;
+}
+.callOutTimelineEm{
+  font-style: italic;
+  color: $secondary-color;
+  font-weight: 600;
+}
 .addContainerFull{
   display: flex;
 }
