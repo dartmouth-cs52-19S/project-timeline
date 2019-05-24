@@ -12,6 +12,8 @@ class BackButton extends Component {
     if (this.props.enabled === 'true') {
       if (this.props.selected === undefined) {
         this.props.history.push('/explore/start');
+      } else if (this.props.parent === '5ce1b7c6c75aa400347686ee') {
+        this.props.history.push('/explore/start');
       } else if (this.props.parent !== null && this.props.parent !== undefined) {
         this.props.history.push(`/explore/${this.props.parent}`);
       } else {
