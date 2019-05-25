@@ -373,14 +373,16 @@ export function signoutUser(history) {
 export function updateUser(fields, history) {
   return (dispatch) => {
     console.log('getting user fields', fields);
-    axios.post(`${ROOT_URL}/personal`, fields).then((response) => {
-      dispatch({ type: ActionTypes.UPDATE_USER, payload: response });
-      localStorage.setItem('username', response.data.username);
-      localStorage.setItem('email', response.data.email);
-      history.push('/explore/start');
-    }).catch((error) => {
-      dispatch(authError(`Update settings failed: ${error.response.data}`));
-      dispatch({ type: ActionTypes.BANNER_SET, payload: 'Updating user settings failed.' });
-    });
+    axios.post(`${ROOT_URL}/personal`, fields,
+      { headers: { authorization: localStorage.getItem('token') } })
+      .then((response) => {
+        dispatch({ type: ActionTypes.UPDATE_USER, payload: response });
+        localStorage.setItem('username', response.data.username);
+        localStorage.setItem('email', response.data.email);
+        history.push('/explore/start');
+      }).catch((error) => {
+        dispatch(authError(`Update settings failed: ${error.response.data}`));
+        dispatch({ type: ActionTypes.BANNER_SET, payload: 'Updating user settings failed.' });
+      });
   };
 }
