@@ -37,7 +37,7 @@ class SignUp extends Component {
     this.props.history.push('/');
   }
 
-  // eslint-disable-next-line consistent-return
+
   checkStartTime = () => {
     const startSlash = this.state.startTime.split('/');
     const startDash = this.state.startTime.split('-');
@@ -56,6 +56,13 @@ class SignUp extends Component {
     return true;
   }
 
+  // checks if email is a valid email
+  // adapted from https://tylermcginnis.com/validate-email-address-javascript/
+  checkEmail = (email) => {
+    return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+
   edit(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
@@ -64,8 +71,9 @@ class SignUp extends Component {
     event.preventDefault();
     // error checks
     console.log(this.checkStartTime());
-    if (this.state.email === '') {
-      this.props.createBanner('Please enter an email.');
+    console.log(this.checkEmail(this.state.email));
+    if (this.state.email === '' || this.checkEmail(this.state.email)) {
+      this.props.createBanner('Please enter a valid email.');
     } else if (this.state.username === '') {
       this.props.createBanner('Please enter a username.');
     } else if (this.state.password === '') {
@@ -122,6 +130,7 @@ class SignUp extends Component {
                   name="email"
                   className="signinput"
                   placeholder="email"
+                  type="email"
                   onChange={this.edit}
                   value={this.state.email}
                 />

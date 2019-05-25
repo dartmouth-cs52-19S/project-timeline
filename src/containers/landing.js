@@ -28,7 +28,7 @@ class Landing extends Component {
       return (this.props.meta.events.map((events) => {
         console.log(`events${events}`);
         return (
-          <div>
+          <div key={events.id}>
             <div key={events.id} className="padding">
               <ElementStatic
                 key={events.id}
