@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Particles from 'react-particles-js';
-import { signupUser, createBanner } from '../actions';
+import { signupUser, createBanner, checkUsername } from '../actions';
 
 const particlesOptions = {
   particles: {
@@ -64,6 +64,12 @@ class SignUp extends Component {
 
 
   edit(e) {
+    // username not taken check
+    if (e.target.name === this.state.username) {
+      this.props.checkUsername();
+      // realtime
+      if (this.props.chkUsername) { this.props.createBanner('Sorry, this username is taken'); }
+    }
     this.setState({ [e.target.name]: e.target.value });
   }
 
@@ -75,7 +81,7 @@ class SignUp extends Component {
     if (this.state.email === '' || this.checkEmail(this.state.email)) {
       this.props.createBanner('Please enter a valid email.');
     } else if (this.state.username === '') {
-      this.props.createBanner('Please enter a username.');
+      this.props.createBanner('Please enter a valid username.');
     } else if (this.state.password === '') {
       this.props.createBanner('Please enter a password.');
     } else if (
@@ -98,6 +104,11 @@ class SignUp extends Component {
       this.startTime = newStateStart;
     });
   }
+
+
+  // dates('option');
+  // months('option');
+  // years('option', 2000, 2030);
 
   // want to call fxn if user exists (which returns a t/f) onChange for username so realtime
 
@@ -148,13 +159,17 @@ class SignUp extends Component {
               </div>
               <div className="flexWide">
                 <i className="fas fa-graduation-cap signicon" />
-                <input
+                {/* <input
                   name="startTime"
                   className="signinput"
                   placeholder="expected high school graduation YYYY-MM-DD"
                   onChange={this.edit}
                   value={this.state.startTime}
-                />
+                /> */}
+                <select className="bear-dates" />
+                <select className="bear-months" />
+                <select className="bear-years" />
+
               </div>
               <div className="signSubmitBox">
                 <button
@@ -180,4 +195,11 @@ class SignUp extends Component {
   }
 }
 
-export default withRouter(connect(null, { signupUser, createBanner })(SignUp));
+const mapStateToProps = state => (
+  {
+    chkUser: state.auth.chkUsername,
+  }
+);
+
+
+export default withRouter(connect(mapStateToProps, { signupUser, createBanner, checkUsername })(SignUp));

@@ -20,7 +20,7 @@ class Profile extends Component {
       return newTime;
     } else {
       this.props.createBanner('Sorry this is not working right now!');
-      return null;
+      return ' sorry this is broken';
     }
   }
 
