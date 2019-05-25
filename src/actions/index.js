@@ -8,6 +8,8 @@ export const ActionTypes = {
   GET_USER: 'GET_USER',
   ERR_USER: 'ERR_USER',
   DEAUTH_USER: 'DEAUTH_USER',
+  CHECK_NAME: 'CHECK_NAME',
+  ERROR_CHECK: 'ERROR_CHECK',
   AUTH_ERROR: 'AUTH_ERROR',
   FETCH_EXPLORE: 'FETCH_EXPLORE',
   FETCH_META: 'FETCH_META',
@@ -243,6 +245,20 @@ export function fetchUserInfo() {
       }).catch((error) => {
         console.log(error);
         dispatch({ type: ActionTypes.ERR_USER, error });
+      });
+  };
+}
+
+export function checkUsername(username) {
+  return (dispatch) => {
+    console.log('IN Check Username');
+    axios.post(`${ROOT_URL}/username${API_KEY}`, username)
+      .then((response) => {
+        console.log('SUCCESS IN CHECK');
+        dispatch({ type: ActionTypes.CHECK_NAME, payload: response.data });
+      }).catch((error) => {
+        console.log(error);
+        dispatch({ type: ActionTypes.ERROR_CHECK, error });
       });
   };
 }
