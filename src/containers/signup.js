@@ -159,16 +159,16 @@ class SignUp extends Component {
               </div>
               <div className="flexWide">
                 <i className="fas fa-graduation-cap signicon" />
-                {/* <input
+                <input
                   name="startTime"
                   className="signinput"
                   placeholder="expected high school graduation YYYY-MM-DD"
                   onChange={this.edit}
                   value={this.state.startTime}
-                /> */}
-                <select className="bear-dates" />
+                />
+                {/* <select className="bear-dates" />
                 <select className="bear-months" />
-                <select className="bear-years" />
+                <select className="bear-years" /> */}
 
               </div>
               <div className="signSubmitBox">
