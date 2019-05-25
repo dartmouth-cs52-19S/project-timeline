@@ -8,6 +8,8 @@ export const ActionTypes = {
   GET_USER: 'GET_USER',
   ERR_USER: 'ERR_USER',
   DEAUTH_USER: 'DEAUTH_USER',
+  CHECK_NAME: 'CHECK_NAME',
+  ERROR_CHECK: 'ERROR_CHECK',
   AUTH_ERROR: 'AUTH_ERROR',
   FETCH_EXPLORE: 'FETCH_EXPLORE',
   FETCH_META: 'FETCH_META',
@@ -247,6 +249,20 @@ export function fetchUserInfo() {
   };
 }
 
+export function checkUsername(username) {
+  return (dispatch) => {
+    console.log('IN Check Username');
+    axios.post(`${ROOT_URL}/username${API_KEY}`, username)
+      .then((response) => {
+        console.log('SUCCESS IN CHECK');
+        dispatch({ type: ActionTypes.CHECK_NAME, payload: response.data });
+      }).catch((error) => {
+        console.log(error);
+        dispatch({ type: ActionTypes.ERROR_CHECK, error });
+      });
+  };
+}
+
 // USELESS DELETE LATER
 // TODO: Check against server for sending post v. destructured
 export function createPost(post, history) {
@@ -379,17 +395,20 @@ export function saveTimeline(timelineID) {
 }
 
 // ask backend to send me user
-// and do a check to see if username taken (for sign up too)
 export function updateUser(fields, history) {
   return (dispatch) => {
     console.log('getting user fields', fields);
-    axios.post(`${ROOT_URL}/personal`, fields).then((response) => {
+    axios.put(`${ROOT_URL}/personal`, fields,
+      { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
       dispatch({ type: ActionTypes.UPDATE_USER, payload: response });
+
       localStorage.setItem('username', response.data.username);
       localStorage.setItem('email', response.data.email);
       history.push('/explore/start');
     }).catch((error) => {
-      dispatch(authError(`Update settings failed: ${error.response.data}`));
+      dispatch(authError(`Update settings failed: ${error.message}`));
+      console.log(error);
+
       dispatch({ type: ActionTypes.BANNER_SET, payload: 'Updating user settings failed.' });
     });
   };
