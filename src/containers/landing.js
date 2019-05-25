@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import Particles from 'react-particles-js';
 import ElementStatic from '../components/element-static';
+import Detail from '../components/detail';
 import { fetchMeta } from '../actions';
 
 const particlesOptions = {
@@ -23,10 +24,11 @@ class Landing extends Component {
   }
 
   renderTime() {
-    console.log(`this.props.meta${this.props.meta}`);
     if (this.props.meta !== 0) {
       return (this.props.meta.events.map((events) => {
-        console.log(`events${events}`);
+        console.log(`this.props.meta.title${this.props.meta.title}`);
+        console.log(`events.title${events.title}`);
+        console.log(`this.props.meta.title${this.props.meta.content}`);
         return (
           <div key={events.id}>
             <div key={events.id} className="padding">
@@ -34,12 +36,51 @@ class Landing extends Component {
                 key={events.id}
                 id={events.id}
                 title={events.title}
-                selectTimeline={this.props.selectTimeline}
+                fetchMeta={this.props.fetchMeta}
                 time={events.time}
                 content={events.content}
               />
             </div>
-            <div className="spacing" />
+            <div className="flex-detail-landing hide">
+              <Detail
+                key={events.id}
+                title={events.title}
+                content={events.content}
+                cover_url={events.cover_url}
+                events={events}
+              />
+            </div>
+            {/* <div className="spacing" /> */}
+          </div>
+        );
+      })
+      );
+    }
+    return (
+      <div className="justShow">
+        <div>Pretend this is a Landing Page</div>
+      </div>
+
+    );
+  }
+
+  renderDetail() {
+    if (this.props.meta !== 0) {
+      return (this.props.meta.events.map((events) => {
+        console.log(`this.props.meta.title${this.props.meta.title}`);
+        console.log(`events.title${events.title}`);
+        console.log(`this.props.meta.title${this.props.meta.content}`);
+        return (
+          <div>
+            <div className="flex-detail-landing padding">
+              <Detail
+                key={events.id}
+                title={events.title}
+                content={events.content}
+                cover_url={events.cover_url}
+                events={events}
+              />
+            </div>
           </div>
         );
       })
@@ -106,8 +147,11 @@ class Landing extends Component {
           </div>
           <Particles className="particles" params={particlesOptions} />
         </div>
-        <div className="backgroundImg">
-          <div className="landingContainerTimeline">
+        <div className="landingTimeline">
+          <div className="flex-detail-landing">
+            {this.renderDetail()}
+          </div>
+          <div className="flex-main-landing">
             {this.renderTime()}
           </div>
         </div>
