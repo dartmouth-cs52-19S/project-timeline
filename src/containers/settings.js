@@ -12,7 +12,7 @@ class Settings extends Component {
       newUsername: '',
       newPassword1: '',
       newPassword2: '',
-      newStartTime: '',
+      // newStartTime: '',
     };
     this.onCancel = this.onCancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -103,14 +103,13 @@ class Settings extends Component {
     } else { // FINALLY save the user obj and update it. If a field is not filled out,
       // we send the user object what it has currently.
       this.props.createBanner('You have saved your settings. Thanks!');
-      this.props.updateUser(
-        {
-          email: this.state.newEmail,
-          username: this.state.newUsername,
-          password: this.state.newPassword1,
-          // startTime: this.state.newStartTime,
-        },
-      );
+      const fields = {
+        email: this.state.newEmail,
+        username: this.state.newUsername,
+        password: this.state.newPassword1,
+        // startTime: this.state.newStartTime,
+      };
+      this.props.updateUser(fields, this.props.history);
     }
   }
   // want to call fxn if user exists (which returns a t/f) onChange for username so realtime
@@ -127,7 +126,8 @@ class Settings extends Component {
         <div>
           <div className="settingsHeader">
             Settings
-            WATING FOR BACKEND
+            PASSWORD IS HASHED one URGHHHH
+            ALSO still working on start time
           </div>
           <div>
             current username: {this.props.user.username}
@@ -171,7 +171,7 @@ class Settings extends Component {
             />
           </div>
 
-          <div>
+          {/* <div>
             current HS graduation date: {this.convertStartTime(this.props.user.startTime)}
           </div>
           <div className="startTime">
@@ -181,7 +181,7 @@ class Settings extends Component {
               onChange={this.edit}
               value={this.state.newStartTime}
             />
-          </div>
+          </div> */}
           <button type="button" onClick={this.onCancel}>Cancel</button>
           <button type="button" onClick={this.handleSubmit}>Save Changes</button>
         </div>
