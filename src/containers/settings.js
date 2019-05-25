@@ -103,14 +103,13 @@ class Settings extends Component {
     } else { // FINALLY save the user obj and update it. If a field is not filled out,
       // we send the user object what it has currently.
       this.props.createBanner('You have saved your settings. Thanks!');
-      this.props.updateUser(
-        {
-          email: this.state.newEmail,
-          username: this.state.newUsername,
-          password: this.state.newPassword1,
-          // startTime: this.state.newStartTime,
-        },
-      );
+      const fields = {
+        email: this.state.newEmail,
+        username: this.state.newUsername,
+        password: this.state.newPassword1,
+        // startTime: this.state.newStartTime,
+      };
+      this.props.updateUser(fields, this.props.history);
     }
   }
   // want to call fxn if user exists (which returns a t/f) onChange for username so realtime

@@ -202,4 +202,5 @@ const mapStateToProps = state => (
 );
 
 
-export default withRouter(connect(mapStateToProps, { signupUser, createBanner, checkUsername })(SignUp));
+export default withRouter(connect(mapStateToProps,
+  { signupUser, createBanner, checkUsername })(SignUp));
