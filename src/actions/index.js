@@ -370,7 +370,6 @@ export function signoutUser(history) {
 }
 
 // ask backend to send me user
-// and do a check to see if username taken (for sign up too)
 export function updateUser(fields, history) {
   return (dispatch) => {
     console.log('getting user fields', fields);

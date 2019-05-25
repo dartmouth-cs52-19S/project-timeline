@@ -62,6 +62,13 @@ class Settings extends Component {
     }
   }
 
+
+  // checks if email is a valid email
+  // adapted from https://tylermcginnis.com/validate-email-address-javascript/
+  checkEmail = (email) => {
+    return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
   // makes the pretty string super ugly again :(( hello unix obj
   createStartTime() {
     this.setState((prevState) => {
@@ -76,13 +83,12 @@ class Settings extends Component {
     console.log(e.target.value);
   }
 
-
   handleSubmit(event) {
     event.preventDefault();
     // if anything is left blank by the user, just keep the same old info
     if (this.state.newUsername === '') {
       this.state.newUsername = this.props.user.username;
-    } if (this.state.newEmail === '') {
+    } if (this.state.newEmail === '' || this.checkEmail(this.state.newEmail)) {
       this.state.newEmail = this.props.user.email;
     // } if (this.state.newStartTime === '') {
     //   this.state.newStartTime = this.props.user.startTime;
