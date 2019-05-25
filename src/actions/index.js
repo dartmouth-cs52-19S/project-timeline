@@ -367,7 +367,13 @@ export function saveTimeline(timelineID) {
     })
       .catch((error) => {
         console.log(error);
-        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+        console.log(error.response.status);
+        // eslint-disable-next-line eqeqeq
+        if (error.response.status == 401) {
+          dispatch(createBanner('You must be signed in to save timelines.'));
+        } else {
+          dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+        }
       });
   };
 }
