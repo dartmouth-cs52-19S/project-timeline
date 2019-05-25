@@ -30,7 +30,7 @@ class Landing extends Component {
         console.log(`events.title${events.title}`);
         console.log(`this.props.meta.title${this.props.meta.content}`);
         return (
-          <div>
+          <div key={events.id}>
             <div key={events.id} className="padding">
               <ElementStatic
                 key={events.id}
