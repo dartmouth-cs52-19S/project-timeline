@@ -13,7 +13,7 @@ const Banner = (props) => {
       <nav className="header" id="banner">
         <div>
           <p>
-            Hold up! {props.message}
+            {props.message}
           </p>
         </div>
         <div>

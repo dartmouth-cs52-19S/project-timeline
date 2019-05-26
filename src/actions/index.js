@@ -24,8 +24,6 @@ export const ActionTypes = {
 };
 
 // SERVER URLS
-// Regina's API url
-// const ROOT_URL = 'https://lab5-regina-yan-1.herokuapp.com/api';
 
 // local testing api url
 // const ROOT_URL = 'http://localhost:9090/api';
@@ -53,18 +51,18 @@ export function createBanner(message) {
 export function fetchTimeline() {
   return (dispatch) => {
     // server call
-    console.log('making server call');
+    // console.log('making server call');
     axios.get(`${ROOT_URL}/explore`)
       .then((response) => {
         // dispatch action w/ payload
         dispatch({ type: ActionTypes.FETCH_EXPLORE, payload: response.data });
-        console.log('done fetching');
-        console.log(response.data);
+        // console.log('done fetching');
+        // console.log(response.data);
       })
       .catch((error) => {
         // TODO: dispatch an error, make reducer, show error component
-        console.log('did not fetch');
-        console.log(error);
+        // console.log('did not fetch');
+        // console.log(error);
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };
@@ -73,18 +71,18 @@ export function fetchTimeline() {
 export function fetchMeta() {
   return (dispatch) => {
     // server call
-    console.log('making server call');
+    // console.log('making server call');
     axios.get(`${ROOT_URL}/timeline/5ce5bf1be5057b0034c8a87c`)
       .then((response) => {
         // dispatch action w/ payload
         dispatch({ type: ActionTypes.FETCH_META, meta: response.data });
-        console.log('done fetching meta');
-        console.log(response.data);
+        // console.log('done fetching meta');
+        // console.log(response.data);
       })
       .catch((error) => {
         // TODO: dispatch an error, make reducer, show error component
-        console.log('did not fetch');
-        console.log(error);
+        // console.log('did not fetch');
+        // console.log(error);
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };
@@ -146,23 +144,23 @@ export function createTimeline(fields, addNextUnder) {
 
 export function updateTimeline(fields, addNextUnder, history) {
   return (dispatch) => {
-    console.log('Fields in action creator: ', fields);
-    console.log('field.id: ', fields.id);
+    // console.log('Fields in action creator: ', fields);
+    // console.log('field.id: ', fields.id);
     axios.post(`${ROOT_URL}/timeline/${fields.id.toString()}`, fields)
       .then((response) => {
-        console.log('from action, update timeline response: ', response.data);
-        console.log('ADDNEXTUNDER: ', addNextUnder);
+        // console.log('from action, update timeline response: ', response.data);
+        // console.log('ADDNEXTUNDER: ', addNextUnder);
         // can't use response to set because it is not populated with
         // the titles and times of its events
         dispatch(selectTimeline(response.data._id));
-        console.log('dispatching banner_set');
+        // console.log('dispatching banner_set');
         dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
         if (history) {
           history.push('/');
         }
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };
@@ -322,7 +320,10 @@ export function signinUser({ email, password }, history) {
   const user = { email, password };
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signin`, user).then((response) => {
-      dispatch({ type: ActionTypes.AUTH_USER, payload: user });
+      dispatch({
+        type: ActionTypes.AUTH_USER,
+        payload: { email, password, timeline: response.data.timeline },
+      });
       localStorage.setItem('token', response.data.token);
       history.push('/explore/start');
     }).catch((error) => {
@@ -366,6 +367,56 @@ export function signoutUser(history) {
     localStorage.removeItem('token');
     dispatch({ type: ActionTypes.DEAUTH_USER, payload: {} });
     history.push('/');
+  };
+}
+
+// save a timeline to a user's profile timeline
+// get the user's user object from server
+// then POST to user/link with the two timeline id's
+export function saveTimeline(timelineID) {
+  return (dispatch) => {
+    console.log('TIMELINE ID', timelineID);
+    axios.post(`${ROOT_URL}/personal`,
+      { childID: timelineID },
+      { headers: { authorization: localStorage.getItem('token') } })
+      .then((resp) => {
+        console.log('second call succeeded.');
+        dispatch(createBanner('Timeline saved!'));
+      })
+      .catch((err) => {
+        console.log('failed in second call..');
+        console.log(err.response);
+        dispatch(createBanner('failed to link'));
+      });
+
+    // console.log('token is: ', localStorage.getItem('token'));
+    // axios.get(`${ROOT_URL}/personal`,
+    //   { headers: { authorization: localStorage.getItem('token') } })
+    //   .then((user) => {
+    //     console.log('first call succeeded, calling second...', user);
+    //     axios.post(`${ROOT_URL}/personal`,
+    //       { parentID: user.timeline, childID: timelineID },
+    //       { headers: { authorization: localStorage.getItem('token') } })
+    //       .then((resp) => {
+    //         console.log('second call succeeded.');
+    //         dispatch(createBanner('Timeline saved!'));
+    //       })
+    //       .catch((err) => {
+    //         console.log('failed in second call..');
+    //         console.log(err.response);
+    //         dispatch(createBanner('failed to link'));
+    //       });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.response);
+    //     console.log(error.response.status);
+    //     // eslint-disable-next-line eqeqeq
+    //     if (error.response.status == 401) {
+    //       dispatch(createBanner('You must be signed in to save timelines.'));
+    //     } else {
+    //       dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+    //     }
+    //   });
   };
 }
 
