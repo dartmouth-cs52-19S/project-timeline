@@ -53,18 +53,18 @@ export function createBanner(message) {
 export function fetchTimeline() {
   return (dispatch) => {
     // server call
-    console.log('making server call');
+    // console.log('making server call');
     axios.get(`${ROOT_URL}/explore`)
       .then((response) => {
         // dispatch action w/ payload
         dispatch({ type: ActionTypes.FETCH_EXPLORE, payload: response.data });
-        console.log('done fetching');
-        console.log(response.data);
+        // console.log('done fetching');
+        // console.log(response.data);
       })
       .catch((error) => {
         // TODO: dispatch an error, make reducer, show error component
-        console.log('did not fetch');
-        console.log(error);
+        // console.log('did not fetch');
+        // console.log(error);
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };
@@ -73,18 +73,18 @@ export function fetchTimeline() {
 export function fetchMeta() {
   return (dispatch) => {
     // server call
-    console.log('making server call');
+    // console.log('making server call');
     axios.get(`${ROOT_URL}/timeline/5ce5bf1be5057b0034c8a87c`)
       .then((response) => {
         // dispatch action w/ payload
         dispatch({ type: ActionTypes.FETCH_META, meta: response.data });
-        console.log('done fetching meta');
-        console.log(response.data);
+        // console.log('done fetching meta');
+        // console.log(response.data);
       })
       .catch((error) => {
         // TODO: dispatch an error, make reducer, show error component
-        console.log('did not fetch');
-        console.log(error);
+        // console.log('did not fetch');
+        // console.log(error);
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };
@@ -146,23 +146,23 @@ export function createTimeline(fields, addNextUnder) {
 
 export function updateTimeline(fields, addNextUnder, history) {
   return (dispatch) => {
-    console.log('Fields in action creator: ', fields);
-    console.log('field.id: ', fields.id);
+    // console.log('Fields in action creator: ', fields);
+    // console.log('field.id: ', fields.id);
     axios.post(`${ROOT_URL}/timeline/${fields.id.toString()}`, fields)
       .then((response) => {
-        console.log('from action, update timeline response: ', response.data);
-        console.log('ADDNEXTUNDER: ', addNextUnder);
+        // console.log('from action, update timeline response: ', response.data);
+        // console.log('ADDNEXTUNDER: ', addNextUnder);
         // can't use response to set because it is not populated with
         // the titles and times of its events
         dispatch(selectTimeline(response.data._id));
-        console.log('dispatching banner_set');
+        // console.log('dispatching banner_set');
         dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
         if (history) {
           history.push('/');
         }
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };

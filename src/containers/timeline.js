@@ -20,12 +20,24 @@ class Timeline extends Component {
 
   componentDidMount() {
     this.props.onAddUpdate(0);
-    this.props.fetchTimeline();
+    if (this.props.match.params.timelineID !== undefined) {
+      this.selectedNotZero();
+      this.props.selectTimeline(this.props.match.params.timelineID);
+    } else {
+      this.selectedZero();
+      this.props.selectTimeline('5ce1b7c6c75aa400347686ee');
+    }
+    // this.props.fetchTimeline();
     console.log(this.props);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.match.params.timelineID !== undefined) {
+      // console.log('JUST SELECTED TIMELINE');
+      // console.log('PREVPROP IS: ', prevProps.match.params.timelineID);
+      // console.log('THIS PROPS IS: ', this.props.match.params.timelineID);
+      // this.selectedNotZero();
+      // this.props.selectTimeline(this.props.match.params.timelineID);
       if (prevProps.match.params.timelineID !== this.props.match.params.timelineID) {
         console.log('JUST SELECTED TIMELINE');
         console.log('PREVPROP IS: ', prevProps.match.params.timelineID);
