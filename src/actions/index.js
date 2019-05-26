@@ -28,10 +28,10 @@ export const ActionTypes = {
 // const ROOT_URL = 'https://lab5-regina-yan-1.herokuapp.com/api';
 
 // local testing api url
-// const ROOT_URL = 'http://localhost:9090/api';
+const ROOT_URL = 'http://localhost:9090/api';
 
 // timeline api url
-const ROOT_URL = 'https://timimeline.herokuapp.com/api';
+// const ROOT_URL = 'https://timimeline.herokuapp.com/api';
 
 const API_KEY = '';
 
@@ -322,7 +322,10 @@ export function signinUser({ email, password }, history) {
   const user = { email, password };
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signin`, user).then((response) => {
-      dispatch({ type: ActionTypes.AUTH_USER, payload: user });
+      dispatch({
+        type: ActionTypes.AUTH_USER,
+        payload: { email, password, timeline: response.data.timeline },
+      });
       localStorage.setItem('token', response.data.token);
       history.push('/explore/start');
     }).catch((error) => {
@@ -366,6 +369,56 @@ export function signoutUser(history) {
     localStorage.removeItem('token');
     dispatch({ type: ActionTypes.DEAUTH_USER, payload: {} });
     history.push('/');
+  };
+}
+
+// save a timeline to a user's profile timeline
+// get the user's user object from server
+// then POST to user/link with the two timeline id's
+export function saveTimeline(timelineID) {
+  return (dispatch) => {
+    console.log('TIMELINE ID', timelineID);
+    axios.post(`${ROOT_URL}/personal`,
+      { childID: timelineID },
+      { headers: { authorization: localStorage.getItem('token') } })
+      .then((resp) => {
+        console.log('second call succeeded.');
+        dispatch(createBanner('Timeline saved!'));
+      })
+      .catch((err) => {
+        console.log('failed in second call..');
+        console.log(err.response);
+        dispatch(createBanner('failed to link'));
+      });
+
+    // console.log('token is: ', localStorage.getItem('token'));
+    // axios.get(`${ROOT_URL}/personal`,
+    //   { headers: { authorization: localStorage.getItem('token') } })
+    //   .then((user) => {
+    //     console.log('first call succeeded, calling second...', user);
+    //     axios.post(`${ROOT_URL}/personal`,
+    //       { parentID: user.timeline, childID: timelineID },
+    //       { headers: { authorization: localStorage.getItem('token') } })
+    //       .then((resp) => {
+    //         console.log('second call succeeded.');
+    //         dispatch(createBanner('Timeline saved!'));
+    //       })
+    //       .catch((err) => {
+    //         console.log('failed in second call..');
+    //         console.log(err.response);
+    //         dispatch(createBanner('failed to link'));
+    //       });
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.response);
+    //     console.log(error.response.status);
+    //     // eslint-disable-next-line eqeqeq
+    //     if (error.response.status == 401) {
+    //       dispatch(createBanner('You must be signed in to save timelines.'));
+    //     } else {
+    //       dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+    //     }
+    //   });
   };
 }
 
