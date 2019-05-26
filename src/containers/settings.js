@@ -7,6 +7,12 @@ class Settings extends Component {
   constructor(props) {
     super(props);
 
+
+    // //this.state = {
+    //   user: this.props.user,
+    // };
+    // then can just update the fields as see fit??
+
     this.state = {
       newEmail: '',
       newUsername: '',
