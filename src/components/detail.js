@@ -17,7 +17,7 @@ class Detail extends Component {
           <button
             type="button"
             className="buttonCTAwhite-alt"
-            onClick={this.props.add}
+            onClick={() => this.props.add(this.props._id)}
           >
           Save
           </button>

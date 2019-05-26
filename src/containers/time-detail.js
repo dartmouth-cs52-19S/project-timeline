@@ -31,6 +31,7 @@ class TimeDetail extends Component {
           content={this.props.selected.content}
           cover_url={this.props.selected.cover_url}
           events={this.props.selected.events}
+          _id={this.props.selected._id}
           add={this.props.add}
         />
       </div>
