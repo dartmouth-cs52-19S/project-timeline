@@ -26,6 +26,17 @@ class Nav extends Component {
         <span>
           <div className="flex">
             <li>
+              {/* Saved */}
+              <NavLink
+                exact
+                to={`/explore/${this.props.user.timeline}`}
+                className="link"
+                activeClassName="selectedLink"
+              >
+                <i className="far fa-bookmark grow" />
+              </NavLink>
+            </li>
+            <li>
               {/* Personal */}
               <NavLink to="/personal" className="link" activeClassName="selectedLink">
                 <i className="far fa-user grow" />
@@ -129,7 +140,8 @@ const mapStateToProps = state => (
   {
     authenticated: state.auth.authenticated,
     addupdate: state.addupdate,
-    user: state.user,
+    user: state.auth.user,
+    // user: state.user,
   }
 );
 
