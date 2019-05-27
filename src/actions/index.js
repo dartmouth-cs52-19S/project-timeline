@@ -241,6 +241,7 @@ export function fetchUserInfo() {
       { headers: { authorization: localStorage.getItem('token') } })
       .then((response) => {
         console.log('SUCCESS IN FETCH, bout to dispatch');
+        console.log('bbbbbbbb ', response.data);
         dispatch({ type: ActionTypes.GET_USER, payload: response.data });
       }).catch((error) => {
         console.log(error);
@@ -345,6 +346,8 @@ export function signupUser({
     const user = {
       username, email, password, startTime,
     };
+    console.log('username is ', username);
+    console.log('startTime is okfjaskdjfaklsjf ', startTime);
     // console.log('in signup user');
     axios.post(`${ROOT_URL}/signup`, user).then((response) => {
       // console.log('lab4 axios post');
@@ -352,6 +355,7 @@ export function signupUser({
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('username', response.data.username);
       localStorage.setItem('email', response.data.email);
+      localStorage.setItem('startTime', response.data.startTime);
       history.push('/explore/start');
     }).catch((error) => {
       console.log('Sign up failed.');
@@ -432,9 +436,10 @@ export function updateUser(fields, history) {
     axios.put(`${ROOT_URL}/personal`, fields,
       { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
       dispatch({ type: ActionTypes.UPDATE_USER, payload: response });
-
       localStorage.setItem('username', response.data.username);
       localStorage.setItem('email', response.data.email);
+      localStorage.setItem('password', response.data.password);
+      // localStorage.setItem('startTime', response.data.startTime);
       history.push('/explore/start');
     }).catch((error) => {
       dispatch(authError(`Update settings failed: ${error.message}`));

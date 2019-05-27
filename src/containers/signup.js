@@ -22,10 +22,11 @@ const particlesOptions = {
 
 // date dropdown stuff
 const optionsYear = [
-  '2010', '2011', '2012',
+  '2010', '2011', '2012', '2013', '2015', '2016', '2017', '2018', '2019', '2020', '2021',
+  '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030',
 ];
 const optionsMonth = [
-  'Jan', 'Feb', 'March',
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec',
 ];
 
 class SignUp extends Component {
@@ -59,16 +60,13 @@ class SignUp extends Component {
     return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   monthChange(e) {
     this.setState({ month: e.value });
   }
 
-  // eslint-disable-next-line class-methods-use-this
   yearChange(e) {
     this.setState({ year: e.value });
   }
-
 
   edit(e) {
     // username not taken check
@@ -111,7 +109,7 @@ class SignUp extends Component {
     // console.log(`sign up info:
     // ${this.state.username} ${this.state.email} ${this.state.password}`);
       this.createStartTime();
-      this.props.signupUser(this.state, this.props.history);
+      // this.props.signupUser(this.state, this.props.history);
     }
   }
 
@@ -123,8 +121,35 @@ class SignUp extends Component {
       case 'Feb':
         numMonth = 1;
         break;
-      case 'March':
-        numMonth = 1;
+      case 'Mar':
+        numMonth = 2;
+        break;
+      case 'Apr':
+        numMonth = 3;
+        break;
+      case 'May':
+        numMonth = 4;
+        break;
+      case 'June':
+        numMonth = 5;
+        break;
+      case 'July':
+        numMonth = 6;
+        break;
+      case 'Aug':
+        numMonth = 7;
+        break;
+      case 'Sept':
+        numMonth = 8;
+        break;
+      case 'Oct':
+        numMonth = 9;
+        break;
+      case 'Nov':
+        numMonth = 10;
+        break;
+      case 'Dec':
+        numMonth = 11;
         break;
       default:
         numMonth = 0;
@@ -132,9 +157,10 @@ class SignUp extends Component {
     }
     const numYear = parseInt(this.state.year, 10);
     const date = new Date(numYear, numMonth, 1);
-    console.log(date);
-    const startTimeMili = date.getTime(); // in milliseconds
-    this.setState({ startTime: startTimeMili }, () => console.log(this.state.startTime));
+    // const startTimeMili = date.getTime(); // in milliseconds
+    this.setState({ startTime: date }, () => {
+      this.props.signupUser(this.state, this.props.history);
+    });
   }
 
   // want to call fxn if user exists (which returns a t/f) onChange for username so realtime
@@ -184,17 +210,19 @@ class SignUp extends Component {
                   value={this.state.password}
                 />
               </div>
-              <div> Please select an expected graduation year</div>
+              <div> <h6>Please select an expected graduation year</h6> </div>
               <div className="flexWide">
                 <i className="fas fa-graduation-cap signicon" />
                 <div>
                   <Dropdown
+                    className="flexWide"
                     options={optionsYear}
                     onChange={this.yearChange}
                     value={this.state.year}
                     placeholder="Select a year"
                   />
                   <Dropdown
+                    className="flexWide"
                     options={optionsMonth}
                     onChange={this.monthChange}
                     value={this.state.month}
