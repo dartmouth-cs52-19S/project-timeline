@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Particles from 'react-particles-js';
 import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
 import {
   signupUser, createBanner, checkUsername, clearBanner,
 } from '../actions';
@@ -22,11 +21,12 @@ const particlesOptions = {
 
 // date dropdown stuff
 const optionsYear = [
-  '2010', '2011', '2012', '2013', '2015', '2016', '2017', '2018', '2019', '2020', '2021',
-  '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030',
+  '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014',
+  '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025',
+  '2026', '2027', '2028', '2029', '2030',
 ];
 const optionsMonth = [
-  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec',
+  'Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec',
 ];
 
 class SignUp extends Component {
@@ -81,7 +81,6 @@ class SignUp extends Component {
   handleSubmit(event) {
     event.preventDefault();
     // error checks
-    console.log(this.checkEmail(this.state.email));
     if (this.state.email === '' || this.checkEmail(this.state.email)) {
       this.props.createBanner('Please enter a valid email.');
       setTimeout(() => {
@@ -121,10 +120,10 @@ class SignUp extends Component {
       case 'Feb':
         numMonth = 1;
         break;
-      case 'Mar':
+      case 'March':
         numMonth = 2;
         break;
-      case 'Apr':
+      case 'April':
         numMonth = 3;
         break;
       case 'May':
@@ -157,6 +156,7 @@ class SignUp extends Component {
     }
     const numYear = parseInt(this.state.year, 10);
     const date = new Date(numYear, numMonth, 1);
+    console.log('this is date ', date);
     // const startTimeMili = date.getTime(); // in milliseconds
     this.setState({ startTime: date }, () => {
       this.props.signupUser(this.state, this.props.history);
@@ -210,27 +210,27 @@ class SignUp extends Component {
                   value={this.state.password}
                 />
               </div>
-              <div> <h6>Please select an expected graduation year</h6> </div>
+              <div className="signUpText">
+                <h6> Please select your expected HS graduation date </h6>
+              </div>
               <div className="flexWide">
                 <i className="fas fa-graduation-cap signicon" />
-                <div>
-                  <Dropdown
-                    className="flexWide"
-                    options={optionsYear}
-                    onChange={this.yearChange}
-                    value={this.state.year}
-                    placeholder="Select a year"
-                  />
-                  <Dropdown
-                    className="flexWide"
-                    options={optionsMonth}
-                    onChange={this.monthChange}
-                    value={this.state.month}
-                    placeholder="Select a month"
-                  />
-
-                </div>
-
+                <Dropdown
+                  className="dropdown"
+                  options={optionsYear}
+                  onChange={this.yearChange}
+                  value={this.state.year}
+                  placeholder="Select a year"
+                  key="year"
+                />
+                <Dropdown
+                  className="dropdown"
+                  options={optionsMonth}
+                  onChange={this.monthChange}
+                  value={this.state.month}
+                  placeholder="Select a month"
+                  key="month"
+                />
               </div>
               <div className="signSubmitBox">
                 <button

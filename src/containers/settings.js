@@ -5,16 +5,17 @@ import Dropdown from 'react-dropdown';
 import {
   fetchUserInfo, createBanner, clearBanner, updateUser,
 } from '../actions';
-import 'react-dropdown/style.css';
 
 // date dropdown stuff
 const optionsYear = [
-  '2010', '2011', '2012', '2013', '2015', '2016', '2017', '2018', '2019', '2020', '2021',
-  '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030',
+  '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014',
+  '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025',
+  '2026', '2027', '2028', '2029', '2030',
 ];
 const optionsMonth = [
-  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec',
+  'Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec',
 ];
+
 class Settings extends Component {
   constructor(props) {
     super(props);
@@ -49,7 +50,9 @@ class Settings extends Component {
   convertStartTime = (oldTime) => {
     let newTime = '';
     let datePrettier = '';
-    if (oldTime !== null) {
+    // eslint-disable-next-line no-restricted-globals
+    const isDate = Object.prototype.toString.call(oldTime) === '[object Date]' && !isNaN(oldTime);
+    if (oldTime !== null && isDate) {
       const datePretty = oldTime.toDateString(); // e.g. Sun May 01 2019
       datePrettier = datePretty.replace(' 01', ''); // Sun May 2019
       if (datePrettier.includes('Sun')) { // May 2019
@@ -73,7 +76,7 @@ class Settings extends Component {
       setTimeout(() => {
         this.props.clearBanner();
       }, 3000);
-      return newTime;
+      return ' lollll katie';
     }
   }
 
@@ -91,8 +94,8 @@ class Settings extends Component {
     this.setState({ year: e.value });
   }
 
-  // makes the pretty string super ugly again :(( hello da5te obj
-  createStartTime() {
+  // makes the pretty string super ugly again :(( hello date obj
+  createStartTime() { // changes the expected HS grad date to a date obj
     let numMonth = 0;
     switch (this.state.month) {
       case 'Jan':
@@ -100,10 +103,10 @@ class Settings extends Component {
       case 'Feb':
         numMonth = 1;
         break;
-      case 'Mar':
+      case 'March':
         numMonth = 2;
         break;
-      case 'Apr':
+      case 'April':
         numMonth = 3;
         break;
       case 'May':
@@ -148,7 +151,14 @@ class Settings extends Component {
   handleSubmit(event) {
     event.preventDefault();
     // if anything is left blank by the user, just keep the same old info
-    if (this.checkEmail(this.state.newEmail)) {
+    if (this.state.newEmail !== '' && !this.checkEmail(this.state.newEmail)) { // bad email check
+      this.props.createBanner('Please enter a valid email.');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
+      return false;
+    }
+    if (this.state.email !== '' && this.checkEmail(this.state.newEmail)) {
       this.state.newEmail = this.props.user.email;
     } if (this.state.newPassword1 !== this.state.newPassword2) {
       this.props.createBanner('Your passwords do not match!');
@@ -230,7 +240,7 @@ class Settings extends Component {
             />
           </div>
           <div>
-            current HS graduation date: {this.props.user.startTime}
+            current HS graduation date: {this.convertStartTime(this.props.user.startTime)}
           </div>
           <div className="startTime">
             <Dropdown
