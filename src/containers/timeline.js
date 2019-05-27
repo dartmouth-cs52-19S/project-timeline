@@ -62,7 +62,7 @@ class Timeline extends Component {
           </div>
           <div>
             <BackButton
-              className="disabled-backbutton"
+              className="backbutton"
               enabled="false"
               timeline={this.state.timeline}
               selected={this.state.selected}
@@ -84,6 +84,7 @@ class Timeline extends Component {
         </div>
         <div>
           <BackButton
+            className="backbutton"
             enabled="true"
             timeline={this.state.timeline}
             selected={this.state.selected}
