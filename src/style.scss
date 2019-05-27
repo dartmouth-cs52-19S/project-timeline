@@ -420,6 +420,10 @@ b{
   display: flex;
   justify-content: space-between;
 }
+.flexWideDrop{
+  display: flex;
+  justify-content: space-around;
+}
 .flex-detail, .flex-main{
   width: 40%;
   height: 100vh;
