@@ -23,7 +23,7 @@ class Nav extends Component {
     // set the links based on authentication
     console.log(this.props);
 
-    const account = this.props.authentaicated
+    const account = (this.props.authenticated && this.props.user !== null)
       ? (
         <span>
           <div className="flex">
@@ -76,36 +76,33 @@ class Nav extends Component {
         </span>
       );
     // Show add/update timeline info buttons only if admin auth
-    console.log(this.props);
 
-    if (this.props.user !== null) {
-      console.log('Ok USER herreeeeee');
-    } else {
-      console.log('No admin :(');
-    }
-    const admin = (this.props.user !== null && this.props.user.admin)
+    const admin = (this.props.authenticated
+      && this.props.user !== null && this.props.user.admin)
       ? (
         <span>
-          <li>
-            {/* Add */}
-            <NavLink
-              to="/newTime"
-              className="link"
-              activeClassName="selectedLink"
-            >
-              <i className="fas fa-plus grow" />
-            </NavLink>
-          </li>
-          <li>
-            {/* Update */}
-            <NavLink
-              to="/updateTime"
-              className="link"
-              activeClassName="selectedLink"
-            >
-              <i className="fas fa-pen grow" />
-            </NavLink>
-          </li>
+          <div className="flex">
+            <li>
+              {/* Add */}
+              <NavLink
+                to="/newTime"
+                className="link"
+                activeClassName="selectedLink"
+              >
+                <i className="fas fa-plus grow" />
+              </NavLink>
+            </li>
+            <li>
+              {/* Update */}
+              <NavLink
+                to="/updateTime"
+                className="link"
+                activeClassName="selectedLink"
+              >
+                <i className="fas fa-pen grow" />
+              </NavLink>
+            </li>
+          </div>
         </span>
       )
       : (null);
