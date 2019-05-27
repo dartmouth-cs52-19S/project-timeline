@@ -8,7 +8,6 @@ import { fetchTimeline, saveTimeline } from '../actions';
 class TimeDetail extends Component {
   componentWillMount() {
     this.props.fetchTimeline();
-    console.log('componentWillMount Detail success');
     console.log(`detail ID${this.props.selected}`);
   }
 
@@ -22,7 +21,7 @@ class TimeDetail extends Component {
     if (this.props.selected === undefined) {
       return (<div>Loading...</div>);
     }
-    console.log('time-detail render');
+
     return (
       <div>
         <Detail
