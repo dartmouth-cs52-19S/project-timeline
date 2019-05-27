@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Particles from 'react-particles-js';
-import { signinUser } from '../actions';
+import { signinUser, createBanner, clearBanner } from '../actions';
 
 
 const particlesOptions = {
@@ -31,6 +32,7 @@ class SignIn extends Component {
     this.onCancel = this.onCancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleShow = this.toggleShow.bind(this);
+    this.eyeToggle = this.eyeToggle.bind(this);
   }
 
   onCancel(event) {
@@ -48,8 +50,23 @@ class SignIn extends Component {
 
   // all password stuff based off of this https://edvins.io/show-and-hide-password-in-react/
   toggleShow(e) {
-    // eslint-disable-next-line react/no-access-state-in-setstate
-    this.setState({ hidden: !this.state.hidden });
+    if (this.state.password === '') {
+      this.props.createBanner('Please enter a password to see it');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
+      // eslint-disable-next-line react/no-access-state-in-setstate
+    } else this.setState({ hidden: !this.state.hidden });
+  }
+
+  eyeToggle() {
+    let string = '';
+    if (this.hidden) {
+      string = 'far fa-eye';
+    } else {
+      string = 'far fa-eye-slash';
+    }
+    return string;
   }
 
   render() {
@@ -82,11 +99,14 @@ class SignIn extends Component {
                   type={this.state.hidden ? 'password' : 'text'}
                   value={this.state.password}
                   onChange={this.edit}
+                  className="signinput"
                   placeholder="password"
                 />
-                <button type="button" onClick={this.toggleShow}>
-                Show / Hide
-                </button>
+                <i className="far fa-eye signicon"
+                  id="passButton"
+                  role="button"
+                  onClick={this.toggleShow}
+                />
               </div>
               <div className="signSubmitBox">
                 <button
@@ -113,4 +133,4 @@ class SignIn extends Component {
   }
 }
 
-export default withRouter(connect(null, { signinUser })(SignIn));
+export default withRouter(connect(null, { signinUser, createBanner, clearBanner })(SignIn));

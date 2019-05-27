@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -63,8 +64,13 @@ class SignUp extends Component {
   }
 
   toggleShow(e) {
-    // eslint-disable-next-line react/no-access-state-in-setstate
-    this.setState({ hidden: !this.state.hidden });
+    if (this.state.password === '') {
+      this.props.createBanner('Please enter a password to see it');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
+      // eslint-disable-next-line react/no-access-state-in-setstate
+    } else this.setState({ hidden: !this.state.hidden });
   }
 
   monthChange(e) {
@@ -214,10 +220,13 @@ class SignUp extends Component {
                   value={this.state.password}
                   onChange={this.edit}
                   placeholder="password"
+                  className="signinput"
                 />
-                <button type="button" onClick={this.toggleShow}>
-                Show / Hide
-                </button>
+                <i className="far fa-eye signicon"
+                  id="passButton"
+                  role="button"
+                  onClick={this.toggleShow}
+                />
               </div>
               <div className="signUpText">
                 <h6> Please select your expected HS graduation date </h6>

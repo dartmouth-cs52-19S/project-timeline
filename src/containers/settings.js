@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -94,8 +95,13 @@ class Settings extends Component {
   }
 
   toggleShow(e) {
-    // eslint-disable-next-line react/no-access-state-in-setstate
-    this.setState({ hidden: !this.state.hidden });
+    if (this.state.newPassword1 === '' && this.state.newPassword2 === '') {
+      this.props.createBanner('Please enter a password to see it');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
+      // eslint-disable-next-line react/no-access-state-in-setstate
+    } else this.setState({ hidden: !this.state.hidden });
   }
 
   convertStartTime() {
@@ -267,6 +273,7 @@ class Settings extends Component {
               placeholder="new username"
               onChange={this.edit}
               value={this.state.newUsername}
+              className="signinput"
             />
           </div>
           <div>
@@ -278,6 +285,7 @@ class Settings extends Component {
               placeholder="new email"
               onChange={this.edit}
               value={this.state.newEmail}
+              className="signinput"
             />
           </div>
           <div>
@@ -290,6 +298,7 @@ class Settings extends Component {
               value={this.state.newPassword1}
               onChange={this.edit}
               placeholder="new password"
+              className="signinput"
             />
             <input
               name="newPassword2"
@@ -297,10 +306,13 @@ class Settings extends Component {
               value={this.state.newPassword2}
               onChange={this.edit}
               placeholder="new password"
+              className="signinput"
             />
-            <button type="button" onClick={this.toggleShow}>
-                Show / Hide
-            </button>
+            <i className="far fa-eye signicon"
+              id="passButtonSettings"
+              role="button"
+              onClick={this.toggleShow}
+            />
           </div>
           <div>
             current HS graduation date: {this.newTime}

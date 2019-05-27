@@ -791,3 +791,52 @@ b{
   color: #141414;
   font-weight: 100;
 }
+
+// password styling
+#passButton {
+  margin: 1em;
+  padding: 0.5em 1em;
+  transition: all .2s ease-in-out;
+  float: right;
+  margin-left: -20%;
+  margin-top: -4%;
+  padding-top: 6%;
+  position: relative;
+  z-index: 2;
+  height: 1em;
+}
+
+#passButton:focus{ // how to keep active?
+  outline: none;
+  color: $main-color;
+}
+#passButton:hover{
+  color: $main-color;
+}
+#passButton:active {
+  color: $main-color;
+}
+
+//settings
+#passButtonSettings {
+  margin: 1em;
+  padding: 0.5em 1em;
+  transition: all .2s ease-in-out;
+  float: right;
+  margin-left: -20%;
+  margin-top: -4%;
+  padding-top: 4.5%;
+  position: relative;
+  z-index: 2;
+  height: 1em;
+}
+#passButtonSettings:focus{ // how to keep active?
+  outline: none;
+  color: $main-color;
+}
+#passButtonSettings:hover{
+  color: $main-color;
+}
+#passButtonSettings:active {
+  color: $main-color;
+}
