@@ -2,6 +2,7 @@ $main-color: #31CBC1;
 $secondary-color: #50A0E9;
 $text-color: #141414;
 $shadow-color: #7A7A7A;
+$shadow-color-darker: rgb(73, 72, 72);
 $vibrant-shadow-color: rgb(176, 188, 216);
 $error-color: #ff6450;
 $white: #ffffff;
@@ -288,6 +289,11 @@ button{
   transition: all .2s ease-in-out;
 }
 
+#disabled-backbutton {
+  color: $shadow-color;
+  border: solid $shadow-color 2px;
+}
+
 button:focus{
   outline: none;
 }
@@ -295,6 +301,10 @@ button:hover{
   background: $main-color;
   color: $white;
 }
+#disabled-backbutton:hover{
+  background: $white;
+}
+
 .element{
   margin-left: -1.7em;
   margin-top: 1em;
