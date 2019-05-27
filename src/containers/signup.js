@@ -4,7 +4,9 @@ import { withRouter } from 'react-router-dom';
 import Particles from 'react-particles-js';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import { signupUser, createBanner, checkUsername } from '../actions';
+import {
+  signupUser, createBanner, checkUsername, clearBanner,
+} from '../actions';
 
 const particlesOptions = {
   particles: {
@@ -84,15 +86,27 @@ class SignUp extends Component {
     console.log(this.checkEmail(this.state.email));
     if (this.state.email === '' || this.checkEmail(this.state.email)) {
       this.props.createBanner('Please enter a valid email.');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 2000);
     } else if (this.state.username === '') {
       this.props.createBanner('Please enter a valid username.');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 2000);
     } else if (this.state.password === '') {
       this.props.createBanner('Please enter a password.');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 2000);
     } else if (
       (this.state.year === '' || this.state.month === '')) {
       console.log(this.state.year);
       console.log(this.state.month);
       this.props.createBanner('Please enter a valid date.');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 2000);
     } else {
     // console.log(`sign up info:
     // ${this.state.username} ${this.state.email} ${this.state.password}`);
@@ -222,4 +236,6 @@ const mapStateToProps = state => (
 
 
 export default withRouter(connect(mapStateToProps,
-  { signupUser, createBanner, checkUsername })(SignUp));
+  {
+    signupUser, createBanner, checkUsername, clearBanner,
+  })(SignUp));

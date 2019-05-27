@@ -27,21 +27,11 @@ class Timeline extends Component {
       this.selectedZero();
       this.props.selectTimeline('5ce1b7c6c75aa400347686ee');
     }
-    // this.props.fetchTimeline();
-    console.log(this.props);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.match.params.timelineID !== undefined) {
-      // console.log('JUST SELECTED TIMELINE');
-      // console.log('PREVPROP IS: ', prevProps.match.params.timelineID);
-      // console.log('THIS PROPS IS: ', this.props.match.params.timelineID);
-      // this.selectedNotZero();
-      // this.props.selectTimeline(this.props.match.params.timelineID);
       if (prevProps.match.params.timelineID !== this.props.match.params.timelineID) {
-        console.log('JUST SELECTED TIMELINE');
-        console.log('PREVPROP IS: ', prevProps.match.params.timelineID);
-        console.log('THIS PROPS IS: ', this.props.match.params.timelineID);
         this.selectedNotZero();
         this.props.selectTimeline(this.props.match.params.timelineID);
       }
@@ -52,8 +42,6 @@ class Timeline extends Component {
   }
 
   selectedNotZero() {
-    console.log('somehting selected this is props');
-    console.log(this.props);
     if (this.props.match.params.timelineID !== undefined) {
       this.setState({ selected: this.props.match.params.timelineID });
     } else {
@@ -66,8 +54,6 @@ class Timeline extends Component {
   }
 
   render() {
-    console.log('timeilneid: ', this.props.match.params.timelineID);
-    console.log(`state of selected is${this.props.selected}`);
     if (this.state.selected === 0) {
       return (
         <div>
@@ -76,7 +62,7 @@ class Timeline extends Component {
           </div>
           <div>
             <BackButton
-              className="disabled-backbutton"
+              className="backbutton"
               enabled="false"
               timeline={this.state.timeline}
               selected={this.state.selected}
@@ -98,6 +84,7 @@ class Timeline extends Component {
         </div>
         <div>
           <BackButton
+            className="backbutton"
             enabled="true"
             timeline={this.state.timeline}
             selected={this.state.selected}

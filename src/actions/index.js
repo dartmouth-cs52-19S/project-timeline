@@ -156,6 +156,8 @@ export function updateTimeline(fields, addNextUnder, history) {
         // console.log('dispatching banner_set');
         dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
         if (history) {
+          console.log('THIS IS THE RESPONSE IN UPDATE_TIMELINE');
+          console.log(response.data);
           history.push('/');
         }
       })
@@ -382,6 +384,9 @@ export function saveTimeline(timelineID) {
       .then((resp) => {
         console.log('second call succeeded.');
         dispatch(createBanner('Timeline saved!'));
+        setTimeout(() => {
+          dispatch(clearBanner());
+        }, 2500);
       })
       .catch((err) => {
         console.log('failed in second call..');
