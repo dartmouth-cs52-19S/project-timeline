@@ -24,11 +24,13 @@ class SignIn extends Component {
     this.state = {
       email: '',
       password: '',
+      hidden: true,
     };
 
     this.edit = this.edit.bind(this);
     this.onCancel = this.onCancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleShow = this.toggleShow.bind(this);
   }
 
   onCancel(event) {
@@ -42,6 +44,12 @@ class SignIn extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.signinUser(this.state, this.props.history);
+  }
+
+  // all password stuff based off of this https://edvins.io/show-and-hide-password-in-react/
+  toggleShow(e) {
+    // eslint-disable-next-line react/no-access-state-in-setstate
+    this.setState({ hidden: !this.state.hidden });
   }
 
   render() {
@@ -71,12 +79,14 @@ class SignIn extends Component {
                 <i className="fas fa-lock signicon" />
                 <input
                   name="password"
-                  type="password"
-                  placeholder="password"
-                  className="signinput"
-                  onChange={this.edit}
+                  type={this.state.hidden ? 'password' : 'text'}
                   value={this.state.password}
+                  onChange={this.edit}
+                  placeholder="password"
                 />
+                <button type="button" onClick={this.toggleShow}>
+                Show / Hide
+                </button>
               </div>
               <div className="signSubmitBox">
                 <button

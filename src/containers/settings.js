@@ -28,6 +28,7 @@ class Settings extends Component {
       newStartTime: '',
       newYear: '',
       newMonth: '',
+      hidden: true,
     };
     this.onCancel = this.onCancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,6 +37,7 @@ class Settings extends Component {
     this.createStartTime = this.createStartTime.bind(this);
     this.monthChange = this.monthChange.bind(this);
     this.yearChange = this.yearChange.bind(this);
+    this.toggleShow = this.toggleShow.bind(this);
   }
 
   componentDidMount = () => {
@@ -89,6 +91,11 @@ class Settings extends Component {
   // adapted from https://tylermcginnis.com/validate-email-address-javascript/
   checkEmail = (email) => {
     return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  toggleShow(e) {
+    // eslint-disable-next-line react/no-access-state-in-setstate
+    this.setState({ hidden: !this.state.hidden });
   }
 
   convertStartTime() {
@@ -249,8 +256,7 @@ class Settings extends Component {
         <div>
           <div className="settingsHeader">
             Settings
-            PASSWORD IS HASHED one URGHHHH
-            ALSO still working on start time
+            Still working on start time
           </div>
           <div>
             current username: {this.props.user.username}
@@ -280,18 +286,21 @@ class Settings extends Component {
           <div className="password">
             <input
               name="newPassword1"
-              type="password"
-              placeholder="new password"
-              onChange={this.edit}
+              type={this.state.hidden ? 'password' : 'text'}
               value={this.state.newPassword1}
+              onChange={this.edit}
+              placeholder="new password"
             />
             <input
               name="newPassword2"
-              type="password"
-              placeholder="re-enter your new password"
-              onChange={this.edit}
+              type={this.state.hidden ? 'password' : 'text'}
               value={this.state.newPassword2}
+              onChange={this.edit}
+              placeholder="new password"
             />
+            <button type="button" onClick={this.toggleShow}>
+                Show / Hide
+            </button>
           </div>
           <div>
             current HS graduation date: {this.newTime}

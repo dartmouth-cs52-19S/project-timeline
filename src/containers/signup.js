@@ -40,6 +40,7 @@ class SignUp extends Component {
       startTime: '',
       year: '',
       month: '',
+      hidden: true,
     };
 
     this.edit = this.edit.bind(this);
@@ -48,6 +49,7 @@ class SignUp extends Component {
     this.createStartTime = this.createStartTime.bind(this);
     this.monthChange = this.monthChange.bind(this);
     this.yearChange = this.yearChange.bind(this);
+    this.toggleShow = this.toggleShow.bind(this);
   }
 
   onCancel(event) {
@@ -58,6 +60,11 @@ class SignUp extends Component {
   // adapted from https://tylermcginnis.com/validate-email-address-javascript/
   checkEmail = (email) => {
     return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  toggleShow(e) {
+    // eslint-disable-next-line react/no-access-state-in-setstate
+    this.setState({ hidden: !this.state.hidden });
   }
 
   monthChange(e) {
@@ -203,12 +210,14 @@ class SignUp extends Component {
                 <i className="fas fa-lock signicon" />
                 <input
                   name="password"
-                  className="signinput"
-                  placeholder="password"
-                  type="password"
-                  onChange={this.edit}
+                  type={this.state.hidden ? 'password' : 'text'}
                   value={this.state.password}
+                  onChange={this.edit}
+                  placeholder="password"
                 />
+                <button type="button" onClick={this.toggleShow}>
+                Show / Hide
+                </button>
               </div>
               <div className="signUpText">
                 <h6> Please select your expected HS graduation date </h6>
