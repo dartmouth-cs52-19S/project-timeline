@@ -26,9 +26,8 @@ class Landing extends Component {
   renderTime() {
     if (this.props.meta !== 0) {
       return (this.props.meta.events.map((events) => {
-        console.log(`this.props.meta.title${this.props.meta.title}`);
-        console.log(`events.title${events.title}`);
-        console.log(`this.props.meta.title${this.props.meta.content}`);
+        console.log(`this.props.meta: ${this.props.meta}`);
+        console.log(`events.title: ${events.title}`);
         return (
           <div key={events.id}>
             <div key={events.id} className="padding">
@@ -67,9 +66,8 @@ class Landing extends Component {
   renderDetail() {
     if (this.props.meta !== 0) {
       return (this.props.meta.events.map((events) => {
-        console.log(`this.props.meta.title${this.props.meta.title}`);
-        console.log(`events.title${events.title}`);
-        console.log(`this.props.meta.title${this.props.meta.content}`);
+        console.log(`this.props.meta: ${this.props.meta}`);
+        console.log(`events.title: ${events.title}`);
         return (
           <div>
             <div className="flex-detail-landing padding">
@@ -110,7 +108,6 @@ class Landing extends Component {
 
   renderCTAwhitealt() {
     if (this.props.authenticated === false) {
-      console.log('should show');
       return (
         <NavLink to="/signup" className="link">
           <button type="button" className="buttonCTAwhite-alt">
@@ -125,7 +122,6 @@ class Landing extends Component {
 
   renderAuthText() {
     if (this.props.authenticated === false) {
-      console.log('should show');
       return (
         <h5>What are you waiting for?</h5>
       );
