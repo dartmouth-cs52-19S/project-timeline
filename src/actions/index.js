@@ -56,13 +56,9 @@ export function fetchTimeline() {
       .then((response) => {
         // dispatch action w/ payload
         dispatch({ type: ActionTypes.FETCH_EXPLORE, payload: response.data });
-        // console.log('done fetching');
-        // console.log(response.data);
       })
       .catch((error) => {
         // TODO: dispatch an error, make reducer, show error component
-        // console.log('did not fetch');
-        // console.log(error);
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };
@@ -71,18 +67,13 @@ export function fetchTimeline() {
 export function fetchMeta() {
   return (dispatch) => {
     // server call
-    // console.log('making server call');
     axios.get(`${ROOT_URL}/timeline/5ce5bf1be5057b0034c8a87c`)
       .then((response) => {
         // dispatch action w/ payload
         dispatch({ type: ActionTypes.FETCH_META, meta: response.data });
-        // console.log('done fetching meta');
-        // console.log(response.data);
       })
       .catch((error) => {
         // TODO: dispatch an error, make reducer, show error component
-        // console.log('did not fetch');
-        // console.log(error);
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };
@@ -97,7 +88,6 @@ export function selectTimeline(id) {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/timeline/${id}`)
       .then((response) => {
-        // console.log('from action, post: ', response.data);
         dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
       })
       .catch((error) => {
@@ -128,7 +118,6 @@ export function createTimeline(fields, addNextUnder) {
         console.log('ADDNEXTUNDER: ', addNextUnder);
         if (addNextUnder) {
           dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
-          console.log('Calling create banner');
           dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
         } else {
           dispatch(selectTimeline(response.data.parent));
@@ -144,8 +133,6 @@ export function createTimeline(fields, addNextUnder) {
 
 export function updateTimeline(fields, addNextUnder, history) {
   return (dispatch) => {
-    // console.log('Fields in action creator: ', fields);
-    // console.log('field.id: ', fields.id);
     axios.post(`${ROOT_URL}/timeline/${fields.id.toString()}`, fields)
       .then((response) => {
         // console.log('from action, update timeline response: ', response.data);
@@ -162,7 +149,6 @@ export function updateTimeline(fields, addNextUnder, history) {
         }
       })
       .catch((error) => {
-        // console.log(error);
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };
@@ -182,7 +168,6 @@ export function fetchTimelineDetail(id) {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/timeline/${id}`)
       .then((response) => {
-        // console.log('from action, post: ', response.data);
         dispatch({ type: ActionTypes.SELECT_TIMELINE_DETAIL, payload: response.data });
       })
       .catch((error) => {
@@ -192,7 +177,6 @@ export function fetchTimelineDetail(id) {
 }
 
 export function onAddUpdate(i) {
-  console.log('in onAddUpdate action');
   return {
     type: ActionTypes.ON_ADDUPDATE,
     addupdate: i,
@@ -210,12 +194,9 @@ export function fetchPosts() {
       .then((response) => {
         // dispatch action w/ payload
         dispatch({ type: ActionTypes.FETCH_POSTS, payload: response.data });
-        // console.log('done fetching');
-        // console.log(response.data);
       })
       .catch((error) => {
         // TODO: dispatch an error, make reducer, show error component
-        console.log('did not fetch');
         console.log(error);
       });
   };
@@ -226,7 +207,6 @@ export function fetchPost(id) {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`).then((response) => {
       dispatch({ type: ActionTypes.FETCH_POST, payload: response.data });
-      // console.log('this is post', response.data);
     }).catch((error) => {
       console.log(error);
     });
@@ -236,12 +216,9 @@ export function fetchPost(id) {
 // Get user info
 export function fetchUserInfo() {
   return (dispatch) => {
-    console.log('IN FETCH');
     axios.get(`${ROOT_URL}/personal${API_KEY}`,
       { headers: { authorization: localStorage.getItem('token') } })
       .then((response) => {
-        console.log('SUCCESS IN FETCH, bout to dispatch');
-        console.log('bbbbbbbb ', response.data);
         dispatch({ type: ActionTypes.GET_USER, payload: response.data });
       }).catch((error) => {
         console.log(error);
@@ -252,10 +229,8 @@ export function fetchUserInfo() {
 
 export function checkUsername(username) {
   return (dispatch) => {
-    console.log('IN Check Username');
     axios.post(`${ROOT_URL}/username${API_KEY}`, username)
       .then((response) => {
-        console.log('SUCCESS IN CHECK');
         dispatch({ type: ActionTypes.CHECK_NAME, payload: response.data });
       }).catch((error) => {
         console.log(error);
@@ -330,7 +305,6 @@ export function signinUser({ email, password }, history) {
       localStorage.setItem('token', response.data.token);
       history.push('/explore/start');
     }).catch((error) => {
-      console.log('Sign in failed.');
       console.log(error);
       dispatch(authError(`Sign In Failed: ${error.response.data}`));
       dispatch({ type: ActionTypes.BANNER_SET, payload: 'Sign in failed.' });
@@ -346,11 +320,7 @@ export function signupUser({
     const user = {
       username, email, password, startTime,
     };
-    console.log('username is ', username);
-    console.log('startTime is okfjaskdjfaklsjf ', startTime);
-    // console.log('in signup user');
     axios.post(`${ROOT_URL}/signup`, user).then((response) => {
-      // console.log('lab4 axios post');
       dispatch({ type: ActionTypes.AUTH_USER, payload: user });
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('username', response.data.username);
@@ -358,10 +328,9 @@ export function signupUser({
       localStorage.setItem('startTime', response.data.startTime);
       history.push('/explore/start');
     }).catch((error) => {
-      console.log('Sign up failed.');
-      console.log('error data', error.response.data);
+      console.log('error data', error.message);
       console.log('full error: ', error);
-      dispatch(authError(`Sign Up Failed: ${error.response.data}`));
+      dispatch(authError(`Sign Up Failed: ${error.message}`));
       dispatch({ type: ActionTypes.BANNER_SET, payload: 'Sign up failed.' });
     });
   };
@@ -386,14 +355,12 @@ export function saveTimeline(timelineID) {
       { childID: timelineID },
       { headers: { authorization: localStorage.getItem('token') } })
       .then((resp) => {
-        console.log('second call succeeded.');
         dispatch(createBanner('Timeline saved!'));
         setTimeout(() => {
           dispatch(clearBanner());
         }, 2500);
       })
       .catch((err) => {
-        console.log('failed in second call..');
         console.log(err.response);
         dispatch(createBanner('failed to link'));
       });
