@@ -21,7 +21,9 @@ class Nav extends Component {
 
   render() {
     // set the links based on authentication
-    const account = this.props.authenticated
+    console.log(this.props);
+
+    const account = this.props.authentaicated
       ? (
         <span>
           <div className="flex">
@@ -74,8 +76,14 @@ class Nav extends Component {
         </span>
       );
     // Show add/update timeline info buttons only if admin auth
-    const admin = (this.props.authenticated === true
-      && this.props.user !== null && this.props.user.admin)
+    console.log(this.props);
+
+    if (this.props.user !== null) {
+      console.log('Ok USER herreeeeee');
+    } else {
+      console.log('No admin :(');
+    }
+    const admin = (this.props.user !== null && this.props.user.admin)
       ? (
         <span>
           <li>
@@ -140,8 +148,8 @@ const mapStateToProps = state => (
   {
     authenticated: state.auth.authenticated,
     addupdate: state.addupdate,
-    user: state.auth.user,
-    // user: state.user,
+    // user: state.auth.user,
+    user: state.user,
   }
 );
 
