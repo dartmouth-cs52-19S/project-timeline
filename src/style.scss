@@ -444,6 +444,14 @@ b{
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
 }
 
+.detailContainerSaved{
+  width: 25vw;
+  margin: 4em 1em 0 1em;
+  padding: 1em;
+  border-left: 10px solid $main-color;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+}
+
 .detailTitle{
   text-transform: uppercase;
   font-size: 1.5em;
@@ -630,6 +638,9 @@ b{
 .flex-detail-landing{
   flex: 1;
   margin-left: 2em;
+}
+.wrap{
+  flex-flow: row wrap;
 }
 // .backgroundImg{
 //   width: 100vw;

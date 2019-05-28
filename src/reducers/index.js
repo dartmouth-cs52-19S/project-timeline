@@ -8,6 +8,7 @@ import BannerReducer from './banner-reducer';
 import UserReducer from './user-reducer';
 import AddUpdateReducer from './addupdate-reducer';
 import MetaReducer from './meta-reducer';
+import UserTimelineReducer from './user-timeline-reducer';
 
 const rootReducer = combineReducers({
   auth: AuthReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   user: UserReducer,
   addupdate: AddUpdateReducer,
   meta: MetaReducer,
+  user_timeline: UserTimelineReducer,
 });
 
 export default rootReducer;
