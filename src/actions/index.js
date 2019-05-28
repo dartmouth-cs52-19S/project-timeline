@@ -2,8 +2,6 @@
 import axios from 'axios';
 
 export const ActionTypes = {
-  FETCH_POSTS: 'FETCH_POSTS',
-  FETCH_POST: 'FETCH_POST',
   AUTH_USER: 'AUTH_USER',
   GET_USER: 'GET_USER',
   ERR_USER: 'ERR_USER',
@@ -196,36 +194,6 @@ export function onAddUpdate(i) {
   return {
     type: ActionTypes.ON_ADDUPDATE,
     addupdate: i,
-  };
-}
-
-// Get all of the post previews
-export function fetchPosts() {
-  // ActionCreator returns a function
-  // that gets called with dispatch
-  // remember (arg) => { } is a function
-  return (dispatch) => {
-    // server call
-    axios.get(`${ROOT_URL}/posts${API_KEY}`)
-      .then((response) => {
-        // dispatch action w/ payload
-        dispatch({ type: ActionTypes.FETCH_POSTS, payload: response.data });
-      })
-      .catch((error) => {
-        // TODO: dispatch an error, make reducer, show error component
-        console.log(error);
-      });
-  };
-}
-
-// Get single, full post
-export function fetchPost(id) {
-  return (dispatch) => {
-    axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`).then((response) => {
-      dispatch({ type: ActionTypes.FETCH_POST, payload: response.data });
-    }).catch((error) => {
-      console.log(error);
-    });
   };
 }
 
