@@ -129,7 +129,7 @@ class Nav extends Component {
                 className="link"
                 activeClassName="selectedLink"
               >
-                <i className="fas fa-stream grow" />
+                <i className="fas fa-globe-americas grow" />
               </NavLink>
             </li>
             {admin}
