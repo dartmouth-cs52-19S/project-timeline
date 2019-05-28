@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Particles from 'react-particles-js';
-import { signinUser } from '../actions';
+import {
+  signinUser, createBanner, clearBanner, fetchUserInfo,
+} from '../actions';
 
 const particlesOptions = {
   particles: {
@@ -23,11 +25,14 @@ class SignIn extends Component {
     this.state = {
       email: '',
       password: '',
+      hidden: true,
     };
 
     this.edit = this.edit.bind(this);
     this.onCancel = this.onCancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleShow = this.toggleShow.bind(this);
+    this.eyeToggle = this.eyeToggle.bind(this);
   }
 
   onCancel(event) {
@@ -40,7 +45,40 @@ class SignIn extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.signinUser(this.state, this.props.history);
+    if (this.state.email === '') {
+      this.props.createBanner('Please enter an email to login.');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 2000);
+    } if (this.state.password === '') {
+      this.props.createBanner('Please enter a password to login.');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 2000);
+    } else {
+      this.props.signinUser(this.state, this.props.history);
+    }
+  }
+
+  // all password stuff based off of this https://edvins.io/show-and-hide-password-in-react/
+  toggleShow(e) {
+    if (this.state.password === '') {
+      this.props.createBanner('Please enter a password to see it');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
+      // eslint-disable-next-line react/no-access-state-in-setstate
+    } else this.setState({ hidden: !this.state.hidden });
+  }
+
+  eyeToggle() {
+    let string = '';
+    if (this.hidden) {
+      string = 'far fa-eye';
+    } else {
+      string = 'far fa-eye-slash';
+    }
+    return string;
   }
 
   render() {
@@ -70,11 +108,17 @@ class SignIn extends Component {
                 <i className="fas fa-lock signicon" />
                 <input
                   name="password"
-                  type="password"
-                  placeholder="password"
-                  className="signinput"
-                  onChange={this.edit}
+                  type={this.state.hidden ? 'password' : 'text'}
                   value={this.state.password}
+                  onChange={this.edit}
+                  className="signinput"
+                  placeholder="password"
+                />
+                <i className="far fa-eye signicon"
+                  id="passButton"
+                  role="button"
+                  tabIndex={0}
+                  onClick={this.toggleShow}
                 />
               </div>
               <div className="signSubmitBox">
@@ -102,4 +146,6 @@ class SignIn extends Component {
   }
 }
 
-export default withRouter(connect(null, { signinUser })(SignIn));
+export default withRouter(connect(null, {
+  signinUser, fetchUserInfo, createBanner, clearBanner,
+})(SignIn));

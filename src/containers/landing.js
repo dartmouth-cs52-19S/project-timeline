@@ -40,7 +40,7 @@ class Landing extends Component {
                 content={events.content}
               />
             </div>
-            <div className="flex-detail-landing hide">
+            <div className="flex-detail-landing hide" key={events.title}>
               <Detail
                 key={events.id}
                 title={events.title}
@@ -70,8 +70,8 @@ class Landing extends Component {
         console.log(`this.props.meta: ${this.props.meta}`);
         console.log(`events.title: ${events.title}`);
         return (
-          <div>
-            <div className="flex-detail-landing padding">
+          <div key={events.id}>
+            <div className="flex-detail-landing padding" key={events.title}>
               <Detail
                 key={events.id}
                 title={events.title}

@@ -1,33 +1,43 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import Dropdown from 'react-dropdown';
 import {
   fetchUserInfo, createBanner, clearBanner, updateUser,
 } from '../actions';
 
+// date dropdown stuff
+const optionsYear = [
+  '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014',
+  '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025',
+  '2026', '2027', '2028', '2029', '2030',
+];
+const optionsMonth = [
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec',
+];
+
 class Settings extends Component {
   constructor(props) {
     super(props);
-
-
-    // //this.state = {
-    //   user: this.props.user,
-    // };
-    // then can just update the fields as see fit??
-
     this.state = {
       newEmail: '',
       newUsername: '',
       newPassword1: '',
       newPassword2: '',
-      // newStartTime: '',
+      newYear: '',
+      newMonth: '',
+      hidden: true,
     };
     this.onCancel = this.onCancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handlesSubmit = this.handlesSubmit.bind(this);
     this.edit = this.edit.bind(this);
-    this.convertStartTime = this.convertStartTime.bind(this);
+    this.displayStartTime = this.displayStartTime.bind(this);
     this.createStartTime = this.createStartTime.bind(this);
-    this.checkStartTime = this.checkStartTime.bind(this);
+    this.convertStartTime = this.convertStartTime.bind(this);
+    this.monthChange = this.monthChange.bind(this);
+    this.yearChange = this.yearChange.bind(this);
+    this.toggleShow = this.toggleShow.bind(this);
   }
 
   componentDidMount = () => {
@@ -38,101 +48,233 @@ class Settings extends Component {
     this.props.history.push('/explore/start');
   }
 
-  // taken from sign up, just checks if they entered in the right start time
-  checkStartTime = () => {
-    const startSlash = this.state.startTime.split('/');
-    const startDash = this.state.startTime.split('-');
-    if (startSlash.length === 1 && startDash.length === 1) {
-      return false;
-    }
-    const startTimeFinal = startSlash.length > 1 ? startSlash : startDash;
-    const date = startTimeFinal[2];
-    const month = startTimeFinal[1];
-    const year = startTimeFinal[0];
-
-    if (year.length !== 4) return false;
-    if (month.length !== 2) return false;
-    if (date.length !== 2) return false;
-
-    return true;
-  }
-
-  // makes the HS grad time unix obj really pretty
-  convertStartTime = (oldTime) => {
-    if (oldTime !== null) {
-      const newTime = String(
-        `${oldTime.split('-')[0]}-${oldTime.split('-')[1]}-${oldTime.split('-')[2].split('T')[0]}`,
-      );
-      return newTime;
-    } else {
-      this.props.createBanner('Sorry this is not working right now!');
-      setTimeout(() => {
-        this.props.clearBanner();
-      }, 3000);
-      return null;
-    }
-  }
-
-
   // checks if email is a valid email
   // adapted from https://tylermcginnis.com/validate-email-address-javascript/
   checkEmail = (email) => {
     return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  // makes the pretty string super ugly again :(( hello unix obj
-  createStartTime() {
-    this.setState((prevState) => {
-      const newStateStart = (new Date((prevState.startTime))).getTime();
-      this.newStartTime = newStateStart;
-    });
+  toggleShow() {
+    if (this.state.newPassword1 === '' && this.state.newPassword2 === '') {
+      this.props.createBanner('Please enter a password to see it.');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 2000);
+    // eslint-disable-next-line react/no-access-state-in-setstate
+    } else this.setState({ hidden: !this.state.hidden });
+  }
+
+  convertStartTime() { // need to do this bc Mongoose returns startTime as a string
+    const dateObj = new Date(this.props.user.startTime);
+    return dateObj;
+  }
+
+  // makes the HS grad time date obj really pretty
+  displayStartTime() {
+    let currMonth = 0;
+    let currYear = 0;
+    if (this.props.user !== null) {
+      const dateObj = this.convertStartTime(); // string => dateObj
+      currMonth = dateObj.getMonth();
+      switch (currMonth) {
+        case 0:
+          currMonth = 'Jan';
+          break;
+        case 1:
+          currMonth = 'Feb';
+          break;
+        case 2:
+          currMonth = 'March';
+          break;
+        case 3:
+          currMonth = 'April';
+          break;
+        case 4:
+          currMonth = 'May';
+          break;
+        case 5:
+          currMonth = 'June';
+          break;
+        case 6:
+          currMonth = 'July';
+          break;
+        case 7:
+          currMonth = 'Aug';
+          break;
+        case 9:
+          currMonth = 'Sept';
+          break;
+        case 10:
+          currMonth = 'Oct';
+          break;
+        case 11:
+          currMonth = 'Nov';
+          break;
+        case 12:
+          currMonth = 'Dev';
+          break;
+        default:
+          currMonth = 'Jan';
+          break;
+      }
+      currYear = dateObj.getFullYear();
+      const currTime = `${currYear.toString()}-${currMonth}`;
+      return currTime;
+    } else {
+      this.props.createBanner('Sorry this is not working right now!');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
+      return ' lollll sorry not working';
+    }
+  }
+
+
+  monthChange(e) {
+    this.setState({ newMonth: e.value });
+  }
+
+  yearChange(e) {
+    this.setState({ newYear: e.value });
+  }
+
+  // makes the pretty string super ugly again :(( hello date obj
+  createStartTime() { // changes the expected HS grad date to a date obj
+    let numMonth = 0;
+    switch (this.state.newMonth) {
+      case 'Jan':
+        break;
+      case 'Feb':
+        numMonth = 1;
+        break;
+      case 'Mar':
+        numMonth = 2;
+        break;
+      case 'Apr':
+        numMonth = 3;
+        break;
+      case 'May':
+        numMonth = 4;
+        break;
+      case 'June':
+        numMonth = 5;
+        break;
+      case 'July':
+        numMonth = 6;
+        break;
+      case 'Aug':
+        numMonth = 7;
+        break;
+      case 'Sept':
+        numMonth = 8;
+        break;
+      case 'Oct':
+        numMonth = 9;
+        break;
+      case 'Nov':
+        numMonth = 10;
+        break;
+      case 'Dec':
+        numMonth = 11;
+        break;
+      default:
+        numMonth = 0;
+        break;
+    }
+    const numYear = parseInt(this.state.newYear, 10);
+    const newDate = new Date(numYear, numMonth, 1);
+    return newDate;
   }
 
   // update fxn for all fields wahoo
   edit(e) {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(e.target.value);
   }
 
-  handleSubmit(event) {
+  handlesSubmit(event) {
     event.preventDefault();
-    // if anything is left blank by the user, just keep the same old info
-    if (this.state.newUsername === '') {
-      this.state.newUsername = this.props.user.username;
-    } if (this.state.newEmail === '' || this.checkEmail(this.state.newEmail)) {
-      this.state.newEmail = this.props.user.email;
-    // } if (this.state.newStartTime === '') {
-    //   this.state.newStartTime = this.props.user.startTime;
-    // } else if ( // start time isn't valid
-    //   (Number.isNaN(Date.parse(this.state.newStartTime))) || !this.checkStartTime()) {
-    //   this.props.createBanner('Please enter a valid date.');
-    } if (this.state.newPassword1 === '' && this.state.newPassword2 === '') {
-      this.state.newPassword1 = this.props.user.password;
-      this.state.newPassword2 = this.props.user.password;
-    } else if (this.state.newPassword1 !== this.state.newPassword2) {
-      this.props.createBanner('Your passwords do not match!');
-      setTimeout(() => {
-        this.props.clearBanner();
-      }, 3000);
-    } else { // FINALLY save the user obj and update it. If a field is not filled out,
-      // we send the user object what it has currently.
+    // FINALLY save the user fields, make startTime, and update it
+    const fields = {};
+    // if anything is left blank by the user, don't add it to fields
+    if (this.state.newEmail !== '') {
+      if (this.checkEmail(this.state.newEmail)) { // passes bad email check
+        this.props.createBanner('Please enter a valid email.');
+        setTimeout(() => {
+          this.props.clearBanner();
+        }, 3000);
+        return false;
+      } else {
+        fields.email = this.state.newEmail;
+      }
+    } if (this.state.newUsername !== '') {
+      fields.username = this.state.newUsername;
+    } if (this.state.newPassword1 !== '' && this.state.newPassword2 !== '') {
+      // password matching check
+      if (this.state.newPassword1 !== this.state.newPassword2) {
+        this.props.createBanner('Your passwords do not match!');
+        setTimeout(() => {
+          this.props.clearBanner();
+        }, 3000);
+        return false;
+      } else {
+        fields.password = this.state.newPassword1;
+      }
+    } if (this.state.newMonth !== '' && this.state.newYear !== '') {
+      fields.startTime = this.createStartTime();
+    } if (Object.entries(fields).length !== 0 && fields.constructor === Object) {
+      this.props.updateUser(fields, this.props.history);
+      // tell the user they did something
       this.props.createBanner('You have saved your settings. Thanks!');
       setTimeout(() => {
         this.props.clearBanner();
       }, 3000);
+      return true;
+    } else {
+      this.props.createBanner('Please enter new information before saving.');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
+      return false;
+    }
+  }
+
+
+  handleSubmit(event) {
+    event.preventDefault();
+    // if anything is left blank by the user, just keep the same old info
+    if (this.state.newEmail !== '' && this.checkEmail(this.state.newEmail)) { // bad email check
+      this.props.createBanner('Please enter a valid email.');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
+      return false;
+    } if (this.state.newPassword1 !== this.state.newPassword2) {
+      this.props.createBanner('Your passwords do not match!');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
+      return false;
+    } else { // FINALLY make the start Time, save the user obj, and update it
+      this.props.createBanner('You have saved your settings. Thanks!');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
+
       const fields = {
         email: this.state.newEmail,
         username: this.state.newUsername,
         password: this.state.newPassword1,
+        startTime: this.createStartTime(),
         // startTime: this.state.newStartTime,
       };
       this.props.updateUser(fields, this.props.history);
+      return true;
     }
   }
   // want to call fxn if user exists (which returns a t/f) onChange for username so realtime
 
   render() {
-    if (this.props.user == null) {
+    if (this.props.user === null) {
       return (
         <div className="flex" style={{ alignItems: 'flex-end', justifyContent: 'space-around' }}>
           <h1>Loading</h1>
@@ -143,8 +285,12 @@ class Settings extends Component {
         <div>
           <div className="settingsHeader">
             Settings
-            PASSWORD IS HASHED one URGHHHH
-            ALSO still working on start time
+            final go-through lolllll
+          </div>
+          <div>
+            <h6><span> Come take our</span>
+              <a href="https://www.surveymonkey.com/r/WT9VZT6"> feedback survey!</a>
+            </h6>
           </div>
           <div>
             current username: {this.props.user.username}
@@ -155,6 +301,7 @@ class Settings extends Component {
               placeholder="new username"
               onChange={this.edit}
               value={this.state.newUsername}
+              className="signinput"
             />
           </div>
           <div>
@@ -166,6 +313,7 @@ class Settings extends Component {
               placeholder="new email"
               onChange={this.edit}
               value={this.state.newEmail}
+              className="signinput"
             />
           </div>
           <div>
@@ -174,41 +322,59 @@ class Settings extends Component {
           <div className="password">
             <input
               name="newPassword1"
-              type="password"
-              placeholder="new password"
-              onChange={this.edit}
+              type={this.state.hidden ? 'password' : 'text'}
               value={this.state.newPassword1}
+              onChange={this.edit}
+              placeholder="new password"
+              className="signinput"
             />
             <input
               name="newPassword2"
-              type="password"
-              placeholder="re-enter your new password"
-              onChange={this.edit}
+              type={this.state.hidden ? 'password' : 'text'}
               value={this.state.newPassword2}
-            />
-          </div>
-
-          {/* <div>
-            current HS graduation date: {this.convertStartTime(this.props.user.startTime)}
-          </div>
-          <div className="startTime">
-            <input
-              name="newStartTime"
-              placeholder="new hs graduation date YYYY-MM-DD"
               onChange={this.edit}
-              value={this.state.newStartTime}
+              placeholder="new password"
+              className="signinput"
             />
-          </div> */}
-          <button type="button" onClick={this.onCancel}>Cancel</button>
-          <button type="button" onClick={this.handleSubmit}>Save Changes</button>
+            <i className="far fa-eye signicon"
+              id="passButtonSettings"
+              role="button"
+              tabIndex={0}
+              onClick={this.toggleShow}
+            />
+          </div>
+          <div>
+            current HS graduation date: {this.displayStartTime()}
+          </div>
+          <div className="flexWideDrop">
+            <Dropdown
+              className="flexWide"
+              options={optionsYear}
+              onChange={this.yearChange}
+              value={this.state.newYear}
+              placeholder="Select a year"
+            />
+            <Dropdown
+              className="flexWide"
+              options={optionsMonth}
+              onChange={this.monthChange}
+              value={this.state.newMonth}
+              placeholder="Select a month"
+            />
+          </div>
+          <div>
+            <button type="button" onClick={this.onCancel}>Cancel</button>
+            <button type="button" onClick={this.handlesSubmit}>Save Changes</button>
+          </div>
         </div>
+
       );
     }
   }
 }
 const mapStateToProps = reduxState => (
   {
-    user: reduxState.user,
+    user: reduxState.auth.user,
   }
 );
 // export default withRouter(connect(mapStateToProps, null)(Settings));

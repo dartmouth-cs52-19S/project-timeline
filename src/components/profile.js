@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 class Profile extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
     this.state = {
       user: this.props.user,
     };
@@ -19,12 +18,11 @@ class Profile extends Component {
       );
       return newTime;
     } else {
-      this.props.createBanner('Sorry this is not working right now!');
+      console.log('Sorry this is not working right now!');
       return ' sorry this is broken';
     }
   }
 
-  // {this.convertStartTime(user.startTime)}
 
   render() {
     const { user } = this.state;
@@ -43,7 +41,7 @@ class Profile extends Component {
           </div>
           <div>
             <h4>
-          Your Current Stage in Life is {this.convertStartTime(this.props.user.startTime)}
+          Your Current Stage in Life is {this.props.user.startTime}
             </h4>
           </div>
         </div>

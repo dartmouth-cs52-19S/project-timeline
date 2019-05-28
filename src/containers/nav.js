@@ -13,15 +13,23 @@ class Nav extends Component {
     this.props.signoutUser(this.props.history);
   }
 
-  componentDidMount = () => {
+  componentWillMount = () => {
     if (this.props.authenticated) {
+      console.log('I AM AUTHENTICATED');
+      this.props.fetchUserInfo();
+    }
+  }
+
+  componentDidUpdate = (prevProps, prevState, snapshot) => {
+    if (prevProps.auth.user.admin === undefined) {
       this.props.fetchUserInfo();
     }
   }
 
   render() {
     // set the links based on authentication
-    console.log(this.props);
+    console.log('NAV BAR PROPS', this.props);
+    console.log('nav bar user', this.props.user);
 
     const account = (this.props.authenticated && this.props.user !== null)
       ? (
@@ -37,12 +45,6 @@ class Nav extends Component {
                 activeClassName="selectedLink"
               >
                 <i className="far fa-bookmark grow" />
-              </NavLink>
-            </li>
-            <li>
-              {/* Personal */}
-              <NavLink to="/personal" className="link" activeClassName="selectedLink">
-                <i className="far fa-user grow" />
               </NavLink>
             </li>
             <li>
@@ -79,7 +81,7 @@ class Nav extends Component {
     // Show add/update timeline info buttons only if admin auth
 
     const admin = (this.props.authenticated
-      && this.props.user !== null && this.props.user.admin)
+      && this.props.auth.user !== null && this.props.user.admin)
       ? (
         <span>
           <div className="flex">
@@ -130,7 +132,7 @@ class Nav extends Component {
                 className="link"
                 activeClassName="selectedLink"
               >
-                <i className="fas fa-stream grow" />
+                <i className="fas fa-globe-americas grow" />
               </NavLink>
             </li>
             {admin}
@@ -144,10 +146,10 @@ class Nav extends Component {
 
 const mapStateToProps = state => (
   {
+    auth: state.auth,
     authenticated: state.auth.authenticated,
     addupdate: state.addupdate,
-    // user: state.auth.user,
-    user: state.user,
+    user: state.auth.user,
   }
 );
 

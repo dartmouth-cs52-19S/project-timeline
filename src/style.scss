@@ -435,6 +435,10 @@ b{
   display: flex;
   justify-content: space-between;
 }
+.flexWideDrop{
+  display: flex;
+  justify-content: space-around;
+}
 .flex-detail, .flex-main{
   width: 40%;
   // height: 100vh;
@@ -671,3 +675,203 @@ b{
 //   display: inline-block;
 //   background: url(https://business.linkedin.com/content/dam/business/talent-solutions/global/en_us/blog/2015/11/marketing-working-with-recruiting.jpg);
 // }
+
+// Dropdown styling
+// modeled after input formatting
+
+.Dropdown-root {
+  position: relative;
+}
+
+.Dropdown-control {
+  position: relative;
+  overflow: hidden;
+  font-family: Roboto;
+  font-size: .8em;
+  border: 1pt solid $shadow-color;
+  font-weight: 100;
+  // width: 40vw;
+  width: 100%;
+  height: 3em;
+  box-sizing: border-box;
+  margin-bottom: 1em;
+  background: #f5f5f5;
+  color: $shadow-color;
+  cursor: default;
+  outline: none;
+  padding: 8px 52px 8px 10px;
+  transition: all 200ms ease;
+}
+
+.Dropdown-control:hover {
+  box-shadow: 0 1px 0 $shadow-color;
+  height: 3em;
+}
+
+.Dropdown-arrow {
+  border-color: $shadow-color transparent transparent;
+  border-style: solid;
+  border-width: 5px 5px 0;
+  content: ' ';
+  display: block;
+  height: 0;
+  margin-top: -ceil(2.5);
+  position: absolute;
+  right: 10px;
+  top: 14px;
+  width: 0
+}
+
+.is-open .Dropdown-arrow {
+  border-color: transparent transparent $shadow-color;
+  border-width: 0 5px 5px;
+}
+
+
+.Dropdown-menu .Dropdown-group > .Dropdown-title{
+  padding: 8px 10px;
+  color: rgba(51, 51, 51, 1);
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.Dropdown-option {
+  box-sizing: border-box;
+  color: rgba(51, 51, 51, 0.8);
+  cursor: pointer;
+  display: block;
+  padding: 8px 10px;
+}
+
+.Dropdown-option:last-child {
+  border-bottom-right-radius: 2px;
+   border-bottom-left-radius: 2px;
+}
+
+.Dropdown-option:hover {
+  background-color: $shadow-color;
+  color: $text-color;
+}
+
+.Dropdown-option.is-selected {
+  background-color: $vibrant-shadow-color;
+  color: $text-color;
+  font-size: .8em;
+}
+
+.Dropdown-noresults {
+  box-sizing: border-box;
+  color: $shadow-color;
+  cursor: default;
+  display: block;
+  padding: 8px 10px;
+}
+.Dropdown-control {
+  font-family: Roboto;
+  font-size: .8em;
+  border: 1pt solid #7A7A7A;
+  font-weight: 100;
+  height: 3em;
+  // width: 40vw;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1em;
+  background: #f5f5f5;
+  height: 3em;
+}
+.Dropdown-control:hover {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+  font-family: Roboto;
+  font-size: .8em;
+  font-weight: 100;
+}
+
+.Dropdown-placeholder {
+  font-size: .8em;
+  font-family: Roboto;
+}
+
+.Dropdown-option {
+  font-size: .8em;
+  font-family: Roboto;
+}
+
+.Dropdown-menu {
+  background-color: #f5f5f5;
+  font-family: Roboto;
+  font-weight: 100;
+  border: 1pt solid #7A7A7A;
+  box-shadow: 0 1px 0 #141414;
+  box-sizing: border-box;
+  margin-top: -1px;
+  max-height: 200px;
+  overflow-y: auto;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  z-index: 1000;
+  -webkit-overflow-scrolling: touch;
+}
+
+.Dropdown-option:hover {
+  background-color: #f5f5f5;
+  font-family: Roboto;
+  font-weight: 100;
+  color: #141414;
+}
+
+.Dropdown-option.is-selected {
+  background-color: #f5f5f5;
+  font-family: Roboto;
+  color: #141414;
+  font-weight: 100;
+}
+
+// password styling
+#passButton {
+  margin: 1em;
+  padding: 0.5em 1em;
+  transition: all .2s ease-in-out;
+  float: right;
+  margin-left: -20%;
+  margin-top: -4%;
+  padding-top: 6%;
+  position: relative;
+  z-index: 2;
+  height: 1em;
+}
+
+#passButton:focus{ // how to keep active?
+  outline: none;
+  color: $main-color;
+}
+#passButton:hover{
+  color: $main-color;
+}
+#passButton:active {
+  color: $main-color;
+}
+
+//settings
+#passButtonSettings {
+  margin: 1em;
+  padding: 0.5em 1em;
+  transition: all .2s ease-in-out;
+  float: right;
+  margin-left: -20%;
+  margin-top: -4%;
+  padding-top: 4.5%;
+  position: relative;
+  z-index: 2;
+  height: 1em;
+}
+#passButtonSettings:focus{ // how to keep active?
+  outline: none;
+  color: $main-color;
+}
+#passButtonSettings:hover{
+  color: $main-color;
+}
+#passButtonSettings:active {
+  color: $main-color;
+}
