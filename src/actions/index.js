@@ -270,6 +270,10 @@ export function signupUser({
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('username', response.data.username);
       localStorage.setItem('email', response.data.email);
+      // only takes strings, so converts startTime to a string
+      // need to redesign to localState
+      // const
+      localStorage.setItem('startTime', response.data.startTime);
       history.push('/explore/start');
     }).catch((error) => {
       console.log('error data', error.message);
@@ -348,14 +352,14 @@ export function updateUser(fields, history) {
     axios.put(`${ROOT_URL}/personal`, fields,
       { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
       dispatch({ type: ActionTypes.UPDATE_USER, payload: response });
-
       localStorage.setItem('username', response.data.username);
       localStorage.setItem('email', response.data.email);
+      localStorage.setItem('password', response.data.password);
+      localStorage.setItem('startTime', response.data.startTime);
       history.push('/explore/start');
     }).catch((error) => {
       dispatch(authError(`Update settings failed: ${error.message}`));
       console.log(error);
-
       dispatch({ type: ActionTypes.BANNER_SET, payload: 'Updating user settings failed.' });
     });
   };
