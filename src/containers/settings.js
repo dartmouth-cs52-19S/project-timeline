@@ -291,7 +291,12 @@ class Settings extends Component {
         <div>
           <div className="settingsHeader">
             Settings
-            Need backend to do something. Use @ur own risk !
+            final go-through lolllll
+          </div>
+          <div>
+            <h6><span> Come take our</span>
+              <a href="https://www.surveymonkey.com/r/DLJKTQV"> feedback survey!</a>
+            </h6>
           </div>
           <div>
             current username: {this.props.user.username}
@@ -363,9 +368,12 @@ class Settings extends Component {
               placeholder="Select a month"
             />
           </div>
-          <button type="button" onClick={this.onCancel}>Cancel</button>
-          <button type="button" onClick={this.handlesSubmit}>Save Changes</button>
+          <div>
+            <button type="button" onClick={this.onCancel}>Cancel</button>
+            <button type="button" onClick={this.handlesSubmit}>Save Changes</button>
+          </div>
         </div>
+
       );
     }
   }
