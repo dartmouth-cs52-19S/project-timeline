@@ -96,18 +96,18 @@ export function selectTimeline(id) {
   };
 }
 
-export function saveToTimeline(timelineID) {
-  return (dispatch) => {
-    axios.post(`${ROOT_URL}/personal`, timelineID)
-      .then((response) => {
-        console.log('from action, create timeline response: ', response.data);
-        dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
-      })
-      .catch((error) => {
-        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
-      });
-  };
-}
+// export function saveToTimeline(timelineID) {
+//   return (dispatch) => {
+//     axios.post(`${ROOT_URL}/personal`, timelineID)
+//       .then((response) => {
+//         console.log('from action, create timeline response: ', response.data);
+//         dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
+//       })
+//       .catch((error) => {
+//         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+//       });
+//   };
+// }
 
 export function createTimeline(fields, addNextUnder) {
   return (dispatch) => {

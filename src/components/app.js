@@ -11,7 +11,6 @@ import Banner from '../containers/banner';
 import SignIn from '../containers/signin';
 import SignUp from '../containers/signup';
 import CreateTimeline from '../containers/create-timeline';
-import SaveTimeline from '../containers/saveTimeline';
 import UpdateTimeline from '../containers/update-timeline';
 import Settings from '../containers/settings';
 import UserProfile from '../containers/user';
@@ -37,7 +36,6 @@ const App = (props) => {
           <Route path="/updateTime" component={RequireAdmin(UpdateTimeline)} />
           <Route path="/settings" component={RequireAuth(Settings)} />
           <Route path="/personal" component={RequireAuth(UserProfile)} />
-          <Route path="/save" component={RequireAuth(SaveTimeline)} />
           <Route render={() => (<div> This life does not exist </div>)} />
         </Switch>
       </div>
