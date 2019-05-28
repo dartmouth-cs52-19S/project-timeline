@@ -19,7 +19,6 @@ const optionsMonth = [
 class Settings extends Component {
   constructor(props) {
     super(props);
-    // console.log('yoooooo', this.props.user.startTime);
     this.state = {
       newEmail: '',
       newUsername: '',
@@ -42,6 +41,7 @@ class Settings extends Component {
 
   componentDidMount = () => {
     this.props.fetchUserInfo();
+    console.log('yoooooo', this.props.user);
   }
 
   onCancel(event) {
@@ -199,41 +199,44 @@ class Settings extends Component {
 
   handlesSubmit(event) {
     event.preventDefault();
-    console.log(this.state.newEmail);
-    if (this.checkEmail(this.state.newEmail)) { // bad email check
-      this.props.createBanner('Please enter a valid email.');
-      setTimeout(() => {
-        this.props.clearBanner();
-      }, 3000);
-      return false;
-    } if (this.state.newPassword1 !== this.state.newPassword2) {
-      this.props.createBanner('Your passwords do not match!');
-      setTimeout(() => {
-        this.props.clearBanner();
-      }, 3000);
-      return false;
-    } else { // FINALLY make the start Time, save the user obj, and update it
-      // and tell the user you did something
-      const fields = {};
-      if (this.state.newEmail === '') {
-        fields.email = this.props.user.email;
+    // FINALLY save the user fields, make startTime, and update it
+    const fields = {};
+    // if anything is left blank by the user, don't add it to fields
+    if (this.state.newEmail !== '') {
+      if (this.checkEmail(this.state.newEmail)) { // passes bad email check
+        this.props.createBanner('Please enter a valid email.');
+        setTimeout(() => {
+          this.props.clearBanner();
+        }, 3000);
+        return false;
       } else {
         fields.email = this.state.newEmail;
       }
-      if (this.state.newUsername === '') {
-        fields.username = this.props.user.username;
+    } if (this.state.newUsername !== '') {
+      fields.username = this.state.newUsername;
+    } if (this.state.newPassword1 !== '' && this.state.newPassword2 !== '') {
+      // password matching check
+      if (this.state.newPassword1 !== this.state.newPassword2) {
+        this.props.createBanner('Your passwords do not match!');
+        setTimeout(() => {
+          this.props.clearBanner();
+        }, 3000);
+        return false;
       } else {
-        fields.username = this.state.newUsername;
-      }
-
-      // if anything is left blank by the user, don't add it to fields
-      if (this.state.newPassword1 !== '' && this.state.newPassword2 !== '') {
         fields.password = this.state.newPassword1;
-      } if (this.state.newMonth !== '' && this.state.newYear !== '') {
-        fields.startTime = this.createStartTime();
       }
+    } if (this.state.newMonth !== '' && this.state.newYear !== '') {
+      fields.startTime = this.createStartTime();
+    } if (fields !== {}) {
       this.props.updateUser(fields, this.props.history);
+      // tell the user they did something
       this.props.createBanner('You have saved your settings. Thanks!');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
+      return true;
+    } else {
+      this.props.createBanner('Please enter new information before saving.');
       setTimeout(() => {
         this.props.clearBanner();
       }, 3000);
@@ -369,7 +372,7 @@ class Settings extends Component {
 }
 const mapStateToProps = reduxState => (
   {
-    user: reduxState.user,
+    user: reduxState.auth.user,
   }
 );
 // export default withRouter(connect(mapStateToProps, null)(Settings));

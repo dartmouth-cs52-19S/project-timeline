@@ -27,10 +27,10 @@ export const ActionTypes = {
 // SERVER URLS
 
 // local testing api url
-const ROOT_URL = 'http://localhost:9090/api';
+// const ROOT_URL = 'http://localhost:9090/api';
 
 // timeline api url
-// const ROOT_URL = 'https://timimeline.herokuapp.com/api';
+const ROOT_URL = 'https://timimeline.herokuapp.com/api';
 
 const API_KEY = '';
 
