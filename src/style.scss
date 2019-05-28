@@ -6,6 +6,7 @@ $shadow-color-darker: rgb(73, 72, 72);
 $vibrant-shadow-color: rgb(176, 188, 216);
 $error-color: #ff6450;
 $white: #ffffff;
+$disabled: #dadada;
 
 body, html {
     font-family: "Roboto", sans-serif;    
@@ -258,7 +259,7 @@ h4{
   position: relative;
   width: 60%;
   float: right;
-  height: 100%;
+  // height: 100%;
 }
 .postTitle{
   font-weight: 400;
@@ -289,9 +290,18 @@ button{
   transition: all .2s ease-in-out;
 }
 
+.button-grey{
+  margin: 1em;
+  padding: 0.5em 1em;
+  border: 2px solid $disabled;
+  color: $disabled;
+  transition: all .2s ease-in-out;
+}
+
 #disabled-backbutton {
-  color: $shadow-color;
-  border: solid $shadow-color 2px;
+  color: $white;
+  background: $disabled;
+  border: solid $disabled 2px;
 }
 
 button:focus{
@@ -301,9 +311,14 @@ button:hover{
   background: $main-color;
   color: $white;
 }
-#disabled-backbutton:hover{
-  background: $white;
+.button-grey:hover{
+  background: $vibrant-shadow-color;
+  border-color: $vibrant-shadow-color;
+  color: $white;
 }
+// #disabled-backbutton:hover{
+//   background: $white;
+// }
 
 .element{
   margin-left: -1.7em;
@@ -426,7 +441,7 @@ b{
 }
 .flex-detail, .flex-main{
   width: 40%;
-  height: 100vh;
+  // height: 100vh;
   flex: 1;
 }
 
@@ -448,9 +463,19 @@ b{
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
 }
 
+.detailContainerSaved{
+  width: 25vw;
+  margin: 4em 1em 0 1em;
+  padding: 1em;
+  border-left: 10px solid $main-color;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+}
+
 .detailTitle{
   text-transform: uppercase;
   font-size: 1.5em;
+  display: flex;
+  justify-content: space-between;
 }
 
 .detailImg{
@@ -634,6 +659,9 @@ b{
 .flex-detail-landing{
   flex: 1;
   margin-left: 2em;
+}
+.wrap{
+  flex-flow: row wrap;
 }
 // .backgroundImg{
 //   width: 100vw;
