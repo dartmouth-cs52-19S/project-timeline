@@ -44,7 +44,19 @@ class SignIn extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.signinUser(this.state, this.props.history);
+    if (this.state.email === '') {
+      this.props.createBanner('Please enter an email to login.');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 2000);
+    } if (this.state.password === '') {
+      this.props.createBanner('Please enter a password to login.');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 2000);
+    } else {
+      this.props.signinUser(this.state, this.props.history);
+    }
   }
 
   // all password stuff based off of this https://edvins.io/show-and-hide-password-in-react/

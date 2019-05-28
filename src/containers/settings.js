@@ -56,7 +56,7 @@ class Settings extends Component {
 
   toggleShow() {
     if (this.state.newPassword1 === '' && this.state.newPassword2 === '') {
-      this.props.createBanner('Please enter a password to see it');
+      this.props.createBanner('Please enter a password to see it.');
       setTimeout(() => {
         this.props.clearBanner();
       }, 2000);

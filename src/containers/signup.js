@@ -64,7 +64,7 @@ class SignUp extends Component {
 
   toggleShow(e) {
     if (this.state.password === '') {
-      this.props.createBanner('Please enter a password to see it');
+      this.props.createBanner('Please enter a password to see it.');
       setTimeout(() => {
         this.props.clearBanner();
       }, 3000);

@@ -429,7 +429,6 @@ export function updateUser(fields, history) {
     }).catch((error) => {
       dispatch(authError(`Update settings failed: ${error.message}`));
       console.log(error);
-
       dispatch({ type: ActionTypes.BANNER_SET, payload: 'Updating user settings failed.' });
     });
   };
