@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createBanner } from '../actions';
+import { createBanner, clearBanner } from '../actions';
 
 export default function (ComposedComponent) {
   class RequireAdmin extends Component {
     componentWillMount() {
-      if (!this.props.admin) {
+      if (this.props.user === null) {
+        this.props.history.push('/');
+        this.props.createBanner('Admin Access Needed');
+        setTimeout(() => {
+          this.props.clearBanner();
+        }, 2500);
+      } else if (!this.props.user.admin) {
         this.props.history.push('/explore');
         this.props.createBanner('Admin Access Needed');
+        setTimeout(() => {
+          this.props.clearBanner();
+        }, 2500);
       }
     }
 
@@ -20,9 +29,8 @@ export default function (ComposedComponent) {
 
   const mapStateToProps = state => (
     {
-      admin: state.user.admin,
-
+      user: state.user,
     }
   );
-  return connect(mapStateToProps, { createBanner })(RequireAdmin);
+  return connect(mapStateToProps, { createBanner, clearBanner })(RequireAdmin);
 }

@@ -33,7 +33,7 @@ const App = (props) => {
           <Route path="/explore/:timelineID" component={RequireAuth(Timeline)} />
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/newTime" component={RequireAdmin(CreateTimeline)} />
+          <Route path="/newTime" component={(RequireAdmin(CreateTimeline))} />
           <Route path="/updateTime" component={RequireAdmin(UpdateTimeline)} />
           <Route path="/settings" component={RequireAuth(Settings)} />
           <Route path="/personal" component={RequireAuth(UserProfile)} />
