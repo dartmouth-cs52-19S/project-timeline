@@ -208,7 +208,7 @@ class Settings extends Component {
 }
 const mapStateToProps = reduxState => (
   {
-    user: reduxState.user,
+    user: reduxState.auth.user,
   }
 );
 // export default withRouter(connect(mapStateToProps, null)(Settings));
