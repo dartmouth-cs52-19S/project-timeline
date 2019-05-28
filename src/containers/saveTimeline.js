@@ -54,16 +54,21 @@ class SaveTimeline extends Component {
     return (this.props.user_timeline.events.map((event) => {
       console.log(`event.id is ${event.id}`);
       return (
-        <div key={event.id} name={event.id} className="detailContainerSaved" onClick={(e => this.handleClicked(e, event.id))}>
+        <div key={event.id} name={event.id} className="detailContainerSaved">
           <div className="detailTitle">
             <span>{event.title}</span>
-            <button
-              type="button"
-              className="button-grey"
-              onClick={(e => this.handleRemove(e, event.id))}
-            >
-              <i className="far fa-bookmark" /> Unsave
-            </button>
+            <div>
+              <button
+                type="button"
+                className="button-grey"
+                onClick={(e => this.handleRemove(e, event.id))}
+              >
+                <i className="far fa-bookmark" /> Unsave
+              </button>
+              <i className="fas fa-external-link-alt grow" name={event.id} onClick={(e => this.handleClicked(e, event.id))} />
+            </div>
+
+
           </div>
           <div className="detailContent">
             {event.content}

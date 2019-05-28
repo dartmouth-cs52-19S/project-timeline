@@ -457,6 +457,7 @@ b{
   padding: 1em;
   border-left: 10px solid $main-color;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 1%;
 }
 
 .detailContainerSaved{
@@ -658,6 +659,12 @@ b{
 }
 .wrap{
   flex-flow: row wrap;
+}
+.fa-external-link-alt {
+  color: $shadow-color;
+}
+.fa-external-link-alt:hover {
+  color: $main-color;
 }
 // .backgroundImg{
 //   width: 100vw;
