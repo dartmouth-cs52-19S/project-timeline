@@ -15,6 +15,7 @@ export const ActionTypes = {
   FETCH_META: 'FETCH_META',
   SELECT_TIMELINE: 'SELECT_TIMELINE',
   CREATE_TIMELINE: 'CREATE_TIMELINE',
+  USER_TIMELINE: 'USER_TIMELINE',
   SELECT_TIMELINE_DETAIL: 'SELECT_TIMELINE_DETAIL',
   ON_ADDUPDATE: 'ON_ADDUPDATE',
   DO_NOTHING: 'DO_NOTHING',
@@ -89,6 +90,18 @@ export function selectTimeline(id) {
     axios.get(`${ROOT_URL}/timeline/${id}`)
       .then((response) => {
         dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
+      })
+      .catch((error) => {
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+      });
+  };
+}
+
+export function userTimeline(id) {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/timeline/${id}`)
+      .then((response) => {
+        dispatch({ type: ActionTypes.USER_TIMELINE, user_timeline: response.data });
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
