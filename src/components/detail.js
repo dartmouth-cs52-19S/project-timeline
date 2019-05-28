@@ -32,10 +32,10 @@ class Detail extends Component {
           <span>{this.props.title}</span>
           <button
             type="button"
-            className="buttonCTAwhite-alt"
+            className="button"
             onClick={() => this.props.add(this.props._id)}
           >
-          Save
+            <i className="far fa-bookmark" /> Save
           </button>
         </div>
         <div className="detailImg">
