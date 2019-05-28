@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/interactive-supports-focus */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -94,13 +93,14 @@ class Settings extends Component {
     return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  toggleShow(e) {
+  toggleShow() {
+    console.log('toggling');
     if (this.state.newPassword1 === '' && this.state.newPassword2 === '') {
       this.props.createBanner('Please enter a password to see it');
       setTimeout(() => {
         this.props.clearBanner();
-      }, 3000);
-      // eslint-disable-next-line react/no-access-state-in-setstate
+      }, 2000);
+    // eslint-disable-next-line react/no-access-state-in-setstate
     } else this.setState({ hidden: !this.state.hidden });
   }
 
@@ -110,6 +110,12 @@ class Settings extends Component {
     console.log('convert fxn start time', this.props.user.startTime);
     const oldTime = this.props.user.startTime;
     console.log('old time ', oldTime);
+    const dateTest = new Date(this.props.user.startTime);
+    console.log('barrys thing ', dateTest.getFullYear());
+    console.log('barrys thing ', dateTest.getMonth());
+    // console.log('barrys thing ', typeof this.props.user.startTime);
+    // console.log('barrys thing ', this.props.user.startTime.getFullYear());
+    // console.log('barrys thing ', this.props.user.startTime.getMonth());
     if (oldTime !== null) {
       datePretty = oldTime.replace('-01T05:00:00.000Z', ''); // e.g. 2005-01-01T05:00:00.000Z
       const datePrettier = datePretty.replace('-', '/'); // e.g. 2005-01
@@ -311,11 +317,12 @@ class Settings extends Component {
             <i className="far fa-eye signicon"
               id="passButtonSettings"
               role="button"
+              tabIndex={0}
               onClick={this.toggleShow}
             />
           </div>
           <div>
-            current HS graduation date: {this.newTime}
+            current HS graduation date: {this.props.user.startTime}
           </div>
           <div className="flexWideDrop">
             <Dropdown

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/interactive-supports-focus */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -105,6 +104,7 @@ class SignIn extends Component {
                 <i className="far fa-eye signicon"
                   id="passButton"
                   role="button"
+                  tabIndex={0}
                   onClick={this.toggleShow}
                 />
               </div>

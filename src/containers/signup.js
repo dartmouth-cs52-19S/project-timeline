@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/interactive-supports-focus */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -125,7 +124,7 @@ class SignUp extends Component {
     }
   }
 
-  createStartTime() { // changes the expected HS grad date to a unix string
+  createStartTime() { // changes the expected HS grad date to a date obj
     let numMonth = 0;
     switch (this.state.month) {
       case 'Jan':
@@ -225,6 +224,7 @@ class SignUp extends Component {
                 <i className="far fa-eye signicon"
                   id="passButton"
                   role="button"
+                  tabIndex={0}
                   onClick={this.toggleShow}
                 />
               </div>
