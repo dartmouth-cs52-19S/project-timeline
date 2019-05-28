@@ -12,7 +12,7 @@ const AuthReducer = (state = initialState, action) => {
       return { ...state, authenticated: true, user: action.payload };
       // return Object.assign({}, state, { authenticated: true, user: action.payload });
     case ActionTypes.DEAUTH_USER:
-      return { ...state };
+      return { ...state, authenticated: false };
       // return Object.assign({}, state, { authenticated: false, user: {} });
     case ActionTypes.AUTH_ERROR:
       return { ...state };

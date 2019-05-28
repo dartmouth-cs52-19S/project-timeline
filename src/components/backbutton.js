@@ -26,12 +26,30 @@ class BackButton extends Component {
     }
   }
 
+  renderbutton() {
+    if (this.props.enabled === 'true') {
+      return (
+        <div className="backdiv">
+          <button type="button" onClick={this.handleClicked}>
+            <i className="fas fa-arrow-up" /> BACK
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div className="backdiv">
+          <button type="button" id="disabled-backbutton">
+            <i className="fas fa-arrow-up" /> BACK
+          </button>
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
-      <div className="element">
-        <button type="button" onClick={this.handleClicked}>
-          BACK, GO BACK
-        </button>
+      <div>
+        {this.renderbutton()}
       </div>
     );
   }

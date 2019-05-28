@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 import React from 'react';
 import '../style.scss';
 import {
@@ -16,7 +17,8 @@ import Settings from '../containers/settings';
 import UserProfile from '../containers/user';
 import Landing from '../containers/landing';
 
-// import RequireAuth from '../containers/requireAuth';
+import RequireAuth from '../containers/requireAuth';
+import RequireAdmin from '../containers/requireAdmin';
 
 const App = (props) => {
   return (
@@ -27,15 +29,15 @@ const App = (props) => {
         <Switch>
           <Route exact path="/" component={Landing} />
 
-          <Route path="/explore/start" component={Timeline} />
-          <Route path="/explore/:timelineID" component={Timeline} />
+          <Route path="/explore/start" component={RequireAuth(Timeline)} />
+          <Route path="/explore/:timelineID" component={RequireAuth(Timeline)} />
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/newTime" component={CreateTimeline} />
-          <Route path="/updateTime" component={UpdateTimeline} />
-          <Route path="/settings" component={Settings} />
-          <Route path="/personal" component={UserProfile} />
-          <Route path="/save" component={SaveTimeline} />
+          <Route path="/newTime" component={(RequireAdmin(CreateTimeline))} />
+          <Route path="/updateTime" component={RequireAdmin(UpdateTimeline)} />
+          <Route path="/settings" component={RequireAuth(Settings)} />
+          <Route path="/personal" component={RequireAuth(UserProfile)} />
+          <Route path="/save" component={RequireAuth(SaveTimeline)} />
           <Route render={() => (<div> This life does not exist </div>)} />
         </Switch>
       </div>

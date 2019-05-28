@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { fetchUserInfo, createBanner, updateUser } from '../actions';
+import {
+  fetchUserInfo, createBanner, clearBanner, updateUser,
+} from '../actions';
 
 class Settings extends Component {
   constructor(props) {
@@ -64,6 +66,9 @@ class Settings extends Component {
       return newTime;
     } else {
       this.props.createBanner('Sorry this is not working right now!');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
       return null;
     }
   }
@@ -106,9 +111,15 @@ class Settings extends Component {
       this.state.newPassword2 = this.props.user.password;
     } else if (this.state.newPassword1 !== this.state.newPassword2) {
       this.props.createBanner('Your passwords do not match!');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
     } else { // FINALLY save the user obj and update it. If a field is not filled out,
       // we send the user object what it has currently.
       this.props.createBanner('You have saved your settings. Thanks!');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
       const fields = {
         email: this.state.newEmail,
         username: this.state.newUsername,
@@ -202,4 +213,6 @@ const mapStateToProps = reduxState => (
 );
 // export default withRouter(connect(mapStateToProps, null)(Settings));
 export default withRouter(connect(mapStateToProps,
-  { fetchUserInfo, createBanner, updateUser })(Settings));
+  {
+    fetchUserInfo, createBanner, updateUser, clearBanner,
+  })(Settings));

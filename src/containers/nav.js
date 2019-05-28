@@ -21,7 +21,9 @@ class Nav extends Component {
 
   render() {
     // set the links based on authentication
-    const account = this.props.authenticated
+    console.log(this.props);
+
+    const account = (this.props.authenticated && this.props.user !== null)
       ? (
         <span>
           <div className="flex">
@@ -29,7 +31,8 @@ class Nav extends Component {
               {/* Saved */}
               <NavLink
                 exact
-                to={`/explore/${this.props.user.timeline}`}
+                // to={`/explore/${this.props.user.timeline}`}
+                to="/save"
                 className="link"
                 activeClassName="selectedLink"
               >
@@ -74,30 +77,33 @@ class Nav extends Component {
         </span>
       );
     // Show add/update timeline info buttons only if admin auth
-    const admin = (this.props.authenticated === true
-      && this.props.user !== null && this.props.user.username === 'admin')
+
+    const admin = (this.props.authenticated
+      && this.props.user !== null && this.props.user.admin)
       ? (
         <span>
-          <li>
-            {/* Add */}
-            <NavLink
-              to="/newTime"
-              className="link"
-              activeClassName="selectedLink"
-            >
-              <i className="fas fa-plus grow" />
-            </NavLink>
-          </li>
-          <li>
-            {/* Update */}
-            <NavLink
-              to="/updateTime"
-              className="link"
-              activeClassName="selectedLink"
-            >
-              <i className="fas fa-pen grow" />
-            </NavLink>
-          </li>
+          <div className="flex">
+            <li>
+              {/* Add */}
+              <NavLink
+                to="/newTime"
+                className="link"
+                activeClassName="selectedLink"
+              >
+                <i className="fas fa-plus grow" />
+              </NavLink>
+            </li>
+            <li>
+              {/* Update */}
+              <NavLink
+                to="/updateTime"
+                className="link"
+                activeClassName="selectedLink"
+              >
+                <i className="fas fa-pen grow" />
+              </NavLink>
+            </li>
+          </div>
         </span>
       )
       : (null);
@@ -140,8 +146,8 @@ const mapStateToProps = state => (
   {
     authenticated: state.auth.authenticated,
     addupdate: state.addupdate,
-    user: state.auth.user,
-    // user: state.user,
+    // user: state.auth.user,
+    user: state.user,
   }
 );
 
