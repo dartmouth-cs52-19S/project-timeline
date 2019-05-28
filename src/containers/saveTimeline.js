@@ -94,7 +94,7 @@ const mapStateToProps = state => (
   {
     timeline: state.timeline,
     user_timeline: state.user_timeline,
-    user: state.user,
+    user: state.auth.user,
   }
 );
 
