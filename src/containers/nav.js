@@ -48,12 +48,6 @@ class Nav extends Component {
               </NavLink>
             </li>
             <li>
-              {/* Personal */}
-              <NavLink to="/personal" className="link" activeClassName="selectedLink">
-                <i className="far fa-user grow" />
-              </NavLink>
-            </li>
-            <li>
               {/* Settings */}
               <NavLink to="/settings" className="link" activeClassName="selectedLink">
                 <i className="fas fa-cog fa-spin-hover" />
