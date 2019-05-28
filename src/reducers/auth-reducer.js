@@ -9,6 +9,7 @@ const initialState = {
 const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.AUTH_USER:
+      console.log('action payload of authreducer', action.payload);
       return { ...state, authenticated: true, user: action.payload };
       // return Object.assign({}, state, { authenticated: true, user: action.payload });
     case ActionTypes.DEAUTH_USER:
@@ -23,6 +24,8 @@ const AuthReducer = (state = initialState, action) => {
     case ActionTypes.UPDATE_USER:
       return { ...state, user: action.payload };
       // return Object.assign({}, state, { user: action.payload });
+    case ActionTypes.GET_USER:
+      return { ...state, authenticated: true, user: action.payload };
     default:
       return state;
   }

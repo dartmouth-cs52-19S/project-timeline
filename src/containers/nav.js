@@ -13,15 +13,32 @@ class Nav extends Component {
     this.props.signoutUser(this.props.history);
   }
 
-  componentDidMount = () => {
+  componentWillMount = () => {
     if (this.props.authenticated) {
+      console.log('I AM AUTHENTICTED');
       this.props.fetchUserInfo();
     }
   }
 
+  // componentDidUpdate = (prevProps, prevState, snapshot) => {
+  // if (this.props.authenticated) {
+  //   console.log('I AM AUTHENTICTED');
+  //   this.props.fetchUserInfo();
+  // }
+  // if (this.props.authenticated
+  //   && this.props.authuser !== undefined
+  //   && this.props.user !== undefined) {
+  //   if (this.props.authuser.email !== ('undefined' || undefined)
+  //     && this.props.user.email !== this.props.authuser.email) {
+  //     this.props.fetchUserInfo();
+  //   }
+  // }
+  // }
+
   render() {
     // set the links based on authentication
-    console.log(this.props);
+    console.log('NAV BAR PROPS', this.props);
+    console.log('nav bar user', this.props.user);
 
     const account = (this.props.authenticated && this.props.user !== null)
       ? (
@@ -145,8 +162,8 @@ const mapStateToProps = state => (
   {
     authenticated: state.auth.authenticated,
     addupdate: state.addupdate,
-    // user: state.auth.user,
-    user: state.user,
+    user: state.auth.user,
+    // user: state.user,
   }
 );
 
