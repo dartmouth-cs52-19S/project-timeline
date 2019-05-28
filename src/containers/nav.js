@@ -15,7 +15,7 @@ class Nav extends Component {
 
   componentWillMount = () => {
     if (this.props.authenticated) {
-      console.log('I AM AUTHENTICTED');
+      console.log('I AM AUTHENTICATED');
       this.props.fetchUserInfo();
     }
   }
@@ -45,12 +45,6 @@ class Nav extends Component {
                 activeClassName="selectedLink"
               >
                 <i className="far fa-bookmark grow" />
-              </NavLink>
-            </li>
-            <li>
-              {/* Personal */}
-              <NavLink to="/personal" className="link" activeClassName="selectedLink">
-                <i className="far fa-user grow" />
               </NavLink>
             </li>
             <li>

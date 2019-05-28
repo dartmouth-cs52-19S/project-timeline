@@ -49,7 +49,7 @@ class TimeCard extends Component {
 const mapStateToProps = state => (
   {
     timeline: state.timeline,
-    user: state.user,
+    user: state.auth.user,
     user_timeline: state.user_timeline,
   }
 );

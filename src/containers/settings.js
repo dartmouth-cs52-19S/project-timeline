@@ -42,7 +42,6 @@ class Settings extends Component {
 
   componentDidMount = () => {
     this.props.fetchUserInfo();
-    console.log('yoooooo', this.props.user);
   }
 
   onCancel(event) {
@@ -142,8 +141,6 @@ class Settings extends Component {
   // makes the pretty string super ugly again :(( hello date obj
   createStartTime() { // changes the expected HS grad date to a date obj
     let numMonth = 0;
-    console.log('this is state month', this.state.newMonth);
-    console.log('this is state year', this.state.newYear);
     switch (this.state.newMonth) {
       case 'Jan':
         break;
@@ -185,24 +182,19 @@ class Settings extends Component {
         break;
     }
     const numYear = parseInt(this.state.newYear, 10);
-    console.log(numYear, numMonth);
     const newDate = new Date(numYear, numMonth, 1);
-    console.log('this is new date', newDate);
-    // this.setState({ newStartTime: newDate });
     return newDate;
   }
 
   // update fxn for all fields wahoo
   edit(e) {
     this.setState({ [e.target.name]: e.target.value });
-    console.log('before test', [e.target.name]);
   }
 
   handlesSubmit(event) {
     event.preventDefault();
     // FINALLY save the user fields, make startTime, and update it
     const fields = {};
-    console.log('heheehe', this.state.newEmail);
     // if anything is left blank by the user, don't add it to fields
     if (this.state.newEmail !== '') {
       if (this.checkEmail(this.state.newEmail)) { // passes bad email check
@@ -229,7 +221,7 @@ class Settings extends Component {
       }
     } if (this.state.newMonth !== '' && this.state.newYear !== '') {
       fields.startTime = this.createStartTime();
-    } if (fields !== {}) {
+    } if (Object.entries(fields).length !== 0 && fields.constructor === Object) {
       this.props.updateUser(fields, this.props.history);
       // tell the user they did something
       this.props.createBanner('You have saved your settings. Thanks!');
@@ -242,7 +234,7 @@ class Settings extends Component {
       setTimeout(() => {
         this.props.clearBanner();
       }, 3000);
-      return true;
+      return false;
     }
   }
 
