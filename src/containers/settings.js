@@ -25,7 +25,6 @@ class Settings extends Component {
       newUsername: '',
       newPassword1: '',
       newPassword2: '',
-      // newStartTime: '',
       newYear: '',
       newMonth: '',
       hidden: true,
@@ -191,68 +190,57 @@ class Settings extends Component {
     // this.setState({ newStartTime: newDate });
     return newDate;
   }
-  // createStartTime() { // changes the expected HS grad date to a date obj
-  //   let numMonth = 0;
-  //   console.log('this is state month', this.state.newMonth);
-  //   console.log('this is state year', this.state.newYear);
-  //   switch (this.state.newMonth) {
-  //     case 'Jan':
-  //       break;
-  //     case 'Feb':
-  //       numMonth = 1;
-  //       break;
-  //     case 'Mar':
-  //       numMonth = 2;
-  //       break;
-  //     case 'Apr':
-  //       numMonth = 3;
-  //       break;
-  //     case 'May':
-  //       numMonth = 4;
-  //       break;
-  //     case 'June':
-  //       numMonth = 5;
-  //       break;
-  //     case 'July':
-  //       numMonth = 6;
-  //       break;
-  //     case 'Aug':
-  //       numMonth = 7;
-  //       break;
-  //     case 'Sept':
-  //       numMonth = 8;
-  //       break;
-  //     case 'Oct':
-  //       numMonth = 9;
-  //       break;
-  //     case 'Nov':
-  //       numMonth = 10;
-  //       break;
-  //     case 'Dec':
-  //       numMonth = 11;
-  //       break;
-  //     default:
-  //       numMonth = 0;
-  //       break;
-  //   }
-  //   const numYear = parseInt(this.state.newYear, 10);
-  //   console.log(numYear, numMonth);
-  //   const newDate = new Date(numYear, numMonth, 1);
-  //   console.log('this is new date', newDate);
-  //   console.log('this is old startTime', this.state.newStartTime);
-  //   // this.setState({ newStartTime: newDate });
-  //   this.setState({ newYear: 'hellooooo' });
-  //   console.log('testttt', this.state.newYear);
-  //   this.setState({ newStartTime: new Date(numYear, numMonth, 1) });
-  //   // this is failing wth
-  //   console.log(this.state.newStartTime);
-  // }
 
   // update fxn for all fields wahoo
   edit(e) {
     this.setState({ [e.target.name]: e.target.value });
     console.log('before test', [e.target.name]);
   }
+
+  handlesSubmit(event) {
+    event.preventDefault();
+    console.log(this.state.newEmail);
+    if (this.checkEmail(this.state.newEmail)) { // bad email check
+      this.props.createBanner('Please enter a valid email.');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
+      return false;
+    } if (this.state.newPassword1 !== this.state.newPassword2) {
+      this.props.createBanner('Your passwords do not match!');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
+      return false;
+    } else { // FINALLY make the start Time, save the user obj, and update it
+      // and tell the user you did something
+      const fields = {};
+      if (this.state.newEmail === '') {
+        fields.email = this.props.user.email;
+      } else {
+        fields.email = this.state.newEmail;
+      }
+      if (this.state.newUsername === '') {
+        fields.username = this.props.user.username;
+      } else {
+        fields.username = this.state.newUsername;
+      }
+
+      // if anything is left blank by the user, don't add it to fields
+      if (this.state.newPassword1 !== '' && this.state.newPassword2 !== '') {
+        fields.password = this.state.newPassword1;
+      } if (this.state.newMonth !== '' && this.state.newYear !== '') {
+        fields.startTime = this.createStartTime();
+      }
+      this.props.updateUser(fields, this.props.history);
+      this.props.createBanner('You have saved your settings. Thanks!');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
+      return true;
+    }
+  }
+
 
   handleSubmit(event) {
     event.preventDefault();
@@ -270,11 +258,11 @@ class Settings extends Component {
       }, 3000);
       return false;
     } else { // FINALLY make the start Time, save the user obj, and update it
-      console.log('test2', this.state.newYear);
       this.props.createBanner('You have saved your settings. Thanks!');
       setTimeout(() => {
         this.props.clearBanner();
       }, 3000);
+
       const fields = {
         email: this.state.newEmail,
         username: this.state.newUsername,
@@ -373,7 +361,7 @@ class Settings extends Component {
             />
           </div>
           <button type="button" onClick={this.onCancel}>Cancel</button>
-          <button type="button" onClick={this.handleSubmit}>Save Changes</button>
+          <button type="button" onClick={this.handlesSubmit}>Save Changes</button>
         </div>
       );
     }
