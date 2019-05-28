@@ -5,7 +5,6 @@ import AuthReducer from './auth-reducer';
 import TimelineReducer from './timeline-reducer';
 import SelectReducer from './select-reducer';
 import BannerReducer from './banner-reducer';
-import UserReducer from './user-reducer';
 import AddUpdateReducer from './addupdate-reducer';
 import MetaReducer from './meta-reducer';
 import UserTimelineReducer from './user-timeline-reducer';
@@ -15,7 +14,6 @@ const rootReducer = combineReducers({
   timeline: TimelineReducer,
   selected: SelectReducer,
   message: BannerReducer,
-  user: UserReducer,
   addupdate: AddUpdateReducer,
   meta: MetaReducer,
   user_timeline: UserTimelineReducer,

@@ -232,7 +232,7 @@ export function fetchUserInfo() {
     axios.get(`${ROOT_URL}/personal${API_KEY}`,
       { headers: { authorization: localStorage.getItem('token') } })
       .then((response) => {
-        console.log('response data: ', response.data);
+        console.log('IN FETCHUSER INFO', response.data);
         dispatch({ type: ActionTypes.GET_USER, payload: response.data });
       }).catch((error) => {
         console.log(error);

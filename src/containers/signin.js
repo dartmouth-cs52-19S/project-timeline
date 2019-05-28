@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Particles from 'react-particles-js';
-import { signinUser, createBanner, clearBanner } from '../actions';
-
+import {
+  signinUser, createBanner, clearBanner, fetchUserInfo,
+} from '../actions';
 
 const particlesOptions = {
   particles: {
@@ -145,4 +146,6 @@ class SignIn extends Component {
   }
 }
 
-export default withRouter(connect(null, { signinUser, createBanner, clearBanner })(SignIn));
+export default withRouter(connect(null, {
+  signinUser, fetchUserInfo, createBanner, clearBanner,
+})(SignIn));

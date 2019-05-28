@@ -29,7 +29,7 @@ export default function (ComposedComponent) {
 
   const mapStateToProps = state => (
     {
-      user: state.user,
+      user: state.auth.user,
     }
   );
   return connect(mapStateToProps, { createBanner, clearBanner })(RequireAdmin);
