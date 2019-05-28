@@ -253,52 +253,6 @@ export function checkUsername(username) {
   };
 }
 
-// USELESS DELETE LATER
-// TODO: Check against server for sending post v. destructured
-export function createPost(post, history) {
-  return (dispatch) => {
-    const fields = {
-      title: post.title, content: post.content, tags: post.tags, cover_url: post.cover_url,
-    };
-    axios.post(`${ROOT_URL}/posts`, fields,
-      { headers: { authorization: localStorage.getItem('token') } })
-      .then(() => {
-        history.push('/');
-      }).catch((error) => {
-        console.log(error);
-      });
-  };
-}
-
-// USELESS DELETE LATER
-// send updated post info to replace old
-export function updatePost(id, fields, history) {
-  return (dispatch) => {
-    axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, fields,
-      { headers: { authorization: localStorage.getItem('token') } })
-      .then((response) => {
-        history.push('/');
-        dispatch({ type: ActionTypes.FETCH_POST, payload: response });
-      }).catch((error) => {
-        console.log(error);
-      });
-  };
-}
-
-// USELESS DELETE LATER
-// Delete post + push to home
-export function deletePost(id, history) {
-  return (dispatch) => {
-    axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`,
-      { headers: { authorization: localStorage.getItem('token') } })
-      .then((response) => {
-        history.push('/');
-      }).catch((error) => {
-        console.log(error);
-      });
-  };
-}
-
 // trigger to deauth if there is error
 export function authError(error) {
   return {
