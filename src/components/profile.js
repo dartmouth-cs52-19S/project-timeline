@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 class Profile extends Component {
   constructor(props) {
     super(props);
-    console.log('yoooooo', this.props);
     this.state = {
       user: this.props.user,
     };

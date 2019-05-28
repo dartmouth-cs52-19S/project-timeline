@@ -219,6 +219,7 @@ export function fetchUserInfo() {
     axios.get(`${ROOT_URL}/personal${API_KEY}`,
       { headers: { authorization: localStorage.getItem('token') } })
       .then((response) => {
+        console.log('response data: ', response.data);
         dispatch({ type: ActionTypes.GET_USER, payload: response.data });
       }).catch((error) => {
         console.log(error);
@@ -322,9 +323,13 @@ export function signupUser({
     };
     axios.post(`${ROOT_URL}/signup`, user).then((response) => {
       dispatch({ type: ActionTypes.AUTH_USER, payload: user });
+      // dispatch({ type: ActionTypes.AUTH_USER, payload: response.data });
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('username', response.data.username);
       localStorage.setItem('email', response.data.email);
+      // only takes strings, so converts startTime to a string
+      // need to redesign to localState
+      // const
       localStorage.setItem('startTime', response.data.startTime);
       history.push('/explore/start');
     }).catch((error) => {
@@ -406,7 +411,7 @@ export function updateUser(fields, history) {
       localStorage.setItem('username', response.data.username);
       localStorage.setItem('email', response.data.email);
       localStorage.setItem('password', response.data.password);
-      // localStorage.setItem('startTime', response.data.startTime);
+      localStorage.setItem('startTime', response.data.startTime);
       history.push('/explore/start');
     }).catch((error) => {
       dispatch(authError(`Update settings failed: ${error.message}`));

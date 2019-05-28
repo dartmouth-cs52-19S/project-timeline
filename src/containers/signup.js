@@ -26,7 +26,7 @@ const optionsYear = [
   '2026', '2027', '2028', '2029', '2030',
 ];
 const optionsMonth = [
-  'Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec',
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec',
 ];
 
 class SignUp extends Component {
@@ -37,7 +37,7 @@ class SignUp extends Component {
       username: '',
       email: '',
       password: '',
-      startTime: '', // should this be a date obj lol
+      startTime: new Date(), // should this be a date obj lol
       year: '',
       month: '',
       hidden: true,
@@ -132,10 +132,10 @@ class SignUp extends Component {
       case 'Feb':
         numMonth = 1;
         break;
-      case 'March':
+      case 'Mar':
         numMonth = 2;
         break;
-      case 'April':
+      case 'Apr':
         numMonth = 3;
         break;
       case 'May':
@@ -168,7 +168,6 @@ class SignUp extends Component {
     }
     const numYear = parseInt(this.state.year, 10);
     const date = new Date(numYear, numMonth, 1);
-    console.log('this is date ', date);
     // const startTimeMili = date.getTime(); // in milliseconds
     this.setState({ startTime: date }, () => {
       this.props.signupUser(this.state, this.props.history);

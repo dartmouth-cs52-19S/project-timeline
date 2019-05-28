@@ -13,7 +13,7 @@ const optionsYear = [
   '2026', '2027', '2028', '2029', '2030',
 ];
 const optionsMonth = [
-  'Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec',
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec',
 ];
 
 class Settings extends Component {
@@ -25,7 +25,7 @@ class Settings extends Component {
       newUsername: '',
       newPassword1: '',
       newPassword2: '',
-      newStartTime: '',
+      // newStartTime: '',
       newYear: '',
       newMonth: '',
       hidden: true,
@@ -33,8 +33,9 @@ class Settings extends Component {
     this.onCancel = this.onCancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.edit = this.edit.bind(this);
-    this.convertStartTime = this.convertStartTime.bind(this);
+    this.displayStartTime = this.displayStartTime.bind(this);
     this.createStartTime = this.createStartTime.bind(this);
+    this.convertStartTime = this.convertStartTime.bind(this);
     this.monthChange = this.monthChange.bind(this);
     this.yearChange = this.yearChange.bind(this);
     this.toggleShow = this.toggleShow.bind(this);
@@ -42,10 +43,6 @@ class Settings extends Component {
 
   componentDidMount = () => {
     this.props.fetchUserInfo();
-    console.log('init props', this.props);
-    console.log('initStartTime', this.props.user.startTime);
-    this.convertStartTime();
-    console.log('newTime', this.newTime);
   }
 
   onCancel(event) {
@@ -59,7 +56,6 @@ class Settings extends Component {
   }
 
   toggleShow() {
-    console.log('toggling');
     if (this.state.newPassword1 === '' && this.state.newPassword2 === '') {
       this.props.createBanner('Please enter a password to see it');
       setTimeout(() => {
@@ -69,50 +65,95 @@ class Settings extends Component {
     } else this.setState({ hidden: !this.state.hidden });
   }
 
+  convertStartTime() { // need to do this bc Mongoose returns startTime as a string
+    const dateObj = new Date(this.props.user.startTime);
+    return dateObj;
+  }
+
   // makes the HS grad time date obj really pretty
   displayStartTime() {
     let currMonth = 0;
     let currYear = 0;
-    const dateObj = new Date(this.props.user.startTime);
-    // for some reason stores in frontend as string
-    if (dateObj !== null) {
+    if (this.props.user !== null) {
+      const dateObj = this.convertStartTime(); // string => dateObj
       currMonth = dateObj.getMonth();
-      const currentMonth = currMonth + 1; // weird 0-11 month things
+      switch (currMonth) {
+        case 0:
+          currMonth = 'Jan';
+          break;
+        case 1:
+          currMonth = 'Feb';
+          break;
+        case 2:
+          currMonth = 'March';
+          break;
+        case 3:
+          currMonth = 'April';
+          break;
+        case 4:
+          currMonth = 'May';
+          break;
+        case 5:
+          currMonth = 'June';
+          break;
+        case 6:
+          currMonth = 'July';
+          break;
+        case 7:
+          currMonth = 'Aug';
+          break;
+        case 9:
+          currMonth = 'Sept';
+          break;
+        case 10:
+          currMonth = 'Oct';
+          break;
+        case 11:
+          currMonth = 'Nov';
+          break;
+        case 12:
+          currMonth = 'Dev';
+          break;
+        default:
+          currMonth = 'Jan';
+          break;
+      }
       currYear = dateObj.getFullYear();
-      console.log('currMonth ', currentMonth);
-      console.log('currMonth ', `${currentMonth.toString()}/${currYear.toString()}`);
-      return `${currentMonth.toString()}/${currYear.toString()}`;
+      const currTime = `${currYear.toString()}-${currMonth}`;
+      return currTime;
     } else {
       this.props.createBanner('Sorry this is not working right now!');
       setTimeout(() => {
         this.props.clearBanner();
       }, 3000);
-      return ' lollll katie';
+      return ' lollll sorry not working';
     }
   }
 
 
   monthChange(e) {
-    this.setState({ month: e.value });
+    this.setState({ newMonth: e.value });
   }
 
   yearChange(e) {
-    this.setState({ year: e.value });
+    this.setState({ newYear: e.value });
   }
 
   // makes the pretty string super ugly again :(( hello date obj
   createStartTime() { // changes the expected HS grad date to a date obj
     let numMonth = 0;
-    switch (this.state.month) {
+    console.log('this is state month', this.state.newMonth);
+    console.log('this is state year', this.state.newYear);
+    switch (this.state.newMonth) {
       case 'Jan':
         break;
       case 'Feb':
         numMonth = 1;
         break;
-      case 'March':
+      case 'Mar':
         numMonth = 2;
         break;
-      case 'April':
+      case 'Apr':
         numMonth = 3;
         break;
       case 'May':
@@ -143,36 +184,93 @@ class Settings extends Component {
         numMonth = 0;
         break;
     }
-    const numYear = parseInt(this.state.year, 10);
+    const numYear = parseInt(this.state.newYear, 10);
+    console.log(numYear, numMonth);
     const newDate = new Date(numYear, numMonth, 1);
-    this.setState({ newStartTime: newDate });
+    console.log('this is new date', newDate);
+    // this.setState({ newStartTime: newDate });
+    return newDate;
   }
+  // createStartTime() { // changes the expected HS grad date to a date obj
+  //   let numMonth = 0;
+  //   console.log('this is state month', this.state.newMonth);
+  //   console.log('this is state year', this.state.newYear);
+  //   switch (this.state.newMonth) {
+  //     case 'Jan':
+  //       break;
+  //     case 'Feb':
+  //       numMonth = 1;
+  //       break;
+  //     case 'Mar':
+  //       numMonth = 2;
+  //       break;
+  //     case 'Apr':
+  //       numMonth = 3;
+  //       break;
+  //     case 'May':
+  //       numMonth = 4;
+  //       break;
+  //     case 'June':
+  //       numMonth = 5;
+  //       break;
+  //     case 'July':
+  //       numMonth = 6;
+  //       break;
+  //     case 'Aug':
+  //       numMonth = 7;
+  //       break;
+  //     case 'Sept':
+  //       numMonth = 8;
+  //       break;
+  //     case 'Oct':
+  //       numMonth = 9;
+  //       break;
+  //     case 'Nov':
+  //       numMonth = 10;
+  //       break;
+  //     case 'Dec':
+  //       numMonth = 11;
+  //       break;
+  //     default:
+  //       numMonth = 0;
+  //       break;
+  //   }
+  //   const numYear = parseInt(this.state.newYear, 10);
+  //   console.log(numYear, numMonth);
+  //   const newDate = new Date(numYear, numMonth, 1);
+  //   console.log('this is new date', newDate);
+  //   console.log('this is old startTime', this.state.newStartTime);
+  //   // this.setState({ newStartTime: newDate });
+  //   this.setState({ newYear: 'hellooooo' });
+  //   console.log('testttt', this.state.newYear);
+  //   this.setState({ newStartTime: new Date(numYear, numMonth, 1) });
+  //   // this is failing wth
+  //   console.log(this.state.newStartTime);
+  // }
 
   // update fxn for all fields wahoo
   edit(e) {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(e.target.value);
+    console.log('before test', [e.target.name]);
   }
 
   handleSubmit(event) {
     event.preventDefault();
     // if anything is left blank by the user, just keep the same old info
-    if (this.state.newEmail !== '' && !this.checkEmail(this.state.newEmail)) { // bad email check
+    if (this.state.newEmail !== '' && this.checkEmail(this.state.newEmail)) { // bad email check
       this.props.createBanner('Please enter a valid email.');
       setTimeout(() => {
         this.props.clearBanner();
       }, 3000);
       return false;
-    }
-    if (this.state.email !== '' && this.checkEmail(this.state.newEmail)) {
-      this.state.newEmail = this.props.user.email;
     } if (this.state.newPassword1 !== this.state.newPassword2) {
       this.props.createBanner('Your passwords do not match!');
       setTimeout(() => {
         this.props.clearBanner();
       }, 3000);
       return false;
-    } else { // FINALLY save the user obj and update it
+    } else { // FINALLY make the start Time, save the user obj, and update it
+      console.log('test2', this.state.newYear);
       this.props.createBanner('You have saved your settings. Thanks!');
       setTimeout(() => {
         this.props.clearBanner();
@@ -181,7 +279,8 @@ class Settings extends Component {
         email: this.state.newEmail,
         username: this.state.newUsername,
         password: this.state.newPassword1,
-        startTime: this.state.newStartTime,
+        startTime: this.createStartTime(),
+        // startTime: this.state.newStartTime,
       };
       this.props.updateUser(fields, this.props.history);
       return true;
@@ -190,7 +289,7 @@ class Settings extends Component {
   // want to call fxn if user exists (which returns a t/f) onChange for username so realtime
 
   render() {
-    if (this.props.user == null) {
+    if (this.props.user === null) {
       return (
         <div className="flex" style={{ alignItems: 'flex-end', justifyContent: 'space-around' }}>
           <h1>Loading</h1>
@@ -201,7 +300,7 @@ class Settings extends Component {
         <div>
           <div className="settingsHeader">
             Settings
-            Still working on start time
+            Need backend to do something. Use @ur own risk !
           </div>
           <div>
             current username: {this.props.user.username}
@@ -255,7 +354,7 @@ class Settings extends Component {
             />
           </div>
           <div>
-            current HS graduation date: {this.props.user.startTime}
+            current HS graduation date: {this.displayStartTime()}
           </div>
           <div className="flexWideDrop">
             <Dropdown
