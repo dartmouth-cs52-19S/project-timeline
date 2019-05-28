@@ -20,20 +20,11 @@ class Nav extends Component {
     }
   }
 
-  // componentDidUpdate = (prevProps, prevState, snapshot) => {
-  // if (this.props.authenticated) {
-  //   console.log('I AM AUTHENTICTED');
-  //   this.props.fetchUserInfo();
-  // }
-  // if (this.props.authenticated
-  //   && this.props.authuser !== undefined
-  //   && this.props.user !== undefined) {
-  //   if (this.props.authuser.email !== ('undefined' || undefined)
-  //     && this.props.user.email !== this.props.authuser.email) {
-  //     this.props.fetchUserInfo();
-  //   }
-  // }
-  // }
+  componentDidUpdate = (prevProps, prevState, snapshot) => {
+    if (prevProps.auth.user.admin === undefined) {
+      this.props.fetchUserInfo();
+    }
+  }
 
   render() {
     // set the links based on authentication
@@ -96,7 +87,7 @@ class Nav extends Component {
     // Show add/update timeline info buttons only if admin auth
 
     const admin = (this.props.authenticated
-      && this.props.user !== null && this.props.user.admin)
+      && this.props.auth.user !== null && this.props.user.admin)
       ? (
         <span>
           <div className="flex">
@@ -161,10 +152,10 @@ class Nav extends Component {
 
 const mapStateToProps = state => (
   {
+    auth: state.auth,
     authenticated: state.auth.authenticated,
     addupdate: state.addupdate,
     user: state.auth.user,
-    // user: state.user,
   }
 );
 
