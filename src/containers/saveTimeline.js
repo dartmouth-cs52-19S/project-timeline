@@ -59,10 +59,10 @@ class SaveTimeline extends Component {
             <span>{event.title}</span>
             <button
               type="button"
-              className="buttonCTAwhite-alt"
+              className="button-grey"
               onClick={(e => this.handleRemove(e, event.id))}
             >
-          Unsave
+              <i className="far fa-bookmark" /> Unsave
             </button>
           </div>
           <div className="detailContent">
