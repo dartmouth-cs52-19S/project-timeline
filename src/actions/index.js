@@ -125,7 +125,8 @@ export function saveToTimeline(timelineID) {
 export function createTimeline(fields, addNextUnder) {
   return (dispatch) => {
     console.log('Fields in action creator: ', fields);
-    axios.post(`${ROOT_URL}/timeline`, fields)
+    axios.post(`${ROOT_URL}/timeline`, fields,
+      { headers: { authorization: localStorage.getItem('token') } })
       .then((response) => {
         console.log('from action, create timeline response: ', response.data);
         console.log('ADDNEXTUNDER: ', addNextUnder);
@@ -146,7 +147,8 @@ export function createTimeline(fields, addNextUnder) {
 
 export function updateTimeline(fields, addNextUnder, history) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/timeline/${fields.id.toString()}`, fields)
+    axios.post(`${ROOT_URL}/timeline/${fields.id.toString()}`, fields,
+      { headers: { authorization: localStorage.getItem('token') } })
       .then((response) => {
         // console.log('from action, update timeline response: ', response.data);
         // console.log('ADDNEXTUNDER: ', addNextUnder);
@@ -169,7 +171,8 @@ export function updateTimeline(fields, addNextUnder, history) {
 
 export function deleteTimeline(timeline, history) {
   return (dispatch) => {
-    axios.delete(`${ROOT_URL}/timeline/${timeline._id}`)
+    axios.delete(`${ROOT_URL}/timeline/${timeline._id}`,
+      { headers: { authorization: localStorage.getItem('token') } })
       .then((response) => {
         dispatch({ type: ActionTypes.BANNER_SET, payload: response.data });
         dispatch(selectTimeline(timeline.parent));
