@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Particles from 'react-particles-js';
+import Dropdown from 'react-dropdown';
 import {
-  signupUser, createBanner, clearBanner, checkUsername,
+  signupUser, createBanner, checkUsername, clearBanner,
 } from '../actions';
 
 const particlesOptions = {
@@ -18,6 +19,16 @@ const particlesOptions = {
   },
 };
 
+// date dropdown stuff
+const optionsYear = [
+  '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014',
+  '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025',
+  '2026', '2027', '2028', '2029', '2030',
+];
+const optionsMonth = [
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec',
+];
+
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -26,36 +37,23 @@ class SignUp extends Component {
       username: '',
       email: '',
       password: '',
-      startTime: '',
+      startTime: new Date(), // should this be a date obj lol
+      year: '',
+      month: '',
+      hidden: true,
     };
 
     this.edit = this.edit.bind(this);
     this.onCancel = this.onCancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.createStartTime = this.createStartTime.bind(this);
+    this.monthChange = this.monthChange.bind(this);
+    this.yearChange = this.yearChange.bind(this);
+    this.toggleShow = this.toggleShow.bind(this);
   }
 
   onCancel(event) {
     this.props.history.push('/');
-  }
-
-
-  checkStartTime = () => {
-    const startSlash = this.state.startTime.split('/');
-    const startDash = this.state.startTime.split('-');
-    if (startSlash.length === 1 && startDash.length === 1) {
-      return false;
-    }
-    const startTimeFinal = startSlash.length > 1 ? startSlash : startDash;
-    const date = startTimeFinal[2];
-    const month = startTimeFinal[1];
-    const year = startTimeFinal[0];
-
-    if (year.length !== 4) return false;
-    if (month.length !== 2) return false;
-    if (date.length !== 2) return false;
-
-    return true;
   }
 
   // checks if email is a valid email
@@ -64,6 +62,23 @@ class SignUp extends Component {
     return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
+  toggleShow(e) {
+    if (this.state.password === '') {
+      this.props.createBanner('Please enter a password to see it.');
+      setTimeout(() => {
+        this.props.clearBanner();
+      }, 3000);
+      // eslint-disable-next-line react/no-access-state-in-setstate
+    } else this.setState({ hidden: !this.state.hidden });
+  }
+
+  monthChange(e) {
+    this.setState({ month: e.value });
+  }
+
+  yearChange(e) {
+    this.setState({ year: e.value });
+  }
 
   edit(e) {
     // username not taken check
@@ -78,8 +93,6 @@ class SignUp extends Component {
   handleSubmit(event) {
     event.preventDefault();
     // error checks
-    console.log(this.checkStartTime());
-    console.log(this.checkEmail(this.state.email));
     if (this.state.email === '' || this.checkEmail(this.state.email)) {
       this.props.createBanner('Please enter a valid email.');
       setTimeout(() => {
@@ -96,10 +109,9 @@ class SignUp extends Component {
         this.props.clearBanner();
       }, 2000);
     } else if (
-      (this.state.startTime === null
-      || Number.isNaN(Date.parse(this.state.startTime)))
-      || !this.checkStartTime()
-    ) {
+      (this.state.year === '' || this.state.month === '')) {
+      console.log(this.state.year);
+      console.log(this.state.month);
       this.props.createBanner('Please enter a valid date.');
       setTimeout(() => {
         this.props.clearBanner();
@@ -108,21 +120,59 @@ class SignUp extends Component {
     // console.log(`sign up info:
     // ${this.state.username} ${this.state.email} ${this.state.password}`);
       this.createStartTime();
-      this.props.signupUser(this.state, this.props.history);
+      // this.props.signupUser(this.state, this.props.history);
     }
   }
 
-  createStartTime() { // changes the expected HS grad date to a unix string
-    this.setState((prevState) => {
-      const newStateStart = (new Date((prevState.startTime))).getTime();
-      this.startTime = newStateStart;
+  createStartTime() { // changes the expected HS grad date to a date obj
+    let numMonth = 0;
+    switch (this.state.month) {
+      case 'Jan':
+        break;
+      case 'Feb':
+        numMonth = 1;
+        break;
+      case 'Mar':
+        numMonth = 2;
+        break;
+      case 'Apr':
+        numMonth = 3;
+        break;
+      case 'May':
+        numMonth = 4;
+        break;
+      case 'June':
+        numMonth = 5;
+        break;
+      case 'July':
+        numMonth = 6;
+        break;
+      case 'Aug':
+        numMonth = 7;
+        break;
+      case 'Sept':
+        numMonth = 8;
+        break;
+      case 'Oct':
+        numMonth = 9;
+        break;
+      case 'Nov':
+        numMonth = 10;
+        break;
+      case 'Dec':
+        numMonth = 11;
+        break;
+      default:
+        numMonth = 0;
+        break;
+    }
+    const numYear = parseInt(this.state.year, 10);
+    const date = new Date(numYear, numMonth, 1);
+    // const startTimeMili = date.getTime(); // in milliseconds
+    this.setState({ startTime: date }, () => {
+      this.props.signupUser(this.state, this.props.history);
     });
   }
-
-
-  // dates('option');
-  // months('option');
-  // years('option', 2000, 2030);
 
   // want to call fxn if user exists (which returns a t/f) onChange for username so realtime
 
@@ -164,26 +214,40 @@ class SignUp extends Component {
                 <i className="fas fa-lock signicon" />
                 <input
                   name="password"
-                  className="signinput"
-                  placeholder="password"
-                  type="password"
-                  onChange={this.edit}
+                  type={this.state.hidden ? 'password' : 'text'}
                   value={this.state.password}
+                  onChange={this.edit}
+                  placeholder="password"
+                  className="signinput"
                 />
+                <i className="far fa-eye signicon"
+                  id="passButton"
+                  role="button"
+                  tabIndex={0}
+                  onClick={this.toggleShow}
+                />
+              </div>
+              <div className="signUpText">
+                <h6> Please select your expected HS graduation date </h6>
               </div>
               <div className="flexWide">
                 <i className="fas fa-graduation-cap signicon" />
-                <input
-                  name="startTime"
-                  className="signinput"
-                  placeholder="expected high school graduation YYYY-MM-DD"
-                  onChange={this.edit}
-                  value={this.state.startTime}
+                <Dropdown
+                  className="dropdown"
+                  options={optionsYear}
+                  onChange={this.yearChange}
+                  value={this.state.year}
+                  placeholder="Select a year"
+                  key="year"
                 />
-                {/* <select className="bear-dates" />
-                <select className="bear-months" />
-                <select className="bear-years" /> */}
-
+                <Dropdown
+                  className="dropdown"
+                  options={optionsMonth}
+                  onChange={this.monthChange}
+                  value={this.state.month}
+                  placeholder="Select a month"
+                  key="month"
+                />
               </div>
               <div className="signSubmitBox">
                 <button
