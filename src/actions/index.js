@@ -56,6 +56,7 @@ export function fetchTimeline() {
       .then((response) => {
         // dispatch action w/ payload
         dispatch({ type: ActionTypes.FETCH_EXPLORE, payload: response.data });
+        dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
       })
       .catch((error) => {
         // TODO: dispatch an error, make reducer, show error component
@@ -126,6 +127,8 @@ export function createTimeline(fields, addNextUnder) {
         // history.push('/');
       })
       .catch((error) => {
+        console.log(error);
+
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
       });
   };
