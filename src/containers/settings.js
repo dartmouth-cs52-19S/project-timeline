@@ -52,41 +52,6 @@ class Settings extends Component {
     this.props.history.push('/explore/start');
   }
 
-  // makes the HS grad time unix obj really pretty
-  // convertStartTime = (oldTime) => {
-  //   let newTime = '';
-  //   let datePrettier = '';
-  //   // eslint-disable-next-line no-restricted-globals
-  //   const isDate = Object.prototype.toString.call(oldTime) ===
-  // '[object Date]' && !isNaN(oldTime);
-  //   if (oldTime !== null && isDate) {
-  //     const datePretty = oldTime.toDateString(); // e.g. Sun May 01 2019
-  //     datePrettier = datePretty.replace(' 01', ''); // Sun May 2019
-  //     if (datePrettier.includes('Sun')) { // May 2019
-  //       newTime = datePrettier.replace('Sun ', '');
-  //     } else if (datePrettier.includes('Mon')) { // May 2019
-  //       newTime = datePrettier.replace('Mon ', '');
-  //     } else if (datePrettier.includes('Tue')) { // May 2019
-  //       newTime = datePrettier.replace('Tue ', '');
-  //     } else if (datePrettier.includes('Wed')) { // May 2019
-  //       newTime = datePrettier.replace('Wed ', '');
-  //     } else if (datePrettier.includes('Thu')) { // May 2019
-  //       newTime = datePrettier.replace('Thu ', '');
-  //     } else if (datePrettier.includes('Fri')) { // May 2019
-  //       newTime = datePrettier.replace('Fri ', '');
-  //     } else if (datePrettier.includes('Sat')) { // May 2019
-  //       newTime = datePrettier.replace('Sat ', '');
-  //     }
-  //     return newTime;
-  //   } else {
-  //     this.props.createBanner('Sorry this is not working right now!');
-  //     setTimeout(() => {
-  //       this.props.clearBanner();
-  //     }, 3000);
-  //     return ' lollll katie';
-  //   }
-  // }
-
   // checks if email is a valid email
   // adapted from https://tylermcginnis.com/validate-email-address-javascript/
   checkEmail = (email) => {
@@ -104,51 +69,19 @@ class Settings extends Component {
     } else this.setState({ hidden: !this.state.hidden });
   }
 
-  convertStartTime() {
-    let newTime = '';
-    let datePretty = '';
-    console.log('convert fxn start time', this.props.user.startTime);
-    const oldTime = this.props.user.startTime;
-    console.log('old time ', oldTime);
-    const dateTest = new Date(this.props.user.startTime);
-    console.log('barrys thing ', dateTest.getFullYear());
-    console.log('barrys thing ', dateTest.getMonth());
-    // console.log('barrys thing ', typeof this.props.user.startTime);
-    // console.log('barrys thing ', this.props.user.startTime.getFullYear());
-    // console.log('barrys thing ', this.props.user.startTime.getMonth());
-    if (oldTime !== null) {
-      datePretty = oldTime.replace('-01T05:00:00.000Z', ''); // e.g. 2005-01-01T05:00:00.000Z
-      const datePrettier = datePretty.replace('-', '/'); // e.g. 2005-01
-      console.log('datePrettier ', datePrettier);
-      if (datePrettier.includes('1')) { // 2005/Jan
-        newTime = datePrettier.replace('Jan', '');
-        console.log('newRime Jan', newTime);
-      } else if (datePrettier.includes('02]')) { // 2005/Feb
-        newTime = datePrettier.replace('Feb', '');
-        console.log('newRime Feb', newTime);
-      } else if (datePrettier.includes('03')) { // 2005/March
-        newTime = datePrettier.replace('March', '');
-      } else if (datePrettier.includes('04')) { // 2005/Jan
-        newTime = datePrettier.replace('April', '');
-      } else if (datePrettier.includes('05')) { // 2005/Jan
-        newTime = datePrettier.replace('May', '');
-      } else if (datePrettier.includes('06')) { // 2005/Jan
-        newTime = datePrettier.replace('June', '');
-      } else if (datePrettier.includes('07')) { // 2005/Jan
-        newTime = datePrettier.replace('July', '');
-      } else if (datePrettier.includes('08')) { // 2005/Jan
-        newTime = datePrettier.replace('Aug', '');
-      } else if (datePrettier.includes('09')) { // 2005/Jan
-        newTime = datePrettier.replace('Sept', '');
-      } else if (datePrettier.includes('10')) { // 2005/Jan
-        newTime = datePrettier.replace('Oct', '');
-      } else if (datePrettier.includes('11')) { // 2005/Jan
-        newTime = datePrettier.replace('Nov', '');
-      } else if (datePrettier.includes('12')) { // 2005/Jan
-        newTime = datePrettier.replace('Nov', '');
-      }
-      console.log('newTime ', newTime);
-      return newTime;
+  // makes the HS grad time date obj really pretty
+  displayStartTime() {
+    let currMonth = 0;
+    let currYear = 0;
+    const dateObj = new Date(this.props.user.startTime);
+    // for some reason stores in frontend as string
+    if (dateObj !== null) {
+      currMonth = dateObj.getMonth();
+      const currentMonth = currMonth + 1; // weird 0-11 month things
+      currYear = dateObj.getFullYear();
+      console.log('currMonth ', currentMonth);
+      console.log('currMonth ', `${currentMonth.toString()}/${currYear.toString()}`);
+      return `${currentMonth.toString()}/${currYear.toString()}`;
     } else {
       this.props.createBanner('Sorry this is not working right now!');
       setTimeout(() => {

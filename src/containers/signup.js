@@ -37,7 +37,7 @@ class SignUp extends Component {
       username: '',
       email: '',
       password: '',
-      startTime: '',
+      startTime: '', // should this be a date obj lol
       year: '',
       month: '',
       hidden: true,
