@@ -10,6 +10,22 @@ class Detail extends Component {
 //   }
 
   render() {
+    console.log(`onLanding is  ${this.props.onLanding}`);
+    if (this.props.onLanding === 'onLanding') {
+      return (
+        <div className="detailContainer">
+          <div className="detailTitle">
+            <span>{this.props.title}</span>
+          </div>
+          <div className="detailImg">
+            <img className="Img" src={this.props.cover_url} alt="Detail" />
+          </div>
+          <div className="detailContent">
+            {this.props.content}
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="detailContainer">
         <div className="detailTitle">

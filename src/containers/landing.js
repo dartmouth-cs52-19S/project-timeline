@@ -47,6 +47,7 @@ class Landing extends Component {
                 content={events.content}
                 cover_url={events.cover_url}
                 events={events}
+                onLanding="onLanding"
               />
             </div>
             {/* <div className="spacing" /> */}
@@ -77,6 +78,7 @@ class Landing extends Component {
                 content={events.content}
                 cover_url={events.cover_url}
                 events={events}
+                onLanding="onLanding"
               />
             </div>
           </div>
