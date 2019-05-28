@@ -26,10 +26,10 @@ export const ActionTypes = {
 // SERVER URLS
 
 // local testing api url
-// const ROOT_URL = 'http://localhost:9090/api';
+const ROOT_URL = 'http://localhost:9090/api';
 
 // timeline api url
-const ROOT_URL = 'https://timimeline.herokuapp.com/api';
+// const ROOT_URL = 'https://timimeline.herokuapp.com/api';
 
 const API_KEY = '';
 
@@ -346,7 +346,12 @@ export function signupUser({
     // console.log('in signup user');
     axios.post(`${ROOT_URL}/signup`, user).then((response) => {
       // console.log('lab4 axios post');
-      dispatch({ type: ActionTypes.AUTH_USER, payload: user });
+      dispatch({
+        type: ActionTypes.AUTH_USER,
+        payload: {
+          username, email, password, startTime, timeline: response.data.timeline,
+        },
+      });
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('username', response.data.username);
       localStorage.setItem('email', response.data.email);
