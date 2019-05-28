@@ -1,76 +1,90 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable max-len */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 // import Main from '../components/main';
-import TimeElement from './time-element';
-import TimeDetail from './time-detail';
-import { fetchTimeline, saveToTimeline } from '../actions';
+// import TimeElement from './time-element';
+// import TimeDetail from './time-detail';
+import { fetchTimeline, saveToTimeline, userTimeline } from '../actions';
 
 
 class SaveTimeline extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      currTimeline: this.props.selected,
-    };
+    this.renderElement = this.renderElement.bind(this);
+    this.handleClicked = this.handleClicked.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
-  componentDidMount = () => {
-    if (this.props.selected !== 0 && this.state.currTimeline !== this.props.selected) {
-      console.log('saving');
-      this.props.saveToTimeline(this.props.selected.id);
-      this.setState({ currTimeline: this.props.selected });
-    }
+  componentWillMount() {
+    this.props.userTimeline(this.props.user.timeline);
+    console.log(`detail ID${this.props.selected}`);
   }
 
-  componentDidUpdate = () => {
-    console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUDGHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
-    console.log(this.state.currTimeline);
-    console.log(this.props.selected);
-    if (this.state.currTimeline !== this.props.selected) {
-      console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUDGHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH');
-      console.log('saving');
-
-      this.props.saveToTimeline(this.props.selected);
-      this.setState({ currTimeline: this.props.selected });
-    }
+  handleClicked(e, event) {
+    console.log(`event is ${event}`);
+    // console.log(`e.currtarget.name is  ${e.target.name}`);
+    this.props.history.push(`/explore/${event}`);
   }
 
-  render() {
-    console.log(`state of selected is${this.props.selected}`);
-    if (this.props.selected === 0) {
+  handleRemove(e, eventId) {
+    // insert remove funcitonality here
+  }
+
+  renderElement() {
+    if (this.props.user_timeline === 0) {
+      console.log('is zero');
       return (
         <div>
           <div className="foodHeader">
-        Discover the Possibilities
+          Discover the Possibilities
           </div>
           <div className="flex">
             <div className="flex-detail" />
-            <div className="flex-main">
-              <TimeElement />
-            </div>
+            <div className="flex-main" />
           </div>
         </div>
       );
     }
+    console.log('nowhere');
+    return (this.props.user_timeline.events.map((event) => {
+      console.log(`event.id is ${event.id}`);
+      return (
+        <div key={event.id} name={event.id} className="detailContainerSaved" onClick={(e => this.handleClicked(e, event.id))}>
+          <div className="detailTitle">
+            <span>{event.title}</span>
+            <button
+              type="button"
+              className="button-grey"
+              onClick={(e => this.handleRemove(e, event.id))}
+            >
+              <i className="far fa-bookmark" /> Unsave
+            </button>
+          </div>
+          <div className="detailContent">
+            {event.content}
+          </div>
+        </div>
+
+      );
+    })
+    );
+  }
+
+  render() {
     return (
       <div>
         <div className="foodHeader">
-        Discover the Possibilities
+            Your Saved Timelines
         </div>
-        <div className="flex">
-          <div className="flex-detail">
-            <TimeDetail />
-          </div>
-          <div className="flex-main">
-            <TimeElement />
-          </div>
+        <div className="flex wrap">
+          {this.renderElement()}
         </div>
       </div>
-
 
     );
   }
@@ -79,10 +93,11 @@ class SaveTimeline extends Component {
 const mapStateToProps = state => (
   {
     timeline: state.timeline,
-    selected: state.selected,
+    user_timeline: state.user_timeline,
+    user: state.user,
   }
 );
 
 
 export default withRouter(connect(mapStateToProps,
-  { fetchTimeline, saveToTimeline })(SaveTimeline));
+  { fetchTimeline, saveToTimeline, userTimeline })(SaveTimeline));

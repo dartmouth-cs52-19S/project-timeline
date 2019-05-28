@@ -31,7 +31,7 @@ class BackButton extends Component {
       return (
         <div className="backdiv">
           <button type="button" onClick={this.handleClicked}>
-            BACK, GO BACK
+            <i className="fas fa-arrow-up" /> BACK
           </button>
         </div>
       );
@@ -39,7 +39,7 @@ class BackButton extends Component {
       return (
         <div className="backdiv">
           <button type="button" id="disabled-backbutton">
-            BACK, GO BACK
+            <i className="fas fa-arrow-up" /> BACK
           </button>
         </div>
       );
