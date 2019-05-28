@@ -30,6 +30,7 @@ class Settings extends Component {
     };
     this.onCancel = this.onCancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handlesSubmit = this.handlesSubmit.bind(this);
     this.edit = this.edit.bind(this);
     this.displayStartTime = this.displayStartTime.bind(this);
     this.createStartTime = this.createStartTime.bind(this);
@@ -201,6 +202,7 @@ class Settings extends Component {
     event.preventDefault();
     // FINALLY save the user fields, make startTime, and update it
     const fields = {};
+    console.log('heheehe', this.state.newEmail);
     // if anything is left blank by the user, don't add it to fields
     if (this.state.newEmail !== '') {
       if (this.checkEmail(this.state.newEmail)) { // passes bad email check
@@ -295,7 +297,7 @@ class Settings extends Component {
           </div>
           <div>
             <h6><span> Come take our</span>
-              <a href="https://www.surveymonkey.com/r/DLJKTQV"> feedback survey!</a>
+              <a href="https://www.surveymonkey.com/r/WT9VZT6"> feedback survey!</a>
             </h6>
           </div>
           <div>

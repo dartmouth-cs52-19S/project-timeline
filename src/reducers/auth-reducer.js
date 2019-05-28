@@ -9,13 +9,7 @@ const initialState = {
 const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.AUTH_USER:
-<<<<<<< HEAD
-      console.log(action.payload);
-      // return { ...state, authenticated: true, user: action.payload,
-      // startTime: action.payload.startTime, user_info: payload};
-=======
       console.log('action payload of authreducer', action.payload);
->>>>>>> 14136c6419132f7a84b3bd985d88d9215042f867
       return { ...state, authenticated: true, user: action.payload };
       // return Object.assign({}, state, { authenticated: true, user: action.payload });
     case ActionTypes.DEAUTH_USER:
