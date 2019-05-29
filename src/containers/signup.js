@@ -7,6 +7,7 @@ import {
   signupUser, createBanner, checkUsername, clearBanner,
 } from '../actions';
 
+
 const particlesOptions = {
   particles: {
     number: {
@@ -88,6 +89,15 @@ class SignUp extends Component {
       if (this.props.chkUsername) { this.props.createBanner('Sorry, this username is taken'); }
     }
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  changeYear(e) {
+    console.log(e);
+    this.setState({ year: e.value });
+  }
+
+  changeMonth(e) {
+    this.setState({ month: e.value });
   }
 
   handleSubmit(event) {
