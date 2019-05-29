@@ -28,6 +28,8 @@ class Nav extends Component {
     if (this.props.authorized && prevProps.auth.user.admin === undefined) {
       this.props.fetchUserInfo();
       this.props.userTimeline(this.props.user.timeline);
+    } else if (this.props.user.timelines === undefined) {
+      this.props.fetchUserInfo();
     }
   }
 
