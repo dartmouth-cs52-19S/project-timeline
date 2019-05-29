@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import { signoutUser, onAddUpdate, fetchUserInfo } from '../actions';
+import {
+  signoutUser, onAddUpdate, fetchUserInfo, userTimeline,
+} from '../actions';
+import logoicon from '../img/timeline-logoicon.png';
+import logotext from '../img/timeline-logotext.png';
 
 class Nav extends Component {
   constructor(props) {
@@ -23,6 +27,9 @@ class Nav extends Component {
   componentDidUpdate = (prevProps, prevState, snapshot) => {
     if (this.props.authorized && prevProps.auth.user.admin === undefined) {
       this.props.fetchUserInfo();
+      this.props.userTimeline(this.props.user.timeline);
+    } else if (this.props.user.timelines === undefined) {
+      this.props.fetchUserInfo();
     }
   }
 
@@ -39,7 +46,7 @@ class Nav extends Component {
               {/* Saved */}
               <NavLink
                 exact
-                // to={`/explore/${this.props.user.timeline}`}
+                // to={`/save/${this.props.user.timeline}`}
                 to="/save"
                 className="link"
                 activeClassName="selectedLink"
@@ -117,7 +124,9 @@ class Nav extends Component {
             <li>
               {/* Home */}
               <NavLink exact to="/" className="link">
-                <i className="fas fa-star-of-life fa-spin-hover" /> Logo
+                {/* <i className="fas fa-star-of-life fa-spin-hover" /> Logo */}
+                <img src={logoicon} alt="logo icon" className="logoicon" />
+                <img src={logotext} alt="logo text" className="logoicon" />
               </NavLink>
             </li>
           </ul>
@@ -154,4 +163,6 @@ const mapStateToProps = state => (
 );
 
 export default withRouter(connect(mapStateToProps,
-  { signoutUser, onAddUpdate, fetchUserInfo })(Nav));
+  {
+    signoutUser, onAddUpdate, fetchUserInfo, userTimeline,
+  })(Nav));

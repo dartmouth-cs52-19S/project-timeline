@@ -102,7 +102,8 @@ export function userTimeline(id) {
         dispatch({ type: ActionTypes.USER_TIMELINE, user_timeline: response.data });
       })
       .catch((error) => {
-        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+        // dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+        console.log(error);
       });
   };
 }
@@ -130,10 +131,14 @@ export function createTimeline(fields, addNextUnder) {
         console.log('ADDNEXTUNDER: ', addNextUnder);
         if (addNextUnder) {
           dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
-          dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
+          dispatch(
+            { type: ActionTypes.BANNER_SET, payload: 'You successfully added timeline content!' },
+          );
         } else {
           dispatch(selectTimeline(response.data.parent));
-          dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
+          dispatch(
+            { type: ActionTypes.BANNER_SET, payload: 'You successfully added timeline content!' },
+          );
         }
         // history.push('/');
       })
@@ -154,7 +159,9 @@ export function updateTimeline(fields, addNextUnder, history) {
         // the titles and times of its events
         dispatch(selectTimeline(response.data._id));
         // console.log('dispatching banner_set');
-        dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
+        dispatch(
+          { type: ActionTypes.BANNER_SET, payload: 'You successfully added timeline content!' },
+        );
         if (history) {
           console.log('THIS IS THE RESPONSE IN UPDATE_TIMELINE');
           console.log(response.data);
@@ -303,6 +310,7 @@ export function saveTimeline(timelineID) {
       { childID: timelineID },
       { headers: { authorization: localStorage.getItem('token') } })
       .then((resp) => {
+        // console.log(resp.data);
         dispatch(createBanner('Timeline saved!'));
         setTimeout(() => {
           dispatch(clearBanner());

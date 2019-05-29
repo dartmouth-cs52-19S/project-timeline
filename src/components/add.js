@@ -269,7 +269,7 @@ class AddForm extends Component {
           </div>
           <div>
             <div className="callOut">
-          Current Timeline Display for {this.displayTimelineName()}
+          Current Timeline Display for <em>{this.displayTimelineName()}</em>
             </div>
             <div className="addContainer">
               <div className="addContainerTimeline">
