@@ -84,6 +84,19 @@ h6{
   color: $shadow-color;
   font-size: .7em;
 }
+.h7{
+  font-weight: 600;
+  font-size: 1.5em;
+  color: $text-color;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+.h8{
+  font-weight: 100;
+  color: $shadow-color;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
 #p404 {
   color: $main-color;
   font-weight: 600;
@@ -967,4 +980,29 @@ h6 span {
   width: 35%;
   background: $secondary-color;
   overflow: hidden;
+}
+.emptyState{
+  height: 50vh;
+}
+.middle{
+  padding: 2em 0 0 0;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.middleText{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.middleText em{
+  color: $main-color;
+  font-weight: 400;
+  font-style: normal;
+  transition: all 0.1s ease-in-out;
+}
+.middleText em:hover{
+  transform: scale(1.05);
 }
