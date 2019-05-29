@@ -99,7 +99,7 @@ h6{
 // also has class .header above
 #banner {
   top: 60px;
-  background: $main-color;
+  background: $secondary-color;
   color: $white;
   width: 94%;
   padding: 0 2% 0 4%;
@@ -941,7 +941,9 @@ b{
 #passButtonSettings:active {
   color: $main-color;
 }
-
+.logoicon{
+  height: 40px;
+}
 .settingsFooter{
   background: $secondary-color;
   width: 100%;
