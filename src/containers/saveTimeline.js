@@ -28,6 +28,10 @@ class SaveTimeline extends Component {
     }
   }
 
+  componentDidUpdate() {
+    this.props.userTimeline(this.props.user.timeline);
+  }
+
   handleClicked(e, event) {
     // console.log(`e.currtarget.name is  ${e.target.name}`);
     this.props.history.push(`/explore/${event}`);
@@ -68,6 +72,7 @@ class SaveTimeline extends Component {
           <div className="detailContent">
             {event.content}
           </div>
+
         </div>
 
       );
