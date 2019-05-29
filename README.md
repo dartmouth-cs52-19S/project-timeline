@@ -1,12 +1,19 @@
 # Timeline
-Timeline helps you know what you don't.
+Have you ever felt overwhelmed or undereducated about all the opportunities available to you in life? Us too. That's why we built Timeline, a website that helps you know what you don't.
 
-Visit http://lifetime.surge.sh/ right now to see what we have.
+Visit http://lifetime.surge.sh/ to see it all in action.
 
-[Team Figma -- Mockups](https://www.figma.com/files/project/2496184/Timeline---Journey---Design-Your-Life)
+## About 
+Timeline allows you to visualize big life possibilities - think college, trade school, the army, etc - and create self-curated timelines of your future, exposing you and others to options in life you wouldn't have otherwise known about.
+
+The main goal of Timeline is exposure rather than planning - once you know about an opportunity, there are plenty of resources to figure out how to get there. Timeline aims to overcome the problem of the "unknown unknowns," and open your mind to the many possibilities in life.
+
+## Designs and Such 
+[Where we began](https://docs.google.com/presentation/d/1uVv9RZOnCL7DT-d8cwIa50YsybgIbgEStRLKBG0Cfwg/edit#slide=id.g56fe0cc43e_1_0)
+
+[Team Figma -- Hi-Fi Mockups](https://www.figma.com/files/project/2496184/Timeline---Journey---Design-Your-Life)
 
 Tell us what you think by filling out our [survey!](https://www.surveymonkey.com/r/WT9VZT6)
-
 
 ## Architecture
 
@@ -70,5 +77,7 @@ Certain functions in the code have comments with more specific sources.
 ## Acknowledgments
 
 Our lovely TA's, especially Jasmine!
+
+Everyone who took our survey - you rock
 
 Timmy Tim Tim (Tim)
