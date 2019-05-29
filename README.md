@@ -3,78 +3,48 @@ Timeline helps you know what you don't.
 
 Visit http://lifetime.surge.sh/ right now to see what we have.
 
-## Important
-If you want to update a node or create a new one, please sign in as an `admin` (ask us for the username and pwd). Secure, we know. Then refresh the page. 
-If you sign out after, refresh as well to see the non-admin nav bar.
-
-PLEASE DO NOT USE DELETE AS AN ADMIN. RIGHT NOW IT DELETES EVERYTHING. WE BEG YOU. NO.
-
 [Team Figma -- Mockups](https://www.figma.com/files/project/2496184/Timeline---Journey---Design-Your-Life)
+
+Tell us what you think by filling out our [survey!](https://www.surveymonkey.com/r/WT9VZT6)
+
 
 ## Architecture
 
 Code is organized into several folders - beyond the classic pages index.html, index.js, and style.css, we have folders for actions, components, containers, img, and reducers. Our containers are smart components - things that need to know about the web app state (settings, sign in, nav). Our components are th parts of the functionality that really only need to display what we tell them to (i.e. timeline element, timline detail, error banner, etc.)
 
-Code library is based on Lab 4/5. Additionally, we have used react-particles-js.
+Code library is based on Lab 4/5. Additionally, we have used react-particles-js for pretty effects and react-dropdown for expected high school graduation date.
 
 ## Setup
 
-Git clone both the frontend and backend repos onto your local dev environment. Then`yarn` it! Download all your dependencies :) Yarn life.
+Git clone both the frontend and backend repos onto your local dev environment. Then `yarn` it! Download all your dependencies :) Yarn life.
 
-## Deployment
+## Relevant Links
 Heroku git: https://git.heroku.com/timimeline.git
 
 Heroku domain: https://timimeline.herokuapp.com/
 
 Backend: https://github.com/dartmouth-cs52-19S/project-api-timeline
 
+## Deployment
 To deploy the project, change the deploy URL in both package.json 's to another surge URL. Then, hit that `yarn deploy`.
 
 
 ## Frontend Routes
-Let's walk through the frontend routes together!! These all come from `actions/index.js`.
+Let's walk through the frontend routes together!! You can explore these lovelies on ```lifetime.surge.sh/```.
 
-```axios.get(`${ROOT_URL}/explore`)```
-- fetches timeline data
+```lifetime.surge.sh/``` is our default landing page. It's pretty, huh? Particles.js (and Regina's design skills). Learn a little more about Timeline, and sign up NOW!
 
-```axios.get(`${ROOT_URL}/timeline/5ce5bf1be5057b0034c8a87c`)```
-- fetches the landing page timeline (had to make under root, hence the long id)
+Clicking the `sign up` button in the nav bar takes you to ```http://lifetime.surge.sh/signup```. Fill out the required forms and yay, you're in!
 
-```axios.get(`${ROOT_URL}/timeline/${id}`)```
-- selects a certain timeline node
+Or, you could be a b0$$ and already have an account. Hurrah! Click `sign in` from the landing page. You're on ```http://lifetime.surge.sh/signin```. Ah! More particles!
 
- ```axios.post(`${ROOT_URL}/personal`, timelineID)```
--saves a timeline object to someone’s personal timeline
+Once you're signed in or signed up, you are taken to the *master* timeline, ```lifetime.surge.sh/explore/start```. Explore all your options. If you click certain events, you may see the url change to something like ```http://lifetime.surge.sh/explore/5ce1dfadf41c760034ffe52d```. What is that?? NBD, the long number thing is just the `id` of whatever Timeline node you are currently viewing. Don't worry about it :).
 
-```axios.post(`${ROOT_URL}/timeline`, fields)```
-- makes a timeline object with specific fields (id, title, selected/not, time [to start it], content [title, image, description])
+Once you want to save something to your own personal timeline(s), click the `save` button and.. Boom! You're at ```lifetime.surge.sh/save```. Try planning out some alternate timeline(s)!
 
-```axios.post(`${ROOT_URL}/timeline/${fields.id.toString()}`, fields)```
-- updates a timeline obj with the same fields
+If you want to change your settings, go to ```lifetime.surge.sh/settings```. Do your thing.
 
-```axios.delete(`${ROOT_URL}/timeline/${timeline._id}`)```
-- currently deletes all timeline data lol
-
-```axios.get(`${ROOT_URL}/timeline/${id}`)```
-- gets a selected timelind
-
- axios.get(`${ROOT_URL}/personal${API_KEY}`,
- - gets user information (email, username, HS graduation date)
-
-```axios.post(`${ROOT_URL}/username${API_KEY}`, username)```
-- checks if username has been taken
-
- ```axios.post(`${ROOT_URL}/signin`, user)```
-- signs someone in and authorizes them
-
-```axios.post(`${ROOT_URL}/signup`, user)```
-- signs someone up, authorizes them
-
-```axios.post(`${ROOT_URL}/personal`, timeline)``
-- save a timeline to a user's profile through the personal tab
-
-```axios.put(`${ROOT_URL}/personal`, fields)```
-- update certain user information
+If you are an admin, you get 2 other routes as well: ```lifetime.surge.sh/newTime``` and ```//lifetime.surge.sh/updateTime```. These guys are protected (i.e. we built in functionality so that only certain users who may or may not be us) as they allow you to create a new timeline element (i.e. Work) and update them, respectively.
 
 ## Authors
 
@@ -94,6 +64,8 @@ Zoe Yu '19
 ## Sources
 
 We started this project with Regina's Lab 4 (front end) and Abhi's Lab 5 (server).
+
+Certain functions in the code have comments with more specific sources.
 
 ## Acknowledgments
 
