@@ -9,10 +9,14 @@ $white: #ffffff;
 $disabled: #dadada;
 
 body, html {
-    font-family: "Roboto", sans-serif;    
-    height: 100%;
-    background-color: #f3f4f6;
-  }
+  font-family: "Roboto", sans-serif;    
+  height: 100%;
+  background-color: #f3f4f6;
+}
+
+#spacer {
+  margin-bottom: 50px;
+}
 
 .logo {
   background-image: url('img/rocket.png');
@@ -79,6 +83,18 @@ h6{
   // text-transform: uppercase;
   color: $shadow-color;
   font-size: .7em;
+}
+#p404 {
+  color: $main-color;
+  font-weight: 600;
+  font-size: 4em;
+  margin-bottom: 40px;
+}
+.t404 {
+  margin-bottom: 5px;
+}
+#linkexplore {
+  margin-left: 0.2em;
 }
 // also has class .header above
 #banner {
