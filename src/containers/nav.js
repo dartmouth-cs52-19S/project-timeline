@@ -42,7 +42,7 @@ class Nav extends Component {
               {/* Saved */}
               <NavLink
                 exact
-                // to={`/explore/${this.props.user.timeline}`}
+                // to={`/save/${this.props.user.timeline}`}
                 to="/save"
                 className="link"
                 activeClassName="selectedLink"

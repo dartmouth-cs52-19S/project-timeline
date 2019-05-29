@@ -102,7 +102,8 @@ export function userTimeline(id) {
         dispatch({ type: ActionTypes.USER_TIMELINE, user_timeline: response.data });
       })
       .catch((error) => {
-        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+        // dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+        console.log(error);
       });
   };
 }
@@ -303,6 +304,7 @@ export function saveTimeline(timelineID) {
       { childID: timelineID },
       { headers: { authorization: localStorage.getItem('token') } })
       .then((resp) => {
+        // console.log(resp.data);
         dispatch(createBanner('Timeline saved!'));
         setTimeout(() => {
           dispatch(clearBanner());

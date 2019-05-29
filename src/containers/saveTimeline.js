@@ -20,15 +20,15 @@ class SaveTimeline extends Component {
     this.handleRemove = this.handleRemove.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props.user.timeline === null) {
+  componentWillMount() {
+    if (this.props.user_timeline === null) {
+      this.props.userTimeline(this.props.user.timeline);
+    } else {
       this.props.userTimeline(this.props.user.timeline);
     }
-    // console.log(`detail ID${this.props.selected}`);
   }
 
   handleClicked(e, event) {
-    console.log(`event is ${event}`);
     // console.log(`e.currtarget.name is  ${e.target.name}`);
     this.props.history.push(`/explore/${event}`);
   }
@@ -40,27 +40,17 @@ class SaveTimeline extends Component {
   }
 
   renderElement() {
-    console.log(`this.state.user_timeline${this.props.user_timeline}`);
-    // length = Array.getLength(this.props.user_timeline.events);
-    // console.log(`user timeline length is${this.props.user_timeline.length}`);
-    if (this.props.user_timeline.events === undefined) {
-      console.log('its null!');
-    }
     if (this.props.user_timeline === 0) {
       if (this.props.user_timeline.events === undefined) {
-        console.log('is zero');
         return (
           <div>
-            <p>Hello</p>
+            <p>Loading</p>
           </div>
         );
       }
     }
     return (this.props.user_timeline.events.map((event) => {
-      console.log('is not zero');
-      // console.log(`event.id is ${event.id}`);
       return (
-        // <div key={event.id} name={event.id} className="detailContainerSaved" onClick={(e => this.handleClicked(e, event.id))}>
         <div className="detailContainerSaved" key={event.id}>
           <div className="detailTitle">
             <span>{event.title}</span>
