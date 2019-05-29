@@ -214,7 +214,7 @@ export function fetchUserInfo() {
 
 export function checkUsername(username) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/username${API_KEY}`, username)
+    axios.post(`${ROOT_URL}/username`, username)
       .then((response) => {
         dispatch({ type: ActionTypes.CHECK_NAME, payload: response.data });
       }).catch((error) => {
