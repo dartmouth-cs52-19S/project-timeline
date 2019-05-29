@@ -91,15 +91,6 @@ class SignUp extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  changeYear(e) {
-    console.log(e);
-    this.setState({ year: e.value });
-  }
-
-  changeMonth(e) {
-    this.setState({ month: e.value });
-  }
-
   handleSubmit(event) {
     event.preventDefault();
     // error checks
