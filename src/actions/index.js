@@ -131,10 +131,14 @@ export function createTimeline(fields, addNextUnder) {
         console.log('ADDNEXTUNDER: ', addNextUnder);
         if (addNextUnder) {
           dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
-          dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
+          dispatch(
+            { type: ActionTypes.BANNER_SET, payload: 'You successfully added timeline content!' },
+          );
         } else {
           dispatch(selectTimeline(response.data.parent));
-          dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
+          dispatch(
+            { type: ActionTypes.BANNER_SET, payload: 'You successfully added timeline content!' },
+          );
         }
         // history.push('/');
       })
@@ -155,7 +159,9 @@ export function updateTimeline(fields, addNextUnder, history) {
         // the titles and times of its events
         dispatch(selectTimeline(response.data._id));
         // console.log('dispatching banner_set');
-        dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
+        dispatch(
+          { type: ActionTypes.BANNER_SET, payload: 'You successfully added timeline content!' },
+        );
         if (history) {
           console.log('THIS IS THE RESPONSE IN UPDATE_TIMELINE');
           console.log(response.data);
