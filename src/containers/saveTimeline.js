@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 // import TimeElement from './time-element';
 // import TimeDetail from './time-detail';
 import { fetchTimeline, unsaveTimeline, userTimeline } from '../actions';
+import emptyState from '../img/timeline-emptystate.png';
 
 
 class SaveTimeline extends Component {
@@ -18,6 +19,7 @@ class SaveTimeline extends Component {
     this.renderElement = this.renderElement.bind(this);
     this.handleClicked = this.handleClicked.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.toExplore = this.toExplore.bind(this);
   }
 
   componentWillMount() {
@@ -28,9 +30,17 @@ class SaveTimeline extends Component {
     }
   }
 
+  componentDidUpdate() {
+    this.props.userTimeline(this.props.user.timeline);
+  }
+
   handleClicked(e, event) {
     // console.log(`e.currtarget.name is  ${e.target.name}`);
     this.props.history.push(`/explore/${event}`);
+  }
+
+  toExplore() {
+    this.props.history.push('/explore/start');
   }
 
   handleRemove(e, eventId) {
@@ -44,8 +54,26 @@ class SaveTimeline extends Component {
       if (this.props.user_timeline.events === undefined) {
         return (
           <div>
-            <p>Loading</p>
+            <h1>Loading</h1>
           </div>
+        );
+      }
+    }
+    if (this.props.user_timeline.events !== undefined) {
+      if (this.props.user_timeline.events.length === 0) {
+        return (
+          <div>
+            <div className="middle">
+              <img src={emptyState} alt="nothing here" className="emptyState" />
+            </div>
+            <div className="middleText">
+              <p className="h7">You have no Saved Timelines Yet!</p>
+            </div>
+            <div className="middleText">
+              <p className="h8">Go to the <em onClick={this.toExplore}>Explore Page </em>to discover timelines you can keep.</p>
+            </div>
+          </div>
+
         );
       }
     }
@@ -68,6 +96,7 @@ class SaveTimeline extends Component {
           <div className="detailContent">
             {event.content}
           </div>
+
         </div>
 
       );
