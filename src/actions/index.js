@@ -107,18 +107,18 @@ export function userTimeline(id) {
   };
 }
 
-export function saveToTimeline(timelineID) {
-  return (dispatch) => {
-    axios.post(`${ROOT_URL}/personal`, timelineID)
-      .then((response) => {
-        console.log('from action, create timeline response: ', response.data);
-        dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
-      })
-      .catch((error) => {
-        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
-      });
-  };
-}
+// export function saveToTimeline(timelineID) {
+//   return (dispatch) => {
+//     axios.post(`${ROOT_URL}/personal`, timelineID)
+//       .then((response) => {
+//         console.log('from action, create timeline response: ', response.data);
+//         dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
+//       })
+//       .catch((error) => {
+//         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+//       });
+//   };
+// }
 
 export function createTimeline(fields, addNextUnder) {
   return (dispatch) => {
@@ -214,7 +214,7 @@ export function fetchUserInfo() {
 
 export function checkUsername(username) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/username${API_KEY}`, username)
+    axios.post(`${ROOT_URL}/username`, username)
       .then((response) => {
         dispatch({ type: ActionTypes.CHECK_NAME, payload: response.data });
       }).catch((error) => {

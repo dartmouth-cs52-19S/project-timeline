@@ -82,12 +82,19 @@ class SignUp extends Component {
 
   edit(e) {
     // username not taken check
-    if (e.target.name === this.state.username) {
-      this.props.checkUsername();
-      // realtime
-      if (this.props.chkUsername) { this.props.createBanner('Sorry, this username is taken'); }
-    }
+    // if (e.target.name === this.state.username) {
+
     this.setState({ [e.target.name]: e.target.value });
+    this.props.checkUsername(e.target.value);
+    console.log('chekingggg');
+
+    // realtime
+    if (this.props.chkUser) {
+      console.log('chkddddddd');
+
+      this.props.createBanner('Sorry, this username is taken');
+    }
+    // }
   }
 
   handleSubmit(event) {
