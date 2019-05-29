@@ -36,16 +36,28 @@ class AddForm extends Component {
   // set the initial state if told to in this.props.update
   componentWillMount() {
     if (this.props.update) {
+      console.log(typeof this.props.timeline.time);
+      const dt = new Date(this.props.timeline.time);
       this.setState({
         title: this.props.timeline.title,
         content: this.props.timeline.content,
         filter: this.props.timeline.filter,
-        time: this.props.timeline.time / (60 * 60 * 24 * 30 * 1000),
+        time: Math.round(dt.getTime() / (60 * 60 * 24 * 30 * 1000)),
         cover_url: this.props.timeline.cover_url,
       });
     }
     console.log(`hopefully not undefined${this.props.addupdate}`);
     this.props.onAddUpdate(1);
+  }
+
+  componentDidMount = () => {
+    if (this.props.update) {
+      console.log(typeof this.props.timeline.time);
+      const dt = new Date(this.props.timeline.time);
+      this.setState({
+        time: Math.round(dt.getTime() / (60 * 60 * 24 * 30 * 1000)),
+      });
+    }
   }
 
   displayTimelineName() {
@@ -209,7 +221,7 @@ class AddForm extends Component {
             placeholder="Time IN MONTHS SINCE HIGH SCHOOL"
             onChange={this.edit}
             onBlur={this.handleTagBlur}
-            value={this.state.time}
+            value={(this.state.time)}
           />
           {/* <em>* Required</em> */}
         </div>
