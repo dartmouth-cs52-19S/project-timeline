@@ -50,6 +50,16 @@ class AddForm extends Component {
     this.props.onAddUpdate(1);
   }
 
+  componentDidMount = () => {
+    if (this.props.update) {
+      console.log(typeof this.props.timeline.time);
+      const dt = new Date(this.props.timeline.time);
+      this.setState({
+        time: Math.round(dt.getTime() / (60 * 60 * 24 * 30 * 1000)),
+      });
+    }
+  }
+
   displayTimelineName() {
     if (this.props.timeline.title === undefined) {
       return (
