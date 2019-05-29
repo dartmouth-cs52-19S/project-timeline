@@ -9,10 +9,14 @@ $white: #ffffff;
 $disabled: #dadada;
 
 body, html {
-    font-family: "Roboto", sans-serif;    
-    height: 100%;
-    background-color: #f3f4f6;
-  }
+  font-family: "Roboto", sans-serif;    
+  height: 100%;
+  background-color: #f3f4f6;
+}
+
+#spacer {
+  margin-bottom: 50px;
+}
 
 .logo {
   background-image: url('img/rocket.png');
@@ -79,6 +83,18 @@ h6{
   // text-transform: uppercase;
   color: $shadow-color;
   font-size: .7em;
+}
+#p404 {
+  color: $main-color;
+  font-weight: 600;
+  font-size: 4em;
+  margin-bottom: 40px;
+}
+.t404 {
+  margin-bottom: 5px;
+}
+#linkexplore {
+  margin-left: 0.2em;
 }
 // also has class .header above
 #banner {
@@ -331,6 +347,7 @@ button:hover{
   display: block;
   align-items: center;
   margin-top: 1em;
+  width:100%;
 }
 .show{
   opacity: 0;
@@ -364,6 +381,12 @@ input:focus{
   height: 3em;
   padding: 1em;
 }
+
+.signUpText{
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
 .error_box{
   border: 1px solid $error-color;
 }
@@ -438,6 +461,9 @@ b{
 .flexWideDrop{
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  width: 60%;
+  margin-left: 20%;
 }
 .flex-detail, .flex-main{
   width: 40%;
@@ -506,13 +532,50 @@ b{
 .settingsHeader {
   margin-top: 70px;
   padding: 1em 1em 1em 1em;
+  padding-bottom: 0em;
   font-size: 25pt;
   font-weight: 500;
   color: $text-color;
   display: flex;
   justify-content: flex-start;
-  border-bottom: 2px dotted $shadow-color;
+  //border-bottom: 2px dotted $shadow-color;
 }
+
+#settingsSurvey {
+  border-bottom: 2px dotted $shadow-color;
+  padding-left: 1.65em;
+  margin-bottom: 1em;
+  height: 2em;
+}
+
+.settingsInput {
+  display: flex;
+  width: 60%;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 20vw;
+}
+
+.currSettings {
+  display: flex;
+  padding-left: 1.65em;
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+.currSettings span {
+  color: $main-color;
+  padding-left: .2em;
+}
+
+.flexWideS{
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    margin-bottom:10px;
+}
+
 .userGraphic{
   width: 50%;
   background: $secondary-color;
@@ -837,6 +900,7 @@ b{
   margin-left: -20%;
   margin-top: -4%;
   padding-top: 6%;
+  margin-right: 7%;
   position: relative;
   z-index: 2;
   height: 1em;
@@ -850,21 +914,22 @@ b{
   color: $main-color;
 }
 #passButton:active {
-  color: $main-color;
+  color: $shadow-color-darker;
 }
 
 //settings
 #passButtonSettings {
-  margin: 1em;
   padding: 0.5em 1em;
   transition: all .2s ease-in-out;
   float: right;
   margin-left: -20%;
+  margin-right: 8%;
   margin-top: -4%;
-  padding-top: 4.5%;
+  padding-top: 5%;
+  padding-left: 5%;
   position: relative;
   z-index: 2;
-  height: 1em;
+  height: 1.2em;
 }
 #passButtonSettings:focus{ // how to keep active?
   outline: none;
@@ -878,4 +943,28 @@ b{
 }
 .logoicon{
   height: 40px;
+}
+.settingsFooter{
+  background: $secondary-color;
+  width: 100%;
+  height: 40vh;
+  margin: 0 auto;
+  overflow: hidden;
+  z-index: 499;
+}
+.setText{
+  margin-bottom: 0em;
+}
+h6 span {
+  color:$main-color;
+  font-weight: 600;
+}
+.setContainer{
+  width: 65%;
+  height: 100vh;
+}
+.setGraphic{
+  width: 35%;
+  background: $secondary-color;
+  overflow: hidden;
 }

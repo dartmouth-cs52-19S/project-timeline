@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Dropdown from 'react-dropdown';
+import Particles from 'react-particles-js';
 import {
   fetchUserInfo, createBanner, clearBanner, updateUser,
 } from '../actions';
@@ -15,6 +16,23 @@ const optionsYear = [
 const optionsMonth = [
   'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec',
 ];
+
+// particles stuff
+const particlesOptions = {
+  particles: {
+    number: {
+      value: 80,
+      density: {
+        enable: true,
+        value_area: 800,
+      },
+    },
+    image: {
+      height: 1000,
+    },
+  },
+};
+
 
 class Settings extends Component {
   constructor(props) {
@@ -273,6 +291,111 @@ class Settings extends Component {
   }
   // want to call fxn if user exists (which returns a t/f) onChange for username so realtime
 
+  // render() {
+  //   if (this.props.user === null) {
+  //     return (
+  //       <div className="flex" style={{ alignItems: 'flex-end', justifyContent: 'space-around' }}>
+  //         <h1>Loading</h1>
+  //       </div>
+  //     );
+  //   } else {
+  //     return (
+  //       <div>
+  //         <div className="settingsHeader">
+  //           Settings
+  //         </div>
+  //         <div id="settingsSurvey">
+  //           <h6><span> Come take our </span>
+  //             <a href="https://www.surveymonkey.com/r/WT9VZT6">feedback survey!</a>
+  //           </h6>
+  //         </div>
+  //         <div className="currSettings">
+  //           current username: <span> {this.props.user.username}</span>
+  //         </div>
+  //         <div className="settingsInput">
+  //           <input
+  //             name="newUsername"
+  //             placeholder="new username"
+  //             onChange={this.edit}
+  //             value={this.state.newUsername}
+  //             className="signinput"
+  //           />
+  //         </div>
+  //         <div className="currSettings">
+  //           current email: <span> {this.props.user.email}</span>
+  //         </div>
+  //         <div className="settingsInput">
+  //           <input
+  //             name="newEmail"
+  //             placeholder="new email"
+  //             onChange={this.edit}
+  //             value={this.state.newEmail}
+  //             className="signinput"
+  //           />
+  //         </div>
+  //         <div className="currSettings">
+  //          change your password
+  //         </div>
+  //         <div className="settingsInput">
+  //           <input
+  //             name="newPassword1"
+  //             type={this.state.hidden ? 'password' : 'text'}
+  //             value={this.state.newPassword1}
+  //             onChange={this.edit}
+  //             placeholder="new password"
+  //             className="signinput"
+  //           />
+  //           <input
+  //             name="newPassword2"
+  //             type={this.state.hidden ? 'password' : 'text'}
+  //             value={this.state.newPassword2}
+  //             onChange={this.edit}
+  //             placeholder="re-enter password"
+  //             className="signinput"
+  //           />
+  //           <i className="far fa-eye signicon"
+  //             id="passButtonSettings"
+  //             role="button"
+  //             tabIndex={0}
+  //             onClick={this.toggleShow}
+  //           />
+  //         </div>
+  //         <div className="currSettings">
+  //           current HS graduation date: <span> {this.displayStartTime()}</span>
+  //         </div>
+  //         <div className="flexWideDrop">
+  //           <Dropdown
+  //             className="flexWide"
+  //             options={optionsYear}
+  //             onChange={this.yearChange}
+  //             value={this.state.newYear}
+  //             placeholder="Select a year"
+  //           />
+  //           <Dropdown
+  //             className="flexWide"
+  //             options={optionsMonth}
+  //             onChange={this.monthChange}
+  //             value={this.state.newMonth}
+  //             placeholder="Select a month"
+  //           />
+  //         </div>
+  //         <div className="flexWideSettings">
+  //           <button type="button" onClick={this.onCancel}>Cancel</button>
+  //           <button type="button" onClick={this.handlesSubmit}>Save Changes</button>
+  //         </div>
+  //         <div className="settingsFooter">
+  //           <Particles className="particles" params={particlesOptions} />
+  //         </div>
+  //       </div>
+
+  //     );
+  //   }
+  //       // }
+  //       );
+  //     }
+  //   }
+  // }
+
   render() {
     if (this.props.user === null) {
       return (
@@ -282,96 +405,115 @@ class Settings extends Component {
       );
     } else {
       return (
-        <div>
-          <div className="settingsHeader">
-            Settings
-            final go-through lolllll
+        <div className="flexWide">
+          <div className="setContainer">
+            <div className="whiteBox">
+              <div className="signin">
+                <div className="setText">
+                  <h3>Settings</h3>
+                  <h6>Come take our
+                    <span>
+                      <a href="https://www.surveymonkey.com/r/WT9VZT6"> feedback survey!</a>
+                    </span>
+                  </h6>
+                </div>
+                <div className="flexWideS">
+                  <h6>current username: <span> {this.props.user.username}</span></h6>
+                </div>
+                <div className="flexWideS">
+                  <input
+                    name="newUsername"
+                    placeholder="new username"
+                    onChange={this.edit}
+                    value={this.state.newUsername}
+                    className="signinput"
+                  />
+                </div>
+                <div className="flexWideS">
+                  <h6>current email: <span> {this.props.user.email}</span></h6>
+                </div>
+                <div className="flexWideS">
+                  <input
+                    name="newEmail"
+                    placeholder="new email"
+                    onChange={this.edit}
+                    value={this.state.newEmail}
+                    className="signinput"
+                  />
+                </div>
+
+                <div className="flexWideS">
+                  <h6>change your password:</h6>
+                </div>
+                <div className="flexWideS">
+                  <input
+                    name="newPassword1"
+                    type={this.state.hidden ? 'password' : 'text'}
+                    value={this.state.newPassword1}
+                    onChange={this.edit}
+                    placeholder="new password"
+                    className="signinput"
+                  />
+                </div>
+                <div className="flexWideS">
+                  <input
+                    name="newPassword2"
+                    type={this.state.hidden ? 'password' : 'text'}
+                    value={this.state.newPassword2}
+                    onChange={this.edit}
+                    placeholder="re-enter password"
+                    className="signinput"
+                  />
+                  <i className="far fa-eye signicon"
+                    id="passButtonSettings"
+                    role="button"
+                    tabIndex={0}
+                    onClick={this.toggleShow}
+                  />
+                </div>
+                <div className="flexWideS">
+                  <h6>current HS graduation date: <span> {this.displayStartTime()}</span></h6>
+                </div>
+                <div className="flexWideS">
+                  <Dropdown
+                    className="flexWide"
+                    options={optionsYear}
+                    onChange={this.yearChange}
+                    value={this.state.newYear}
+                    placeholder="Select a year"
+                  />
+                  <Dropdown
+                    className="flexWide"
+                    options={optionsMonth}
+                    onChange={this.monthChange}
+                    value={this.state.newMonth}
+                    placeholder="Select a month"
+                  />
+                </div>
+                <div className="signSubmitBox">
+                  <button type="button"
+                    className="buttonSecondary"
+                    onClick={this.onCancel}
+                  >Cancel
+                  </button>
+                  <button type="button"
+                    className="buttonCTA"
+                    onClick={this.handlesSubmit}
+                  >Save Changes
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-          <div>
-            <h6><span> Come take our</span>
-              <a href="https://www.surveymonkey.com/r/WT9VZT6"> feedback survey!</a>
-            </h6>
-          </div>
-          <div>
-            current username: {this.props.user.username}
-          </div>
-          <div className="username">
-            <input
-              name="newUsername"
-              placeholder="new username"
-              onChange={this.edit}
-              value={this.state.newUsername}
-              className="signinput"
-            />
-          </div>
-          <div>
-            current email: {this.props.user.email}
-          </div>
-          <div className="email">
-            <input
-              name="newEmail"
-              placeholder="new email"
-              onChange={this.edit}
-              value={this.state.newEmail}
-              className="signinput"
-            />
-          </div>
-          <div>
-           change your password
-          </div>
-          <div className="password">
-            <input
-              name="newPassword1"
-              type={this.state.hidden ? 'password' : 'text'}
-              value={this.state.newPassword1}
-              onChange={this.edit}
-              placeholder="new password"
-              className="signinput"
-            />
-            <input
-              name="newPassword2"
-              type={this.state.hidden ? 'password' : 'text'}
-              value={this.state.newPassword2}
-              onChange={this.edit}
-              placeholder="new password"
-              className="signinput"
-            />
-            <i className="far fa-eye signicon"
-              id="passButtonSettings"
-              role="button"
-              tabIndex={0}
-              onClick={this.toggleShow}
-            />
-          </div>
-          <div>
-            current HS graduation date: {this.displayStartTime()}
-          </div>
-          <div className="flexWideDrop">
-            <Dropdown
-              className="flexWide"
-              options={optionsYear}
-              onChange={this.yearChange}
-              value={this.state.newYear}
-              placeholder="Select a year"
-            />
-            <Dropdown
-              className="flexWide"
-              options={optionsMonth}
-              onChange={this.monthChange}
-              value={this.state.newMonth}
-              placeholder="Select a month"
-            />
-          </div>
-          <div>
-            <button type="button" onClick={this.onCancel}>Cancel</button>
-            <button type="button" onClick={this.handlesSubmit}>Save Changes</button>
+          <div className="setGraphic">
+            <Particles className="particles" params={particlesOptions} />
           </div>
         </div>
-
       );
     }
   }
 }
+
 const mapStateToProps = reduxState => (
   {
     user: reduxState.auth.user,

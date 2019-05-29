@@ -15,6 +15,7 @@ import SaveTimeline from '../containers/saveTimeline';
 import UpdateTimeline from '../containers/update-timeline';
 import Settings from '../containers/settings';
 import Landing from '../containers/landing';
+import Page404 from './page404';
 
 import RequireAuth from '../containers/requireAuth';
 import RequireAdmin from '../containers/requireAdmin';
@@ -36,6 +37,7 @@ const App = (props) => {
           <Route path="/updateTime" component={RequireAdmin(UpdateTimeline)} />
           <Route path="/settings" component={RequireAuth(Settings)} />
           <Route path="/save" component={RequireAuth(SaveTimeline)} />
+          <Route component={Page404} />
           <Route render={() => (<div> This life does not exist </div>)} />
         </Switch>
       </div>
