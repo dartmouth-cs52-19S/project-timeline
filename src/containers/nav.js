@@ -4,6 +4,8 @@ import { NavLink, withRouter } from 'react-router-dom';
 import {
   signoutUser, onAddUpdate, fetchUserInfo, userTimeline,
 } from '../actions';
+import logoicon from '../img/timeline-logoicon.png';
+import logotext from '../img/timeline-logotext.png';
 
 class Nav extends Component {
   constructor(props) {
@@ -122,7 +124,9 @@ class Nav extends Component {
             <li>
               {/* Home */}
               <NavLink exact to="/" className="link">
-                <i className="fas fa-star-of-life fa-spin-hover" /> Logo
+                {/* <i className="fas fa-star-of-life fa-spin-hover" /> Logo */}
+                <img src={logoicon} alt="logo icon" className="logoicon" />
+                <img src={logotext} alt="logo text" className="logoicon" />
               </NavLink>
             </li>
           </ul>
