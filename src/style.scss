@@ -25,9 +25,9 @@ body, html {
   background-repeat: no-repeat;
   background-size: contain;
 }
-// .active {
-//   color: pink;
-// }
+span {
+  align-content: flex-end;
+}
 .header {
   background: $white;
   height: 60px;
@@ -487,6 +487,7 @@ b{
   padding: 1em;
   border-left: 10px solid $main-color;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 1%;
 }
 
 .detailContainerSaved{
@@ -725,6 +726,13 @@ b{
 }
 .wrap{
   flex-flow: row wrap;
+}
+.fa-external-link-alt {
+  color: $shadow-color;
+  font-size: 0.7em;
+}
+.fa-external-link-alt:hover {
+  color: $main-color;
 }
 // .backgroundImg{
 //   width: 100vw;
