@@ -20,9 +20,11 @@ class SaveTimeline extends Component {
     this.handleRemove = this.handleRemove.bind(this);
   }
 
-  componentWillMount() {
-    this.props.userTimeline(this.props.user.timeline);
-    console.log(`detail ID${this.props.selected}`);
+  componentDidMount() {
+    if (this.props.user.timeline === null) {
+      this.props.userTimeline(this.props.user.timeline);
+    }
+    // console.log(`detail ID${this.props.selected}`);
   }
 
   handleClicked(e, event) {
@@ -38,37 +40,40 @@ class SaveTimeline extends Component {
   }
 
   renderElement() {
-    if (this.props.user_timeline === 0) {
-      console.log('is zero');
-      return (
-        <div>
-          <div className="foodHeader">
-          Discover the Possibilities
-          </div>
-          <div className="flex">
-            <div className="flex-detail" />
-            <div className="flex-main" />
-          </div>
-        </div>
-      );
+    console.log(`this.state.user_timeline${this.props.user_timeline}`);
+    // length = Array.getLength(this.props.user_timeline.events);
+    // console.log(`user timeline length is${this.props.user_timeline.length}`);
+    if (this.props.user_timeline.events === undefined) {
+      console.log('its null!');
     }
-    // console.log('nowhere');
+    if (this.props.user_timeline === 0) {
+      if (this.props.user_timeline.events === undefined) {
+        console.log('is zero');
+        return (
+          <div>
+            <p>Hello</p>
+          </div>
+        );
+      }
+    }
     return (this.props.user_timeline.events.map((event) => {
+      console.log('is not zero');
       // console.log(`event.id is ${event.id}`);
       return (
         // <div key={event.id} name={event.id} className="detailContainerSaved" onClick={(e => this.handleClicked(e, event.id))}>
         <div className="detailContainerSaved" key={event.id}>
           <div className="detailTitle">
-            <button type="button" key={event.id} name={event.id} className="detailContainerSaved" onClick={(e => this.handleClicked(e, event.id))}>
-              <span>{event.title}</span>
-            </button>
-            <button
-              type="button"
-              className="button-grey"
-              onClick={(e => this.handleRemove(e, event.id))}
-            >
-              <i className="far fa-bookmark" /> Unsave
-            </button>
+            <span>{event.title}</span>
+            <div>
+              <button
+                type="button"
+                className="button-grey"
+                onClick={(e => this.handleRemove(e, event.id))}
+              >
+                <i className="far fa-bookmark" /> Unsave
+              </button>
+              <i className="fas fa-external-link-alt grow" key={event.id} name={event.id} onClick={(e => this.handleClicked(e, event.id))} />
+            </div>
           </div>
           <div className="detailContent">
             {event.content}
@@ -81,6 +86,11 @@ class SaveTimeline extends Component {
   }
 
   render() {
+    if (this.props.user_timeline === null) {
+      return (
+        <div><h1>Loading</h1></div>
+      );
+    }
     return (
       <div>
         <div className="foodHeader">

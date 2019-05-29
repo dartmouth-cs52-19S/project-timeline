@@ -21,9 +21,9 @@ body, html {
   background-repeat: no-repeat;
   background-size: contain;
 }
-// .active {
-//   color: pink;
-// }
+span {
+  align-content: flex-end;
+}
 .header {
   background: $white;
   height: 60px;
@@ -666,6 +666,7 @@ b{
 }
 .fa-external-link-alt {
   color: $shadow-color;
+  font-size: 0.7em;
 }
 .fa-external-link-alt:hover {
   color: $main-color;

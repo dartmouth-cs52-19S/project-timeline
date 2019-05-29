@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import { signoutUser, onAddUpdate, fetchUserInfo } from '../actions';
+import {
+  signoutUser, onAddUpdate, fetchUserInfo, userTimeline,
+} from '../actions';
 
 class Nav extends Component {
   constructor(props) {
@@ -23,6 +25,7 @@ class Nav extends Component {
   componentDidUpdate = (prevProps, prevState, snapshot) => {
     if (prevProps.auth.user.admin === undefined) {
       this.props.fetchUserInfo();
+      this.props.userTimeline(this.props.user.timeline);
     }
   }
 
@@ -154,4 +157,6 @@ const mapStateToProps = state => (
 );
 
 export default withRouter(connect(mapStateToProps,
-  { signoutUser, onAddUpdate, fetchUserInfo })(Nav));
+  {
+    signoutUser, onAddUpdate, fetchUserInfo, userTimeline,
+  })(Nav));
