@@ -229,7 +229,7 @@ class SignUp extends Component {
                 />
               </div>
               <div className="signUpText">
-                <h6> Please select your expected HS graduation date </h6>
+                <h6> Please select your expected HS graduation date:</h6>
               </div>
               <div className="flexWide">
                 <i className="fas fa-graduation-cap signicon" />
