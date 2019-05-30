@@ -319,6 +319,9 @@ export function saveTimeline(timelineID) {
       .catch((err) => {
         console.log(err.response);
         dispatch(createBanner('failed to link'));
+        setTimeout(() => {
+          dispatch(clearBanner());
+        }, 2500);
       });
   };
 }
@@ -349,6 +352,9 @@ export function unsaveTimeline(timelineID) {
       .catch((err) => {
         console.log('ERROR from UNSAVE timeline: ', err.response);
         dispatch(createBanner('failed to remove from saved'));
+        setTimeout(() => {
+          dispatch(clearBanner());
+        }, 2500);
       });
   };
 }
