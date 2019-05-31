@@ -26,8 +26,6 @@ class Landing extends Component {
   renderTime() {
     if (this.props.meta !== 0) {
       return (this.props.meta.events.map((events) => {
-        console.log(`this.props.meta: ${this.props.meta}`);
-        console.log(`events.title: ${events.title}`);
         return (
           <div key={events.id}>
             <div key={events.id} className="padding">
@@ -67,8 +65,6 @@ class Landing extends Component {
   renderDetail() {
     if (this.props.meta !== 0) {
       return (this.props.meta.events.map((events) => {
-        console.log(`this.props.meta: ${this.props.meta}`);
-        console.log(`events.title: ${events.title}`);
         return (
           <div key={events.id}>
             <div className="flex-detail-landing padding" key={events.title}>
