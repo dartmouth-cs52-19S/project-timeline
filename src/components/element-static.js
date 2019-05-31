@@ -8,9 +8,7 @@ class ElementStatic extends React.Component {
   }
 
   handleClicked() {
-    console.log(`clicked this ID: ${this.props.id}`);
     // Change the route
-    // NOTE: Child componenets need with router affect change upwards
     this.props.selectTimeline(this.props.id);
     // const date = new Date(this.props.time).getTime();
   }

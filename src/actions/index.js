@@ -32,10 +32,8 @@ const ROOT_URL = 'https://timimeline.herokuapp.com/api';
 
 const API_KEY = '';
 
+// eslint-disable-next-line no-unused-vars
 const token = localStorage.getItem('token');
-if (token) {
-  console.log(`token  ${token}`);
-}
 
 // this one works though
 export function clearBanner() {
@@ -50,14 +48,12 @@ export function createBanner(message) {
 export function fetchTimeline() {
   return (dispatch) => {
     // server call
-    // console.log('making server call');
     axios.get(`${ROOT_URL}/explore`)
       .then((response) => {
         // dispatch action w/ payload
         dispatch({ type: ActionTypes.FETCH_EXPLORE, payload: response.data });
       })
       .catch((error) => {
-        // TODO: dispatch an error, make reducer, show error component
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
         setTimeout(() => {
           dispatch(clearBanner());
@@ -75,7 +71,6 @@ export function fetchMeta() {
         dispatch({ type: ActionTypes.FETCH_META, meta: response.data });
       })
       .catch((error) => {
-        // TODO: dispatch an error, make reducer, show error component
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
         setTimeout(() => {
           dispatch(clearBanner());
@@ -111,8 +106,10 @@ export function userTimeline(id) {
         dispatch({ type: ActionTypes.USER_TIMELINE, user_timeline: response.data });
       })
       .catch((error) => {
-        // dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
-        console.log(error);
+        dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+        setTimeout(() => {
+          dispatch(clearBanner());
+        }, 2500);
       });
   };
 }
@@ -120,12 +117,9 @@ export function userTimeline(id) {
 
 export function createTimeline(fields, addNextUnder) {
   return (dispatch) => {
-    console.log('Fields in action creator: ', fields);
     axios.post(`${ROOT_URL}/timeline`, fields,
       { headers: { authorization: localStorage.getItem('token') } })
       .then((response) => {
-        console.log('from action, create timeline response: ', response.data);
-        console.log('ADDNEXTUNDER: ', addNextUnder);
         if (addNextUnder) {
           dispatch({ type: ActionTypes.SELECT_TIMELINE, selected: response.data });
           dispatch(
@@ -159,12 +153,7 @@ export function updateTimeline(fields, addNextUnder, history) {
     axios.post(`${ROOT_URL}/timeline/${fields.id.toString()}`, fields,
       { headers: { authorization: localStorage.getItem('token') } })
       .then((response) => {
-        // console.log('from action, update timeline response: ', response.data);
-        // console.log('ADDNEXTUNDER: ', addNextUnder);
-        // can't use response to set because it is not populated with
-        // the titles and times of its events
         dispatch(selectTimeline(response.data._id));
-        // console.log('dispatching banner_set');
         dispatch(
           { type: ActionTypes.BANNER_SET, payload: 'You successfully added timeline content!' },
         );
@@ -172,8 +161,6 @@ export function updateTimeline(fields, addNextUnder, history) {
           dispatch(clearBanner());
         }, 2500);
         if (history) {
-          console.log('THIS IS THE RESPONSE IN UPDATE_TIMELINE');
-          console.log(response.data);
           history.push('/');
         }
       })
@@ -228,7 +215,6 @@ export function fetchUserInfo() {
     axios.get(`${ROOT_URL}/personal${API_KEY}`,
       { headers: { authorization: localStorage.getItem('token') } })
       .then((response) => {
-        console.log('IN FETCHUSER INFO', response.data);
         dispatch({ type: ActionTypes.GET_USER, payload: response.data });
       }).catch((error) => {
         dispatch({ type: ActionTypes.ERR_USER, error });
@@ -242,7 +228,6 @@ export function checkUsername(username) {
       .then((response) => {
         dispatch({ type: ActionTypes.CHECK_NAME, payload: response.data });
       }).catch((error) => {
-        console.log(error);
         dispatch({ type: ActionTypes.ERROR_CHECK, error });
       });
   };
@@ -268,7 +253,6 @@ export function signinUser({ email, password }, history) {
       localStorage.setItem('token', response.data.token);
       history.push('/explore/start');
     }).catch((error) => {
-      console.log(error);
       dispatch(authError(`Sign In Failed: ${error.response.data}`));
       dispatch({ type: ActionTypes.BANNER_SET, payload: 'Sign in failed.' });
       setTimeout(() => {
@@ -287,7 +271,6 @@ export function signupUser({
       username, email, password, startTime,
     };
     axios.post(`${ROOT_URL}/signup`, user).then((response) => {
-      // console.log('lab4 axios post');
       dispatch({
         type: ActionTypes.AUTH_USER,
         payload: {
@@ -303,8 +286,6 @@ export function signupUser({
       localStorage.setItem('startTime', response.data.startTime);
       history.push('/explore/start');
     }).catch((error) => {
-      console.log('error data', error.message);
-      console.log('full error: ', error);
       dispatch(authError(`Sign Up Failed: ${error.message}`));
       dispatch({ type: ActionTypes.BANNER_SET, payload: 'Sign up failed.' });
       setTimeout(() => {
@@ -328,19 +309,16 @@ export function signoutUser(history) {
 // user's timeline will be found based on the auth
 export function saveTimeline(timelineID) {
   return (dispatch) => {
-    // console.log('TIMELINE ID', timelineID);
     axios.post(`${ROOT_URL}/personal`,
       { childID: timelineID },
       { headers: { authorization: localStorage.getItem('token') } })
       .then((resp) => {
-        // console.log(resp.data);
         dispatch(createBanner('Timeline saved!'));
         setTimeout(() => {
           dispatch(clearBanner());
         }, 2500);
       })
       .catch((err) => {
-        console.log(err.response);
         dispatch(createBanner('failed to link'));
         setTimeout(() => {
           dispatch(clearBanner());
@@ -354,10 +332,6 @@ export function saveTimeline(timelineID) {
 // finds user's timeline with auth
 export function unsaveTimeline(timelineID) {
   return (dispatch) => {
-    console.log('REMOVE from saved TIMELINE ID', timelineID);
-    // axios.delete(`${ROOT_URL}/personal`,
-    //   { childID: timelineID },
-    //   { headers: { authorization: localStorage.getItem('token') } })
     axios({
       url: `${ROOT_URL}/personal`,
       method: 'delete',
@@ -369,11 +343,9 @@ export function unsaveTimeline(timelineID) {
         setTimeout(() => {
           dispatch(clearBanner());
         }, 2500);
-        console.log('response from remove', resp.data);
         dispatch({ type: ActionTypes.USER_TIMELINE, user_timeline: resp.data });
       })
       .catch((err) => {
-        console.log('ERROR from UNSAVE timeline: ', err.response);
         dispatch(createBanner('failed to remove from saved'));
         setTimeout(() => {
           dispatch(clearBanner());
@@ -385,7 +357,6 @@ export function unsaveTimeline(timelineID) {
 // ask backend to send me user
 export function updateUser(fields, history) {
   return (dispatch) => {
-    // console.log('getting user fields', fields);
     axios.put(`${ROOT_URL}/personal`, fields,
       { headers: { authorization: localStorage.getItem('token') } }).then((response) => {
       dispatch({ type: ActionTypes.UPDATE_USER, payload: response });
@@ -396,7 +367,6 @@ export function updateUser(fields, history) {
       history.push('/explore/start');
     }).catch((error) => {
       dispatch(authError(`Update settings failed: ${error.message}`));
-      console.log(error);
       dispatch({ type: ActionTypes.BANNER_SET, payload: 'Updating user settings failed.' });
       setTimeout(() => {
         dispatch(clearBanner());

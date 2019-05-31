@@ -19,7 +19,6 @@ class Nav extends Component {
 
   componentWillMount = () => {
     if (this.props.authenticated) {
-      console.log('I AM AUTHENTICATED');
       this.props.fetchUserInfo();
     }
   }
@@ -35,9 +34,6 @@ class Nav extends Component {
 
   render() {
     // set the links based on authentication
-    console.log('NAV BAR PROPS', this.props);
-    console.log('nav bar user', this.props.user);
-
     const account = (this.props.authenticated && this.props.user !== null)
       ? (
         <span>
