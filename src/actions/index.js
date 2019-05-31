@@ -231,7 +231,6 @@ export function fetchUserInfo() {
         console.log('IN FETCHUSER INFO', response.data);
         dispatch({ type: ActionTypes.GET_USER, payload: response.data });
       }).catch((error) => {
-        console.log(error);
         dispatch({ type: ActionTypes.ERR_USER, error });
       });
   };
