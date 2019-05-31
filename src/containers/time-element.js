@@ -16,7 +16,11 @@ class TimeElement extends Component {
     if (this.props.addupdate === 0) {
       if (this.props.selected === 0) {
         if (this.props.timeline.events === undefined) {
-          return (<div>Loading...</div>);
+          return (
+            <div className="loading">
+              <i className="fas fa-spinner fa-pulse" /> Loading ...
+            </div>
+          );
         }
         return (this.props.timeline.events.map((events) => {
           return (

@@ -19,7 +19,11 @@ class TimeDetail extends Component {
   render() {
     console.log(`fetched timeline:  ${this.props.timeline.events}`);
     if (this.props.selected === undefined) {
-      return (<div>Loading...</div>);
+      return (
+        <div className="loading">
+          <i className="fas fa-spinner fa-pulse" /> Loading ...
+        </div>
+      );
     }
 
     return (

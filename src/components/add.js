@@ -271,8 +271,8 @@ class AddForm extends Component {
 
     if (this.state.cover_url === null) {
       return (
-        <div>
-          Loading ...
+        <div className="loading">
+          <i className="fas fa-spinner fa-pulse" /> Loading ...
         </div>
       );
     }

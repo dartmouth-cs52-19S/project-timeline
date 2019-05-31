@@ -18,7 +18,11 @@ class TimeCard extends Component {
 
   render() {
     if (this.props.user_timeline === undefined) {
-      return (<div>Loading...</div>);
+      return (
+        <div className="loading">
+          <i className="fas fa-spinner fa-pulse" /> Loading ...
+        </div>
+      );
     }
 
     return (this.props.user_timeline.events.map((events) => {

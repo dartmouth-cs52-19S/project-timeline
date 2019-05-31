@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 // import TimeElement from './time-element';
 // import TimeDetail from './time-detail';
 import { fetchTimeline, unsaveTimeline, userTimeline } from '../actions';
-import emptyState from '../img/timeline-emptystate.png';
+import emptyState from '../img/timeline-emptystate.gif';
 
 
 class SaveTimeline extends Component {
@@ -53,8 +53,8 @@ class SaveTimeline extends Component {
     if (this.props.user_timeline === 0) {
       if (this.props.user_timeline.events === undefined) {
         return (
-          <div>
-            <h1>Loading</h1>
+          <div className="loading">
+            <i className="fas fa-spinner fa-pulse" /> Loading ...
           </div>
         );
       }
@@ -107,7 +107,9 @@ class SaveTimeline extends Component {
   render() {
     if (this.props.user_timeline === null) {
       return (
-        <div><h1>Loading</h1></div>
+        <div className="loading">
+          <i className="fas fa-spinner fa-pulse" /> Loading ...
+        </div>
       );
     }
     return (

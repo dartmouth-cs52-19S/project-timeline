@@ -498,6 +498,7 @@ b{
   border-left: 10px solid $main-color;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
   border-radius: 1%;
+  background: $white;
 }
 
 .detailContainerSaved{
@@ -506,6 +507,8 @@ b{
   padding: 1em;
   border-left: 10px solid $main-color;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 1%;
+  background: $white;
 }
 
 .detailTitle{
@@ -1002,6 +1005,10 @@ h6 span {
 }
 .middleText em:hover{
   transform: scale(1.05);
+}
+.loading{
+  color: $shadow-color;
+  font-size: 2em;
 }
 @media screen and (max-width : 800px){
   .previewImage{
