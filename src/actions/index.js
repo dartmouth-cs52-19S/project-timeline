@@ -332,6 +332,7 @@ export function unsaveTimeline(timelineID) {
     // axios.delete(`${ROOT_URL}/personal`,
     //   { childID: timelineID },
     //   { headers: { authorization: localStorage.getItem('token') } })
+    // alt axios call from: https://github.com/axios/axios/issues/509
     axios({
       url: `${ROOT_URL}/personal`,
       method: 'delete',
