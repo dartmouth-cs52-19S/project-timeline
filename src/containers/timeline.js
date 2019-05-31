@@ -68,7 +68,7 @@ class Timeline extends Component {
               selected={this.state.selected}
             />
           </div>
-          <div className="flex">
+          <div className="flex-timeline">
             <div className="flex-detail" />
             <div className="flex-main">
               <TimeElement />
@@ -91,7 +91,7 @@ class Timeline extends Component {
             parent={this.props.selected.parent}
           />
         </div>
-        <div className="flex">
+        <div className="flex-timeline">
           <div className="flex-detail">
             <TimeDetail />
           </div>

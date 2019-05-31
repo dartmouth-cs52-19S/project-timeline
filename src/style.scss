@@ -181,12 +181,6 @@ h6{
   height: 20vh;
   // max-width: 90%;
 }
-@media screen and (max-width : 800px){
-  .previewImage{
-    max-width: 90%;
-    height: initial;
-  }
-}
 .previewTitleText{
   font-size: 15pt;
   margin-bottom: 0.5em;
@@ -466,6 +460,9 @@ b{
 .flex{
   display: flex;
   // padding-top: 50px;
+}
+.flex-timeline{
+  display: flex;
 }
 .flexWide{
   display: flex;
@@ -1005,4 +1002,76 @@ h6 span {
 }
 .middleText em:hover{
   transform: scale(1.05);
+}
+@media screen and (max-width : 800px){
+  .previewImage{
+    max-width: 90%;
+    height: initial;
+  }
+  .flex-main-landing{
+    display: none;
+  }
+  .flex-timeline {
+    display: block;
+  }
+  .detailContainer{
+    margin-right: 0;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    width: 90%;
+  }
+  .flex-detail-landing{
+    margin-left: 0;
+  }
+  .flex-detail{
+    width: 100%;
+  }
+  .flex-main{
+    float: right;
+    width: 50%;
+  }
+  .wrap{
+    display: block;
+  }
+  .detailContainerSaved{
+    width: 80%;
+    margin: 1em 1em 0 1em;
+  }
+  .flexWide{
+    display: block;
+  }
+  .setGraphic{
+    width: 100%;
+  }
+  .setContainer{
+    width: 100%;
+  }
+  .addContainerFull{
+    display: block;
+  }
+  .post{
+    border-right: none;
+    border-bottom: 2px dotted $shadow-color;
+  }
+  .addContainer{
+    width: 100%;
+  }
+  .callOut{
+    margin: 1em 0 2em 0;
+  }
+  .whiteBox{
+    margin: 1em;
+  }
+  .userGraphic{
+    display: none;
+  }
+  .signContainer{
+    width: 100%;
+  }
+  .fa-eye{
+    display: none;
+  }
+  .show{
+    display: none;
+  }
 }

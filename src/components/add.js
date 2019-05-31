@@ -11,7 +11,7 @@ class AddForm extends Component {
 
     this.state = {
       title: '',
-      filter: '',
+      // filter: '',
       content: '',
       time: '', // Associated relative prep time
       cover_url: '', // Image URL
@@ -33,31 +33,32 @@ class AddForm extends Component {
     this.renderNewPost = this.renderNewPost.bind(this);
   }
 
+
   // set the initial state if told to in this.props.update
   componentWillMount() {
-    if (this.props.update) {
-      console.log(typeof this.props.timeline.time);
-      const dt = new Date(this.props.timeline.time);
-      this.setState({
-        title: this.props.timeline.title,
-        content: this.props.timeline.content,
-        filter: this.props.timeline.filter,
-        time: Math.round(dt.getTime() / (60 * 60 * 24 * 30 * 1000)),
-        cover_url: this.props.timeline.cover_url,
-      });
-    }
+    this.settingState();
     console.log(`hopefully not undefined${this.props.addupdate}`);
     this.props.onAddUpdate(1);
   }
 
-  componentDidMount = () => {
+  settingState = () => {
     if (this.props.update) {
-      console.log(typeof this.props.timeline.time);
-      const dt = new Date(this.props.timeline.time);
-      this.setState({
-        time: Math.round(dt.getTime() / (60 * 60 * 24 * 30 * 1000)),
-      });
+      if (this.props.timeline.title !== this.state.title) {
+        console.log(typeof this.props.timeline.time);
+        const dt = new Date(this.props.timeline.time);
+        this.setState({
+          title: this.props.timeline.title,
+          content: this.props.timeline.content,
+          // filter: this.props.timeline.filter,
+          time: Math.round(dt.getTime() / (60 * 60 * 24 * 30 * 1000)),
+          cover_url: this.props.timeline.cover_url,
+        });
+      }
     }
+  }
+
+  componentDidUpdate = () => {
+    this.settingState();
   }
 
   displayTimelineName() {
@@ -134,7 +135,7 @@ class AddForm extends Component {
       fields = {
         title: this.state.title,
         content: this.state.content,
-        filter: this.state.filter,
+        // filter: this.state.filter,
         cover_url: this.state.cover_url,
         time,
         id: this.props.timeline._id,
@@ -143,7 +144,7 @@ class AddForm extends Component {
       fields = {
         title: this.state.title,
         content: this.state.content,
-        filter: this.state.filter,
+        // filter: this.state.filter,
         cover_url: this.state.cover_url,
         parent: this.props.timeline._id,
         time,
@@ -152,7 +153,7 @@ class AddForm extends Component {
       // reset the state
       this.setState({
         title: '',
-        filter: '',
+        // filter: '',
         content: '',
         time: '',
         cover_url: '',
@@ -203,7 +204,7 @@ class AddForm extends Component {
           />
           <em>* Required</em>
         </div>
-        <div>
+        {/* <div>
           <input
             name="filter"
             className={this.state.errorTags}
@@ -212,8 +213,7 @@ class AddForm extends Component {
             onBlur={this.handleTagBlur}
             value={this.state.filter}
           />
-          {/* <em>* Required</em> */}
-        </div>
+        </div> */}
         <div>
           <input
             name="time"
@@ -267,6 +267,15 @@ class AddForm extends Component {
   }
 
   render() {
+    console.log(this.state);
+
+    if (this.state.cover_url === null) {
+      return (
+        <div>
+          Loading ...
+        </div>
+      );
+    }
     const addEditTitle = this.props.update ? 'Update Timeline Info!' : 'Create a New Timeline!';
     return (
       <div>
