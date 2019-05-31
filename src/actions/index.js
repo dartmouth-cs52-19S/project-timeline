@@ -59,6 +59,9 @@ export function fetchTimeline() {
       .catch((error) => {
         // TODO: dispatch an error, make reducer, show error component
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+        setTimeout(() => {
+          dispatch(clearBanner());
+        }, 2500);
       });
   };
 }
@@ -74,6 +77,9 @@ export function fetchMeta() {
       .catch((error) => {
         // TODO: dispatch an error, make reducer, show error component
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+        setTimeout(() => {
+          dispatch(clearBanner());
+        }, 2500);
       });
   };
 }
@@ -91,6 +97,9 @@ export function selectTimeline(id) {
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+        setTimeout(() => {
+          dispatch(clearBanner());
+        }, 2500);
       });
   };
 }
@@ -108,18 +117,6 @@ export function userTimeline(id) {
   };
 }
 
-// export function saveToTimeline(timelineID) {
-//   return (dispatch) => {
-//     axios.post(`${ROOT_URL}/personal`, timelineID)
-//       .then((response) => {
-//         console.log('from action, create timeline response: ', response.data);
-//         dispatch({ type: ActionTypes.BANNER_SET, payload: 'You successfully added a post!' });
-//       })
-//       .catch((error) => {
-//         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
-//       });
-//   };
-// }
 
 export function createTimeline(fields, addNextUnder) {
   return (dispatch) => {
@@ -134,16 +131,25 @@ export function createTimeline(fields, addNextUnder) {
           dispatch(
             { type: ActionTypes.BANNER_SET, payload: 'You successfully added timeline content!' },
           );
+          setTimeout(() => {
+            dispatch(clearBanner());
+          }, 2500);
         } else {
           dispatch(selectTimeline(response.data.parent));
           dispatch(
             { type: ActionTypes.BANNER_SET, payload: 'You successfully added timeline content!' },
           );
+          setTimeout(() => {
+            dispatch(clearBanner());
+          }, 2500);
         }
         // history.push('/');
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+        setTimeout(() => {
+          dispatch(clearBanner());
+        }, 2500);
       });
   };
 }
@@ -162,6 +168,9 @@ export function updateTimeline(fields, addNextUnder, history) {
         dispatch(
           { type: ActionTypes.BANNER_SET, payload: 'You successfully added timeline content!' },
         );
+        setTimeout(() => {
+          dispatch(clearBanner());
+        }, 2500);
         if (history) {
           console.log('THIS IS THE RESPONSE IN UPDATE_TIMELINE');
           console.log(response.data);
@@ -170,6 +179,9 @@ export function updateTimeline(fields, addNextUnder, history) {
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+        setTimeout(() => {
+          dispatch(clearBanner());
+        }, 2500);
       });
   };
 }
@@ -180,6 +192,9 @@ export function deleteTimeline(timeline, history) {
       { headers: { authorization: localStorage.getItem('token') } })
       .then((response) => {
         dispatch({ type: ActionTypes.BANNER_SET, payload: response.data });
+        setTimeout(() => {
+          dispatch(clearBanner());
+        }, 2500);
         dispatch(selectTimeline(timeline.parent));
       });
   };
@@ -193,6 +208,9 @@ export function fetchTimelineDetail(id) {
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
+        setTimeout(() => {
+          dispatch(clearBanner());
+        }, 2500);
       });
   };
 }
@@ -254,6 +272,9 @@ export function signinUser({ email, password }, history) {
       console.log(error);
       dispatch(authError(`Sign In Failed: ${error.response.data}`));
       dispatch({ type: ActionTypes.BANNER_SET, payload: 'Sign in failed.' });
+      setTimeout(() => {
+        dispatch(clearBanner());
+      }, 2500);
     });
   };
 }
@@ -287,6 +308,9 @@ export function signupUser({
       console.log('full error: ', error);
       dispatch(authError(`Sign Up Failed: ${error.message}`));
       dispatch({ type: ActionTypes.BANNER_SET, payload: 'Sign up failed.' });
+      setTimeout(() => {
+        dispatch(clearBanner());
+      }, 2500);
     });
   };
 }
@@ -375,6 +399,9 @@ export function updateUser(fields, history) {
       dispatch(authError(`Update settings failed: ${error.message}`));
       console.log(error);
       dispatch({ type: ActionTypes.BANNER_SET, payload: 'Updating user settings failed.' });
+      setTimeout(() => {
+        dispatch(clearBanner());
+      }, 2500);
     });
   };
 }
