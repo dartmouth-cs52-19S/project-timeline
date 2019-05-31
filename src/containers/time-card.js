@@ -8,13 +8,7 @@ import { fetchTimeline, userTimeline } from '../actions';
 class TimeCard extends Component {
   componentWillMount() {
     this.props.userTimeline(this.props.user.timeline);
-    console.log(`detail ID${this.props.selected}`);
   }
-
-  //   componentWillUpdate() {
-  //     this.props.fetchTimelineDetail(this.props.selected.id);
-  //     console.log('updated Detail');
-  //   }
 
   render() {
     if (this.props.user_timeline === undefined) {

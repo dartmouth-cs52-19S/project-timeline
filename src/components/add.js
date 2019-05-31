@@ -37,14 +37,12 @@ class AddForm extends Component {
   // set the initial state if told to in this.props.update
   componentWillMount() {
     this.settingState();
-    console.log(`hopefully not undefined${this.props.addupdate}`);
     this.props.onAddUpdate(1);
   }
 
   settingState = () => {
     if (this.props.update) {
       if (this.props.timeline.title !== this.state.title) {
-        console.log(typeof this.props.timeline.time);
         const dt = new Date(this.props.timeline.time);
         this.setState({
           title: this.props.timeline.title,
@@ -71,7 +69,6 @@ class AddForm extends Component {
     );
   }
 
-  // TODO Add onblur for coverURL
   // then can remove the setstate above
   handleCoverURLBlur() {
     if (!this.validURL(this.state.cover_url)) {
@@ -80,12 +77,6 @@ class AddForm extends Component {
     } else {
       console.log('URL is good');
       this.setState({ errorCover: 'postCover' });
-    }
-  }
-
-  handleContentBlur() {
-    if (!this.state.content) {
-      console.log('no content but that is OK');
     }
   }
 
@@ -101,7 +92,6 @@ class AddForm extends Component {
   handleTagBlur() {
     // this.setState({ hasMovedTag: 1 });
     if (!this.state.tags) {
-      console.log('no tags');
       this.setState({ errorTags: 'errorTags' });
     } else {
       this.setState({ errorTags: 'postTags' });
@@ -161,8 +151,6 @@ class AddForm extends Component {
     }
 
     this.props.createTimeline(fields, addNextUnder);
-
-    console.log(fields);
   }
 
   renderNewPost() {
@@ -187,7 +175,6 @@ class AddForm extends Component {
     //   par = this.props.timeline.title;
     // }
     const addEdit = this.props.update ? 'update' : 'add a new step under';
-    console.log(this.props.timeline);
     return (
       <div>
         <div className="callOut">
@@ -267,8 +254,6 @@ class AddForm extends Component {
   }
 
   render() {
-    console.log(this.state);
-
     if (this.state.cover_url === null) {
       return (
         <div>
