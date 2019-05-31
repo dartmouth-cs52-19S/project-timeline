@@ -24,11 +24,14 @@ class Nav extends Component {
   }
 
   componentDidUpdate = (prevProps, prevState, snapshot) => {
-    if (this.props.authenticated && prevProps.auth.user.admin === undefined) {
-      this.props.fetchUserInfo();
-      this.props.userTimeline(this.props.user.timeline);
-    } else if (this.props.user.timelines === undefined) {
-      this.props.fetchUserInfo();
+    // check authorized thennnn check admin
+    if (this.props.auth.authenticated) {
+      if (prevProps.auth.user.admin === undefined || this.props.user.admin === undefined) {
+        this.props.fetchUserInfo();
+        this.props.userTimeline(this.props.user.timeline);
+      } else if (this.props.user.timelines === undefined) {
+        this.props.fetchUserInfo();
+      }
     }
   }
 
