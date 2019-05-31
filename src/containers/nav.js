@@ -25,7 +25,7 @@ class Nav extends Component {
 
   componentWillUpdate = (prevProps, prevState, snapshot) => {
     // check authorized thennnn check admin
-    if (this.props.auth.authenticated === true) {
+    if (this.props.auth.authenticated) {
       if (this.props.auth.user.admin === undefined && prevProps.auth.user.admin === undefined) {
         console.log('fetch 1');
         console.log('prev', prevProps.auth.user);
