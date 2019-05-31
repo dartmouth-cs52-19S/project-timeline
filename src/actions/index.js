@@ -54,7 +54,6 @@ export function fetchTimeline() {
         dispatch({ type: ActionTypes.FETCH_EXPLORE, payload: response.data });
       })
       .catch((error) => {
-        // TODO: dispatch an error, make reducer, show error component
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
         setTimeout(() => {
           dispatch(clearBanner());
@@ -72,7 +71,6 @@ export function fetchMeta() {
         dispatch({ type: ActionTypes.FETCH_META, meta: response.data });
       })
       .catch((error) => {
-        // TODO: dispatch an error, make reducer, show error component
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
         setTimeout(() => {
           dispatch(clearBanner());
