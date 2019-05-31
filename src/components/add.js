@@ -69,7 +69,6 @@ class AddForm extends Component {
     );
   }
 
-  // TODO Add onblur for coverURL
   // then can remove the setstate above
   handleCoverURLBlur() {
     if (!this.validURL(this.state.cover_url)) {
@@ -80,12 +79,6 @@ class AddForm extends Component {
       this.setState({ errorCover: 'postCover' });
     }
   }
-
-  // handleContentBlur() {
-  //   if (!this.state.content) {
-  //     console.log('no content but that is OK');
-  //   }
-  // }
 
   handleTitleBlur() {
     // this.setState({ hasMoved: 1 });
