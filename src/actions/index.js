@@ -79,10 +79,6 @@ export function fetchMeta() {
   };
 }
 
-// export const selectTimeline = timeline => ({
-//   type: ActionTypes.SELECT_TIMELINE,
-//   selected: timeline,
-// });
 
 export function selectTimeline(id) {
   return (dispatch) => {
@@ -137,7 +133,6 @@ export function createTimeline(fields, addNextUnder) {
             dispatch(clearBanner());
           }, 2500);
         }
-        // history.push('/');
       })
       .catch((error) => {
         dispatch({ type: ActionTypes.BANNER_SET, payload: error.message });
@@ -281,8 +276,6 @@ export function signupUser({
       localStorage.setItem('username', response.data.username);
       localStorage.setItem('email', response.data.email);
       // only takes strings, so converts startTime to a string
-      // need to redesign to localState
-      // const
       localStorage.setItem('startTime', response.data.startTime);
       history.push('/explore/start');
     }).catch((error) => {

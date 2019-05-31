@@ -283,118 +283,11 @@ class Settings extends Component {
         username: this.state.newUsername,
         password: this.state.newPassword1,
         startTime: this.createStartTime(),
-        // startTime: this.state.newStartTime,
       };
       this.props.updateUser(fields, this.props.history);
       return true;
     }
   }
-  // want to call fxn if user exists (which returns a t/f) onChange for username so realtime
-
-  // render() {
-  //   if (this.props.user === null) {
-  //     return (
-  //       <div className="flex" style={{ alignItems: 'flex-end', justifyContent: 'space-around' }}>
-  //         <h1>Loading</h1>
-  //       </div>
-  //     );
-  //   } else {
-  //     return (
-  //       <div>
-  //         <div className="settingsHeader">
-  //           Settings
-  //         </div>
-  //         <div id="settingsSurvey">
-  //           <h6><span> Come take our </span>
-  //             <a href="https://www.surveymonkey.com/r/WT9VZT6">feedback survey!</a>
-  //           </h6>
-  //         </div>
-  //         <div className="currSettings">
-  //           current username: <span> {this.props.user.username}</span>
-  //         </div>
-  //         <div className="settingsInput">
-  //           <input
-  //             name="newUsername"
-  //             placeholder="new username"
-  //             onChange={this.edit}
-  //             value={this.state.newUsername}
-  //             className="signinput"
-  //           />
-  //         </div>
-  //         <div className="currSettings">
-  //           current email: <span> {this.props.user.email}</span>
-  //         </div>
-  //         <div className="settingsInput">
-  //           <input
-  //             name="newEmail"
-  //             placeholder="new email"
-  //             onChange={this.edit}
-  //             value={this.state.newEmail}
-  //             className="signinput"
-  //           />
-  //         </div>
-  //         <div className="currSettings">
-  //          change your password
-  //         </div>
-  //         <div className="settingsInput">
-  //           <input
-  //             name="newPassword1"
-  //             type={this.state.hidden ? 'password' : 'text'}
-  //             value={this.state.newPassword1}
-  //             onChange={this.edit}
-  //             placeholder="new password"
-  //             className="signinput"
-  //           />
-  //           <input
-  //             name="newPassword2"
-  //             type={this.state.hidden ? 'password' : 'text'}
-  //             value={this.state.newPassword2}
-  //             onChange={this.edit}
-  //             placeholder="re-enter password"
-  //             className="signinput"
-  //           />
-  //           <i className="far fa-eye signicon"
-  //             id="passButtonSettings"
-  //             role="button"
-  //             tabIndex={0}
-  //             onClick={this.toggleShow}
-  //           />
-  //         </div>
-  //         <div className="currSettings">
-  //           current HS graduation date: <span> {this.displayStartTime()}</span>
-  //         </div>
-  //         <div className="flexWideDrop">
-  //           <Dropdown
-  //             className="flexWide"
-  //             options={optionsYear}
-  //             onChange={this.yearChange}
-  //             value={this.state.newYear}
-  //             placeholder="Select a year"
-  //           />
-  //           <Dropdown
-  //             className="flexWide"
-  //             options={optionsMonth}
-  //             onChange={this.monthChange}
-  //             value={this.state.newMonth}
-  //             placeholder="Select a month"
-  //           />
-  //         </div>
-  //         <div className="flexWideSettings">
-  //           <button type="button" onClick={this.onCancel}>Cancel</button>
-  //           <button type="button" onClick={this.handlesSubmit}>Save Changes</button>
-  //         </div>
-  //         <div className="settingsFooter">
-  //           <Particles className="particles" params={particlesOptions} />
-  //         </div>
-  //       </div>
-
-  //     );
-  //   }
-  //       // }
-  //       );
-  //     }
-  //   }
-  // }
 
   render() {
     if (this.props.user === null) {
@@ -519,7 +412,7 @@ const mapStateToProps = reduxState => (
     user: reduxState.auth.user,
   }
 );
-// export default withRouter(connect(mapStateToProps, null)(Settings));
+
 export default withRouter(connect(mapStateToProps,
   {
     fetchUserInfo, createBanner, updateUser, clearBanner,

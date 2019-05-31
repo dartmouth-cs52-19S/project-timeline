@@ -283,8 +283,6 @@ class AddForm extends Component {
           </div>
         </div>
       </div>
-
-
     );
   }
 }
