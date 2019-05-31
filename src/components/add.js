@@ -26,7 +26,7 @@ class AddForm extends Component {
     this.edit = this.edit.bind(this);
     this.handleTitleBlur = this.handleTitleBlur.bind(this);
     this.handleTagBlur = this.handleTagBlur.bind(this);
-    this.handleContentBlur = this.handleContentBlur.bind(this);
+    // this.handleContentBlur = this.handleContentBlur.bind(this);
     this.handleCoverURLBlur = this.handleCoverURLBlur.bind(this);
     // this.validURL = this.validURL.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -217,7 +217,7 @@ class AddForm extends Component {
             name="content"
             placeholder="Event Description"
             onChange={this.edit}
-            onBlur={this.handleContentBlur}
+            // onBlur={this.handleContentBlur}
             value={this.state.content}
           />
         </div>
