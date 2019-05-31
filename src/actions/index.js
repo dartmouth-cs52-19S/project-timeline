@@ -160,7 +160,7 @@ export function updateTimeline(fields, addNextUnder, history) {
         dispatch(selectTimeline(response.data._id));
         // console.log('dispatching banner_set');
         dispatch(
-          { type: ActionTypes.BANNER_SET, payload: 'You successfully added timeline content!' },
+          { type: ActionTypes.BANNER_SET, payload: 'You successfully updated timeline content!' },
         );
         if (history) {
           console.log('THIS IS THE RESPONSE IN UPDATE_TIMELINE');
