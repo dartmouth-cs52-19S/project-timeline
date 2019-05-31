@@ -18,7 +18,6 @@ class Profile extends Component {
       );
       return newTime;
     } else {
-      console.log('Sorry this is not working right now!');
       return ' sorry this is broken';
     }
   }

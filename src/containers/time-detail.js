@@ -8,16 +8,9 @@ import { fetchTimeline, saveTimeline } from '../actions';
 class TimeDetail extends Component {
   componentWillMount() {
     this.props.fetchTimeline();
-    console.log(`detail ID${this.props.selected}`);
   }
 
-  //   componentWillUpdate() {
-  //     this.props.fetchTimelineDetail(this.props.selected.id);
-  //     console.log('updated Detail');
-  //   }
-
   render() {
-    console.log(`fetched timeline:  ${this.props.timeline.events}`);
     if (this.props.selected === undefined) {
       return (<div>Loading...</div>);
     }
