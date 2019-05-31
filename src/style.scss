@@ -1,3 +1,4 @@
+// colors
 $main-color: #31CBC1;
 $secondary-color: #50A0E9;
 $text-color: #141414;
@@ -8,6 +9,7 @@ $error-color: #ff6450;
 $white: #ffffff;
 $disabled: #dadada;
 
+// general styling of elements across routes & fxnality
 body, html {
   font-family: "Roboto", sans-serif;    
   height: 100%;
@@ -18,16 +20,10 @@ body, html {
   margin-bottom: 50px;
 }
 
-.logo {
-  background-image: url('img/rocket.png');
-  width: 100px;
-  height: 100px;
-  background-repeat: no-repeat;
-  background-size: contain;
-}
 span {
   align-content: flex-end;
 }
+
 .header {
   background: $white;
   height: 60px;
@@ -42,17 +38,44 @@ span {
   justify-content: space-between;
   z-index:  500;
 }
+
+.mainHeader{
+  margin-top: 70px;
+  padding: 1em 1em 1em 1em;
+  font-size: 25pt;
+  font-weight: 500;
+  color: $text-color;
+  // display: flex;
+  // justify-content: flex-start;
+  border-bottom: 2px dotted $shadow-color;
+}
+
+.foodHeader{
+  margin-top: 70px;
+  padding: 1em 1em 1em 1em;
+  font-size: 25pt;
+  font-weight: 500;
+  color: $text-color;
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 2px dotted $shadow-color;
+}
+
 ul {
   list-style-type: none;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+
 li {
   padding-right: 1em;
   color: $shadow-color;
   text-decoration: none;
 }
+
+// fonts 
+
 h1{
   color: $white;
   text-transform: uppercase;
@@ -60,6 +83,7 @@ h1{
   margin-block-start: 0;
   margin-block-end: 0;
 }
+
 h2{
   color: $white;
   font-size: 1em;
@@ -67,17 +91,27 @@ h2{
   margin-block-start: 0;
   margin-block-end: 0;
 }
+
 h3{
   font-size: 2em;
   margin-block-start: 0.2em;
   margin-block-end: 0.2em;
 }
+
+h4{
+  font-weight: 100;
+  // text-transform: uppercase;
+  color: $shadow-color;
+  font-size: 0.5em;
+}
+
 h5{
   color: $white;
   font-size: 1.5em;
   margin-block-start: 0;
   margin-block-end: 0;
 }
+
 h6{
   font-weight: 100;
   // text-transform: uppercase;
@@ -91,25 +125,27 @@ h6{
   margin-block-start: 0;
   margin-block-end: 0;
 }
+
 .h8{
   font-weight: 100;
   color: $shadow-color;
   margin-block-start: 0;
   margin-block-end: 0;
 }
+
 #p404 {
   color: $main-color;
   font-weight: 600;
   font-size: 4em;
   margin-bottom: 40px;
 }
+
 .t404 {
   margin-bottom: 5px;
 }
-#linkexplore {
-  margin-left: 0.2em;
-}
-// also has class .header above
+
+// error banner styling 
+
 #banner {
   top: 60px;
   background: $secondary-color;
@@ -117,32 +153,54 @@ h6{
   width: 94%;
   padding: 0 2% 0 4%;
 }
+
 #banner li {
   color: $white;
 }
+
+// nav bar styling
+
+.logo {
+  background-image: url('img/rocket.png');
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+#linkexplore {
+  margin-left: 0.2em;
+}
+
 .link {
   color: $shadow-color;
   text-decoration: none;
   transition: all .1s ease-in-out;
 }
+
 .link:hover{
   color: $main-color;
 }
+
 .selectedLink{
   color: $main-color;
 }
+
 .fa-spin-hover:hover{
   -webkit-animation: fa-spin 2s infinite linear;
   -moz-animation: fa-spin 2s infinite linear;
   -o-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear;
 }
+
 .grow{
   transition: all .1s ease-in-out;
 }
+
 .grow:hover{
   transform: scale(1.1);
 }
+
 .preview{
   height: 35vh;
   width: 25vw;
@@ -151,12 +209,14 @@ h6{
   overflow: hidden;
   transition: all .1s ease-in-out;
 }
+
 .preview:hover{
   color: $main-color;
   transform: scale(1.02);
   border: 2px solid $main-color;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
   }
+
 .allposts{
   display: flex;
   flex-direction: row;
@@ -164,74 +224,39 @@ h6{
   justify-content: space-around;
   margin-top: 4em;
 }
+
+// timeline element styling 
+
 .previewTitle{
   color: $text-color;
   text-decoration: none;
   padding-bottom: 1em;
-
 }
+
 .previewTagsText{
   font-weight: 100;
   font-size: 10pt;
   text-transform: uppercase;
   margin-bottom: 1em;
-
 }
+
 .previewImage{
   height: 20vh;
   // max-width: 90%;
 }
+
 .previewTitleText{
   font-size: 15pt;
   margin-bottom: 0.5em;
 }
+
 .previewTagsText{
   font-weight: 100;
   font-size: 10pt;
   text-transform: uppercase;
   margin-bottom: 1em;
+}
 
-}
-.foodHeader{
-  margin-top: 70px;
-  padding: 1em 1em 1em 1em;
-  font-size: 25pt;
-  font-weight: 500;
-  color: $text-color;
-  display: flex;
-  justify-content: flex-start;
-  border-bottom: 2px dotted $shadow-color;
-}
-.mainHeader{
-  margin-top: 70px;
-  padding: 1em 1em 1em 1em;
-  font-size: 25pt;
-  font-weight: 500;
-  color: $text-color;
-  // display: flex;
-  // justify-content: flex-start;
-  border-bottom: 2px dotted $shadow-color;
-}
-.foodHeader em{
-  font-weight: 400;
-  color: $main-color;
-  font-style: normal;
-}
-h4{
-  font-weight: 100;
-  // text-transform: uppercase;
-  color: $shadow-color;
-  font-size: 0.5em;
-}
-.foodHeaderSecondary{
-  display: flex;
-  justify-content: center;
-}
-.post{
-  margin: 0 1em 0 2em;
-  padding: 0 2em 2em 2em;
-  border-right: 2px dotted $shadow-color;
-}
 .callOut{
   background: $white;
   padding: 0.5em;
@@ -241,6 +266,7 @@ h4{
   font-size: 10pt;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
 }
+
 .callOutTimeline{
   background: $white;
   padding: 0.5em;
@@ -251,23 +277,28 @@ h4{
   font-size: 10pt;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
 }
+
 .callOut em{
   font-style: normal;
   font-weight: 600;
   color: $main-color;
 }
+
 .callOutTimelineText{
   font-weight: 300;
   margin-bottom: 1em;
 }
+
 .callOutTimelineEm{
   font-style: italic;
   color: $secondary-color;
   font-weight: 600;
 }
+
 .addContainerFull{
   display: flex;
 }
+
 .addContainer{
   // margin: 3em 0 0 0;
   width: 30vw;
@@ -284,20 +315,19 @@ h4{
   float: right;
   // height: 100%;
 }
-.postTitle{
-  font-weight: 400;
-  font-size: 25pt;
-}
-.errorTitle{
+
+.errorTitle{ // if an error when adding a timeline element
   font-weight: 400;
   font-size: 25pt;
   border: 1px solid $error-color;
 }
-.postTags{
+
+.postTags{ // still using some post content for styling purposes
   font-weight: 100;
   text-transform: uppercase;
   font-size: 1em;
 }
+
 .errorTags{
   font-weight: 100;
   text-transform: uppercase;
@@ -305,6 +335,27 @@ h4{
   border: 1px solid $error-color;
 }
 
+.post{
+  margin: 0 1em 0 2em;
+  padding: 0 2em 2em 2em;
+  border-right: 2px dotted $shadow-color;
+}
+
+.postTitle{
+  font-weight: 400;
+  font-size: 25pt;
+}
+
+.postImage{
+  margin-top: 1em;
+}
+
+.postImagedisp{
+  max-height: 50vh;
+}
+
+
+// button and back button styling
 button{
   margin: 1em;
   padding: 0.5em 1em;
@@ -330,45 +381,45 @@ button{
 button:focus{
   outline: none;
 }
+
 button:hover{
   background: $main-color;
   color: $white;
 }
+
 .button-grey:hover{
   background: $vibrant-shadow-color;
   border-color: $vibrant-shadow-color;
   color: $white;
 }
-// #disabled-backbutton:hover{
-//   background: $white;
-// }
+
+// timeline element styling (visualized on explore + add pages)
 
 .element{
   margin-left: -1.7em;
   margin-top: 1em;
 }
+
 .elementButton:hover{
   color: $main-color;
 }
+
 .displayElement{
   display: block;
   align-items: center;
   margin-top: 1em;
   width:100%;
 }
+
 .show{
   opacity: 0;
   transition: all .1s ease-in-out;
 }
+
 .trigger:hover ~ .show{
   opacity: 1;
 }
-.postImage{
-  margin-top: 1em;
-}
-.postImagedisp{
-  max-height: 50vh;
-}
+
 input{
   font-family: Roboto;
   border: 1pt solid $shadow-color;
@@ -379,24 +430,17 @@ input{
   margin-bottom: 1em;
   background: #f5f5f5;
 }
+
 input:focus{
   background: #f5f5f5;
   outline: none;
   // border-bottom: 1px solid $text-color;
 }
-.signinput{
-  height: 3em;
-  padding: 1em;
-}
-
-.signUpText{
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
 
 .error_box{
   border: 1px solid $error-color;
 }
+
 textarea{
   height: 100px;
   width: 40vw;
@@ -411,40 +455,45 @@ textarea:focus{
   outline: none;
   // border-bottom: 1px solid $text-color;
 }
+
 em{
   font-style: italic;
   font-weight: 100;
 }
+
 .postContent{
   display: flex;
   align-items: flex-start;
 }
+
 b{
   font-weight: 400;
 }
+
 .newPostHeader{
   font-size: 20pt;
   margin-top: 2em;
   padding: 2em;
 }
+
 .divider{
   border-bottom: 1px solid $text-color;
 }
-.signin{
-  margin-top: 90px;
-  padding: 2em;
-}
+
 .timelineDisp{
   display: flex;
   align-items:  flex-start;
 }
+
 .placeholderBox{
   width: 40vw;
 }
+
 .time{
   border-left: 2px solid rgb(37, 37, 37);
   position: relative;
 }
+
 .dot {
   height: 25px;
   width: 25px;
@@ -454,20 +503,27 @@ b{
   // top: 0;
   // display: inline-block;
 }
+
 .timeInfo{
   margin-left: 30px;
 }
+
+// timeline element container styling
+
 .flex{
   display: flex;
   // padding-top: 50px;
 }
+
 .flex-timeline{
   display: flex;
 }
+
 .flexWide{
   display: flex;
   justify-content: space-between;
 }
+
 .flexWideDrop{
   display: flex;
   justify-content: space-around;
@@ -475,6 +531,7 @@ b{
   width: 60%;
   margin-left: 20%;
 }
+
 .flex-detail, .flex-main{
   width: 40%;
   // height: 100vh;
@@ -518,14 +575,33 @@ b{
 .detailImg{
   margin-top: 2em;
 }
+
 .Img{
   width: 50%;
 }
+
 .detailContent{
   margin-top: 1em;
   font-size: 0.75em;
   font-weight: 200; 
 }
+
+// sign up styling
+
+.signinput{
+  height: 3em;
+  padding: 1em;
+}
+
+.signUpText{
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.signin{
+  margin-top: 90px;
+  padding: 2em;
+}
+
 .signButton{
   margin: 0;
   border: none;
@@ -539,6 +615,7 @@ b{
 }
 
 // settings css
+
 .settingsHeader {
   margin-top: 70px;
   padding: 1em 1em 1em 1em;
@@ -586,42 +663,61 @@ b{
     margin-bottom:10px;
 }
 
+.settingsFooter{
+  background: $secondary-color;
+  width: 100%;
+  height: 40vh;
+  margin: 0 auto;
+  overflow: hidden;
+  z-index: 499;
+}
+
+// styling elements used in the sign up, sign in, and settings pages
+
 .userGraphic{
   width: 50%;
   background: $secondary-color;
   overflow: hidden;
 }
+
 .signContainer{
   width: 50%;
   height: 100vh;
 }
+
 .whiteBox{
   background: $white;
   margin: 4em;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
 }
+
 .signText{
   margin-bottom: 2em;
 }
+
 .signicon{
   margin-right: 1em;
   color: $shadow-color;
   max-width: 10px;
   padding-top: 10px;
 }
+
 .signSubmitBox{
   margin-top: 2em;
 }
+
 .buttonSecondary{
   border: none;
   color: $vibrant-shadow-color;
   transition: all .2s ease-in-out;
 }
+
 .buttonSecondary:hover{
   border-bottom: 2px solid $vibrant-shadow-color;
   color: $vibrant-shadow-color;
   background: $white;
 }
+
 .buttonCTA{
   border: 2px solid $main-color;
   color: $white;
@@ -629,11 +725,13 @@ b{
   transition: all .2s ease-in-out;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
 }
+
 .buttonCTA:hover{
   border: 2px solid $main-color;
   color: $white;
   transform: scale(1.05);
 }
+
 .particles {
   // position: fixed;
   // right: 0;
@@ -648,12 +746,16 @@ b{
 .justShow{
   padding-top: 100px;
 }
+
+// landing page styling
+
 .landingBanner{
   background: $main-color;
   height: 80vh;
   margin: 0 auto;
   overflow: hidden;
 }
+
 .landingText{
   padding-top: 30vh;
   display: flex;
@@ -661,6 +763,7 @@ b{
   flex-direction: column;
   align-items: center;
 }
+
 .landingContainerTimeline{
   border-left: 2px solid #7A7A7A;
   position: relative;
@@ -669,9 +772,11 @@ b{
   height: 100vh;
   padding-top: 3em;
 }
+
 .spacing{
   height: 15vh;
 }
+
 .landingFooter{
   background: $secondary-color;
   width: 100%;
@@ -687,6 +792,7 @@ b{
   flex-direction: column;
   align-items: center;
 }
+
 .buttonCTAwhite{
   padding: 1em 2em;
   border: 2px solid $white;
@@ -695,12 +801,14 @@ b{
   transition: all .2s ease-in-out;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
 }
+
 .buttonCTAwhite:hover{
   border: 2px solid $secondary-color;
   background: $secondary-color;
   color: $white;
   transform: scale(1.05);
 }
+
 .buttonCTAwhite-alt{
   padding: 1em 2em;
   border: 2px solid $white;
@@ -709,20 +817,24 @@ b{
   transition: all .2s ease-in-out;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
 }
+
 .buttonCTAwhite-alt:hover{
   border: 2px solid $main-color;
   background: $main-color;
   color: $white;
   transform: scale(1.05);
 }
+
 .landingTimeline{
   display:flex;
   min-height: 100vh;
 }
+
 .hide{
   visibility: hidden;
   margin-top: -2em;
 }
+
 .flex-main-landing{
   width: 40%;
   flex: 1;
@@ -730,28 +842,26 @@ b{
   position: relative;
   padding-top: 2em;
 }
+
 .flex-detail-landing{
   flex: 1;
   margin-left: 2em;
 }
+
 .wrap{
   flex-flow: row wrap;
 }
+
 .fa-external-link-alt {
   color: $shadow-color;
   font-size: 0.7em;
 }
+
 .fa-external-link-alt:hover {
   color: $main-color;
 }
-// .backgroundImg{
-//   width: 100vw;
-//   display: inline-block;
-//   background: url(https://business.linkedin.com/content/dam/business/talent-solutions/global/en_us/blog/2015/11/marketing-working-with-recruiting.jpg);
-// }
 
-// Dropdown styling
-// modeled after input formatting
+// dropdown component styling
 
 .Dropdown-root {
   position: relative;
@@ -801,7 +911,6 @@ b{
   border-width: 0 5px 5px;
 }
 
-
 .Dropdown-menu .Dropdown-group > .Dropdown-title{
   padding: 8px 10px;
   color: rgba(51, 51, 51, 1);
@@ -840,6 +949,7 @@ b{
   display: block;
   padding: 8px 10px;
 }
+
 .Dropdown-control {
   font-family: Roboto;
   font-size: .8em;
@@ -853,6 +963,7 @@ b{
   background: #f5f5f5;
   height: 3em;
 }
+
 .Dropdown-control:hover {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
   font-family: Roboto;
@@ -901,7 +1012,8 @@ b{
   font-weight: 100;
 }
 
-// password styling
+// password styling - used in sign in, sign up, and settings
+
 #passButton {
   margin: 1em;
   padding: 0.5em 1em;
@@ -916,18 +1028,22 @@ b{
   height: 1em;
 }
 
-#passButton:focus{ // how to keep active?
+#passButton:focus{
   outline: none;
   color: $main-color;
 }
+
 #passButton:hover{
   color: $main-color;
 }
+
 #passButton:active {
   color: $shadow-color-darker;
 }
 
-//settings
+// password for settings specifically - curse relative
+// a necessary evil
+
 #passButtonSettings {
   padding: 0.5em 1em;
   transition: all .2s ease-in-out;
@@ -941,38 +1057,38 @@ b{
   z-index: 2;
   height: 1.2em;
 }
-#passButtonSettings:focus{ // how to keep active?
+
+#passButtonSettings:focus{
   outline: none;
   color: $main-color;
 }
+
 #passButtonSettings:hover{
   color: $main-color;
 }
+
 #passButtonSettings:active {
   color: $main-color;
 }
+
 .logoicon{
   height: 40px;
 }
-.settingsFooter{
-  background: $secondary-color;
-  width: 100%;
-  height: 40vh;
-  margin: 0 auto;
-  overflow: hidden;
-  z-index: 499;
-}
+
 .setText{
   margin-bottom: 0em;
 }
+
 h6 span {
   color:$main-color;
   font-weight: 600;
 }
+
 .setContainer{
   width: 65%;
   height: 100vh;
 }
+
 .setGraphic{
   width: 35%;
   background: $secondary-color;
@@ -981,6 +1097,7 @@ h6 span {
 .emptyState{
   height: 50vh;
 }
+
 .middle{
   padding: 2em 0 0 0;
   width: 100vw;
@@ -988,21 +1105,27 @@ h6 span {
   justify-content: center;
   align-items: center;
 }
+
 .middleText{
   width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .middleText em{
   color: $main-color;
   font-weight: 400;
   font-style: normal;
   transition: all 0.1s ease-in-out;
 }
+
 .middleText em:hover{
   transform: scale(1.05);
 }
+
+// resizing css
+
 @media screen and (max-width : 800px){
   .previewImage{
     max-width: 90%;

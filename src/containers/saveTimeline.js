@@ -1,7 +1,5 @@
-/* eslint-disable class-methods-use-this */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable max-len */
-/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -43,7 +41,6 @@ class SaveTimeline extends Component {
   }
 
   handleRemove(e, eventId) {
-    // insert remove funcitonality here
     e.preventDefault();
     this.props.unsaveTimeline(eventId);
   }
@@ -72,7 +69,6 @@ class SaveTimeline extends Component {
               <p className="h8">Go to the <em onClick={this.toExplore}>Explore Page </em>to discover timelines you can keep.</p>
             </div>
           </div>
-
         );
       }
     }
@@ -95,9 +91,7 @@ class SaveTimeline extends Component {
           <div className="detailContent">
             {event.content}
           </div>
-
         </div>
-
       );
     })
     );
@@ -118,7 +112,6 @@ class SaveTimeline extends Component {
           {this.renderElement()}
         </div>
       </div>
-
     );
   }
 }

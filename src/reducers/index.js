@@ -1,5 +1,5 @@
-// the starting point for your redux store
-// this defines what your store state will look like
+// the starting point for our redux store
+// this defines what our store state looks like
 import { combineReducers } from 'redux';
 import AuthReducer from './auth-reducer';
 import TimelineReducer from './timeline-reducer';
