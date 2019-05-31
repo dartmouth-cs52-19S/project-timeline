@@ -2,15 +2,7 @@
 import React, { Component } from 'react';
 
 class Detail extends Component {
-//   displayEvents() {
-//     this.props.events.forEach((element) => {
-//       console.log(`element here${element.title}`);
-//       return element.title;
-//     });
-//   }
-
   render() {
-    console.log(`onLanding is  ${this.props.onLanding}`);
     if (this.props.onLanding === 'onLanding') {
       return (
         <div className="detailContainer">

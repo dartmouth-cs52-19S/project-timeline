@@ -35,7 +35,6 @@ class SaveTimeline extends Component {
   }
 
   handleClicked(e, event) {
-    // console.log(`e.currtarget.name is  ${e.target.name}`);
     this.props.history.push(`/explore/${event}`);
   }
 
