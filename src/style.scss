@@ -443,8 +443,8 @@ input:focus{
 
 textarea{
   height: 100px;
-  width: 40vw;
-  border: none;
+  width: 100%;
+  border: 1pt solid $shadow-color;
   font-size: 11pt;
   font-weight: 200;
   font-family: Roboto;
@@ -524,6 +524,11 @@ b{
   justify-content: space-between;
 }
 
+.flexWide-start{
+  display: flex;
+  justify-content: flex-start;
+}
+
 .flexWideDrop{
   display: flex;
   justify-content: space-around;
@@ -555,6 +560,7 @@ b{
   border-left: 10px solid $main-color;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
   border-radius: 1%;
+  background: $white;
 }
 
 .detailContainerSaved{
@@ -563,6 +569,8 @@ b{
   padding: 1em;
   border-left: 10px solid $main-color;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 1%;
+  background: $white;
 }
 
 .detailTitle{
@@ -591,6 +599,7 @@ b{
 .signinput{
   height: 3em;
   padding: 1em;
+  max-width: 90%;
 }
 
 .signUpText{
@@ -1105,6 +1114,12 @@ h6 span {
   justify-content: center;
   align-items: center;
 }
+.middle-element{
+  padding: 2em 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .middleText{
   width: 100vw;
@@ -1112,6 +1127,12 @@ h6 span {
   justify-content: center;
   align-items: center;
 }
+.middleText-element{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .middleText em{
   color: $main-color;
@@ -1122,6 +1143,10 @@ h6 span {
 
 .middleText em:hover{
   transform: scale(1.05);
+}
+.loading{
+  color: $shadow-color;
+  font-size: 2em;
 }
 
 // resizing css
