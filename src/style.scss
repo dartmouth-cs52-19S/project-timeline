@@ -443,8 +443,8 @@ input:focus{
 
 textarea{
   height: 100px;
-  width: 40vw;
-  border: none;
+  width: 100%;
+  border: 1pt solid $shadow-color;
   font-size: 11pt;
   font-weight: 200;
   font-family: Roboto;
@@ -524,6 +524,11 @@ b{
   justify-content: space-between;
 }
 
+.flexWide-start{
+  display: flex;
+  justify-content: flex-start;
+}
+
 .flexWideDrop{
   display: flex;
   justify-content: space-around;
@@ -594,6 +599,7 @@ b{
 .signinput{
   height: 3em;
   padding: 1em;
+  max-width: 90%;
 }
 
 .signUpText{
