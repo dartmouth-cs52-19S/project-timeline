@@ -94,7 +94,7 @@ class SignIn extends Component {
                 <h3>Sign In</h3>
                 <h6>Sign Back in to Access Your Profile and Account</h6>
               </div>
-              <div className="flexWide">
+              <div className="flexWide-start">
                 <i className="far fa-paper-plane signicon" />
                 <input
                   name="email"
@@ -104,7 +104,7 @@ class SignIn extends Component {
                   value={this.state.email}
                 />
               </div>
-              <div className="flexWide">
+              <div className="flexWide-start">
                 <i className="fas fa-lock signicon" />
                 <input
                   name="password"
