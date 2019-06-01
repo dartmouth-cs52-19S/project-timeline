@@ -27,13 +27,12 @@ class Nav extends Component {
     // check authorized thennnn check admin
     if (this.props.auth.authenticated) {
       if (this.props.auth.user.admin === undefined && prevProps.auth.user.admin === undefined) {
-        console.log('fetch 1');
-        console.log('prev', prevProps.auth.user);
-        console.log('curr', this.props.auth.user);
         this.props.fetchUserInfo();
-        this.props.userTimeline(this.props.user.timeline);
+        // not sure why this was here but if things break maybe check it
+        // if (this.props.user.timeline !== undefined) {
+        //   this.props.userTimeline(this.props.user.timeline);
+        // }
       } else if (this.props.user.username === undefined) {
-        console.log('fetch 2');
         this.props.fetchUserInfo();
       }
     }

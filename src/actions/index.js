@@ -357,7 +357,9 @@ export function updateUser(fields, history) {
       localStorage.setItem('email', response.data.email);
       localStorage.setItem('password', response.data.password);
       localStorage.setItem('startTime', response.data.startTime);
+      console.log('pushed explore start');
       history.push('/explore/start');
+      console.log('after pushing explore start');
     }).catch((error) => {
       dispatch(authError(`Update settings failed: ${error.message}`));
       dispatch({ type: ActionTypes.BANNER_SET, payload: 'Updating user settings failed.' });
