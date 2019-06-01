@@ -283,7 +283,6 @@ class Settings extends Component {
         username: this.state.newUsername,
         password: this.state.newPassword1,
         startTime: this.createStartTime(),
-        // startTime: this.state.newStartTime,
       };
       this.props.updateUser(fields, this.props.history);
       return true;
@@ -415,7 +414,7 @@ const mapStateToProps = reduxState => (
     user: reduxState.auth.user,
   }
 );
-// export default withRouter(connect(mapStateToProps, null)(Settings));
+
 export default withRouter(connect(mapStateToProps,
   {
     fetchUserInfo, createBanner, updateUser, clearBanner,

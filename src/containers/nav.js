@@ -19,25 +19,28 @@ class Nav extends Component {
 
   componentWillMount = () => {
     if (this.props.authenticated) {
-      console.log('I AM AUTHENTICATED');
       this.props.fetchUserInfo();
     }
   }
 
-  componentDidUpdate = (prevProps, prevState, snapshot) => {
-    if (this.props.authorized && prevProps.auth.user.admin === undefined) {
-      this.props.fetchUserInfo();
-      this.props.userTimeline(this.props.user.timeline);
-    } else if (this.props.user.timelines === undefined) {
-      this.props.fetchUserInfo();
+  componentWillUpdate = (prevProps, prevState, snapshot) => {
+    // check authorized thennnn check admin
+    if (this.props.auth.authenticated) {
+      if (this.props.auth.user.admin === undefined && prevProps.auth.user.admin === undefined) {
+        console.log('fetch 1');
+        console.log('prev', prevProps.auth.user);
+        console.log('curr', this.props.auth.user);
+        this.props.fetchUserInfo();
+        this.props.userTimeline(this.props.user.timeline);
+      } else if (this.props.user.username === undefined) {
+        console.log('fetch 2');
+        this.props.fetchUserInfo();
+      }
     }
   }
 
   render() {
     // set the links based on authentication
-    console.log('NAV BAR PROPS', this.props);
-    console.log('nav bar user', this.props.user);
-
     const account = (this.props.authenticated && this.props.user !== null)
       ? (
         <span>
@@ -46,7 +49,6 @@ class Nav extends Component {
               {/* Saved */}
               <NavLink
                 exact
-                // to={`/save/${this.props.user.timeline}`}
                 to="/save"
                 className="link"
                 activeClassName="selectedLink"

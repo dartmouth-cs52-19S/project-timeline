@@ -1,4 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
+// this was displayed in frontend under the /profile URL
+// but was ultimatley not implemented as Settings & Saved had most of this fxnality
 import React, { Component } from 'react';
 
 class Profile extends Component {
@@ -18,11 +20,9 @@ class Profile extends Component {
       );
       return newTime;
     } else {
-      console.log('Sorry this is not working right now!');
       return ' sorry this is broken';
     }
   }
-
 
   render() {
     const { user } = this.state;
