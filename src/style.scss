@@ -1108,6 +1108,12 @@ h6 span {
   justify-content: center;
   align-items: center;
 }
+.middle-element{
+  padding: 2em 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .middleText{
   width: 100vw;
@@ -1115,6 +1121,12 @@ h6 span {
   justify-content: center;
   align-items: center;
 }
+.middleText-element{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .middleText em{
   color: $main-color;
@@ -1159,18 +1171,6 @@ h6 span {
   .flex-main{
     float: right;
     width: 50%;
-    margin: 0 auto;
-    position: relative;
-  }
-  .flex-main::after{
-    position: absolute;
-    width: 6px;
-    background-color: white;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    margin-left: -3px;
-    content: '';
   }
   .wrap{
     display: block;
