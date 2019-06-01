@@ -293,7 +293,9 @@ class Settings extends Component {
     if (this.props.user === null) {
       return (
         <div className="flex" style={{ alignItems: 'flex-end', justifyContent: 'space-around' }}>
-          <h1>Loading</h1>
+          <div className="loading">
+            <i className="fas fa-spinner fa-pulse" /> Loading ...
+          </div>
         </div>
       );
     } else {
